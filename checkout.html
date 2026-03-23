@@ -166,7 +166,6 @@ footer {
 
     <!-- LEFT -->
     <div class="checkout-info">
-      <img src="https://apppadelup.com/logo.png" alt="PadelUp" class="checkout-logo">
       <div class="checkout-title">PASSEZ<br><span class="accent">PREMIUM</span></div>
       <div class="checkout-subtitle">Débloquez tout le potentiel de PadelUp et progressez plus vite que jamais.</div>
       <div class="checkout-features">
@@ -219,29 +218,30 @@ footer {
   </div>
 </footer>
 
-<script type="module">
-import { Purchases } from 'https://unpkg.com/@revenuecat/purchases-js@latest/dist/index.js';
+<script src="https://unpkg.com/@revenuecat/purchases-js@latest"></script>
+<script>
+const RC = Purchases.Purchases;
 
 const API_KEY = 'rcb_yNtyReKoXSiOObSrOSGAMHxikTyl';
 let selectedPackage = null;
 let purchasesInstance = null;
 
 const LABELS = {
-  monthly: 'Mensuel',
-  annual: 'Annuel',
-  yearly: 'Annuel'
+  '$rc_monthly': 'Mensuel',
+  '$rc_annual': 'Annuel',
+  '$rc_yearly': 'Annuel'
 };
 
 const PERIOD_LABELS = {
-  monthly: '/ mois',
-  annual: '/ an',
-  yearly: '/ an'
+  '$rc_monthly': '/ mois',
+  '$rc_annual': '/ an',
+  '$rc_yearly': '/ an'
 };
 
 async function init() {
   try {
-    const appUserId = Purchases.generateRevenueCatAnonymousAppUserId();
-    purchasesInstance = Purchases.configure({
+    const appUserId = RC.generateRevenueCatAnonymousAppUserId();
+    purchasesInstance = RC.configure({
       apiKey: API_KEY,
       appUserId: appUserId,
     });
@@ -252,10 +252,12 @@ async function init() {
       renderPackages(offerings.current.availablePackages);
     } else {
       showError('Aucune offre disponible pour le moment.');
+      document.getElementById('loading').style.display = 'none';
     }
   } catch (e) {
     console.error('Init error:', e);
     showError('Impossible de charger les offres. Veuillez réessayer.');
+    document.getElementById('loading').style.display = 'none';
   }
 }
 
@@ -263,9 +265,8 @@ function renderPackages(packages) {
   const list = document.getElementById('package-list');
   list.innerHTML = '';
 
-  // Sort: monthly first, then annual
   const sorted = packages.sort((a, b) => {
-    const order = { '$rc_monthly': 0, '$rc_annual': 1 };
+    const order = { '$rc_monthly': 0, '$rc_annual': 1, '$rc_yearly': 1 };
     return (order[a.identifier] ?? 2) - (order[b.identifier] ?? 2);
   });
 
@@ -274,24 +275,22 @@ function renderPackages(packages) {
     if (!product) return;
 
     const priceAmount = (product.currentPrice?.amountMicros / 1000000).toFixed(2).replace('.', ',');
-    const currency = product.currentPrice?.currency || 'EUR';
-    const type = pkg.identifier.includes('annual') || pkg.identifier.includes('yearly') ? 'annual' : 'monthly';
+    const type = pkg.identifier;
 
     const card = document.createElement('div');
     card.className = 'pkg-card' + (index === 0 ? ' selected' : '');
-    card.onclick = () => selectPackage(pkg, card);
+    card.onclick = function() { selectPackage(pkg, card); };
 
     let saveHtml = '';
-    if (type === 'annual') {
+    if (type === '$rc_annual' || type === '$rc_yearly') {
       saveHtml = '<div class="pkg-save">≈ 2 mois offerts</div>';
     }
 
-    card.innerHTML = `
-      <div class="pkg-label">${LABELS[type] || type}</div>
-      <div class="pkg-name">${product.displayName || product.title || 'PadelUp Premium'}</div>
-      <div class="pkg-price">${priceAmount} €<span class="period">${PERIOD_LABELS[type] || ''}</span></div>
-      ${saveHtml}
-    `;
+    card.innerHTML =
+      '<div class="pkg-label">' + (LABELS[type] || 'Abonnement') + '</div>' +
+      '<div class="pkg-name">' + (product.displayName || 'PadelUp Premium') + '</div>' +
+      '<div class="pkg-price">' + priceAmount + ' €<span class="period">' + (PERIOD_LABELS[type] || '') + '</span></div>' +
+      saveHtml;
 
     list.appendChild(card);
 
@@ -307,25 +306,26 @@ function renderPackages(packages) {
 
 function selectPackage(pkg, card) {
   selectedPackage = pkg;
-  document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.pkg-card').forEach(function(c) { c.classList.remove('selected'); });
   card.classList.add('selected');
 }
 
-window.handlePurchase = async function() {
+async function handlePurchase() {
   if (!selectedPackage || !purchasesInstance) return;
 
-  const btn = document.getElementById('buy-btn');
+  var btn = document.getElementById('buy-btn');
   btn.disabled = true;
   btn.textContent = 'Traitement en cours...';
   hideError();
 
   try {
-    const { customerInfo, redemptionInfo } = await purchasesInstance.purchase({
+    var result = await purchasesInstance.purchase({
       rcPackage: selectedPackage,
       selectedLocale: 'fr',
       defaultLocale: 'fr',
     });
 
+    var customerInfo = result.customerInfo;
     if (customerInfo.entitlements.active['premium']) {
       document.getElementById('packages').style.display = 'none';
       document.getElementById('success').style.display = 'block';
@@ -338,10 +338,10 @@ window.handlePurchase = async function() {
     btn.disabled = false;
     btn.textContent = 'Continuer';
   }
-};
+}
 
 function showError(msg) {
-  const el = document.getElementById('error');
+  var el = document.getElementById('error');
   el.textContent = msg;
   el.style.display = 'block';
 }
@@ -350,6 +350,7 @@ function hideError() {
   document.getElementById('error').style.display = 'none';
 }
 
+document.getElementById('buy-btn').onclick = handlePurchase;
 init();
 </script>
 
