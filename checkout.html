@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PadelUp — Paiement Premium</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-black: #0a0a0a;
+  --c-white: #f5f3ee;
+  --c-green: #3ecf5a;
+  --c-green-dark: #2ba844;
+  --c-gray: #141414;
+  --c-muted: #666;
+  --c-border: rgba(255,255,255,0.07);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--c-black); color: var(--c-white); font-family: var(--font-body); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--c-border);
+}
+.nav-logo { text-decoration: none; }
+.nav-back { display: flex; align-items: center; gap: 8px; color: var(--c-muted); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--c-white); }
+
+/* MAIN */
+.checkout-wrapper {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 100px 24px 60px;
+}
+.checkout-container {
+  width: 100%; max-width: 900px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--c-border);
+  animation: fadeUp 0.6s ease both;
+}
+
+/* LEFT - INFO */
+.checkout-info {
+  background: linear-gradient(165deg, #0f1f12 0%, #111a13 50%, var(--c-gray) 100%);
+  padding: 48px 36px; display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.checkout-info::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(62,207,90,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.checkout-logo { height: 40px; width: auto; mix-blend-mode: screen; margin-bottom: 32px; }
+.checkout-title { font-family: var(--font-display); font-size: 36px; line-height: 0.95; margin-bottom: 12px; }
+.checkout-title .accent { color: var(--c-green); }
+.checkout-subtitle { font-size: 14px; font-weight: 300; color: rgba(245,243,238,0.5); line-height: 1.6; margin-bottom: 32px; }
+
+.checkout-features { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.checkout-feat { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(245,243,238,0.8); }
+.checkout-feat .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-green); flex-shrink: 0; }
+
+.checkout-secure { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--c-border); display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-muted); }
+.checkout-secure svg { width: 14px; height: 14px; fill: var(--c-green); }
+
+/* RIGHT - PAYWALL */
+.checkout-paywall {
+  background: var(--c-gray); padding: 48px 36px;
+  display: flex; flex-direction: column;
+}
+.paywall-title { font-family: var(--font-display); font-size: 24px; margin-bottom: 6px; }
+.paywall-sub { font-size: 13px; color: var(--c-muted); margin-bottom: 28px; }
+
+/* PACKAGE CARDS */
+.pkg-card {
+  background: var(--c-black); border: 2px solid var(--c-border);
+  border-radius: 14px; padding: 20px; cursor: pointer;
+  transition: border-color 0.25s, transform 0.2s;
+  margin-bottom: 12px; position: relative;
+}
+.pkg-card:hover { transform: translateY(-2px); }
+.pkg-card.selected { border-color: var(--c-green); }
+.pkg-card.selected::after {
+  content: '✓'; position: absolute; top: 16px; right: 16px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--c-green); color: var(--c-black);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.pkg-label { font-family: var(--font-mono); font-size: 11px; color: var(--c-green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.pkg-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.pkg-price { font-family: var(--font-display); font-size: 28px; }
+.pkg-price .period { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: var(--c-muted); margin-left: 4px; }
+.pkg-save { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--c-black); background: var(--c-green); padding: 2px 8px; border-radius: 100px; }
+
+.buy-btn {
+  width: 100%; margin-top: 24px; padding: 16px;
+  background: var(--c-green); color: var(--c-black);
+  border: none; border-radius: 14px;
+  font-family: var(--font-body); font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.2s;
+}
+.buy-btn:hover { background: var(--c-green-dark); transform: translateY(-1px); }
+.buy-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.paywall-terms { margin-top: 16px; font-size: 11px; color: var(--c-muted); text-align: center; line-height: 1.6; }
+.paywall-terms a { color: var(--c-green); text-decoration: none; }
+
+/* LOADING */
+.loading { text-align: center; padding: 60px 20px; color: var(--c-muted); font-size: 14px; }
+.spinner { width: 32px; height: 32px; border: 3px solid var(--c-border); border-top-color: var(--c-green); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* SUCCESS */
+.success-msg { text-align: center; padding: 40px 20px; }
+.success-icon { font-size: 48px; margin-bottom: 16px; }
+.success-title { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; }
+.success-sub { font-size: 14px; color: var(--c-muted); line-height: 1.6; }
+
+/* ERROR */
+.error-msg { background: rgba(176,23,31,0.1); border: 1px solid rgba(176,23,31,0.3); border-radius: 10px; padding: 14px; margin-bottom: 16px; font-size: 13px; color: #ff6b6b; display: none; }
+
+/* FOOTER */
+footer {
+  background: #050505; border-top: 1px solid var(--c-border);
+  padding: 30px 48px; display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--c-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--c-white); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 800px) {
+  nav { padding: 14px 20px; }
+  .checkout-wrapper { padding: 80px 16px 40px; }
+  .checkout-container { grid-template-columns: 1fr; }
+  .checkout-info { padding: 32px 24px; }
+  .checkout-paywall { padding: 32px 24px; }
+  footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://apppadelup.com" class="nav-logo"><img src="https://apppadelup.com/logo.png" alt="PadelUp" style="height:40px;width:auto;mix-blend-mode:screen;"></a>
+  <a href="pricing.html" class="nav-back">← Retour aux abonnements</a>
+</nav>
+
+<div class="checkout-wrapper">
+  <div class="checkout-container">
+
+    <!-- LEFT -->
+    <div class="checkout-info">
+      <img src="https://apppadelup.com/logo.png" alt="PadelUp" class="checkout-logo">
+      <div class="checkout-title">PASSEZ<br><span class="accent">PREMIUM</span></div>
+      <div class="checkout-subtitle">Débloquez tout le potentiel de PadelUp et progressez plus vite que jamais.</div>
+      <div class="checkout-features">
+        <div class="checkout-feat"><span class="dot"></span> 1 analyse vidéo IA par jour</div>
+        <div class="checkout-feat"><span class="dot"></span> Programme d'entraînement personnalisé</div>
+        <div class="checkout-feat"><span class="dot"></span> +12 métriques détaillées</div>
+        <div class="checkout-feat"><span class="dot"></span> ELO Certifié & classement complet</div>
+        <div class="checkout-feat"><span class="dot"></span> Historique de progression illimité</div>
+      </div>
+      <div class="checkout-secure">
+        <svg viewBox="0 0 24 24"><path d="M12 1C8.676 1 6 3.676 6 7v2H4v14h16V9h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v2H8V7c0-2.276 1.724-4 4-4zm-6 8h12v10H6V11zm6 3a2 2 0 00-1 3.732V20h2v-2.268A2 2 0 0012 14z"/></svg>
+        Paiement sécurisé via Stripe
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="checkout-paywall" id="paywall">
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        Chargement des offres...
+      </div>
+
+      <div id="packages" style="display:none;">
+        <div class="paywall-title">Choisissez votre plan</div>
+        <div class="paywall-sub">Résiliable à tout moment. Sans engagement.</div>
+        <div class="error-msg" id="error"></div>
+        <div id="package-list"></div>
+        <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()">Continuer</button>
+        <div class="paywall-terms">
+          En continuant, vous acceptez les <a href="https://apppadelup.com/privacy-policy.html" target="_blank">conditions d'utilisation</a>.
+          Votre abonnement se renouvelle automatiquement. Résiliable à tout moment.
+        </div>
+      </div>
+
+      <div id="success" style="display:none;" class="success-msg">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">BIENVENUE DANS<br>PADELUP <span class="accent">PREMIUM</span> !</div>
+        <div class="success-sub">Votre abonnement est actif. Téléchargez l'app et connectez-vous pour profiter de toutes vos fonctionnalités Premium.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 PadelUp. Tous droits réservés.</div>
+  <div class="footer-links">
+    <a href="https://apppadelup.com/privacy-policy.html">Politique de confidentialité</a>
+    <a href="https://apppadelup.com/contact.html">Contact</a>
+  </div>
+</footer>
+
+<script type="module">
+import { Purchases } from 'https://unpkg.com/@revenuecat/purchases-js@latest/dist/index.js';
+
+const API_KEY = 'rcb_yNtyReKoXSiOObSrOSGAMHxikTyl';
+let selectedPackage = null;
+let purchasesInstance = null;
+
+const LABELS = {
+  monthly: 'Mensuel',
+  annual: 'Annuel',
+  yearly: 'Annuel'
+};
+
+const PERIOD_LABELS = {
+  monthly: '/ mois',
+  annual: '/ an',
+  yearly: '/ an'
+};
+
+async function init() {
+  try {
+    const appUserId = Purchases.generateRevenueCatAnonymousAppUserId();
+    purchasesInstance = Purchases.configure({
+      apiKey: API_KEY,
+      appUserId: appUserId,
+    });
+
+    const offerings = await purchasesInstance.getOfferings({ currency: 'EUR' });
+
+    if (offerings.current && offerings.current.availablePackages.length > 0) {
+      renderPackages(offerings.current.availablePackages);
+    } else {
+      showError('Aucune offre disponible pour le moment.');
+    }
+  } catch (e) {
+    console.error('Init error:', e);
+    showError('Impossible de charger les offres. Veuillez réessayer.');
+  }
+}
+
+function renderPackages(packages) {
+  const list = document.getElementById('package-list');
+  list.innerHTML = '';
+
+  // Sort: monthly first, then annual
+  const sorted = packages.sort((a, b) => {
+    const order = { '$rc_monthly': 0, '$rc_annual': 1 };
+    return (order[a.identifier] ?? 2) - (order[b.identifier] ?? 2);
+  });
+
+  sorted.forEach((pkg, index) => {
+    const product = pkg.webBillingProduct;
+    if (!product) return;
+
+    const priceAmount = (product.currentPrice?.amountMicros / 1000000).toFixed(2).replace('.', ',');
+    const currency = product.currentPrice?.currency || 'EUR';
+    const type = pkg.identifier.includes('annual') || pkg.identifier.includes('yearly') ? 'annual' : 'monthly';
+
+    const card = document.createElement('div');
+    card.className = 'pkg-card' + (index === 0 ? ' selected' : '');
+    card.onclick = () => selectPackage(pkg, card);
+
+    let saveHtml = '';
+    if (type === 'annual') {
+      saveHtml = '<div class="pkg-save">≈ 2 mois offerts</div>';
+    }
+
+    card.innerHTML = `
+      <div class="pkg-label">${LABELS[type] || type}</div>
+      <div class="pkg-name">${product.displayName || product.title || 'PadelUp Premium'}</div>
+      <div class="pkg-price">${priceAmount} €<span class="period">${PERIOD_LABELS[type] || ''}</span></div>
+      ${saveHtml}
+    `;
+
+    list.appendChild(card);
+
+    if (index === 0) {
+      selectedPackage = pkg;
+    }
+  });
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('packages').style.display = 'block';
+  document.getElementById('buy-btn').disabled = false;
+}
+
+function selectPackage(pkg, card) {
+  selectedPackage = pkg;
+  document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+}
+
+window.handlePurchase = async function() {
+  if (!selectedPackage || !purchasesInstance) return;
+
+  const btn = document.getElementById('buy-btn');
+  btn.disabled = true;
+  btn.textContent = 'Traitement en cours...';
+  hideError();
+
+  try {
+    const { customerInfo, redemptionInfo } = await purchasesInstance.purchase({
+      rcPackage: selectedPackage,
+      selectedLocale: 'fr',
+      defaultLocale: 'fr',
+    });
+
+    if (customerInfo.entitlements.active['premium']) {
+      document.getElementById('packages').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+    }
+  } catch (e) {
+    console.error('Purchase error:', e);
+    if (e.errorCode !== 'USER_CANCELLED') {
+      showError('Une erreur est survenue. Veuillez réessayer.');
+    }
+    btn.disabled = false;
+    btn.textContent = 'Continuer';
+  }
+};
+
+function showError(msg) {
+  const el = document.getElementById('error');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function hideError() {
+  document.getElementById('error').style.display = 'none';
+}
+
+init();
+</script>
+
+</body>
+</html>
