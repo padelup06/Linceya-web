@@ -4,179 +4,359 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PadelUp — Politique de confidentialité</title>
+<meta name="description" content="Politique de confidentialité de PadelUp : données collectées, utilisation, conservation, et vos droits RGPD.">
+<link rel="canonical" href="https://apppadelup.com/privacy-policy.html">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #0a0f0a;
-    color: #e0e0e0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-  }
-  .container { max-width: 640px; width: 100%; }
-  .logo { font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #00C170; margin-bottom: 8px; }
-  .subtitle { font-size: 13px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
-  h1 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-  .date { font-size: 13px; color: #555; margin-bottom: 32px; }
-  h2 { font-size: 16px; font-weight: 700; color: #00C170; margin: 28px 0 10px; }
-  p { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 12px; }
-  ul { padding-left: 20px; color: #aaa; font-size: 14px; line-height: 2; margin-bottom: 12px; }
+:root {
+  --cream: #F2EDE2;
+  --ivory: #FAF7EF;
+  --pearl: #FFFFFF;
+  --ink: #0E1B35;
+  --navy: #1A2B4D;
+  --signal: #1E47F0;
+  --signal-dark: #1436B8;
+  --platinum: #B48A4A;
+  --platinum-soft: #D4B07A;
+  --stroke: rgba(14,27,53,0.12);
+  --stroke-soft: rgba(14,27,53,0.06);
+  --muted: rgba(14,27,53,0.55);
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-body: 'Archivo', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
-  /* Formulaire contact */
-  .contact-card {
-    background: #141a14;
-    border: 1px solid #1e2e1e;
-    border-radius: 16px;
-    padding: 24px;
-    margin-top: 8px;
-  }
-  .contact-card h3 { font-size: 14px; font-weight: 700; color: #00C170; margin-bottom: 14px; }
-  .form-group { margin-bottom: 14px; }
-  .form-group label { display: block; font-size: 11px; font-weight: 600; color: #555; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
-  .form-group input, .form-group textarea, .form-group select {
-    width: 100%;
-    background: #0a0f0a;
-    border: 1px solid #1e2e1e;
-    border-radius: 8px;
-    padding: 10px 12px;
-    color: #e0e0e0;
-    font-size: 13px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #00C170; }
-  .form-group select option { background: #141a14; }
-  .form-group textarea { resize: vertical; min-height: 80px; }
-  .btn-submit {
-    width: 100%;
-    background: #00C170;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: background 0.2s;
-  }
-  .btn-submit:hover { background: #00a85e; }
-  .success-msg {
-    display: none;
-    background: #00C17020;
-    border: 1px solid #00C17040;
-    border-radius: 8px;
-    padding: 12px;
-    color: #00C170;
-    font-size: 13px;
-    text-align: center;
-    margin-top: 10px;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(ellipse 700px 400px at 80% 10%, rgba(30,71,240,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 10% 95%, rgba(180,138,74,0.08) 0%, transparent 60%);
+}
 
-  .footer { margin-top: 40px; font-size: 12px; color: #444; text-align: center; line-height: 2; border-top: 1px solid #1e2e1e; padding-top: 20px; }
-  .footer a { color: #555; text-decoration: none; }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(250,247,239,0.88); backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--stroke-soft);
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 34px; width: auto; }
+.nav-logo-text { font-family: var(--font-display); font-size: 18px; letter-spacing: 0.02em; color: var(--ink); }
+.nav-back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
+.nav-back:hover { color: var(--ink); }
+
+/* MAIN */
+.wrapper {
+  flex: 1; display: flex; justify-content: center;
+  padding: 140px 24px 80px;
+  position: relative; z-index: 2;
+}
+.container { max-width: 760px; width: 100%; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--signal); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--signal); display: inline-block; }
+h1 {
+  font-family: var(--font-display); font-size: 48px;
+  line-height: 0.94; letter-spacing: -0.02em;
+  color: var(--ink); text-transform: uppercase; margin-bottom: 14px;
+}
+.date {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--muted); margin-bottom: 40px; letter-spacing: 0.04em;
+}
+
+.content {
+  background: var(--pearl); border: 1px solid var(--stroke);
+  border-radius: 24px; padding: 44px;
+  box-shadow: 0 2px 4px rgba(14,27,53,0.02), 0 16px 40px rgba(14,27,53,0.04);
+}
+
+.content p {
+  font-size: 15px; color: rgba(14,27,53,0.75);
+  line-height: 1.75; margin-bottom: 14px;
+}
+h2 {
+  font-family: var(--font-display); font-size: 18px;
+  color: var(--ink); letter-spacing: 0.01em;
+  margin: 32px 0 14px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+}
+h2::before {
+  content: attr(data-num);
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--signal); background: rgba(30,71,240,0.08);
+  border: 1px solid rgba(30,71,240,0.2);
+  padding: 3px 8px; border-radius: 6px;
+  letter-spacing: 0.08em;
+}
+h2:first-of-type { margin-top: 0; }
+
+ul {
+  list-style: none; padding: 0; margin-bottom: 14px;
+}
+ul li {
+  padding: 8px 0 8px 22px;
+  font-size: 14px; color: rgba(14,27,53,0.75);
+  line-height: 1.65; position: relative;
+}
+ul li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 10px; height: 2px; background: var(--signal);
+}
+ul li strong { color: var(--ink); font-weight: 700; }
+
+a { color: var(--signal); text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+
+/* CONTACT CARD */
+.contact-card {
+  background: linear-gradient(135deg, rgba(30,71,240,0.03), rgba(30,71,240,0.01));
+  border: 1px solid rgba(30,71,240,0.18);
+  border-radius: 18px;
+  padding: 28px;
+  margin-top: 18px;
+}
+.contact-card h3 {
+  font-family: var(--font-display); font-size: 15px;
+  color: var(--ink); margin-bottom: 18px;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 10px;
+}
+.contact-card h3::before {
+  content: ''; width: 24px; height: 1.5px;
+  background: var(--signal);
+}
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block; font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; color: var(--signal);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  background: var(--pearl);
+  border: 1.5px solid var(--stroke);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: var(--ink);
+  font-size: 13px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: all 0.2s;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(14,27,53,0.3); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--signal);
+  box-shadow: 0 0 0 4px rgba(30,71,240,0.08);
+}
+.form-group select {
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%230E1B35' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-group textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+.btn-submit {
+  width: 100%;
+  background: var(--ink);
+  color: var(--pearl);
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.btn-submit:hover { background: var(--signal); transform: translateY(-1px); }
+.success-msg {
+  display: none;
+  background: rgba(30,71,240,0.1);
+  border: 1px solid rgba(30,71,240,0.25);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--signal);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.footer-note {
+  margin-top: 32px; font-family: var(--font-mono); font-size: 11px;
+  color: var(--muted); text-align: center; line-height: 2;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--stroke-soft); padding-top: 24px;
+}
+.footer-note a { color: var(--muted); }
+.footer-note a:hover { color: var(--signal); }
+
+/* MAIN FOOTER */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.55);
+  padding: 26px 48px; display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+  position: relative; z-index: 2;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-soft); }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .wrapper { padding: 110px 16px 60px; }
+  h1 { font-size: 36px; }
+  .content { padding: 28px 22px; }
+  h2 { font-size: 16px; flex-wrap: wrap; }
+  footer { padding: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="logo">PADELUP</div>
-  <div class="subtitle">Elevate Your Game</div>
 
-  <h1>Politique de confidentialité</h1>
-  <div class="date">Dernière mise à jour : 15 mars 2026</div>
+<nav>
+  <a href="https://apppadelup.com" class="nav-logo">
+    <img src="https://apppadelup.com/logo.png" alt="PadelUp">
+    <span class="nav-logo-text">PADELUP</span>
+  </a>
+  <a href="index.html" class="nav-back">← Accueil</a>
+</nav>
 
-  <p>PadelUp ("nous", "notre") s'engage à protéger vos données personnelles. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.</p>
+<div class="wrapper">
+  <div class="container">
+    <div class="eyebrow">Informations légales</div>
+    <h1>Politique de<br>confidentialité</h1>
+    <div class="date">Dernière mise à jour : 15 mars 2026</div>
 
-  <h2>1. Données collectées</h2>
-  <ul>
-    <li><strong>Compte :</strong> adresse email, nom d'utilisateur, photo de profil</li>
-    <li><strong>Profil sportif :</strong> niveau de jeu, ville/région, position sur le terrain</li>
-    <li><strong>Matchs :</strong> scores, résultats, historique des parties</li>
-    <li><strong>Vidéos :</strong> vidéos de match uploadées pour l'analyse IA</li>
-    <li><strong>Analyses IA :</strong> scores, métriques, coaching personnalisé</li>
-    <li><strong>Abonnement :</strong> statut Premium (géré par RevenueCat)</li>
-  </ul>
+    <div class="content">
+      <p>PadelUp ("nous", "notre") s'engage à protéger vos données personnelles. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.</p>
 
-  <h2>2. Utilisation des données</h2>
-  <ul>
-    <li>Calculer et afficher votre ELO certifié</li>
-    <li>Générer des analyses IA de vos matchs via Gemini (Google)</li>
-    <li>Personnaliser votre programme d'entraînement</li>
-    <li>Afficher le classement régional et national</li>
-    <li>Gérer votre abonnement Premium</li>
-    <li>Améliorer l'application</li>
-  </ul>
+      <h2 data-num="01">Données collectées</h2>
+      <ul>
+        <li><strong>Compte :</strong> adresse email, nom d'utilisateur, photo de profil</li>
+        <li><strong>Profil sportif :</strong> niveau de jeu, ville/région, position sur le terrain</li>
+        <li><strong>Matchs :</strong> scores, résultats, historique des parties</li>
+        <li><strong>Vidéos :</strong> vidéos de match uploadées pour l'analyse IA</li>
+        <li><strong>Analyses IA :</strong> scores, métriques, coaching personnalisé</li>
+        <li><strong>Abonnement :</strong> statut Premium (géré par RevenueCat)</li>
+      </ul>
 
-  <h2>3. Partage des données</h2>
-  <p>Vos données ne sont jamais vendues. Elles peuvent être partagées avec :</p>
-  <ul>
-    <li><strong>Supabase</strong> — stockage et authentification (serveurs UE)</li>
-    <li><strong>Google Gemini</strong> — analyse IA des vidéos de match</li>
-    <li><strong>RevenueCat</strong> — gestion des abonnements</li>
-  </ul>
+      <h2 data-num="02">Utilisation des données</h2>
+      <ul>
+        <li>Calculer et afficher votre ELO certifié</li>
+        <li>Générer des analyses IA de vos matchs via Gemini (Google)</li>
+        <li>Personnaliser votre programme d'entraînement</li>
+        <li>Afficher le classement régional et national</li>
+        <li>Gérer votre abonnement Premium</li>
+        <li>Améliorer l'application</li>
+      </ul>
 
-  <h2>4. Vidéos de match</h2>
-  <p>Les vidéos uploadées sont utilisées uniquement pour l'analyse IA. Elles sont transmises à l'API Google Gemini et peuvent être conservées temporairement par Google conformément à leurs conditions d'utilisation. Nous ne partageons pas vos vidéos avec d'autres utilisateurs.</p>
+      <h2 data-num="03">Partage des données</h2>
+      <p>Vos données ne sont jamais vendues. Elles peuvent être partagées avec :</p>
+      <ul>
+        <li><strong>Supabase</strong> — stockage et authentification (serveurs UE)</li>
+        <li><strong>Google Gemini</strong> — analyse IA des vidéos de match</li>
+        <li><strong>RevenueCat</strong> — gestion des abonnements</li>
+      </ul>
 
-  <h2>5. Conservation des données</h2>
-  <p>Vos données sont conservées tant que votre compte est actif. En cas de suppression du compte, toutes vos données personnelles sont supprimées dans un délai de 7 jours, à l'exception des données de facturation conservées 30 jours pour obligations légales.</p>
+      <h2 data-num="04">Vidéos de match</h2>
+      <p>Les vidéos uploadées sont utilisées uniquement pour l'analyse IA. Elles sont transmises à l'API Google Gemini et peuvent être conservées temporairement par Google conformément à leurs conditions d'utilisation. Nous ne partageons pas vos vidéos avec d'autres utilisateurs.</p>
 
-  <h2>6. Vos droits</h2>
-  <ul>
-    <li>Accéder à vos données</li>
-    <li>Corriger vos données</li>
-    <li>Supprimer votre compte et vos données</li>
-    <li>Exporter vos données</li>
-  </ul>
-  <p>Pour exercer vos droits, utilisez le formulaire ci-dessous :</p>
+      <h2 data-num="05">Conservation des données</h2>
+      <p>Vos données sont conservées tant que votre compte est actif. En cas de suppression du compte, toutes vos données personnelles sont supprimées dans un délai de 7 jours, à l'exception des données de facturation conservées 30 jours pour obligations légales.</p>
 
-  <div class="contact-card">
-    <h3>✉️ Exercer mes droits</h3>
-    <form id="contactForm">
-      <div class="form-group">
-        <label>Votre email *</label>
-        <input type="email" id="email" placeholder="votre@email.com" required>
+      <h2 data-num="06">Vos droits</h2>
+      <ul>
+        <li>Accéder à vos données</li>
+        <li>Corriger vos données</li>
+        <li>Supprimer votre compte et vos données</li>
+        <li>Exporter vos données</li>
+      </ul>
+      <p>Pour exercer vos droits, utilisez le formulaire ci-dessous :</p>
+
+      <div class="contact-card">
+        <h3>Exercer mes droits RGPD</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <label>Votre email *</label>
+            <input type="email" id="email" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Droit à exercer *</label>
+            <select id="requestType" required>
+              <option value="" disabled selected>Choisir...</option>
+              <option value="Accès à mes données">Accès à mes données</option>
+              <option value="Correction de mes données">Correction de mes données</option>
+              <option value="Suppression de mon compte">Suppression de mon compte</option>
+              <option value="Export de mes données">Export de mes données</option>
+              <option value="Autre demande">Autre demande</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message (optionnel)</label>
+            <textarea id="message" placeholder="Précisez votre demande..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Envoyer ma demande</button>
+        </form>
+        <div class="success-msg" id="successMsg">
+          ✓ Votre demande a bien été envoyée. Nous vous répondrons dans les 7 jours ouvrés.
+        </div>
       </div>
-      <div class="form-group">
-        <label>Droit à exercer *</label>
-        <select id="requestType" required>
-          <option value="" disabled selected>Choisir...</option>
-          <option value="Accès à mes données">Accès à mes données</option>
-          <option value="Correction de mes données">Correction de mes données</option>
-          <option value="Suppression de mon compte">Suppression de mon compte</option>
-          <option value="Export de mes données">Export de mes données</option>
-          <option value="Autre demande">Autre demande</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Message (optionnel)</label>
-        <textarea id="message" placeholder="Précisez votre demande..."></textarea>
-      </div>
-      <button type="submit" class="btn-submit">ENVOYER MA DEMANDE</button>
-    </form>
-    <div class="success-msg" id="successMsg">
-      ✅ Votre demande a bien été envoyée. Nous vous répondrons dans les 7 jours ouvrés.
+
+      <h2 data-num="07">Sécurité</h2>
+      <p>Toutes les données sont chiffrées en transit (HTTPS). Nous utilisons Supabase avec des politiques de sécurité Row Level Security (RLS) pour protéger vos données.</p>
+
+      <h2 data-num="08">Enfants</h2>
+      <p>PadelUp n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment de données sur des mineurs de moins de 13 ans.</p>
+
+      <h2 data-num="09">Contact</h2>
+      <p>Pour toute question concernant cette politique, utilisez le formulaire de contact ci-dessus ou rendez-vous sur <a href="/delete-account.html">notre page de suppression de compte</a>.</p>
+    </div>
+
+    <div class="footer-note">
+      © 2026 PADELUP · <a href="/delete-account.html">Supprimer mon compte</a> · <a href="/contact.html">Contact</a>
     </div>
   </div>
-
-  <h2>7. Sécurité</h2>
-  <p>Toutes les données sont chiffrées en transit (HTTPS). Nous utilisons Supabase avec des politiques de sécurité Row Level Security (RLS) pour protéger vos données.</p>
-
-  <h2>8. Enfants</h2>
-  <p>PadelUp n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment de données sur des mineurs de moins de 13 ans.</p>
-
-  <h2>9. Contact</h2>
-  <p>Pour toute question concernant cette politique, utilisez le formulaire de contact ci-dessus ou rendez-vous sur <a href="/delete-account.html">notre page de suppression de compte</a>.</p>
-
-  <div class="footer">
-    © 2026 PadelUp ·
-    <a href="/delete-account.html">Supprimer mon compte</a>
-  </div>
 </div>
+
+<footer>
+  <div class="footer-copy">© 2026 PADELUP — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-links">
+    <a href="/contact.html">Contact</a>
+    <a href="/pricing.html">Abonnements</a>
+    <a href="/index.html">Accueil</a>
+  </div>
+</footer>
 
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {

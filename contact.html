@@ -4,196 +4,358 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PadelUp — Contact</title>
+<meta name="description" content="Une question, un bug, une suggestion ? L'équipe PadelUp répond sous 48h ouvrées.">
+<link rel="canonical" href="https://apppadelup.com/contact.html">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #0a0f0a;
-    color: #e0e0e0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-  }
-  .container { max-width: 560px; width: 100%; }
-  .logo { font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #00C170; margin-bottom: 8px; }
-  .subtitle { font-size: 13px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
-  h1 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-  .lead { font-size: 14px; color: #777; line-height: 1.7; margin-bottom: 32px; }
+:root {
+  --cream: #F2EDE2;
+  --ivory: #FAF7EF;
+  --pearl: #FFFFFF;
+  --ink: #0E1B35;
+  --navy: #1A2B4D;
+  --signal: #1E47F0;
+  --signal-dark: #1436B8;
+  --platinum: #B48A4A;
+  --platinum-soft: #D4B07A;
+  --stroke: rgba(14,27,53,0.12);
+  --stroke-soft: rgba(14,27,53,0.06);
+  --muted: rgba(14,27,53,0.55);
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-body: 'Archivo', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
-  .card {
-    background: #141a14;
-    border: 1px solid #1e2e1e;
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 20px;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(ellipse 700px 400px at 85% 10%, rgba(30,71,240,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 500px at 10% 90%, rgba(180,138,74,0.08) 0%, transparent 60%);
+}
 
-  .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    color: #00C170;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 7px;
-  }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    background: #0d120d;
-    border: 1px solid #1e2e1e;
-    border-radius: 10px;
-    padding: 12px 14px;
-    color: #e0e0e0;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input::placeholder,
-  .form-group textarea::placeholder { color: #444; }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: #00C170; }
-  .form-group select { appearance: none; cursor: pointer; }
-  .form-group select option { background: #141a14; }
-  .form-group textarea { resize: vertical; min-height: 120px; }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(250,247,239,0.88); backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--stroke-soft);
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 34px; width: auto; }
+.nav-logo-text { font-family: var(--font-display); font-size: 18px; letter-spacing: 0.02em; color: var(--ink); }
+.nav-back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
+.nav-back:hover { color: var(--ink); }
 
-  .row { display: flex; gap: 14px; }
-  .row .form-group { flex: 1; }
+/* MAIN */
+.wrapper {
+  flex: 1; display: flex; justify-content: center;
+  padding: 140px 24px 80px;
+  position: relative; z-index: 2;
+}
+.container { max-width: 640px; width: 100%; }
 
-  .btn-submit {
-    width: 100%;
-    background: #00C170;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: background 0.2s, transform 0.15s;
-    margin-top: 4px;
-  }
-  .btn-submit:hover { background: #00a85e; transform: translateY(-1px); }
-  .btn-submit:active { transform: translateY(0); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--signal); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--signal); display: inline-block; }
+h1 {
+  font-family: var(--font-display); font-size: 52px;
+  line-height: 0.94; letter-spacing: -0.02em;
+  color: var(--ink); text-transform: uppercase; margin-bottom: 18px;
+}
+h1 .accent {
+  background: linear-gradient(135deg, var(--platinum-soft), var(--platinum));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.lead {
+  font-size: 17px; color: var(--muted); line-height: 1.65;
+  max-width: 480px; margin-bottom: 44px;
+}
 
-  .success-card {
-    display: none;
-    background: #00C17015;
-    border: 1px solid #00C17040;
-    border-radius: 16px;
-    padding: 32px;
-    text-align: center;
-  }
-  .success-icon { font-size: 48px; margin-bottom: 16px; }
-  .success-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-  .success-text { font-size: 14px; color: #777; line-height: 1.6; }
+/* INFO CARDS */
+.info-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 32px; }
+.info-card {
+  background: var(--pearl); border: 1px solid var(--stroke);
+  border-radius: 16px; padding: 20px 16px; text-align: center;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative; overflow: hidden;
+}
+.info-card::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 2px; background: var(--signal);
+  opacity: 0; transition: opacity 0.3s;
+}
+.info-card:hover { transform: translateY(-3px); border-color: rgba(30,71,240,0.3); box-shadow: 0 12px 28px rgba(14,27,53,0.06); }
+.info-card:hover::before { opacity: 1; }
+.info-card .icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(30,71,240,0.08), rgba(30,71,240,0.02));
+  border: 1px solid rgba(30,71,240,0.2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px; color: var(--signal);
+}
+.info-card .icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.info-card .label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.12em; margin-bottom: 4px;
+}
+.info-card .value { font-size: 13px; color: var(--ink); font-weight: 600; }
 
-  .info-cards { display: flex; gap: 12px; margin-bottom: 20px; }
-  .info-card {
-    flex: 1;
-    background: #141a14;
-    border: 1px solid #1e2e1e;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-  }
-  .info-card .icon { font-size: 24px; margin-bottom: 8px; }
-  .info-card .label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .info-card .value { font-size: 13px; color: #aaa; font-weight: 500; }
+/* FORM CARD */
+.card {
+  background: var(--pearl); border: 1px solid var(--stroke);
+  border-radius: 24px; padding: 36px;
+  box-shadow: 0 2px 4px rgba(14,27,53,0.02), 0 16px 40px rgba(14,27,53,0.05);
+  margin-bottom: 20px;
+}
 
-  .footer { margin-top: 40px; font-size: 12px; color: #444; text-align: center; line-height: 2; border-top: 1px solid #1e2e1e; padding-top: 20px; }
-  .footer a { color: #555; text-decoration: none; }
-  .footer a:hover { color: #00C170; }
+.form-group { margin-bottom: 22px; }
+.form-group label {
+  display: block;
+  font-family: var(--font-mono); font-size: 10px;
+  font-weight: 600; color: var(--signal);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--ivory);
+  border: 1.5px solid var(--stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--ink);
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: all 0.2s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(14,27,53,0.35); }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--signal);
+  background: var(--pearl);
+  box-shadow: 0 0 0 4px rgba(30,71,240,0.08);
+}
+.form-group select {
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%230E1B35' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+.form-group select option { background: var(--pearl); color: var(--ink); }
+.form-group textarea { resize: vertical; min-height: 130px; line-height: 1.55; }
 
-  @media (max-width: 480px) {
-    .row { flex-direction: column; gap: 0; }
-    .info-cards { flex-direction: column; }
-  }
+.row { display: flex; gap: 14px; }
+.row .form-group { flex: 1; }
+
+.btn-submit {
+  width: 100%;
+  background: var(--ink);
+  color: var(--pearl);
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin-top: 6px; position: relative; overflow: hidden;
+}
+.btn-submit::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--signal), var(--signal-dark));
+  opacity: 0; transition: opacity 0.25s;
+}
+.btn-submit span { position: relative; z-index: 2; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(14,27,53,0.2); }
+.btn-submit:hover::before { opacity: 1; }
+.btn-submit:active { transform: translateY(0); }
+
+.success-card {
+  display: none;
+  background: var(--pearl);
+  border: 1px solid rgba(30,71,240,0.25);
+  border-radius: 24px;
+  padding: 44px 32px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(14,27,53,0.02), 0 16px 40px rgba(30,71,240,0.08);
+}
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--signal), var(--signal-dark));
+  color: var(--pearl); font-size: 32px; font-weight: 700;
+  margin: 0 auto 22px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 16px 40px rgba(30,71,240,0.3);
+}
+.success-title { font-family: var(--font-display); font-size: 26px; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 10px; text-transform: uppercase; }
+.success-text { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 360px; margin: 0 auto; }
+
+/* FOOTER */
+.footer-note {
+  margin-top: 32px;
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--muted); text-align: center; line-height: 2;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--stroke-soft); padding-top: 24px;
+}
+.footer-note a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-note a:hover { color: var(--signal); }
+
+/* MAIN FOOTER */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.55);
+  padding: 26px 48px; display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+  position: relative; z-index: 2;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-soft); }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .wrapper { padding: 110px 16px 60px; }
+  h1 { font-size: 40px; }
+  .lead { font-size: 15px; }
+  .info-cards { grid-template-columns: 1fr; }
+  .card { padding: 28px 22px; }
+  .row { flex-direction: column; gap: 0; }
+  footer { padding: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="logo">PADELUP</div>
-  <div class="subtitle">Elevate Your Game</div>
 
-  <h1>Nous contacter</h1>
-  <p class="lead">Une question, un bug, une suggestion ? On vous répond sous 48h.</p>
+<nav>
+  <a href="https://apppadelup.com" class="nav-logo">
+    <img src="https://apppadelup.com/logo.png" alt="PadelUp">
+    <span class="nav-logo-text">PADELUP</span>
+  </a>
+  <a href="index.html" class="nav-back">← Accueil</a>
+</nav>
 
-  <div class="info-cards">
-    <div class="info-card">
-      <div class="icon">⚡</div>
-      <div class="label">Délai de réponse</div>
-      <div class="value">48h ouvrées</div>
-    </div>
-    <div class="info-card">
-      <div class="icon">🎾</div>
-      <div class="label">Support</div>
-      <div class="value">7j/7</div>
-    </div>
-    <div class="info-card">
-      <div class="icon">🔒</div>
-      <div class="label">Suppression compte</div>
-      <div class="value">7 jours ouvrés</div>
-    </div>
-  </div>
+<div class="wrapper">
+  <div class="container">
+    <div class="eyebrow">Support &amp; Contact</div>
+    <h1>Parlons<br><span class="accent">padel</span></h1>
+    <p class="lead">Une question, un bug, une suggestion ? L'équipe répond sous 48&nbsp;heures ouvrées.</p>
 
-  <div class="card" id="formCard">
-    <form id="contactForm">
-      <div class="row">
-        <div class="form-group">
-          <label>Prénom *</label>
-          <input type="text" id="firstname" placeholder="Thomas" required>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="label">Délai</div>
+        <div class="value">48h ouvrées</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="label">Support</div>
+        <div class="value">7j / 7</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="label">Suppression</div>
+        <div class="value">7 jours</div>
+      </div>
+    </div>
+
+    <div class="card" id="formCard">
+      <form id="contactForm">
+        <div class="row">
+          <div class="form-group">
+            <label>Prénom *</label>
+            <input type="text" id="firstname" placeholder="Thomas" required>
+          </div>
+          <div class="form-group">
+            <label>Nom *</label>
+            <input type="text" id="lastname" placeholder="Dupont" required>
+          </div>
         </div>
         <div class="form-group">
-          <label>Nom *</label>
-          <input type="text" id="lastname" placeholder="Dupont" required>
+          <label>Email *</label>
+          <input type="email" id="email" placeholder="votre@email.com" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label>Email *</label>
-        <input type="email" id="email" placeholder="votre@email.com" required>
-      </div>
-      <div class="form-group">
-        <label>Sujet *</label>
-        <select id="subject" required>
-          <option value="" disabled selected>Choisir un sujet...</option>
-          <option value="Bug / Problème technique">🐛 Bug / Problème technique</option>
-          <option value="Question sur l'analyse IA">🤖 Question sur l'analyse IA</option>
-          <option value="Abonnement Premium">⭐ Abonnement Premium</option>
-          <option value="Suppression de compte">🗑️ Suppression de compte</option>
-          <option value="Suggestion d'amélioration">💡 Suggestion d'amélioration</option>
-          <option value="Partenariat / Club">🏟️ Partenariat / Club</option>
-          <option value="Autre">💬 Autre</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Message *</label>
-        <textarea id="message" placeholder="Décrivez votre demande en détail..." required></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Envoyer le message</button>
-    </form>
-  </div>
+        <div class="form-group">
+          <label>Sujet *</label>
+          <select id="subject" required>
+            <option value="" disabled selected>Choisir un sujet...</option>
+            <option value="Bug / Problème technique">Bug / Problème technique</option>
+            <option value="Question sur l'analyse IA">Question sur l'analyse IA</option>
+            <option value="Abonnement Premium">Abonnement Premium</option>
+            <option value="Suppression de compte">Suppression de compte</option>
+            <option value="Suggestion d'amélioration">Suggestion d'amélioration</option>
+            <option value="Partenariat / Club">Partenariat / Club</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea id="message" placeholder="Décrivez votre demande en détail..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit"><span>Envoyer le message →</span></button>
+      </form>
+    </div>
 
-  <div class="success-card" id="successCard">
-    <div class="success-icon">✅</div>
-    <div class="success-title">Message envoyé !</div>
-    <div class="success-text">Merci pour votre message. Nous vous répondrons dans les 48 heures ouvrées.</div>
-  </div>
+    <div class="success-card" id="successCard">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Message envoyé</div>
+      <div class="success-text">Merci pour votre message. Nous vous répondrons dans les 48 heures ouvrées.</div>
+    </div>
 
-  <div class="footer">
-    © 2026 PadelUp ·
-    <a href="/privacy-policy.html">Politique de confidentialité</a> ·
-    <a href="/delete-account.html">Supprimer mon compte</a>
+    <div class="footer-note">
+      © 2026 PADELUP ·
+      <a href="/privacy-policy.html">Politique de confidentialité</a> ·
+      <a href="/delete-account.html">Supprimer mon compte</a>
+    </div>
   </div>
 </div>
+
+<footer>
+  <div class="footer-copy">© 2026 PADELUP — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-links">
+    <a href="/privacy-policy.html">Politique de confidentialité</a>
+    <a href="/pricing.html">Abonnements</a>
+    <a href="/index.html">Accueil</a>
+  </div>
+</footer>
 
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {
