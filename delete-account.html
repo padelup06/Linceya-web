@@ -359,43 +359,4 @@ var CONTACT_ENDPOINT = '/api/contact';
 
 document.getElementById('deleteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  var btn = document.getElementById('submitBtn');
-  var errBox = document.getElementById('formError');
-  errBox.style.display = 'none';
-
-  var data = {
-    formType: 'account-deletion',
-    email: document.getElementById('email').value.trim(),
-    username: document.getElementById('username').value.trim(),
-    reason: document.getElementById('reason').value.trim(),
-    website: document.getElementById('website').value, // honeypot
-  };
-
-  var originalLabel = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = 'Envoi en cours…';
-
-  try {
-    var res = await fetch(CONTACT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    var json = await res.json().catch(function() { return {}; });
-
-    if (!res.ok) {
-      throw new Error(json.error || 'Erreur d\'envoi (HTTP ' + res.status + ')');
-    }
-
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('deleteForm').style.display = 'none';
-  } catch (err) {
-    errBox.textContent = err.message || 'Erreur d\'envoi, veuillez réessayer.';
-    errBox.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = originalLabel;
-  }
-});
-</script>
-</body>
-</html>
+  var btn = document.getElementByI

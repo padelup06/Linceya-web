@@ -368,43 +368,4 @@ document.getElementById('contactForm').addEventListener('submit', async function
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
   var errBox = document.getElementById('formError');
-  errBox.style.display = 'none';
-
-  var data = {
-    firstname: document.getElementById('firstname').value.trim(),
-    lastname: document.getElementById('lastname').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    subject: document.getElementById('subject').value,
-    message: document.getElementById('message').value.trim(),
-    website: document.getElementById('website').value, // honeypot
-  };
-
-  // État loading
-  var originalLabel = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = '<span>Envoi en cours…</span>';
-
-  try {
-    var res = await fetch(CONTACT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    var json = await res.json().catch(function() { return {}; });
-
-    if (!res.ok) {
-      throw new Error(json.error || 'Erreur d\'envoi (HTTP ' + res.status + ')');
-    }
-
-    document.getElementById('formCard').style.display = 'none';
-    document.getElementById('successCard').style.display = 'block';
-  } catch (err) {
-    errBox.textContent = err.message || 'Erreur d\'envoi, veuillez réessayer.';
-    errBox.style.display = 'block';
-    btn.disabled = false;
-    btn.innerHTML = originalLabel;
-  }
-});
-</script>
-</body>
-</html>
+  errBox.style.display = 'n
