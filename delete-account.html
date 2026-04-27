@@ -280,17 +280,20 @@ footer {
       <form id="deleteForm">
         <div class="form-group">
           <label>Votre email Linceya *</label>
-          <input type="email" id="email" placeholder="votre@email.com" required>
+          <input type="email" id="email" name="email" placeholder="votre@email.com" required>
         </div>
         <div class="form-group">
           <label>Votre nom d'utilisateur *</label>
-          <input type="text" id="username" placeholder="linceya_username" required>
+          <input type="text" id="username" name="username" placeholder="linceya_username" required>
         </div>
         <div class="form-group">
           <label>Raison (optionnel)</label>
-          <textarea id="reason" placeholder="Pourquoi souhaitez-vous supprimer votre compte ?"></textarea>
+          <textarea id="reason" name="reason" placeholder="Pourquoi souhaitez-vous supprimer votre compte ?"></textarea>
         </div>
-        <button type="submit" class="btn-submit">Envoyer la demande de suppression</button>
+        <!-- Honeypot anti-bot -->
+        <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
+        <div id="formError" style="display:none; padding:12px 16px; margin-bottom:16px; background:#FEE2E2; color:#991B1B; border-radius:8px; font-size:14px;"></div>
+        <button type="submit" class="btn-submit" id="submitBtn">Envoyer la demande de suppression</button>
       </form>
       <div class="success-msg" id="successMsg">
         ✓ Votre demande a bien été envoyée. Nous la traiterons dans un délai de 7 jours ouvrés.
@@ -350,21 +353,48 @@ footer {
 </footer>
 
 <script>
-document.getElementById('deleteForm').addEventListener('submit', function(e) {
+// Endpoint Cloudflare Worker (le même que pour le formulaire de contact).
+// Le champ formType=account-deletion permet au Worker de générer le bon email.
+var CONTACT_ENDPOINT = '/api/contact';
+
+document.getElementById('deleteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  var email = document.getElementById('email').value;
-  var username = document.getElementById('username').value;
-  var reason = document.getElementById('reason').value;
-  var subject = encodeURIComponent('Suppression de compte - ' + username);
-  var body = encodeURIComponent(
-    'Demande de suppression de compte\n\n' +
-    'Email : ' + email + '\n' +
-    'Username : ' + username + '\n' +
-    (reason ? 'Raison : ' + reason + '\n' : '')
-  );
-  window.location.href = 'mailto:contact@linceya.com?subject=' + subject + '&body=' + body;
-  document.getElementById('successMsg').style.display = 'block';
-  this.reset();
+  var btn = document.getElementById('submitBtn');
+  var errBox = document.getElementById('formError');
+  errBox.style.display = 'none';
+
+  var data = {
+    formType: 'account-deletion',
+    email: document.getElementById('email').value.trim(),
+    username: document.getElementById('username').value.trim(),
+    reason: document.getElementById('reason').value.trim(),
+    website: document.getElementById('website').value, // honeypot
+  };
+
+  var originalLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours…';
+
+  try {
+    var res = await fetch(CONTACT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    var json = await res.json().catch(function() { return {}; });
+
+    if (!res.ok) {
+      throw new Error(json.error || 'Erreur d\'envoi (HTTP ' + res.status + ')');
+    }
+
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('deleteForm').style.display = 'none';
+  } catch (err) {
+    errBox.textContent = err.message || 'Erreur d\'envoi, veuillez réessayer.';
+    errBox.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+  }
 });
 </script>
 </body>
