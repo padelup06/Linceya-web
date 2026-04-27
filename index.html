@@ -444,11 +444,21 @@ section { padding: 110px 48px; position: relative; }
   border-color: var(--platinum);
   background: linear-gradient(180deg, var(--pearl) 0%, #FBF7EF 100%);
 }
-.mini-card.premium::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--platinum), var(--platinum-light), var(--platinum));
-  border-radius: 22px 22px 0 0;
+.mini-card-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: var(--platinum);
+  color: var(--pearl);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-platinum);
+  z-index: 2;
 }
 .mini-card-tag {
   display: inline-block; font-family: var(--font-mono);
@@ -960,6 +970,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
     <div class="mini-card premium reveal">
+      <div class="mini-card-badge">Populaire</div>
       <div class="mini-card-tag">// Premium</div>
       <div class="mini-card-name">PREMIUM</div>
       <div class="mini-card-price"><span class="currency">€</span>9,99<span class="period">/ mois</span></div>
