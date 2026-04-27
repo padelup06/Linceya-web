@@ -191,20 +191,17 @@ nav {
   border-color: var(--platinum);
   box-shadow: var(--shadow-platinum);
 }
-.plan-card.premium::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 5px;
-  background: linear-gradient(90deg, var(--platinum), var(--platinum-light), var(--platinum));
-  border-radius: 24px 24px 0 0;
-}
 .plan-badge {
-  position: absolute; top: -14px; right: 24px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
   background: var(--signal); color: var(--pearl);
   padding: 6px 14px; border-radius: 100px;
   font-family: var(--font-mono); font-size: 10px;
   font-weight: 700; letter-spacing: 1.5px;
   text-transform: uppercase;
   box-shadow: var(--shadow-signal);
+  z-index: 2;
 }
 .plan-card.premium .plan-badge {
   background: var(--platinum);
