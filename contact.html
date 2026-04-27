@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PadelUp — Contact</title>
-<meta name="description" content="Une question, un bug, une suggestion ? L'équipe PadelUp répond sous 48h ouvrées.">
-<link rel="canonical" href="https://apppadelup.com/contact.html">
+<title>Linceya — Contact</title>
+<meta name="description" content="Une question, un bug, une suggestion ? L'équipe Linceya répond sous 48h ouvrées.">
+<link rel="canonical" href="https://linceya.com/contact.html">
 
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -260,9 +260,9 @@ footer {
 <body>
 
 <nav>
-  <a href="https://apppadelup.com" class="nav-logo">
-    <img src="https://apppadelup.com/logo.png?v=2" alt="PadelUp">
-    <span class="nav-logo-text">PADELUP</span>
+  <a href="https://linceya.com" class="nav-logo">
+    <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
+    <span class="nav-logo-text">LINCEYA</span>
   </a>
   <a href="index.html" class="nav-back">← Accueil</a>
 </nav>
@@ -341,7 +341,7 @@ footer {
     </div>
 
     <div class="footer-note">
-      © 2026 PADELUP ·
+      © 2026 LINCEYA ·
       <a href="/privacy-policy.html">Politique de confidentialité</a> ·
       <a href="/delete-account.html">Supprimer mon compte</a>
     </div>
@@ -349,7 +349,7 @@ footer {
 </div>
 
 <footer>
-  <div class="footer-copy">© 2026 PADELUP — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
   <div class="footer-links">
     <a href="/privacy-policy.html">Politique de confidentialité</a>
     <a href="/pricing.html">Abonnements</a>
@@ -366,7 +366,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   var subject = document.getElementById('subject').value;
   var message = document.getElementById('message').value;
 
-  var mailSubject = encodeURIComponent('[PadelUp] ' + subject);
+  var mailSubject = encodeURIComponent('[Linceya] ' + subject);
   var mailBody = encodeURIComponent(
     'Nom : ' + firstname + ' ' + lastname + '\n' +
     'Email : ' + email + '\n' +
@@ -374,7 +374,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     'Message :\n' + message
   );
 
-  window.location.href = 'mailto:contact@apppadelup.com?subject=' + mailSubject + '&body=' + mailBody;
+  window.location.href = 'mailto:contact@linceya.com?subject=' + mailSubject + '&body=' + mailBody;
 
   document.getElementById('formCard').style.display = 'none';
   document.getElementById('successCard').style.display = 'block';

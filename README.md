@@ -1,12 +1,12 @@
-# padelup-web
+# linceya-web
 
-Site marketing public **apppadelup.com**.
+Site marketing public **linceya.com**.
 
 ## Stack
 
 - HTML/CSS/JS statique (aucune build step)
 - Hébergé sur GitHub Pages (cf. `CNAME`)
-- Domaine `apppadelup.com` — DNS chez Cloudflare
+- Domaine `linceya.com` — DNS chez Cloudflare
 
 ## Pages
 
@@ -28,6 +28,6 @@ Push sur `main` → GitHub Pages publie automatiquement.
 
 ## Repos liés
 
-- [padelup-app](https://github.com/padelup06/padelup-app) — app Flutter
-- [padelup-dashboard](https://github.com/padelup06/padelup-dashboard) — dashboard clubs
-- [padelup-server](https://github.com/padelup06/padelup-server) — backend FastAPI
+- [linceya-app](https://github.com/linceya06/linceya-app) — app Flutter
+- [linceya-dashboard](https://github.com/linceya06/linceya-dashboard) — dashboard clubs
+- [linceya-server](https://github.com/linceya06/linceya-server) — backend FastAPI
