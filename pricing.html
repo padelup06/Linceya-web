@@ -580,7 +580,7 @@ footer {
     <li><a href="#pricing">Abonnements</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="nav-cta" target="_blank" rel="noopener noreferrer">Télécharger</a>
+  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="nav-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger</a>
   <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -592,7 +592,7 @@ footer {
   <a href="https://linceya.com#avis" onclick="toggleMenu()">Avis</a>
   <a href="#pricing" onclick="toggleMenu()">Abonnements</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="mobile-cta" target="_blank" rel="noopener noreferrer">Télécharger</a>
+  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="mobile-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger</a>
 </div>
 
 <section class="pricing-hero" id="pricing">
@@ -624,7 +624,7 @@ footer {
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Métriques détaillées (+12 indicateurs)</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Historique complet de progression</div>
     </div>
-    <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="plan-btn free" target="_blank" rel="noopener noreferrer">Télécharger gratuitement</a>
+    <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="plan-btn free" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger gratuitement</a>
   </div>
 
   <div class="plan-card premium">
@@ -773,6 +773,19 @@ var observer = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('hidden'); observer.observe(el); });
+
+// Smart store redirect : iOS → App Store, Android → Google Play, desktop → Google Play.
+// On override le href des boutons taggés [data-smart-store] au chargement de la page.
+(function() {
+  var APP_STORE = 'https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174';
+  var PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.padelup.padelup';
+  var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var target = isIOS ? APP_STORE : PLAY_STORE;
+  document.querySelectorAll('[data-smart-store]').forEach(function(el) {
+    el.href = target;
+  });
+})();
 </script>
 
 </body>
