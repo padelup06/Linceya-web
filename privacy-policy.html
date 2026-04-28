@@ -255,12 +255,16 @@ footer {
   <div class="container">
     <div class="eyebrow">Informations légales</div>
     <h1>Politique de<br>confidentialité</h1>
-    <div class="date">Dernière mise à jour : 15 mars 2026</div>
+    <div class="date">Dernière mise à jour : 28 avril 2026</div>
 
     <div class="content">
       <p>Linceya ("nous", "notre") s'engage à protéger vos données personnelles. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.</p>
 
-      <h2 data-num="01">Données collectées</h2>
+      <h2 data-num="01">Responsable de traitement</h2>
+      <p><strong>Linceya</strong><br>
+      Contact : <a href="mailto:contact@linceya.com">contact@linceya.com</a></p>
+
+      <h2 data-num="02">Données collectées</h2>
       <ul>
         <li><strong>Compte :</strong> adresse email, nom d'utilisateur, photo de profil</li>
         <li><strong>Profil sportif :</strong> niveau de jeu, ville/région, position sur le terrain</li>
@@ -268,38 +272,56 @@ footer {
         <li><strong>Vidéos :</strong> vidéos de match uploadées pour l'analyse IA</li>
         <li><strong>Analyses IA :</strong> scores, métriques, coaching personnalisé</li>
         <li><strong>Abonnement :</strong> statut Premium (géré par RevenueCat)</li>
+        <li><strong>Identifiants techniques :</strong> token de notifications push (Firebase Cloud Messaging), identifiant d'installation</li>
+        <li><strong>Géolocalisation :</strong> ville/région approximative pour suggérer les clubs proches (uniquement avec votre accord explicite)</li>
+        <li><strong>Données de diagnostic :</strong> rapports d'erreurs anonymisés via Sentry (stack trace, version OS, contexte technique — aucun contenu personnel)</li>
       </ul>
 
-      <h2 data-num="02">Utilisation des données</h2>
+      <h2 data-num="03">Utilisation des données</h2>
       <ul>
         <li>Calculer et afficher votre ELO certifié</li>
         <li>Générer des analyses IA de vos matchs via Gemini (Google)</li>
         <li>Personnaliser votre programme d'entraînement</li>
         <li>Afficher le classement régional et national</li>
         <li>Gérer votre abonnement Premium</li>
+        <li>Vous envoyer des notifications push concernant vos matchs et analyses</li>
+        <li>Détecter et corriger les bugs (diagnostics Sentry)</li>
         <li>Améliorer l'application</li>
       </ul>
 
-      <h2 data-num="03">Partage des données</h2>
-      <p>Vos données ne sont jamais vendues. Elles peuvent être partagées avec :</p>
+      <h2 data-num="04">Partage des données</h2>
+      <p>Vos données ne sont jamais vendues. Elles peuvent être partagées avec les sous-traitants suivants :</p>
       <ul>
         <li><strong>Supabase</strong> — stockage et authentification (serveurs UE)</li>
-        <li><strong>Google Gemini</strong> — analyse IA des vidéos de match</li>
+        <li><strong>Google Gemini</strong> — analyse IA des vidéos de match (serveurs US, transfert encadré par les Clauses Contractuelles Types de la Commission européenne)</li>
+        <li><strong>Firebase (Google)</strong> — notifications push, serveurs UE/US</li>
+        <li><strong>Sentry</strong> — monitoring d'erreurs (serveurs UE)</li>
         <li><strong>RevenueCat</strong> — gestion des abonnements</li>
       </ul>
 
-      <h2 data-num="04">Vidéos de match</h2>
+      <h2 data-num="05">Vidéos de match</h2>
       <p>Les vidéos uploadées sont utilisées uniquement pour l'analyse IA. Elles sont transmises à l'API Google Gemini et peuvent être conservées temporairement par Google conformément à leurs conditions d'utilisation. Nous ne partageons pas vos vidéos avec d'autres utilisateurs.</p>
 
-      <h2 data-num="05">Conservation des données</h2>
+      <h2 data-num="06">Base légale du traitement</h2>
+      <p>Conformément au RGPD (Article 6), nous traitons vos données sur les bases suivantes :</p>
+      <ul>
+        <li><strong>Exécution du contrat</strong> — pour fournir le service Linceya (analyse IA, ELO, classement, gestion d'abonnement)</li>
+        <li><strong>Consentement</strong> — pour la géolocalisation et les notifications push (vous pouvez retirer votre consentement à tout moment dans les paramètres de l'app)</li>
+        <li><strong>Intérêt légitime</strong> — pour améliorer l'application et prévenir la fraude</li>
+        <li><strong>Obligation légale</strong> — pour conserver les données de facturation</li>
+      </ul>
+
+      <h2 data-num="07">Conservation des données</h2>
       <p>Vos données sont conservées tant que votre compte est actif. En cas de suppression du compte, toutes vos données personnelles sont supprimées dans un délai de 7 jours, à l'exception des données de facturation conservées 30 jours pour obligations légales.</p>
 
-      <h2 data-num="06">Vos droits</h2>
+      <h2 data-num="08">Vos droits</h2>
       <ul>
         <li>Accéder à vos données</li>
         <li>Corriger vos données</li>
         <li>Supprimer votre compte et vos données</li>
-        <li>Exporter vos données</li>
+        <li>Exporter vos données (portabilité)</li>
+        <li>Vous opposer au traitement ou en limiter la portée</li>
+        <li>Déposer une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés</li>
       </ul>
       <p>Pour exercer vos droits, utilisez le formulaire ci-dessous :</p>
 
@@ -332,13 +354,13 @@ footer {
         </div>
       </div>
 
-      <h2 data-num="07">Sécurité</h2>
+      <h2 data-num="09">Sécurité</h2>
       <p>Toutes les données sont chiffrées en transit (HTTPS). Nous utilisons Supabase avec des politiques de sécurité Row Level Security (RLS) pour protéger vos données.</p>
 
-      <h2 data-num="08">Enfants</h2>
+      <h2 data-num="10">Enfants</h2>
       <p>Linceya n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment de données sur des mineurs de moins de 13 ans.</p>
 
-      <h2 data-num="09">Contact</h2>
+      <h2 data-num="11">Contact</h2>
       <p>Pour toute question concernant cette politique, utilisez le formulaire de contact ci-dessus ou rendez-vous sur <a href="/delete-account.html">notre page de suppression de compte</a>.</p>
     </div>
 
