@@ -43,14 +43,14 @@
   }
 
   var css = [
-    '.lcc-banner{position:fixed;bottom:16px;left:16px;right:16px;max-width:720px;margin:0 auto;background:#0E1B35;color:#F2EDE2;border:1px solid rgba(180,138,74,0.3);border-radius:14px;padding:22px 24px;box-shadow:0 12px 36px rgba(0,0,0,0.4);z-index:9999;font-family:Archivo,system-ui,sans-serif;display:none}',
+    '.lcc-banner{position:fixed;bottom:14px;left:14px;right:14px;max-width:560px;margin:0 auto;background:#0E1B35;color:#F2EDE2;border:1px solid rgba(180,138,74,0.3);border-radius:12px;padding:14px 16px;box-shadow:0 10px 28px rgba(0,0,0,0.35);z-index:9999;font-family:Archivo,system-ui,sans-serif;display:none}',
     '.lcc-banner.show{display:block;animation:lcc-up .4s ease}',
     '@keyframes lcc-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}',
-    '.lcc-title{font-family:"Archivo Black",Archivo,sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#D4B87A;margin-bottom:8px}',
-    '.lcc-text{font-size:13.5px;line-height:1.55;color:rgba(242,237,226,0.78);margin-bottom:16px}',
+    '.lcc-text{font-size:12.5px;line-height:1.5;color:rgba(242,237,226,0.82);margin-bottom:12px}',
+    '.lcc-text strong{color:#D4B87A;font-weight:700;letter-spacing:.04em;margin-right:6px}',
     '.lcc-text a{color:#D4B87A;text-decoration:underline}',
-    '.lcc-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}',
-    '.lcc-btn{font-family:Archivo,system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;padding:10px 18px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:all .18s}',
+    '.lcc-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}',
+    '.lcc-btn{font-family:Archivo,system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:.03em;padding:7px 14px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:all .18s}',
     '.lcc-btn-secondary{background:transparent;color:rgba(242,237,226,0.7);border-color:rgba(255,255,255,0.18)}',
     '.lcc-btn-secondary:hover{color:#F2EDE2;border-color:rgba(255,255,255,0.35)}',
     '.lcc-btn-primary{background:linear-gradient(135deg,#D4B87A 0%,#B48A4A 100%);color:#0E1B35;border-color:transparent}',
@@ -73,16 +73,15 @@
     '.lcc-modal-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}',
     '.lcc-modal-actions .lcc-btn-secondary{color:#6B7489;border-color:#D8D0BE}',
     '.lcc-modal-actions .lcc-btn-secondary:hover{color:#0E1B35;border-color:#B48A4A}',
-    '@media (max-width:540px){.lcc-banner{left:8px;right:8px;bottom:8px;padding:18px}.lcc-actions{flex-direction:column-reverse;gap:8px}.lcc-btn{width:100%}.lcc-modal{padding:24px 22px}.lcc-modal-actions{flex-direction:column-reverse}.lcc-modal-actions .lcc-btn{width:100%}}'
+    '@media (max-width:540px){.lcc-banner{left:8px;right:8px;bottom:8px;padding:14px}.lcc-text{font-size:12px;margin-bottom:10px}.lcc-actions{gap:6px}.lcc-btn{flex:1;padding:8px 10px;font-size:11.5px}.lcc-modal{padding:24px 22px}.lcc-modal-actions{flex-direction:column-reverse}.lcc-modal-actions .lcc-btn{width:100%}}'
   ].join('');
 
   var bannerHTML =
-    '<div class="lcc-title">Cookies</div>' +
-    '<div class="lcc-text">Linceya utilise des cookies strictement nécessaires au fonctionnement du site et, avec votre accord, des cookies de mesure d\'audience et marketing. <a href="/privacy-policy.html">En savoir plus</a>.</div>' +
+    '<div class="lcc-text"><strong>COOKIES</strong>Nous utilisons des cookies pour améliorer votre expérience. <a href="/privacy-policy.html">En savoir plus</a>.</div>' +
     '<div class="lcc-actions">' +
-      '<button class="lcc-btn lcc-btn-secondary" data-action="customize">Personnaliser</button>' +
-      '<button class="lcc-btn lcc-btn-secondary" data-action="reject">Tout refuser</button>' +
-      '<button class="lcc-btn lcc-btn-primary" data-action="accept">Tout accepter</button>' +
+      '<button class="lcc-btn lcc-btn-secondary" data-action="customize">Choisir</button>' +
+      '<button class="lcc-btn lcc-btn-secondary" data-action="reject">Refuser</button>' +
+      '<button class="lcc-btn lcc-btn-primary" data-action="accept">Accepter</button>' +
     '</div>';
 
   var modalHTML =
