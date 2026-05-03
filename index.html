@@ -477,7 +477,7 @@ section { padding: 64px 48px; position: relative; }
   font-size: 48px; margin-top: 14px;
   color: var(--ink); line-height: 1;
 }
-.mini-card-price .currency { font-size: 24px; vertical-align: super; }
+.mini-card-price .currency { font-size: 24px; color: var(--platinum); margin-left: 4px; }
 .mini-card-price .period {
   font-family: var(--font-body);
   font-size: 14px; font-weight: 500;
@@ -1008,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="pricing-cards-mini">
     <div class="mini-card reveal">
       <div class="mini-card-name">GRATUIT</div>
-      <div class="mini-card-price"><span class="currency">€</span>0<span class="period">/ mois</span></div>
+      <div class="mini-card-price">0<span class="currency">€</span><span class="period">/ mois</span></div>
       <div class="mini-card-desc">Classement, matchs publics et communauté.</div>
       <div class="mini-card-features">
         <div class="mini-feat"><span class="dot"></span> Classement ELO visible</div>
@@ -1021,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="mini-card premium reveal">
       <div class="mini-card-badge">Populaire</div>
       <div class="mini-card-name">PREMIUM</div>
-      <div class="mini-card-price"><span class="currency">€</span>9,99<span class="period">/ mois</span></div>
+      <div class="mini-card-price">9,99<span class="currency">€</span><span class="period">/ mois</span></div>
       <div class="mini-card-desc">15 analyses vidéo IA / mois et programme personnalisé.</div>
       <div class="mini-card-features">
         <div class="mini-feat"><span class="dot"></span> 15 analyses vidéo IA / mois</div>
