@@ -485,25 +485,27 @@ nav {
 /* FOOTER */
 footer {
   background: var(--ink); color: var(--pearl);
-  padding: 40px 48px;
+  padding: 48px 48px 32px;
   display: flex; justify-content: space-between;
-  align-items: center; flex-wrap: wrap; gap: 24px;
+  align-items: flex-start; flex-wrap: wrap; gap: 32px;
   border-top: 1px solid rgba(180,138,74,0.2);
 }
-.footer-logo img { height: 48px; width: auto; }
+.footer-logo { display: flex; flex-direction: column; gap: 14px; }
+.footer-logo img { height: 44px; width: auto; }
 .footer-copy {
   font-family: var(--font-mono); font-size: 11px;
   color: rgba(255,255,255,0.4);
-  margin-top: 6px; letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
 }
-.footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+.footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 18px; }
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: flex-end; }
 .footer-links a {
   font-size: 13px; color: rgba(255,255,255,0.6);
   text-decoration: none; font-weight: 500;
   transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--platinum-light); }
-.footer-socials { display: inline-flex; gap: 16px; align-items: center; padding-left: 4px; }
+.footer-socials { display: flex; gap: 12px; align-items: center; }
 .footer-socials a {
   width: 36px; height: 36px;
   display: inline-flex; align-items: center; justify-content: center;
@@ -518,6 +520,18 @@ footer {
   background: rgba(180,138,74,0.06);
 }
 .footer-socials svg { width: 16px; height: 16px; }
+@media (max-width: 720px) {
+  footer {
+    padding: 36px 24px 28px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+  .footer-logo { align-items: center; }
+  .footer-right { align-items: center; gap: 20px; width: 100%; }
+  .footer-links { justify-content: center; gap: 14px 24px; }
+}
 
 /* ANIMATIONS */
 @keyframes fadeUp {
@@ -739,10 +753,12 @@ footer {
     <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
     <div class="footer-copy">© 2026 Linceya. Tous droits réservés.</div>
   </div>
-  <div class="footer-links">
-    <a href="https://linceya.com/privacy-policy.html">Politique de confidentialité</a>
-    <a href="https://linceya.com/delete-account.html">Supprimer mon compte</a>
-    <a href="https://linceya.com/contact.html">Contact</a>
+  <div class="footer-right">
+    <div class="footer-links">
+      <a href="https://linceya.com/privacy-policy.html">Politique de confidentialité</a>
+      <a href="https://linceya.com/delete-account.html">Supprimer mon compte</a>
+      <a href="https://linceya.com/contact.html">Contact</a>
+    </div>
     <div class="footer-socials">
       <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
