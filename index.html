@@ -402,6 +402,8 @@ section { padding: 64px 48px; position: relative; }
   display: flex; gap: 18px; margin-top: 56px;
   overflow-x: auto; padding-bottom: 20px;
   scrollbar-width: none; cursor: grab;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 .screenshots-track:active { cursor: grabbing; }
 .screenshots-track::-webkit-scrollbar { display: none; }
