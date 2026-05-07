@@ -402,11 +402,13 @@ section { padding: 64px 48px; position: relative; }
   display: flex; gap: 18px; margin-top: 56px;
   overflow-x: auto; padding-bottom: 20px;
   scrollbar-width: none; cursor: grab;
-  touch-action: pan-x;
-  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
 }
 .screenshots-track:active { cursor: grabbing; }
 .screenshots-track::-webkit-scrollbar { display: none; }
+.screen-card { scroll-snap-align: start; }
 .screen-card {
   flex-shrink: 0;
   width: 200px; border-radius: 26px;
@@ -422,7 +424,44 @@ section { padding: 64px 48px; position: relative; }
   border-color: var(--signal);
   box-shadow: var(--shadow-lg);
 }
-.screen-card img { width: 100%; display: block; }
+.screen-card img { width: 100%; display: block; pointer-events: none; }
+.screen-card[data-lightbox] { cursor: zoom-in; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(14,27,53,0.94);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 10001;
+  padding: 24px;
+  cursor: zoom-out;
+  animation: lbFade 0.22s ease;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 100%; max-height: 88vh;
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  border: 1px solid rgba(180,138,74,0.25);
+  animation: lbZoom 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lightbox-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--pearl);
+  font-size: 22px; font-family: var(--font-mono);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lightbox-close:hover { background: rgba(180,138,74,0.15); border-color: rgba(180,138,74,0.45); }
+@keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lbZoom { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 
 /* ============================================================
    PRICING PREVIEW
@@ -903,6 +942,28 @@ function toggleMenu() {
   document.getElementById('mobile-menu').classList.toggle('open');
   document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
 }
+function openLightbox(src, alt) {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  img.src = src; img.alt = alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.screen-card[data-lightbox]').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var img = card.querySelector('img');
+      if (img) openLightbox(img.src, img.alt);
+    });
+  });
+});
 document.addEventListener('DOMContentLoaded', function() {
   var navEl = document.querySelector('nav');
   function updateNav() {
@@ -1013,12 +1074,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <p class="section-sub reveal" style="text-align:right;">Interface conçue pour la clarté et la performance, même après un match intense.</p>
   </div>
   <div class="screenshots-track" id="track">
-    <div class="screen-card reveal"><img src="ps_dashboard.jpg" alt="Dashboard ELO"></div>
-    <div class="screen-card reveal"><img src="ps_qui_es_tu.jpg" alt="Sélection joueur"></div>
-    <div class="screen-card reveal"><img src="ps_analyse.jpg" alt="Analyse IA"></div>
-    <div class="screen-card reveal"><img src="ps_exercices.jpg" alt="Exercices personnalisés"></div>
-    <div class="screen-card reveal"><img src="ps_classement.jpg" alt="Classement"></div>
-    <div class="screen-card reveal"><img src="ps_match_public.jpg" alt="Matchs publics"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_dashboard.jpg" alt="Dashboard ELO"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_qui_es_tu.jpg" alt="Sélection joueur"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_analyse.jpg" alt="Analyse IA"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_exercices.jpg" alt="Exercices personnalisés"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_classement.jpg" alt="Classement"></div>
+    <div class="screen-card reveal" data-lightbox><img src="ps_match_public.jpg" alt="Matchs publics"></div>
   </div>
 </section>
 
@@ -1179,6 +1240,10 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="footer-copy">© 2026 Linceya. Tous droits réservés.</div>
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 <script src="/cookies.js" defer></script>
 </body>
 </html>
