@@ -520,21 +520,35 @@ section { padding: 64px 48px; position: relative; }
 /* ============================================================
    TESTIMONIALS
    ============================================================ */
-.testimonials { background: var(--cream); }
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px; margin-top: 56px;
+.testimonials { background: var(--cream); overflow: hidden; }
+.testimonials-marquee {
+  position: relative;
+  margin-top: 56px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+}
+.testimonials-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: testiMarquee 36s linear infinite;
+}
+.testimonials-track:hover { animation-play-state: paused; }
+@keyframes testiMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 8px)); }
 }
 .testi-card {
+  flex-shrink: 0;
+  width: 320px;
   background: var(--pearl);
   border: 1px solid var(--stroke);
-  border-radius: 20px; padding: 30px;
-  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  border-radius: 20px; padding: 28px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 .testi-card:hover {
   border-color: var(--platinum);
-  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 .testi-stars {
@@ -871,7 +885,7 @@ nav.scrolled .nav-hamburger span {
   .hero-seo { font-size: 15px; margin-top: 12px; }
   .hero-badges { margin-top: 22px; }
   .features-grid { grid-template-columns: 1fr; gap: 12px; }
-  .testimonials-grid { grid-template-columns: 1fr; gap: 14px; }
+  .testi-card { width: 280px; padding: 22px; }
   .pricing-cards-mini { grid-template-columns: 1fr; }
   footer { padding: 32px 20px; }
   .cta-download { padding: 56px 20px; }
@@ -1008,21 +1022,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section class="testimonials" id="avis">
   <h2 class="section-title reveal">ILS ONT<br><span class="accent">PROGRESSÉ</span></h2>
-  <div class="testimonials-grid">
-    <div class="testi-card reveal">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"En 3 semaines j'ai compris pourquoi je perdais mes échanges au filet. Linceya m'a montré exactement quoi travailler. Résultat : +2 niveaux en compétition."</p>
-      <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Alexandre M.</div><div class="testi-role">Joueur P250 · Nice</div></div></div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"L'analyse IA est bluffante. Elle a détecté que je montais au filet trop lentement — un truc que même mon coach n'avait pas remarqué. Indispensable."</p>
-      <div class="testi-author"><div class="testi-avatar">L</div><div><div class="testi-name">Lucie P.</div><div class="testi-role">Joueuse P100 · Paris</div></div></div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="testi-stars">★★★★☆</div>
-      <p class="testi-text">"Le plan d'entraînement personnalisé change tout. Fini les exercices génériques — chaque session cible mes vraies lacunes. Mon smash s'est nettement amélioré."</p>
-      <div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karim B.</div><div class="testi-role">Joueur P500 · Lyon</div></div></div>
+  <div class="testimonials-marquee reveal">
+    <div class="testimonials-track">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"En 3 semaines j'ai compris pourquoi je perdais mes échanges au filet. Linceya m'a montré exactement quoi travailler. Résultat : +2 niveaux en compétition."</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Alexandre M.</div><div class="testi-role">Joueur P250 · Nice</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"L'analyse IA est bluffante. Elle a détecté que je montais au filet trop lentement — un truc que même mon coach n'avait pas remarqué. Indispensable."</p>
+        <div class="testi-author"><div class="testi-avatar">L</div><div><div class="testi-name">Lucie P.</div><div class="testi-role">Joueuse P100 · Paris</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★☆</div>
+        <p class="testi-text">"Le plan d'entraînement personnalisé change tout. Fini les exercices génériques — chaque session cible mes vraies lacunes. Mon smash s'est nettement amélioré."</p>
+        <div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karim B.</div><div class="testi-role">Joueur P500 · Lyon</div></div></div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"En 3 semaines j'ai compris pourquoi je perdais mes échanges au filet. Linceya m'a montré exactement quoi travailler. Résultat : +2 niveaux en compétition."</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Alexandre M.</div><div class="testi-role">Joueur P250 · Nice</div></div></div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"L'analyse IA est bluffante. Elle a détecté que je montais au filet trop lentement — un truc que même mon coach n'avait pas remarqué. Indispensable."</p>
+        <div class="testi-author"><div class="testi-avatar">L</div><div><div class="testi-name">Lucie P.</div><div class="testi-role">Joueuse P100 · Paris</div></div></div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="testi-stars">★★★★☆</div>
+        <p class="testi-text">"Le plan d'entraînement personnalisé change tout. Fini les exercices génériques — chaque session cible mes vraies lacunes. Mon smash s'est nettement amélioré."</p>
+        <div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karim B.</div><div class="testi-role">Joueur P500 · Lyon</div></div></div>
+      </div>
     </div>
   </div>
 </section>
