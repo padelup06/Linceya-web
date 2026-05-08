@@ -76,42 +76,95 @@
     '@media (max-width:540px){.lcc-banner{left:8px;right:8px;bottom:8px;padding:14px}.lcc-text{font-size:12px;margin-bottom:10px}.lcc-actions{gap:6px}.lcc-btn{flex:1;padding:8px 10px;font-size:11.5px}.lcc-modal{padding:24px 22px}.lcc-modal-actions{flex-direction:column-reverse}.lcc-modal-actions .lcc-btn{width:100%}}'
   ].join('');
 
+  var I18N = {
+    fr: {
+      cookies: 'COOKIES',
+      banner: 'Nous utilisons des cookies pour améliorer votre expérience.',
+      learn: 'En savoir plus',
+      customize: 'Choisir', reject: 'Refuser', accept: 'Accepter',
+      modalTitle: 'Préférences cookies',
+      modalSub: 'Choisissez les catégories que vous autorisez. Vous pouvez modifier vos préférences à tout moment depuis le pied de page.',
+      necName: 'Strictement nécessaires',
+      necDesc: 'Indispensables au fonctionnement du site (sécurité, protection anti-bot Cloudflare). Toujours actifs.',
+      anaName: 'Mesure d\'audience',
+      anaDesc: 'Nous aident à comprendre comment le site est utilisé pour l\'améliorer (Google Analytics).',
+      mktName: 'Marketing',
+      mktDesc: 'Pour mesurer l\'efficacité de nos campagnes publicitaires (Meta Pixel, etc.).',
+      rejectAll: 'Tout refuser', save: 'Enregistrer mes choix',
+      privacyPath: '/privacy-policy.html'
+    },
+    en: {
+      cookies: 'COOKIES',
+      banner: 'We use cookies to enhance your experience.',
+      learn: 'Learn more',
+      customize: 'Customize', reject: 'Reject', accept: 'Accept',
+      modalTitle: 'Cookie preferences',
+      modalSub: 'Choose the categories you allow. You can update your preferences anytime from the footer.',
+      necName: 'Strictly necessary',
+      necDesc: 'Essential for site operation (security, Cloudflare anti-bot protection). Always active.',
+      anaName: 'Analytics',
+      anaDesc: 'Help us understand how the site is used to improve it (Google Analytics).',
+      mktName: 'Marketing',
+      mktDesc: 'To measure the effectiveness of our advertising campaigns (Meta Pixel, etc.).',
+      rejectAll: 'Reject all', save: 'Save my choices',
+      privacyPath: '/en/privacy-policy.html'
+    },
+    es: {
+      cookies: 'COOKIES',
+      banner: 'Usamos cookies para mejorar tu experiencia.',
+      learn: 'Más info',
+      customize: 'Elegir', reject: 'Rechazar', accept: 'Aceptar',
+      modalTitle: 'Preferencias de cookies',
+      modalSub: 'Elige las categorías que autorizas. Puedes modificar tus preferencias en cualquier momento desde el pie de página.',
+      necName: 'Estrictamente necesarias',
+      necDesc: 'Indispensables para el funcionamiento del sitio (seguridad, protección anti-bot de Cloudflare). Siempre activas.',
+      anaName: 'Medición de audiencia',
+      anaDesc: 'Nos ayudan a entender cómo se usa el sitio para mejorarlo (Google Analytics).',
+      mktName: 'Marketing',
+      mktDesc: 'Para medir la eficacia de nuestras campañas publicitarias (Meta Pixel, etc.).',
+      rejectAll: 'Rechazar todo', save: 'Guardar mis opciones',
+      privacyPath: '/es/privacy-policy.html'
+    }
+  };
+  var lang = (document.documentElement.lang || 'fr').slice(0,2).toLowerCase();
+  var t = I18N[lang] || I18N.fr;
+
   var bannerHTML =
-    '<div class="lcc-text"><strong>COOKIES</strong>Nous utilisons des cookies pour améliorer votre expérience. <a href="/privacy-policy.html">En savoir plus</a>.</div>' +
+    '<div class="lcc-text"><strong>' + t.cookies + '</strong>' + t.banner + ' <a href="' + t.privacyPath + '">' + t.learn + '</a>.</div>' +
     '<div class="lcc-actions">' +
-      '<button class="lcc-btn lcc-btn-secondary" data-action="customize">Choisir</button>' +
-      '<button class="lcc-btn lcc-btn-secondary" data-action="reject">Refuser</button>' +
-      '<button class="lcc-btn lcc-btn-primary" data-action="accept">Accepter</button>' +
+      '<button class="lcc-btn lcc-btn-secondary" data-action="customize">' + t.customize + '</button>' +
+      '<button class="lcc-btn lcc-btn-secondary" data-action="reject">' + t.reject + '</button>' +
+      '<button class="lcc-btn lcc-btn-primary" data-action="accept">' + t.accept + '</button>' +
     '</div>';
 
   var modalHTML =
     '<div class="lcc-modal" role="dialog" aria-modal="true" aria-labelledby="lcc-modal-title">' +
-      '<div class="lcc-modal-title" id="lcc-modal-title">Préférences cookies</div>' +
-      '<div class="lcc-modal-sub">Choisissez les catégories que vous autorisez. Vous pouvez modifier vos préférences à tout moment depuis le pied de page.</div>' +
+      '<div class="lcc-modal-title" id="lcc-modal-title">' + t.modalTitle + '</div>' +
+      '<div class="lcc-modal-sub">' + t.modalSub + '</div>' +
       '<div class="lcc-cat">' +
         '<div class="lcc-cat-row">' +
-          '<div class="lcc-cat-name">Strictement nécessaires</div>' +
+          '<div class="lcc-cat-name">' + t.necName + '</div>' +
           '<div class="lcc-toggle on disabled" data-cat="necessary"></div>' +
         '</div>' +
-        '<div class="lcc-cat-desc">Indispensables au fonctionnement du site (sécurité, protection anti-bot Cloudflare). Toujours actifs.</div>' +
+        '<div class="lcc-cat-desc">' + t.necDesc + '</div>' +
       '</div>' +
       '<div class="lcc-cat">' +
         '<div class="lcc-cat-row">' +
-          '<div class="lcc-cat-name">Mesure d\'audience</div>' +
+          '<div class="lcc-cat-name">' + t.anaName + '</div>' +
           '<div class="lcc-toggle" data-cat="analytics"></div>' +
         '</div>' +
-        '<div class="lcc-cat-desc">Nous aident à comprendre comment le site est utilisé pour l\'améliorer (Google Analytics).</div>' +
+        '<div class="lcc-cat-desc">' + t.anaDesc + '</div>' +
       '</div>' +
       '<div class="lcc-cat">' +
         '<div class="lcc-cat-row">' +
-          '<div class="lcc-cat-name">Marketing</div>' +
+          '<div class="lcc-cat-name">' + t.mktName + '</div>' +
           '<div class="lcc-toggle" data-cat="marketing"></div>' +
         '</div>' +
-        '<div class="lcc-cat-desc">Pour mesurer l\'efficacité de nos campagnes publicitaires (Meta Pixel, etc.).</div>' +
+        '<div class="lcc-cat-desc">' + t.mktDesc + '</div>' +
       '</div>' +
       '<div class="lcc-modal-actions">' +
-        '<button class="lcc-btn lcc-btn-secondary" data-action="reject-all">Tout refuser</button>' +
-        '<button class="lcc-btn lcc-btn-primary" data-action="save">Enregistrer mes choix</button>' +
+        '<button class="lcc-btn lcc-btn-secondary" data-action="reject-all">' + t.rejectAll + '</button>' +
+        '<button class="lcc-btn lcc-btn-primary" data-action="save">' + t.save + '</button>' +
       '</div>' +
     '</div>';
 

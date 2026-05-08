@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linceya — Paiement Premium</title>
-<meta name="description" content="Passez à Linceya Premium : 15 analyses vidéo IA par mois, programme personnalisé, ELO certifié. 9,99€/mois, résiliable à tout moment.">
+<meta name="description" content="Go Linceya Premium: 15 AI video analyses per month, personalized plan, certified ELO. €9.99/month, cancel anytime.">
 <link rel="canonical" href="https://linceya.com/checkout.html">
 <meta name="robots" content="noindex">
 
@@ -13,30 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="canonical" href="https://linceya.com/checkout.html">
+<link rel="canonical" href="https://linceya.com/en/checkout.html">
 <link rel="alternate" hreflang="fr" href="https://linceya.com/checkout.html">
 <link rel="alternate" hreflang="en" href="https://linceya.com/en/checkout.html">
 <link rel="alternate" hreflang="es" href="https://linceya.com/es/checkout.html">
 <link rel="alternate" hreflang="x-default" href="https://linceya.com/checkout.html">
-<!-- Détection langue navigateur (premier visit only) -->
-<script>
-(function() {
-  try {
-    var seen = localStorage.getItem('lng_seen');
-    if (seen) return;
-    var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
-    if (lng.indexOf('en') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/en/checkout.html');
-    } else if (lng.indexOf('es') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/es/checkout.html');
-    } else {
-      localStorage.setItem('lng_seen', '1');
-    }
-  } catch (e) {}
-})();
-</script>
 <style>
 :root {
   --cream: #F2EDE2;
@@ -322,7 +303,7 @@ footer {
   <a href="https://linceya.com" class="nav-logo">
     <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
   </a>
-  <a href="pricing.html" class="nav-back">← Retour</a>
+  <a href="/en/pricing.html" class="nav-back">← Back</a>
 </nav>
 
 <div class="checkout-wrapper">
@@ -330,19 +311,19 @@ footer {
 
     <!-- LEFT -->
     <div class="checkout-info">
-      <div class="checkout-badge">Édition Premium</div>
-      <div class="checkout-title">PASSEZ<br><span class="accent">PREMIUM</span></div>
-      <div class="checkout-subtitle">Débloquez tout le potentiel de Linceya et progressez plus vite que jamais.</div>
+      <div class="checkout-badge">Premium Edition</div>
+      <div class="checkout-title">GO<br><span class="accent">PREMIUM</span></div>
+      <div class="checkout-subtitle">Unlock the full potential of Linceya and progress faster than ever.</div>
       <div class="checkout-features">
-        <div class="checkout-feat"><span class="check">✓</span>15 analyses vidéo IA par mois</div>
-        <div class="checkout-feat"><span class="check">✓</span>Programme d'entraînement personnalisé</div>
-        <div class="checkout-feat"><span class="check">✓</span>12 points d'analyse détaillés</div>
-        <div class="checkout-feat"><span class="check">✓</span>ELO Certifié &amp; classement complet</div>
-        <div class="checkout-feat"><span class="check">✓</span>Historique de progression illimité</div>
+        <div class="checkout-feat"><span class="check">✓</span>15 AI video analyses per month</div>
+        <div class="checkout-feat"><span class="check">✓</span>Personalized training plan</div>
+        <div class="checkout-feat"><span class="check">✓</span>12 detailed analysis points</div>
+        <div class="checkout-feat"><span class="check">✓</span>Certified ELO &amp; full ranking</div>
+        <div class="checkout-feat"><span class="check">✓</span>Unlimited progress history</div>
       </div>
       <div class="checkout-secure">
         <svg viewBox="0 0 24 24"><path d="M12 1C8.676 1 6 3.676 6 7v2H4v14h16V9h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v2H8V7c0-2.276 1.724-4 4-4zm-6 8h12v10H6V11zm6 3a2 2 0 00-1 3.732V20h2v-2.268A2 2 0 0012 14z"/></svg>
-        PAIEMENT SÉCURISÉ VIA REVENUECAT
+        SECURE PAYMENT VIA REVENUECAT
       </div>
     </div>
 
@@ -350,26 +331,26 @@ footer {
     <div class="checkout-paywall" id="paywall">
       <div class="loading" id="loading">
         <div class="spinner"></div>
-        Chargement des offres...
+        Loading offers...
       </div>
 
       <div id="packages" style="display:none;">
-        <div class="paywall-eyebrow">› Abonnement</div>
-        <div class="paywall-title">Choisissez<br>votre plan</div>
-        <div class="paywall-sub">Résiliable à tout moment. Sans engagement.</div>
+        <div class="paywall-eyebrow">› Subscription</div>
+        <div class="paywall-title">Choose<br>your plan</div>
+        <div class="paywall-sub">Cancel anytime. No commitment.</div>
         <div class="error-msg" id="error"></div>
         <div id="package-list"></div>
-        <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continuer →</span></button>
+        <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continue →</span></button>
         <div class="paywall-terms">
-          En continuant, vous acceptez les <a href="https://linceya.com/privacy-policy.html" target="_blank" rel="noopener noreferrer">conditions d'utilisation</a>.
-          Votre abonnement se renouvelle automatiquement. Résiliable à tout moment.
+          By continuing, you accept the <a href="https://linceya.com/en/privacy-policy.html" target="_blank" rel="noopener noreferrer">terms of use</a>.
+          Your subscription renews automatically. Cancel anytime.
         </div>
       </div>
 
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
-        <div class="success-title">BIENVENUE DANS<br>LINCEYA <span class="accent">PREMIUM</span></div>
-        <div class="success-sub">Votre abonnement est actif. Téléchargez l'app et connectez-vous pour profiter de toutes vos fonctionnalités Premium.</div>
+        <div class="success-title">WELCOME TO<br>LINCEYA <span class="accent">PREMIUM</span></div>
+        <div class="success-sub">Your subscription is active. Download the app and sign in to enjoy all Premium features.</div>
       </div>
     </div>
 
@@ -377,12 +358,12 @@ footer {
 </div>
 
 <footer>
-  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-copy">© 2026 LINCEYA — ALL RIGHTS RESERVED</div>
   <div class="footer-links">
-    <a href="https://linceya.com/privacy-policy.html">Politique de confidentialité</a>
-    <a href="https://linceya.com/contact.html">Contact</a>
+    <a href="https://linceya.com/en/privacy-policy.html">Privacy Policy</a>
+    <a href="https://linceya.com/en/contact.html">Contact</a>
   </div>
-  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/checkout.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/checkout.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/checkout.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <span style="color:var(--platinum-light);">EN</span> <a href="/es/checkout.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
 </footer>
 
 <script src="https://unpkg.com/@revenuecat/purchases-js@latest"></script>
@@ -503,7 +484,7 @@ async function handlePurchase() {
       showError('Une erreur est survenue. Veuillez réessayer.');
     }
     btn.disabled = false;
-    btn.innerHTML = '<span>Continuer →</span>';
+    btn.innerHTML = '<span>Continue →</span>';
   }
 }
 

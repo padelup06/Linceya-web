@@ -2,12 +2,860 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=/pricing.html">
-<link rel="canonical" href="https://linceya.com/pricing.html">
-<title>Linceya — Precios</title>
-<script>location.replace('/pricing.html');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linceya — Planes Premium | Análisis IA Pádel</title>
+<meta name="description" content="Compara los planes Linceya: versión gratis o Premium a 9,99€/mes. 15 análisis vídeo IA al mes, plan de entrenamiento personalizado, ELO certificado y ranking nacional.">
+<link rel="canonical" href="https://linceya.com/es/pricing.html">
+<link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html">
+<link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html">
+<link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html">
+<link rel="alternate" hreflang="x-default" href="https://linceya.com/pricing.html">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://linceya.com/es/pricing.html">
+<meta property="og:title" content="Linceya Premium — 15 análisis IA/mes desde 9,99€">
+<meta property="og:description" content="Análisis vídeo IA, plan personalizado, ELO certificado y ranking completo. Compara Gratis vs Premium.">
+<meta property="og:image" content="https://linceya.com/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Linceya">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Linceya Premium — 15 análisis IA/mes desde 9,99€">
+<meta name="twitter:description" content="Análisis vídeo IA, plan personalizado, ELO certificado y ranking completo.">
+<meta name="twitter:image" content="https://linceya.com/og-image.png">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F2EDE2;
+  --bone: #EAE3D2;
+  --ivory: #FAF7EF;
+  --pearl: #FFFFFF;
+  --ink: #0E1B35;
+  --navy: #1A2B4D;
+  --graphite: #2C3A54;
+  --platinum: #B48A4A;
+  --platinum-light: #D4B87A;
+  --platinum-dim: #8A6830;
+  --signal: #1E47F0;
+  --signal-bright: #3860FF;
+  --signal-dim: #0022AA;
+  --muted: #6B7489;
+  --muted-light: #9AA1B2;
+  --stroke: #D8D0BE;
+  --stroke-strong: #C0B69F;
+  --error: #E03A5A;
+  --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --shadow-soft: 0 2px 8px rgba(14,27,53,0.06);
+  --shadow-lg: 0 12px 32px rgba(14,27,53,0.12);
+  --shadow-signal: 0 8px 24px rgba(30,71,240,0.25);
+  --shadow-platinum: 0 8px 24px rgba(180,138,74,0.25);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream); color: var(--ink);
+  font-family: var(--font-body); overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(242,237,226,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--stroke);
+}
+.nav-logo img { height: 44px; width: auto; filter: brightness(0); }
+/* logo.png is now white-on-transparent; brightness(0) forces black on light nav */
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--graphite); font-size: 13px; text-decoration: none;
+  font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--signal); }
+.nav-cta {
+  background: var(--signal); color: var(--pearl);
+  padding: 11px 22px; border-radius: 100px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: var(--shadow-signal);
+}
+.nav-cta:hover { transform: translateY(-2px); background: var(--signal-bright); }
+
+/* HERO */
+.pricing-hero {
+  position: relative; overflow: hidden;
+  padding: 150px 48px 60px; text-align: center;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--ivory) 100%);
+}
+.pricing-hero::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(30,71,240,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.section-tag {
+  font-family: var(--font-mono); font-size: 11px; color: var(--platinum);
+  letter-spacing: 2.4px; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
+.pricing-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 86px); line-height: 0.95;
+  letter-spacing: -0.02em; text-transform: uppercase;
+  color: var(--ink); position: relative; z-index: 1;
+}
+.pricing-hero h1 .accent { color: var(--signal); }
+.pricing-hero p {
+  max-width: 540px; margin: 20px auto 44px;
+  color: var(--muted); font-size: 16px; line-height: 1.65;
+  position: relative; z-index: 1;
+}
+
+/* Toggle */
+.toggle-wrapper {
+  display: inline-flex; align-items: center; gap: 14px;
+  position: relative; z-index: 1;
+  background: var(--pearl);
+  border: 1px solid var(--stroke);
+  padding: 8px 16px;
+  border-radius: 100px;
+  box-shadow: var(--shadow-soft);
+}
+.toggle-label {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--muted); font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  cursor: pointer; transition: color 0.2s;
+}
+.toggle-label.active { color: var(--ink); }
+.toggle-track {
+  width: 52px; height: 28px; border-radius: 100px;
+  background: var(--signal);
+  position: relative; cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+}
+.toggle-track::before {
+  content: '';
+  position: absolute; top: 3px; left: 3px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--pearl);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+.toggle-track.annual::before { transform: translateX(24px); }
+.toggle-track.annual { background: var(--platinum); }
+.save-tag {
+  background: var(--platinum);
+  color: var(--pearl);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.save-tag.visible { opacity: 1; }
+
+/* PRICING CARDS */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 56px 48px 100px;
+}
+.plan-card {
+  position: relative;
+  background: var(--pearl);
+  border: 1px solid var(--stroke);
+  border-radius: 24px;
+  padding: 44px 38px;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.plan-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.plan-card.premium {
+  background: linear-gradient(180deg, var(--pearl) 0%, #FBF7EF 100%);
+  border-color: var(--platinum);
+  box-shadow: var(--shadow-platinum);
+}
+.plan-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: var(--signal); color: var(--pearl);
+  padding: 6px 14px; border-radius: 100px;
+  font-family: var(--font-mono); font-size: 10px;
+  font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-signal);
+  z-index: 2;
+}
+.plan-card.premium .plan-badge {
+  background: var(--platinum);
+  box-shadow: var(--shadow-platinum);
+}
+.plan-name {
+  font-family: var(--font-display);
+  font-size: 30px; text-transform: uppercase;
+  letter-spacing: -0.01em; color: var(--ink);
+  display: flex; align-items: center; gap: 10px;
+}
+.plan-name .accent { color: var(--platinum); font-size: 22px; }
+.plan-desc {
+  font-size: 14px; color: var(--muted);
+  margin-top: 10px; line-height: 1.6;
+}
+.plan-price {
+  margin-top: 26px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--stroke);
+}
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 58px; color: var(--ink);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.price-amount .currency {
+  font-size: 32px;
+  color: var(--platinum);
+  margin-left: 4px;
+}
+.price-amount .period {
+  font-family: var(--font-body); font-size: 15px;
+  color: var(--muted); font-weight: 500; margin-left: 6px;
+}
+.price-note {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--muted); margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+.price-note .green { color: var(--signal); font-weight: 700; }
+
+.plan-features {
+  display: flex; flex-direction: column;
+  gap: 14px; margin: 28px 0 32px;
+}
+.plan-feature {
+  display: flex; align-items: center;
+  gap: 12px; font-size: 14px;
+  color: var(--graphite); font-weight: 500;
+}
+.plan-feature.dimmed {
+  color: var(--muted-light);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+.plan-feature .icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+}
+.plan-feature .icon.check {
+  background: rgba(30,71,240,0.12);
+  color: var(--signal);
+  border: 1px solid rgba(30,71,240,0.25);
+}
+.plan-feature .icon.star {
+  background: rgba(180,138,74,0.14);
+  color: var(--platinum);
+  border: 1px solid rgba(180,138,74,0.3);
+}
+.plan-feature .icon.x {
+  background: rgba(107,116,137,0.08);
+  color: var(--muted-light);
+  border: 1px solid rgba(107,116,137,0.15);
+}
+
+.plan-btn {
+  display: block; width: 100%;
+  padding: 16px 22px; border-radius: 14px;
+  text-align: center; text-decoration: none;
+  font-weight: 700; font-size: 14px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  transition: transform 0.2s, background 0.2s;
+}
+.plan-btn.free {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--stroke-strong);
+}
+.plan-btn.free:hover {
+  background: var(--ink); color: var(--pearl);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.plan-btn.pro {
+  background: var(--signal); color: var(--pearl);
+  border: none;
+  box-shadow: var(--shadow-signal);
+}
+.plan-btn.pro:hover {
+  background: var(--signal-bright);
+  transform: translateY(-2px);
+}
+
+/* COMPARISON TABLE */
+.compare-section {
+  background: var(--ivory);
+  border-top: 1px solid var(--stroke);
+  border-bottom: 1px solid var(--stroke);
+  padding: 100px 48px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.2vw, 64px);
+  line-height: 0.95; letter-spacing: -0.02em;
+  text-transform: uppercase; margin-bottom: 18px;
+  color: var(--ink);
+}
+.section-title .accent { color: var(--signal); }
+.section-sub {
+  font-size: 16px; color: var(--muted);
+  max-width: 480px; line-height: 1.65;
+}
+.compare-table {
+  width: 100%; max-width: 900px;
+  margin: 48px auto 0;
+  background: var(--pearl);
+  border: 1px solid var(--stroke);
+  border-radius: 20px;
+  border-collapse: separate; border-spacing: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.compare-table thead th {
+  padding: 22px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  border-bottom: 1px solid var(--stroke);
+  background: var(--ivory);
+}
+.compare-table thead th.premium-col {
+  color: var(--platinum); font-weight: 800;
+}
+.compare-table tbody td {
+  padding: 16px 20px;
+  font-size: 14px; color: var(--graphite);
+  border-bottom: 1px solid var(--stroke);
+}
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table tbody tr:nth-child(even) td { background: rgba(250,247,239,0.5); }
+.compare-table td:not(:first-child) { text-align: center; }
+.table-val {
+  font-family: var(--font-mono); font-size: 13px;
+  font-weight: 600; color: var(--graphite);
+}
+.table-val.green { color: var(--signal); font-weight: 700; }
+.table-check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(30,71,240,0.12); color: var(--signal);
+  border: 1px solid rgba(30,71,240,0.3);
+  font-weight: 700;
+}
+.table-x {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(107,116,137,0.08); color: var(--muted-light);
+  border: 1px solid rgba(107,116,137,0.15);
+  font-weight: 700;
+}
+
+/* FAQ */
+.faq-section {
+  background: var(--cream);
+  padding: 100px 48px;
+}
+.faq-list { max-width: 760px; margin: 48px auto 0; }
+.faq-item {
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  background: var(--pearl);
+  margin-bottom: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.faq-item:hover { border-color: var(--stroke-strong); }
+.faq-item.open { border-color: var(--signal); box-shadow: var(--shadow-soft); }
+.faq-q {
+  width: 100%; background: none; border: none;
+  color: var(--ink); font-family: var(--font-body);
+  font-size: 15px; font-weight: 600;
+  text-align: left; padding: 22px 24px;
+  cursor: pointer;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 20px;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--signal); }
+.faq-icon {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(30,71,240,0.1);
+  border: 1px solid rgba(30,71,240,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--signal); font-size: 16px; font-weight: 700;
+  flex-shrink: 0;
+  transition: transform 0.35s, background 0.3s;
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+  background: var(--signal); color: var(--pearl);
+}
+.faq-a {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.75; max-height: 0;
+  overflow: hidden; padding: 0 24px;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+.faq-item.open .faq-a { max-height: 280px; padding: 0 24px 22px; }
+
+/* CTA BOTTOM */
+.cta-bottom {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--ink), var(--navy));
+  text-align: center; padding: 100px 48px;
+  color: var(--pearl);
+}
+.cta-bottom::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(30,71,240,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 50% 100%, rgba(180,138,74,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-bottom .section-title { color: var(--pearl); position: relative; z-index: 1; }
+.cta-bottom .section-title .accent { color: var(--platinum-light); }
+.cta-bottom .section-sub {
+  color: rgba(255,255,255,0.7);
+  margin: 14px auto 40px; text-align: center;
+  max-width: 520px;
+  position: relative; z-index: 1;
+}
+.cta-btns {
+  display: flex; justify-content: center; gap: 14px;
+  flex-wrap: wrap; position: relative; z-index: 1;
+}
+.btn-store, .btn-store-outline {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 24px; border-radius: 14px;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.btn-store {
+  background: var(--pearl); color: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+.btn-store:hover { transform: translateY(-2px); background: var(--platinum-light); }
+.btn-store-outline {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--pearl);
+}
+.btn-store-outline:hover {
+  transform: translateY(-2px);
+  background: rgba(180,138,74,0.14);
+  border-color: var(--platinum);
+}
+.btn-store svg, .btn-store-outline svg { width: 22px; height: 22px; flex-shrink: 0; }
+.btn-store-text { display: flex; flex-direction: column; align-items: flex-start; }
+.btn-store-sub {
+  font-size: 10px; font-family: var(--font-mono);
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); line-height: 1.1;
+}
+.btn-store-outline .btn-store-sub { color: rgba(255,255,255,0.6); }
+.btn-store-name { font-size: 15px; font-weight: 700; line-height: 1.3; }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: var(--pearl);
+  padding: 44px 24px 28px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 24px;
+  border-top: 1px solid rgba(180,138,74,0.2);
+}
+.footer-copy {
+  font-family: var(--font-mono); font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  width: 100%; max-width: 720px;
+}
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+.footer-links a {
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--platinum-light); }
+.footer-socials { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.footer-socials a {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.footer-socials a:hover {
+  color: var(--platinum-light);
+  border-color: rgba(180,138,74,0.4);
+  background: rgba(180,138,74,0.06);
+}
+.footer-socials svg { width: 16px; height: 16px; }
+@media (max-width: 720px) {
+  footer { padding: 36px 20px 24px; gap: 20px; }
+  .footer-links { gap: 14px 24px; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.hidden { opacity: 0; transform: translateY(24px); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* MOBILE */
+.nav-hamburger {
+  display: none; width: 34px; height: 34px;
+  background: none; border: none; cursor: pointer;
+  flex-direction: column; justify-content: center;
+  align-items: center; gap: 5px;
+  padding: 0; z-index: 101;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s, background 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(10,18,38,0.985) 0%, rgba(14,27,53,0.985) 100%);
+  backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+  z-index: 99;
+  flex-direction: column;
+  padding: 96px 28px 36px;
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu-list {
+  display: flex; flex-direction: column;
+  list-style: none; padding: 0; margin: 0; flex: 1;
+}
+.mobile-menu-list li { border-bottom: 1px solid rgba(231,190,98,0.14); }
+.mobile-menu-list li:first-child { border-top: 1px solid rgba(231,190,98,0.14); }
+.mobile-menu-list a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 4px;
+  font-family: var(--font-display);
+  font-size: 26px; line-height: 1;
+  color: var(--pearl);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: color 0.25s, padding-left 0.25s;
+}
+.mobile-menu-list a:hover,
+.mobile-menu-list a:active { color: var(--platinum-light); padding-left: 12px; }
+.mobile-menu-list .menu-arrow {
+  display: inline-block; margin-left: 12px;
+  font-family: var(--font-mono); font-size: 14px;
+  color: rgba(255,255,255,0.35); transition: transform 0.25s, color 0.25s;
+}
+.mobile-menu-list a:hover .menu-arrow,
+.mobile-menu-list a:active .menu-arrow { transform: translateX(4px); color: var(--platinum); }
+.mobile-menu .mobile-cta {
+  margin-top: 36px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: linear-gradient(135deg, #FFE7A5, #E7BE62 50%, #B67A24);
+  color: #06111F;
+  padding: 18px 28px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 16px 40px rgba(231,190,98,0.32);
+}
+.mobile-menu .mobile-cta::after { content: '→'; font-size: 16px; line-height: 1; }
+
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .pricing-hero { padding: 120px 20px 48px; }
+  .pricing-cards { grid-template-columns: 1fr; padding: 40px 20px 72px; gap: 16px; }
+  .compare-section, .faq-section { padding: 64px 20px; }
+  .compare-table thead th, .compare-table tbody td { padding: 12px 10px; font-size: 13px; }
+  .cta-bottom { padding: 64px 20px; }
+  footer { padding: 28px 20px; }
+}
+@media (max-width: 500px) {
+  .plan-card { padding: 32px 22px; }
+  .price-amount { font-size: 46px; }
+}
+</style>
 </head>
 <body>
-<p>Redirigiendo a <a href="/pricing.html">precios</a>…</p>
+
+<nav>
+  <a href="https://linceya.com" class="nav-logo"><img src="https://linceya.com/logo.png?v=2" alt="Linceya"></a>
+  <ul class="nav-links">
+    <li><a href="https://linceya.com/es/#features">Funciones</a></li>
+    <li><a href="https://linceya.com/es/#screenshots">App</a></li>
+    <li><a href="https://linceya.com/es/#avis">Opiniones</a></li>
+    <li><a href="#pricing">Precios</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="nav-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Descargar</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-menu-list">
+    <li><a href="https://linceya.com/es/#screenshots"><span>App</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="https://linceya.com/es/#avis"><span>Opiniones</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="#pricing" onclick="toggleMenu()"><span>Precios</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="#faq" onclick="toggleMenu()"><span>FAQ</span><span class="menu-arrow">→</span></a></li>
+  </ul>
+  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="mobile-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Descargar la app</a>
+</div>
+
+<section class="pricing-hero" id="pricing">
+  <h1>ELIGE<br>TU <span class="accent">PLAN</span></h1>
+  <p>Empieza gratis y pasa a Premium cuando estés listo para potenciar tus estadísticas.</p>
+  <div class="toggle-wrapper">
+    <span class="toggle-label active" id="label-monthly">Mensual</span>
+    <div class="toggle-track" id="toggle" onclick="togglePlan()"></div>
+    <span class="toggle-label" id="label-annual">Anual</span>
+    <span class="save-tag" id="save-tag">−17%</span>
+  </div>
+</section>
+
+<div class="pricing-cards">
+  <div class="plan-card">
+    <div class="plan-name">GRATIS</div>
+    <div class="plan-desc">Descubre Linceya, encuentra compañeros y sigue tu ranking gratis.</div>
+    <div class="plan-price">
+      <div class="price-amount">0<span class="currency">€</span><span class="period">/ mes</span></div>
+      <div class="price-note">Para siempre. Sin tarjeta requerida.</div>
+    </div>
+    <div class="plan-features">
+      <div class="plan-feature"><span class="icon check">✓</span> 1 análisis vídeo IA / mes</div>
+      <div class="plan-feature"><span class="icon check">✓</span> Ranking ELO visible</div>
+      <div class="plan-feature"><span class="icon check">✓</span> Partidos públicos y búsqueda de compañeros</div>
+      <div class="plan-feature"><span class="icon check">✓</span> Ranking nacional y regional</div>
+      <div class="plan-feature dimmed"><span class="icon x">✕</span> Plan de entrenamiento personalizado</div>
+      <div class="plan-feature dimmed"><span class="icon x">✕</span> 12 puntos de análisis detallados</div>
+      <div class="plan-feature dimmed"><span class="icon x">✕</span> Historial completo de progresión</div>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="plan-btn free" target="_blank" rel="noopener noreferrer" data-smart-store>Descargar gratis</a>
+  </div>
+
+  <div class="plan-card premium">
+    <div class="plan-badge">Popular</div>
+    <div class="plan-name">PREMIUM <span class="accent">↗</span></div>
+    <div class="plan-desc">15 análisis vídeo IA al mes, plan personalizado y ranking ELO certificado.</div>
+    <div class="plan-price">
+      <div class="price-amount"><span id="price-value">9,99</span><span class="currency">€</span><span class="period" id="price-period">/ mes</span></div>
+      <div class="price-note" id="price-note">Cancelable en cualquier momento.</div>
+    </div>
+    <div class="plan-features">
+      <div class="plan-feature"><span class="icon star">★</span> 15 análisis vídeo IA al mes</div>
+      <div class="plan-feature"><span class="icon star">★</span> Reconocimiento automático de jugadores</div>
+      <div class="plan-feature"><span class="icon star">★</span> 12 puntos de análisis detallados</div>
+      <div class="plan-feature"><span class="icon star">★</span> Plan de entrenamiento personalizado IA</div>
+      <div class="plan-feature"><span class="icon star">★</span> ELO Certificado y ranking completo</div>
+      <div class="plan-feature"><span class="icon star">★</span> Historial de progresión detallado</div>
+      <div class="plan-feature"><span class="icon star">★</span> Partidos públicos y búsqueda de compañeros</div>
+    </div>
+    <a href="/es/checkout.html" class="plan-btn pro">Pasar a Premium</a>
+  </div>
+</div>
+
+<section class="compare-section">
+  <h2 class="section-title reveal">TODO<br>EN <span class="accent">DETALLE</span></h2>
+  <table class="compare-table reveal">
+    <thead>
+      <tr>
+        <th>Función</th>
+        <th>Gratis</th>
+        <th class="premium-col">Premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Análisis vídeo IA</td><td><span class="table-val">1 / mes</span></td><td><span class="table-val green">15 / mes</span></td></tr>
+      <tr><td>Puntuación global del partido</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>12 puntos de análisis detallados</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Plan de entrenamiento IA</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Ejercicios dirigidos post-análisis</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>ELO y ranking</td><td><span class="table-val">Visible</span></td><td><span class="table-val green">Certificado</span></td></tr>
+      <tr><td>Ranking nacional y regional</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Historial de progresión</td><td><span class="table-val">30 días</span></td><td><span class="table-val green">Ilimitado</span></td></tr>
+      <tr><td>Partidos públicos</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Reconocimiento de jugadores</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Soporte prioritario</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="faq-section" id="faq">
+  <h2 class="section-title reveal">SOBRE LA<br><span class="accent">SUSCRIPCIÓN</span></h2>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿Cuál es la diferencia entre Gratis y Premium?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">Con Gratis tienes 1 análisis vídeo IA al mes, el ranking ELO y los partidos públicos. Premium sube a 15 análisis al mes, desbloquea los 12 puntos de análisis detallados (puntuación global, estabilidad, juego en la red, táctica, regularidad, fortalezas, áreas de progreso, error crítico, plan de coaching), el plan de entrenamiento personalizado IA y el historial de progresión completo.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿Cómo funciona el periodo de prueba?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">La versión gratuita no tiene límite de tiempo. Puedes pasar a Premium en cualquier momento desde la app. El pago se gestiona de forma segura vía Google Play (y pronto la App Store).</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿Puedo cancelar cuando quiera?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">Sí, la suscripción es sin compromiso. Puedes cancelar en cualquier momento desde los ajustes de tu cuenta Google Play. Tu acceso Premium se mantiene activo hasta el final del periodo pagado.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿La oferta anual realmente vale la pena?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">La suscripción anual cuesta 99,99€/año en vez de 9,99€ × 12 = 119,88€. Sale a unos 8,33€/mes, casi 2 meses gratis. La mejor opción para jugadores habituales.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿Pierdo mis datos al pasar de Gratis a Premium?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">No, todos tus análisis, puntuaciones y datos ELO se conservan. Al pasar a Premium simplemente desbloqueas las funciones avanzadas en tu cuenta existente.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q"><span>¿Cómo pagar?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">El pago se gestiona directamente a través de Google Play (o App Store, próximamente). Tarjeta bancaria, PayPal o crédito Google Play se aceptan según tu configuración.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-bottom">
+  <h2 class="section-title">¿LISTO PARA<br><span class="accent">PROGRESAR</span>?</h2>
+  <p class="section-sub">Descarga Linceya gratis y analiza tu primer partido hoy mismo.</p>
+  <div class="cta-btns">
+    <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="btn-store" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 512 512"><path fill="#4CAF50" d="M48 428.7L254.9 256 48 83.3z"/><path fill="#F44336" d="M48 83.3l206.9 172.7L340.3 170 99 32.1C78.4 20.4 55.3 29.2 48 83.3z"/><path fill="#FFC107" d="M464 256c0-41.4-22.1-77.7-55.3-98.2L340.3 170 254.9 256l85.4 86 68.4-42.2C441.9 333.7 464 297.4 464 256z"/><path fill="#2196F3" d="M254.9 256L48 428.7c7.3 54.1 30.4 62.9 51 51.2L340.3 342l-85.4-86z"/></svg>
+      <div class="btn-store-text"><span class="btn-store-sub">Disponible en</span><span class="btn-store-name">Google Play</span></div>
+    </a>
+    <a href="https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174" class="btn-store-outline" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="btn-store-text"><span class="btn-store-sub">Disponible en</span><span class="btn-store-name">App Store</span></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@linceya.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+    </a>
+    <a href="https://x.com/linceyapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.snapchat.com/add/Linceyapp" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 2.001c1.466.024 4.298.404 5.667 3.515.464 1.054.348 2.85.255 4.292l-.004.066c-.014.219-.027.43-.036.625.007.005.026.013.063.016.198-.012.418-.075.65-.181.073-.038.247-.117.448-.117.119 0 .238.026.347.075.323.119.523.354.527.622.005.357-.302.667-.913.92-.06.025-.137.05-.219.078-.291.094-.731.236-.85.515-.061.144-.039.328.066.55l.006.013c.044.103.991 2.292 3.193 2.654.099.016.171.103.165.203a.55.55 0 0 1-.044.179c-.139.323-.7.518-1.713.595-.046.005-.064.054-.105.21-.018.062-.038.131-.062.205l-.014.046c-.046.156-.099.317-.245.317-.013 0-.027 0-.041-.003a.745.745 0 0 1-.17-.038 4.05 4.05 0 0 0-1.121-.155 4.94 4.94 0 0 0-.792.064c-.502.087-.939.388-1.442.737-.731.508-1.561 1.082-2.853 1.082-.058 0-.115-.003-.171-.005a3.27 3.27 0 0 1-.143.005c-1.293 0-2.122-.574-2.853-1.082-.502-.349-.939-.65-1.441-.737a4.91 4.91 0 0 0-.792-.064c-.566 0-.992.131-1.121.155a.95.95 0 0 1-.17.038c-.158 0-.205-.144-.245-.317l-.013-.046a3.4 3.4 0 0 1-.063-.205c-.041-.156-.06-.205-.105-.21-1.012-.077-1.574-.272-1.713-.595a.55.55 0 0 1-.044-.179c-.005-.099.066-.187.165-.203 2.202-.362 3.149-2.551 3.193-2.654l.006-.013c.105-.219.127-.405.066-.55-.119-.279-.559-.421-.85-.515a3.5 3.5 0 0 1-.219-.078c-.612-.255-.918-.563-.913-.92.005-.268.205-.503.527-.622a1.07 1.07 0 0 1 .347-.075c.201 0 .375.079.448.117.232.106.452.169.65.181.04-.003.057-.011.063-.016a17.24 17.24 0 0 0-.036-.625l-.004-.066c-.094-1.443-.21-3.236.255-4.292 1.369-3.111 4.201-3.491 5.667-3.515h.061Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="https://linceya.com/privacy-policy.html">Política de privacidad</a>
+    <a href="https://linceya.com/delete-account.html">Eliminar mi cuenta</a>
+    <a href="https://linceya.com/contact.html">Contact</a>
+    <a href="#" data-cookies-settings>Cookies</a>
+  </div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <a href="/en/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <span style="color:var(--platinum-light);">ES</span></div>
+  <div class="footer-copy">© 2026 Linceya. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
+}
+let isAnnual = false;
+function togglePlan() {
+  isAnnual = !isAnnual;
+  document.getElementById('toggle').classList.toggle('annual', isAnnual);
+  document.getElementById('label-monthly').classList.toggle('active', !isAnnual);
+  document.getElementById('label-annual').classList.toggle('active', isAnnual);
+  document.getElementById('save-tag').classList.toggle('visible', isAnnual);
+  if (isAnnual) {
+    document.getElementById('price-value').textContent = '99,99';
+    document.getElementById('price-period').textContent = '/ an';
+    document.getElementById('price-note').innerHTML = 'Unos ~8,33€/mes · <span class="green">2 meses gratis</span>';
+  } else {
+    document.getElementById('price-value').textContent = '9,99';
+    document.getElementById('price-period').textContent = '/ mois';
+    document.getElementById('price-note').textContent = 'Cancelable en cualquier momento.';
+  }
+}
+document.querySelectorAll('.faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = this.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  });
+});
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function() { e.target.classList.remove('hidden'); e.target.classList.add('visible'); }, i * 70);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('hidden'); observer.observe(el); });
+
+// Smart store redirect : iOS → App Store, Android → Google Play, desktop → Google Play.
+// On override le href des boutons taggés [data-smart-store] au chargement de la page.
+(function() {
+  var APP_STORE = 'https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174';
+  var PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.padelup.padelup';
+  var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var target = isIOS ? APP_STORE : PLAY_STORE;
+  document.querySelectorAll('[data-smart-store]').forEach(function(el) {
+    el.href = target;
+  });
+})();
+</script>
+<script src="https://linceya.com/cookies.js" defer></script>
 </body>
 </html>
+                                                                                                                                                                                                                             

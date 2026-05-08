@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,30 +12,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="canonical" href="https://linceya.com/privacy-policy.html">
+<link rel="canonical" href="https://linceya.com/en/privacy-policy.html">
 <link rel="alternate" hreflang="fr" href="https://linceya.com/privacy-policy.html">
 <link rel="alternate" hreflang="en" href="https://linceya.com/en/privacy-policy.html">
 <link rel="alternate" hreflang="es" href="https://linceya.com/es/privacy-policy.html">
 <link rel="alternate" hreflang="x-default" href="https://linceya.com/privacy-policy.html">
-<!-- Détection langue navigateur (premier visit only) -->
-<script>
-(function() {
-  try {
-    var seen = localStorage.getItem('lng_seen');
-    if (seen) return;
-    var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
-    if (lng.indexOf('en') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/en/privacy-policy.html');
-    } else if (lng.indexOf('es') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/es/privacy-policy.html');
-    } else {
-      localStorage.setItem('lng_seen', '1');
-    }
-  } catch (e) {}
-})();
-</script>
 <style>
 :root {
   --cream: #F2EDE2;
@@ -294,120 +275,120 @@ footer {
   <a href="https://linceya.com" class="nav-logo">
     <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
   </a>
-  <a href="index.html" class="nav-back">← Accueil</a>
+  <a href="/en/index.html" class="nav-back">← Home</a>
 </nav>
 
 <div class="wrapper">
   <div class="container">
-    <div class="eyebrow">Informations légales</div>
-    <h1>Politique de<br>confidentialité</h1>
-    <div class="date">Dernière mise à jour : 28 avril 2026</div>
+    <div class="eyebrow">Legal information</div>
+    <h1>Privacy<br>Policy</h1>
+    <div class="date">Last updated: April 28, 2026</div>
 
     <div class="content">
-      <p>Linceya ("nous", "notre") s'engage à protéger vos données personnelles. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.</p>
+      <p>Linceya ("we", "our") is committed to protecting your personal data. This policy explains what data we collect, how we use it and your rights.</p>
 
-      <h2 data-num="01">Responsable de traitement</h2>
+      <h2 data-num="01">Data controller</h2>
       <p><strong>Linceya</strong><br>
-      Contact : <a href="mailto:contact@linceya.com">contact@linceya.com</a></p>
+      Contact: <a href="mailto:contact@linceya.com">contact@linceya.com</a></p>
 
-      <h2 data-num="02">Données collectées</h2>
+      <h2 data-num="02">Data collected</h2>
       <ul>
-        <li><strong>Compte :</strong> adresse email, nom d'utilisateur, photo de profil</li>
-        <li><strong>Profil sportif :</strong> niveau de jeu, ville/région, position sur le terrain</li>
-        <li><strong>Matchs :</strong> scores, résultats, historique des parties</li>
-        <li><strong>Vidéos :</strong> vidéos de match uploadées pour l'analyse IA</li>
-        <li><strong>Analyses IA :</strong> scores, métriques, coaching personnalisé</li>
-        <li><strong>Abonnement :</strong> statut Premium (géré par RevenueCat)</li>
-        <li><strong>Identifiants techniques :</strong> token de notifications push (Firebase Cloud Messaging), identifiant d'installation</li>
-        <li><strong>Géolocalisation :</strong> ville/région approximative pour suggérer les clubs proches (uniquement avec votre accord explicite)</li>
-        <li><strong>Données de diagnostic :</strong> rapports d'erreurs anonymisés via Sentry (stack trace, version OS, contexte technique — aucun contenu personnel)</li>
+        <li><strong>Account:</strong> email address, username, profile picture</li>
+        <li><strong>Sports profile:</strong> playing level, city/region, court position</li>
+        <li><strong>Matches:</strong> scores, results, match history</li>
+        <li><strong>Videos:</strong> match videos uploaded for AI analysis</li>
+        <li><strong>AI analyses:</strong> scores, metrics, personalized coaching</li>
+        <li><strong>Subscription:</strong> Premium status (managed by RevenueCat)</li>
+        <li><strong>Technical identifiers:</strong> push notification token (Firebase Cloud Messaging), install identifier</li>
+        <li><strong>Geolocation:</strong> approximate city/region to suggest nearby clubs (only with your explicit consent)</li>
+        <li><strong>Diagnostic data:</strong> anonymized error reports via Sentry (stack trace, OS version, technical context — no personal content)</li>
       </ul>
 
-      <h2 data-num="03">Utilisation des données</h2>
+      <h2 data-num="03">Use of data</h2>
       <ul>
-        <li>Calculer et afficher votre ELO certifié</li>
-        <li>Générer des analyses IA de vos matchs via Gemini (Google)</li>
-        <li>Personnaliser votre programme d'entraînement</li>
-        <li>Afficher le classement régional et national</li>
-        <li>Gérer votre abonnement Premium</li>
-        <li>Vous envoyer des notifications push concernant vos matchs et analyses</li>
-        <li>Détecter et corriger les bugs (diagnostics Sentry)</li>
-        <li>Améliorer l'application</li>
+        <li>Calculate and display your certified ELO</li>
+        <li>Generate AI analyses of your matches via Gemini (Google)</li>
+        <li>Personalize your training plan</li>
+        <li>Display regional and national rankings</li>
+        <li>Manage your Premium subscription</li>
+        <li>Send you push notifications about your matches and analyses</li>
+        <li>Detect and fix bugs (Sentry diagnostics)</li>
+        <li>Improve the app</li>
       </ul>
 
-      <h2 data-num="04">Partage des données</h2>
-      <p>Vos données ne sont jamais vendues. Elles peuvent être partagées avec les sous-traitants suivants :</p>
+      <h2 data-num="04">Data sharing</h2>
+      <p>Your data is never sold. It may be shared with the following processors:</p>
       <ul>
-        <li><strong>Supabase</strong> — stockage et authentification (serveurs UE)</li>
-        <li><strong>Google Gemini</strong> — analyse IA des vidéos de match (serveurs US, transfert encadré par les Clauses Contractuelles Types de la Commission européenne)</li>
-        <li><strong>Firebase (Google)</strong> — notifications push, serveurs UE/US</li>
-        <li><strong>Sentry</strong> — monitoring d'erreurs (serveurs UE)</li>
-        <li><strong>RevenueCat</strong> — gestion des abonnements</li>
+        <li><strong>Supabase</strong> — storage and authentication (EU servers)</li>
+        <li><strong>Google Gemini</strong> — AI analysis of match videos (US servers, transfer covered by the European Commission's Standard Contractual Clauses)</li>
+        <li><strong>Firebase (Google)</strong> — push notifications, EU/US servers</li>
+        <li><strong>Sentry</strong> — error monitoring (EU servers)</li>
+        <li><strong>RevenueCat</strong> — subscription management</li>
       </ul>
 
-      <h2 data-num="05">Vidéos de match</h2>
-      <p>Les vidéos uploadées sont utilisées uniquement pour l'analyse IA. Elles sont transmises à l'API Google Gemini et peuvent être conservées temporairement par Google conformément à leurs conditions d'utilisation. Nous ne partageons pas vos vidéos avec d'autres utilisateurs.</p>
+      <h2 data-num="05">Match videos</h2>
+      <p>Uploaded videos are used solely for AI analysis. They are sent to the Google Gemini API and may be temporarily retained by Google in accordance with their terms of use. We do not share your videos with other users.</p>
 
-      <h2 data-num="06">Base légale du traitement</h2>
-      <p>Conformément au RGPD (Article 6), nous traitons vos données sur les bases suivantes :</p>
+      <h2 data-num="06">Legal basis for processing</h2>
+      <p>In accordance with GDPR (Article 6), we process your data on the following bases:</p>
       <ul>
-        <li><strong>Exécution du contrat</strong> — pour fournir le service Linceya (analyse IA, ELO, classement, gestion d'abonnement)</li>
-        <li><strong>Consentement</strong> — pour la géolocalisation et les notifications push (vous pouvez retirer votre consentement à tout moment dans les paramètres de l'app)</li>
-        <li><strong>Intérêt légitime</strong> — pour améliorer l'application et prévenir la fraude</li>
-        <li><strong>Obligation légale</strong> — pour conserver les données de facturation</li>
+        <li><strong>Performance of contract</strong> — to provide the Linceya service (AI analysis, ELO, ranking, subscription management)</li>
+        <li><strong>Consent</strong> — for geolocation and push notifications (you can withdraw consent at any time in the app settings)</li>
+        <li><strong>Legitimate interest</strong> — to improve the app and prevent fraud</li>
+        <li><strong>Legal obligation</strong> — to retain billing data</li>
       </ul>
 
-      <h2 data-num="07">Conservation des données</h2>
-      <p>Vos données sont conservées tant que votre compte est actif. En cas de suppression du compte, toutes vos données personnelles sont supprimées dans un délai de 7 jours, à l'exception des données de facturation conservées 30 jours pour obligations légales.</p>
+      <h2 data-num="07">Data retention</h2>
+      <p>Your data is retained as long as your account is active. If your account is deleted, all your personal data is removed within 7 days, except billing data which is kept for 30 days for legal obligations.</p>
 
-      <h2 data-num="08">Vos droits</h2>
+      <h2 data-num="08">Your rights</h2>
       <ul>
-        <li>Accéder à vos données</li>
-        <li>Corriger vos données</li>
-        <li>Supprimer votre compte et vos données</li>
-        <li>Exporter vos données (portabilité)</li>
-        <li>Vous opposer au traitement ou en limiter la portée</li>
-        <li>Déposer une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés</li>
+        <li>Access your data</li>
+        <li>Correct your data</li>
+        <li>Delete your account and data</li>
+        <li>Export your data (portability)</li>
+        <li>Object to or limit processing</li>
+        <li>File a complaint with your local data protection authority (in France: <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>) if you believe your rights are not respected</li>
       </ul>
-      <p>Pour exercer vos droits, utilisez le formulaire ci-dessous :</p>
+      <p>To exercise your rights, use the form below:</p>
 
       <div class="contact-card">
-        <h3>Exercer mes droits RGPD</h3>
+        <h3>Exercise my GDPR rights</h3>
         <form id="contactForm">
           <div class="form-group">
-            <label>Votre email *</label>
-            <input type="email" id="email" placeholder="votre@email.com" required>
+            <label>Your email *</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
           </div>
           <div class="form-group">
-            <label>Droit à exercer *</label>
+            <label>Right to exercise *</label>
             <select id="requestType" required>
-              <option value="" disabled selected>Choisir...</option>
-              <option value="Accès à mes données">Accès à mes données</option>
-              <option value="Correction de mes données">Correction de mes données</option>
-              <option value="Suppression de mon compte">Suppression de mon compte</option>
-              <option value="Export de mes données">Export de mes données</option>
-              <option value="Autre demande">Autre demande</option>
+              <option value="" disabled selected>Choose...</option>
+              <option value="Access my data">Access my data</option>
+              <option value="Correct my data">Correct my data</option>
+              <option value="Delete my account">Delete my account</option>
+              <option value="Export my data">Export my data</option>
+              <option value="Other request">Other request</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Message (optionnel)</label>
-            <textarea id="message" placeholder="Précisez votre demande..."></textarea>
+            <label>Message (optional)</label>
+            <textarea id="message" placeholder="Provide details..."></textarea>
           </div>
-          <button type="submit" class="btn-submit">Envoyer ma demande</button>
+          <button type="submit" class="btn-submit">Send my request</button>
         </form>
         <div class="success-msg" id="successMsg">
-          ✓ Votre demande a bien été envoyée. Nous vous répondrons dans les 7 jours ouvrés.
+          ✓ Your request has been sent. We will reply within 7 business days.
         </div>
       </div>
 
-      <h2 data-num="09">Sécurité</h2>
-      <p>Toutes les données sont chiffrées en transit (HTTPS). Nous utilisons Supabase avec des politiques de sécurité Row Level Security (RLS) pour protéger vos données.</p>
+      <h2 data-num="09">Security</h2>
+      <p>All data is encrypted in transit (HTTPS). We use Supabase with Row Level Security (RLS) policies to protect your data.</p>
 
-      <h2 data-num="10">Enfants</h2>
-      <p>Linceya n'est pas destiné aux enfants de moins de 13 ans. Nous ne collectons pas sciemment de données sur des mineurs de moins de 13 ans.</p>
+      <h2 data-num="10">Children</h2>
+      <p>Linceya is not intended for children under 13. We do not knowingly collect data on minors under 13.</p>
 
       <h2 data-num="11">Contact</h2>
-      <p>Pour toute question concernant cette politique, utilisez le formulaire de contact ci-dessus ou rendez-vous sur <a href="/delete-account.html">notre page de suppression de compte</a>.</p>
+      <p>For any question about this policy, use the contact form above or visit <a href="/en/delete-account.html">our account deletion page</a>.</p>
     </div>
 
   </div>
@@ -429,13 +410,13 @@ footer {
     </a>
   </div>
   <div class="footer-links">
-    <a href="/contact.html">Contact</a>
-    <a href="/pricing.html">Abonnements</a>
-    <a href="/index.html">Accueil</a>
+    <a href="/en/contact.html">Contact</a>
+    <a href="/en/pricing.html">Pricing</a>
+    <a href="/en/index.html">Home</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
-  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/privacy-policy.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/privacy-policy.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
-  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/privacy-policy.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <span style="color:var(--platinum-light);">EN</span> <a href="/es/privacy-policy.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
+  <div class="footer-copy">© 2026 LINCEYA — ALL RIGHTS RESERVED</div>
 </footer>
 
 <script>

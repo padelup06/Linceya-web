@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linceya — Suppression de compte</title>
-<meta name="description" content="Demandez la suppression définitive de votre compte Linceya et de toutes vos données personnelles. Délai de traitement : 7 jours ouvrés.">
+<meta name="description" content="Request the permanent deletion of your Linceya account and all your personal data. Processing time: 7 business days.">
 <link rel="canonical" href="https://linceya.com/delete-account.html">
 
 <link rel="icon" type="image/png" href="favicon.png">
@@ -12,30 +12,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="canonical" href="https://linceya.com/delete-account.html">
+<link rel="canonical" href="https://linceya.com/en/delete-account.html">
 <link rel="alternate" hreflang="fr" href="https://linceya.com/delete-account.html">
 <link rel="alternate" hreflang="en" href="https://linceya.com/en/delete-account.html">
 <link rel="alternate" hreflang="es" href="https://linceya.com/es/delete-account.html">
 <link rel="alternate" hreflang="x-default" href="https://linceya.com/delete-account.html">
-<!-- Détection langue navigateur (premier visit only) -->
-<script>
-(function() {
-  try {
-    var seen = localStorage.getItem('lng_seen');
-    if (seen) return;
-    var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
-    if (lng.indexOf('en') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/en/delete-account.html');
-    } else if (lng.indexOf('es') === 0) {
-      localStorage.setItem('lng_seen', '1');
-      location.replace('/es/delete-account.html');
-    } else {
-      localStorage.setItem('lng_seen', '1');
-    }
-  } catch (e) {}
-})();
-</script>
 <style>
 :root {
   --cream: #F2EDE2;
@@ -307,42 +288,42 @@ footer {
   <a href="https://linceya.com" class="nav-logo">
     <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
   </a>
-  <a href="index.html" class="nav-back">← Accueil</a>
+  <a href="/en/index.html" class="nav-back">← Home</a>
 </nav>
 
 <div class="wrapper">
   <div class="container">
-    <div class="eyebrow">Action définitive</div>
-    <h1>Suppression<br>de compte</h1>
-    <p class="lead">Vous pouvez demander la suppression de votre compte Linceya et de toutes vos données personnelles à tout moment. La suppression est définitive et irréversible.</p>
+    <div class="eyebrow">Permanent action</div>
+    <h1>Account<br>deletion</h1>
+    <p class="lead">You can request deletion of your Linceya account and all your personal data at any time. Deletion is permanent and irreversible.</p>
 
     <div class="card">
       <div class="card-head">
         <div class="card-icon form">
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         </div>
-        <div class="card-title">Formulaire de demande</div>
+        <div class="card-title">Request form</div>
       </div>
       <form id="deleteForm">
         <div class="form-group">
-          <label>Votre email Linceya *</label>
-          <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+          <label>Your Linceya email *</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
-          <label>Votre nom d'utilisateur *</label>
+          <label>Your username *</label>
           <input type="text" id="username" name="username" placeholder="linceya_username" required>
         </div>
         <div class="form-group">
-          <label>Raison (optionnel)</label>
-          <textarea id="reason" name="reason" placeholder="Pourquoi souhaitez-vous supprimer votre compte ?"></textarea>
+          <label>Reason (optional)</label>
+          <textarea id="reason" name="reason" placeholder="Why do you want to delete your account?"></textarea>
         </div>
         <!-- Honeypot anti-bot -->
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
         <div id="formError" style="display:none; padding:12px 16px; margin-bottom:16px; background:#FEE2E2; color:#991B1B; border-radius:8px; font-size:14px;"></div>
-        <button type="submit" class="btn-submit" id="submitBtn">Envoyer la demande de suppression</button>
+        <button type="submit" class="btn-submit" id="submitBtn">Send deletion request</button>
       </form>
       <div class="success-msg" id="successMsg">
-        ✓ Votre demande a bien été envoyée. Nous la traiterons dans un délai de 7 jours ouvrés.
+        ✓ Your request has been sent. We will process it within 7 business days.
       </div>
     </div>
 
@@ -351,20 +332,20 @@ footer {
         <div class="card-icon trash">
           <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
         </div>
-        <div class="card-title">Données supprimées et conservées</div>
+        <div class="card-title">Data deleted and retained</div>
       </div>
       <table class="data-table">
         <tr>
-          <th>Type de données</th>
+          <th>Data type</th>
           <th>Action</th>
-          <th>Délai</th>
+          <th>Timeframe</th>
         </tr>
-        <tr><td>Profil (email, username, photo)</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>Historique des matchs</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>Analyses IA et vidéos</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>ELO et classement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>Plan d'entraînement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>Données de facturation</td><td><span class="badge-keep">Conservé</span></td><td>30 jours (obligation légale)</td></tr>
+        <tr><td>Profile (email, username, photo)</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
+        <tr><td>Match history</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
+        <tr><td>AI analyses and videos</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
+        <tr><td>ELO and ranking</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
+        <tr><td>Training plan</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
+        <tr><td>Billing data</td><td><span class="badge-keep">Retained</span></td><td>30 days (legal obligation)</td></tr>
       </table>
     </div>
 
@@ -373,13 +354,13 @@ footer {
         <div class="card-icon info">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         </div>
-        <div class="card-title">Informations importantes</div>
+        <div class="card-title">Important information</div>
       </div>
       <ul class="info-list">
-        <li>La suppression du compte annule automatiquement tout abonnement Premium actif</li>
-        <li>Les données supprimées ne peuvent pas être récupérées</li>
-        <li>Les données de facturation sont conservées 30 jours conformément aux obligations légales</li>
-        <li>Délai de traitement : <strong>7 jours ouvrés</strong></li>
+        <li>Account deletion automatically cancels any active Premium subscription</li>
+        <li>Deleted data cannot be recovered</li>
+        <li>Billing data is kept for 30 days as required by legal obligations</li>
+        <li>Processing time: <strong>7 business days</strong></li>
       </ul>
     </div>
 
@@ -402,13 +383,13 @@ footer {
     </a>
   </div>
   <div class="footer-links">
-    <a href="/privacy-policy.html">Politique de confidentialité</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/index.html">Accueil</a>
+    <a href="/en/privacy-policy.html">Privacy Policy</a>
+    <a href="/en/contact.html">Contact</a>
+    <a href="/en/index.html">Home</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
-  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
-  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <span style="color:var(--platinum-light);">EN</span> <a href="/es/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
+  <div class="footer-copy">© 2026 LINCEYA — ALL RIGHTS RESERVED</div>
 </footer>
 
 <script>
@@ -432,7 +413,7 @@ document.getElementById('deleteForm').addEventListener('submit', async function(
 
   var originalLabel = btn.textContent;
   btn.disabled = true;
-  btn.textContent = 'Envoi en cours…';
+  btn.textContent = 'Sending…';
 
   try {
     var res = await fetch(CONTACT_ENDPOINT, {

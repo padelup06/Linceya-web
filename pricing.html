@@ -6,6 +6,10 @@
 <title>Linceya — Abonnements Premium | Analyse IA Padel</title>
 <meta name="description" content="Comparez les offres Linceya : version gratuite ou Premium à 9,99€/mois. 15 analyses vidéo IA par mois, programme d'entraînement personnalisé, ELO certifié et classement national.">
 <link rel="canonical" href="https://linceya.com/pricing.html">
+<link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html">
+<link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html">
+<link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html">
+<link rel="alternate" hreflang="x-default" href="https://linceya.com/pricing.html">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://linceya.com/pricing.html">
@@ -25,6 +29,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Détection langue navigateur (premier visit only) -->
+<script>
+(function() {
+  try {
+    var seen = localStorage.getItem('lng_seen');
+    if (seen) return;
+    var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+    if (lng.indexOf('en') === 0) {
+      localStorage.setItem('lng_seen', '1');
+      location.replace('/en/pricing.html');
+    } else if (lng.indexOf('es') === 0) {
+      localStorage.setItem('lng_seen', '1');
+      location.replace('/es/pricing.html');
+    } else {
+      localStorage.setItem('lng_seen', '1');
+    }
+  } catch (e) {}
+})();
+</script>
 <style>
 :root {
   --cream: #F2EDE2;
@@ -793,6 +816,7 @@ footer {
     <a href="https://linceya.com/contact.html">Contact</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
   <div class="footer-copy">© 2026 Linceya. Tous droits réservés.</div>
 </footer>
 
