@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenue dans Linceya Premium</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F2EDE2;
+  --pearl: #FFFFFF;
+  --ink: #0E1B35;
+  --navy: #1A2B4D;
+  --platinum: #B48A4A;
+  --platinum-light: #D4B87A;
+  --signal: #1E47F0;
+  --muted: rgba(14,27,53,0.55);
+  --stroke: rgba(14,27,53,0.12);
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--pearl);
+  border-radius: 28px;
+  border: 1px solid var(--stroke);
+  padding: 48px 36px 40px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(14,27,53,0.08);
+}
+.success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
+  color: var(--pearl);
+  font-size: 32px; line-height: 64px;
+  margin: 0 auto 24px;
+  box-shadow: 0 12px 28px rgba(180,138,74,0.3);
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--platinum);
+  margin-bottom: 14px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+h1 .accent {
+  background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px; }
+.status { font-family: var(--font-mono); font-size: 12px; color: var(--signal); margin: 18px 0 22px; letter-spacing: 0.04em; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%;
+  padding: 16px 22px; border-radius: 14px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary {
+  background: var(--ink); color: var(--pearl);
+  box-shadow: 0 12px 28px rgba(14,27,53,0.25);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-store {
+  background: var(--pearl); color: var(--ink);
+  border: 1px solid var(--stroke);
+  text-transform: none; letter-spacing: 0;
+  font-weight: 600;
+}
+.btn-store:hover { border-color: var(--platinum); }
+.btn-row { display: flex; gap: 10px; margin-top: 12px; }
+.btn-row .btn { flex: 1; padding: 14px; font-size: 13px; }
+.fallback { display: none; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--stroke); }
+.fallback.show { display: block; }
+.fallback h2 { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+.fallback p { font-size: 13px; }
+.spinner {
+  display: inline-block; width: 14px; height: 14px;
+  border: 2px solid rgba(30,71,240,0.25); border-top-color: var(--signal);
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+  vertical-align: middle; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.foot { margin-top: 32px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.foot a { color: var(--platinum); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="success-icon">✓</div>
+  <div class="eyebrow" id="eyebrow">// Bienvenue</div>
+  <h1 id="title">Linceya<br><span class="accent">Premium</span></h1>
+  <p id="subtitle">Ton abonnement est actif. On t'ouvre l'app dans un instant…</p>
+
+  <div class="status" id="status"><span class="spinner"></span><span id="status-text">Ouverture de l'app…</span></div>
+
+  <a href="#" class="btn btn-primary" id="open-app-btn" style="display:none;">
+    Ouvrir Linceya
+    <span>→</span>
+  </a>
+
+  <div class="fallback" id="fallback">
+    <h2 id="fallback-title">L'app n'est pas installée ?</h2>
+    <p id="fallback-desc">Télécharge Linceya pour activer ton compte Premium et commencer à analyser tes matchs.</p>
+    <div class="btn-row">
+      <a href="https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174" class="btn btn-store" target="_blank" rel="noopener noreferrer">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="btn btn-store" target="_blank" rel="noopener noreferrer">Google Play</a>
+    </div>
+  </div>
+
+  <div class="foot">© 2026 LINCEYA · <a href="/contact.html" id="contact-link">Support</a></div>
+</div>
+
+<script>
+(function() {
+  // i18n based on browser language (since we can't trust ?lang= here — magic link tokens are in fragment)
+  var lang = (navigator.language || 'fr').slice(0,2).toLowerCase();
+  var I18N = {
+    fr: {
+      eyebrow: '// BIENVENUE',
+      title: 'LINCEYA<br><span class="accent">PREMIUM</span>',
+      subtitle: "Ton abonnement est actif. On t'ouvre l'app dans un instant…",
+      statusOpening: 'Ouverture de l\'app…',
+      statusReady: 'Si l\'app ne s\'est pas ouverte, clique ci-dessous',
+      openBtn: 'Ouvrir Linceya',
+      fallbackTitle: "L'app n'est pas installée ?",
+      fallbackDesc: 'Télécharge Linceya pour activer ton compte Premium et commencer à analyser tes matchs.',
+    },
+    en: {
+      eyebrow: '// WELCOME',
+      title: 'LINCEYA<br><span class="accent">PREMIUM</span>',
+      subtitle: 'Your subscription is active. Opening the app shortly…',
+      statusOpening: 'Opening the app…',
+      statusReady: "If the app didn't open, tap below",
+      openBtn: 'Open Linceya',
+      fallbackTitle: 'App not installed?',
+      fallbackDesc: 'Download Linceya to activate your Premium account and start analyzing your matches.',
+    },
+    es: {
+      eyebrow: '// BIENVENIDO',
+      title: 'LINCEYA<br><span class="accent">PREMIUM</span>',
+      subtitle: 'Tu suscripción está activa. Abriendo la app en un momento…',
+      statusOpening: 'Abriendo la app…',
+      statusReady: 'Si la app no se ha abierto, toca abajo',
+      openBtn: 'Abrir Linceya',
+      fallbackTitle: '¿La app no está instalada?',
+      fallbackDesc: 'Descarga Linceya para activar tu cuenta Premium y empezar a analizar tus partidos.',
+    },
+  };
+  var t = I18N[lang] || I18N.fr;
+  document.documentElement.lang = lang;
+  document.getElementById('eyebrow').textContent = t.eyebrow;
+  document.getElementById('title').innerHTML = t.title;
+  document.getElementById('subtitle').textContent = t.subtitle;
+  document.getElementById('status-text').textContent = t.statusOpening;
+  document.getElementById('open-app-btn').firstChild.textContent = t.openBtn;
+  document.getElementById('fallback-title').textContent = t.fallbackTitle;
+  document.getElementById('fallback-desc').textContent = t.fallbackDesc;
+
+  // Build the deep link with the magic link tokens (Supabase puts them in the fragment)
+  var fragment = window.location.hash || '';
+  var deepLink = 'padelup://login-callback/' + fragment;
+
+  // Try to open the app
+  var openedAt = Date.now();
+  var visibilityChanged = false;
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) visibilityChanged = true;
+  });
+
+  // Attempt deep link redirect
+  try {
+    window.location.href = deepLink;
+  } catch (e) {}
+
+  // Show the manual button + fallback after 1.5s
+  setTimeout(function() {
+    if (visibilityChanged) return; // app probably opened
+    document.getElementById('status-text').textContent = t.statusReady;
+    document.querySelector('.spinner').style.display = 'none';
+    var btn = document.getElementById('open-app-btn');
+    btn.href = deepLink;
+    btn.style.display = 'inline-flex';
+    document.getElementById('fallback').classList.add('show');
+  }, 1500);
+})();
+</script>
+</body>
+</html>
