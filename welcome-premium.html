@@ -121,6 +121,17 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   </div>
 
   <div class="foot">© 2026 LINCEYA · <a href="/contact.html">Support</a></div>
+
+  <!-- [DEBUG TEMP] Affiche l'URL reçue + le deep link construit pour
+       diagnostiquer le flow d'invite Stripe Checkout. À retirer après fix. -->
+  <div id="debug-panel" style="margin-top:16px;padding:14px;background:#0E1B35;color:#fff;border-radius:8px;font-family:monospace;font-size:10px;line-height:1.5;text-align:left;word-break:break-all;">
+    <div style="color:#D4B87A;font-weight:700;margin-bottom:6px;">DEBUG INFO</div>
+    <div><b>Original URL:</b><br><span id="dbg-url"></span></div>
+    <div style="margin-top:6px;"><b>Search:</b> <span id="dbg-search"></span></div>
+    <div style="margin-top:6px;"><b>Fragment:</b> <span id="dbg-fragment"></span></div>
+    <div style="margin-top:6px;"><b>Has tokens?</b> <span id="dbg-tokens"></span></div>
+    <div style="margin-top:6px;"><b>Deep link:</b><br><span id="dbg-deeplink"></span></div>
+  </div>
 </div>
 
 <script>
@@ -191,12 +202,28 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   }
   var deepLink = 'padelup://login-callback/' + combinedQuery;
 
+  // [DEBUG TEMP] Populate debug panel pour diagnostique
+  try {
+    document.getElementById('dbg-url').textContent = window.location.href;
+    document.getElementById('dbg-search').textContent = search || '(empty)';
+    document.getElementById('dbg-fragment').textContent = fragment || '(empty)';
+    var hasAccessToken = (search + fragment).indexOf('access_token') !== -1;
+    var hasCode = (search + fragment).indexOf('code=') !== -1;
+    document.getElementById('dbg-tokens').textContent =
+      'access_token=' + hasAccessToken + ', code=' + hasCode;
+    document.getElementById('dbg-deeplink').textContent = deepLink;
+  } catch(_) {}
+
   var visibilityChanged = false;
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) visibilityChanged = true;
   });
 
-  try { window.location.href = deepLink; } catch (e) {}
+  // [DEBUG TEMP] On RETARDE le deep link de 5 secondes pour que tu puisses
+  // lire le debug panel avant que l'app ne s'ouvre. À remettre à 0 après.
+  setTimeout(function() {
+    try { window.location.href = deepLink; } catch (e) {}
+  }, 5000);
 
   setTimeout(function() {
     if (visibilityChanged) return;
