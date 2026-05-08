@@ -375,15 +375,15 @@ let selectedPackage = null;
 let purchasesInstance = null;
 
 const LABELS = {
-  '$rc_monthly': 'Mensuel',
-  '$rc_annual': 'Annuel',
-  '$rc_yearly': 'Annuel'
+  '$rc_monthly': 'Mensual',
+  '$rc_annual': 'Anual',
+  '$rc_yearly': 'Anual'
 };
 
 const PERIOD_LABELS = {
-  '$rc_monthly': '/ mois',
-  '$rc_annual': '/ an',
-  '$rc_yearly': '/ an'
+  '$rc_monthly': '/ mes',
+  '$rc_annual': '/ año',
+  '$rc_yearly': '/ año'
 };
 
 async function init() {
@@ -399,12 +399,12 @@ async function init() {
     if (offerings.current && offerings.current.availablePackages.length > 0) {
       renderPackages(offerings.current.availablePackages);
     } else {
-      showError('Aucune offre disponible pour le moment.');
+      showError('No hay ofertas disponibles ahora.');
       document.getElementById('loading').style.display = 'none';
     }
   } catch (e) {
     console.error('Init error:', e);
-    showError('Impossible de charger les offres. Veuillez réessayer.');
+    showError('No se pueden cargar las ofertas. Inténtalo de nuevo.');
     document.getElementById('loading').style.display = 'none';
   }
 }
@@ -431,11 +431,11 @@ function renderPackages(packages) {
 
     let saveHtml = '';
     if (type === '$rc_annual' || type === '$rc_yearly') {
-      saveHtml = '<div class="pkg-save">≈ 2 mois offerts</div>';
+      saveHtml = '<div class="pkg-save">≈ 2 meses gratis</div>';
     }
 
     card.innerHTML =
-      '<div class="pkg-label">' + (LABELS[type] || 'Abonnement') + '</div>' +
+      '<div class="pkg-label">' + (LABELS[type] || 'Suscripción') + '</div>' +
       '<div class="pkg-name">' + (product.displayName || 'Linceya Premium') + '</div>' +
       '<div class="pkg-price">' + priceAmount + ' €<span class="period">' + (PERIOD_LABELS[type] || '') + '</span></div>' +
       saveHtml;
@@ -463,14 +463,14 @@ async function handlePurchase() {
 
   var btn = document.getElementById('buy-btn');
   btn.disabled = true;
-  btn.innerHTML = '<span>Traitement en cours...</span>';
+  btn.innerHTML = '<span>Procesando...</span>';
   hideError();
 
   try {
     var result = await purchasesInstance.purchase({
       rcPackage: selectedPackage,
-      selectedLocale: 'fr',
-      defaultLocale: 'fr',
+      selectedLocale: 'es',
+      defaultLocale: 'es',
     });
 
     var customerInfo = result.customerInfo;
@@ -481,7 +481,7 @@ async function handlePurchase() {
   } catch (e) {
     console.error('Purchase error:', e);
     if (e.errorCode !== 'USER_CANCELLED') {
-      showError('Une erreur est survenue. Veuillez réessayer.');
+      showError('Ha ocurrido un error. Inténtalo de nuevo.');
     }
     btn.disabled = false;
     btn.innerHTML = '<span>Continuar →</span>';
