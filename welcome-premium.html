@@ -27,68 +27,48 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  background: var(--cream);
-  color: var(--ink);
+  background: var(--cream); color: var(--ink);
   font-family: var(--font-body);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 20px;
-  -webkit-font-smoothing: antialiased;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 20px; -webkit-font-smoothing: antialiased;
 }
 .card {
-  width: 100%;
-  max-width: 480px;
+  width: 100%; max-width: 480px;
   background: var(--pearl);
-  border-radius: 28px;
-  border: 1px solid var(--stroke);
-  padding: 48px 36px 40px;
-  text-align: center;
+  border-radius: 28px; border: 1px solid var(--stroke);
+  padding: 48px 36px 40px; text-align: center;
   box-shadow: 0 24px 60px rgba(14,27,53,0.08);
 }
 .success-icon {
-  width: 64px; height: 64px;
-  border-radius: 50%;
+  width: 64px; height: 64px; border-radius: 50%;
   background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
-  color: var(--pearl);
-  font-size: 32px; line-height: 64px;
-  margin: 0 auto 24px;
-  box-shadow: 0 12px 28px rgba(180,138,74,0.3);
+  color: var(--pearl); font-size: 32px; line-height: 64px;
+  margin: 0 auto 24px; box-shadow: 0 12px 28px rgba(180,138,74,0.3);
 }
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--platinum);
-  margin-bottom: 14px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--platinum); margin-bottom: 14px;
 }
 h1 {
   font-family: var(--font-display);
-  font-size: 32px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 14px;
+  font-size: 32px; line-height: 1.05; letter-spacing: -0.01em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 14px;
 }
 h1 .accent {
   background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px; }
 .status { font-family: var(--font-mono); font-size: 12px; color: var(--signal); margin: 18px 0 22px; letter-spacing: 0.04em; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%;
-  padding: 16px 22px; border-radius: 14px;
+  width: 100%; padding: 16px 22px; border-radius: 14px;
   font-family: var(--font-body); font-size: 14px; font-weight: 700;
   letter-spacing: 0.04em; text-transform: uppercase;
-  text-decoration: none;
-  transition: transform 0.15s, box-shadow 0.2s;
+  text-decoration: none; transition: transform 0.15s, box-shadow 0.2s;
 }
 .btn-primary {
   background: var(--ink); color: var(--pearl);
@@ -98,8 +78,7 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
 .btn-store {
   background: var(--pearl); color: var(--ink);
   border: 1px solid var(--stroke);
-  text-transform: none; letter-spacing: 0;
-  font-weight: 600;
+  text-transform: none; letter-spacing: 0; font-weight: 600;
 }
 .btn-store:hover { border-color: var(--platinum); }
 .btn-row { display: flex; gap: 10px; margin-top: 12px; }
@@ -122,32 +101,30 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
 <body>
 <div class="card">
   <div class="success-icon">✓</div>
-  <div class="eyebrow" id="eyebrow">// Bienvenue</div>
-  <h1 id="title">Linceya<br><span class="accent">Premium</span></h1>
+  <div class="eyebrow" id="eyebrow">// BIENVENUE</div>
+  <h1 id="title">LINCEYA<br><span class="accent">PREMIUM</span></h1>
   <p id="subtitle">Ton abonnement est actif. On t'ouvre l'app dans un instant…</p>
 
   <div class="status" id="status"><span class="spinner"></span><span id="status-text">Ouverture de l'app…</span></div>
 
   <a href="#" class="btn btn-primary" id="open-app-btn" style="display:none;">
-    Ouvrir Linceya
-    <span>→</span>
+    <span id="open-app-label">Ouvrir Linceya</span> <span>→</span>
   </a>
 
   <div class="fallback" id="fallback">
     <h2 id="fallback-title">L'app n'est pas installée ?</h2>
-    <p id="fallback-desc">Télécharge Linceya pour activer ton compte Premium et commencer à analyser tes matchs.</p>
+    <p id="fallback-desc">Télécharge Linceya pour finaliser ton compte Premium et commencer à analyser tes matchs.</p>
     <div class="btn-row">
       <a href="https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174" class="btn btn-store" target="_blank" rel="noopener noreferrer">App Store</a>
       <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="btn btn-store" target="_blank" rel="noopener noreferrer">Google Play</a>
     </div>
   </div>
 
-  <div class="foot">© 2026 LINCEYA · <a href="/contact.html" id="contact-link">Support</a></div>
+  <div class="foot">© 2026 LINCEYA · <a href="/contact.html">Support</a></div>
 </div>
 
 <script>
 (function() {
-  // i18n based on browser language (since we can't trust ?lang= here — magic link tokens are in fragment)
   var lang = (navigator.language || 'fr').slice(0,2).toLowerCase();
   var I18N = {
     fr: {
@@ -158,7 +135,7 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
       statusReady: 'Si l\'app ne s\'est pas ouverte, clique ci-dessous',
       openBtn: 'Ouvrir Linceya',
       fallbackTitle: "L'app n'est pas installée ?",
-      fallbackDesc: 'Télécharge Linceya pour activer ton compte Premium et commencer à analyser tes matchs.',
+      fallbackDesc: 'Télécharge Linceya pour finaliser ton compte Premium et commencer à analyser tes matchs.',
     },
     en: {
       eyebrow: '// WELCOME',
@@ -168,7 +145,7 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
       statusReady: "If the app didn't open, tap below",
       openBtn: 'Open Linceya',
       fallbackTitle: 'App not installed?',
-      fallbackDesc: 'Download Linceya to activate your Premium account and start analyzing your matches.',
+      fallbackDesc: 'Download Linceya to finalize your Premium account and start analyzing your matches.',
     },
     es: {
       eyebrow: '// BIENVENIDO',
@@ -178,7 +155,7 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
       statusReady: 'Si la app no se ha abierto, toca abajo',
       openBtn: 'Abrir Linceya',
       fallbackTitle: '¿La app no está instalada?',
-      fallbackDesc: 'Descarga Linceya para activar tu cuenta Premium y empezar a analizar tus partidos.',
+      fallbackDesc: 'Descarga Linceya para finalizar tu cuenta Premium y empezar a analizar tus partidos.',
     },
   };
   var t = I18N[lang] || I18N.fr;
@@ -187,29 +164,42 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   document.getElementById('title').innerHTML = t.title;
   document.getElementById('subtitle').textContent = t.subtitle;
   document.getElementById('status-text').textContent = t.statusOpening;
-  document.getElementById('open-app-btn').firstChild.textContent = t.openBtn;
+  document.getElementById('open-app-label').textContent = t.openBtn;
   document.getElementById('fallback-title').textContent = t.fallbackTitle;
   document.getElementById('fallback-desc').textContent = t.fallbackDesc;
 
-  // Build the deep link with the magic link tokens (Supabase puts them in the fragment)
+  // Supabase peut renvoyer le token soit en query (?code=xxx, flow PKCE)
+  // soit en fragment (#access_token=xxx, flow implicit).
+  //
+  // BUG iOS connu : Safari strip parfois le fragment quand il transmet un
+  // URL custom-scheme à une app. On convertit donc TOUT en query string
+  // avant le deep link pour que rien ne se perde côté app.
+  // Le SDK Supabase Flutter parse les tokens dans la query ET le fragment,
+  // donc renommer access_token de fragment → query passe sans souci.
+  var search = window.location.search || '';
   var fragment = window.location.hash || '';
-  var deepLink = 'padelup://login-callback/' + fragment;
+  var combinedQuery = '';
+  if (search && fragment.length > 1) {
+    // Les deux : on append le fragment (sans le #) à la query existante
+    combinedQuery = search + '&' + fragment.substring(1);
+  } else if (fragment.length > 1) {
+    // Que le fragment : on le transforme en query
+    combinedQuery = '?' + fragment.substring(1);
+  } else {
+    // Que la query (ou rien)
+    combinedQuery = search;
+  }
+  var deepLink = 'padelup://login-callback/' + combinedQuery;
 
-  // Try to open the app
-  var openedAt = Date.now();
   var visibilityChanged = false;
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) visibilityChanged = true;
   });
 
-  // Attempt deep link redirect
-  try {
-    window.location.href = deepLink;
-  } catch (e) {}
+  try { window.location.href = deepLink; } catch (e) {}
 
-  // Show the manual button + fallback after 1.5s
   setTimeout(function() {
-    if (visibilityChanged) return; // app probably opened
+    if (visibilityChanged) return;
     document.getElementById('status-text').textContent = t.statusReady;
     document.querySelector('.spinner').style.display = 'none';
     var btn = document.getElementById('open-app-btn');
