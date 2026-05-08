@@ -182,25 +182,17 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   // Supabase peut renvoyer le token soit en query (?code=xxx, flow PKCE)
   // soit en fragment (#access_token=xxx, flow implicit).
   //
-  // BUG iOS connu : Safari strip parfois le fragment quand il transmet un
-  // URL custom-scheme à une app. On convertit donc TOUT en query string
-  // avant le deep link pour que rien ne se perde côté app.
-  // Le SDK Supabase Flutter parse les tokens dans la query ET le fragment,
-  // donc renommer access_token de fragment → query passe sans souci.
+  // Le SDK Supabase Flutter en mode PKCE détecte AUTOMATIQUEMENT :
+  // - access_token dans le fragment → setSession (implicit)
+  // - code dans la query → exchangeCodeForSession (PKCE)
+  // Mais il NE reconnaît PAS access_token en query.
+  //
+  // Donc on forward search ET fragment tels quels, sans conversion.
+  // Les custom URL schemes (padelup://) préservent le fragment sur iOS
+  // (contrairement aux Universal Links où il peut être strippé).
   var search = window.location.search || '';
   var fragment = window.location.hash || '';
-  var combinedQuery = '';
-  if (search && fragment.length > 1) {
-    // Les deux : on append le fragment (sans le #) à la query existante
-    combinedQuery = search + '&' + fragment.substring(1);
-  } else if (fragment.length > 1) {
-    // Que le fragment : on le transforme en query
-    combinedQuery = '?' + fragment.substring(1);
-  } else {
-    // Que la query (ou rien)
-    combinedQuery = search;
-  }
-  var deepLink = 'padelup://login-callback/' + combinedQuery;
+  var deepLink = 'padelup://login-callback/' + search + fragment;
 
   // [DEBUG TEMP] Populate debug panel pour diagnostique
   try {
