@@ -295,6 +295,13 @@ footer {
   footer { padding: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-links { flex-direction: column; gap: 10px; }
 }
+
+.email-input-wrap { margin: 18px 0 14px; }
+.email-input-wrap label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.email-input-wrap input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--stroke); background: var(--pearl); color: var(--ink); font-family: var(--font-body); font-size: 14px; outline: none; transition: border-color 0.2s; }
+.email-input-wrap input:focus { border-color: var(--signal); }
+.email-input-wrap .hint { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
 </style>
 </head>
 <body>
@@ -340,7 +347,12 @@ footer {
         <div class="paywall-sub">Cancelable en cualquier momento. Sin compromiso.</div>
         <div class="error-msg" id="error"></div>
         <div id="package-list"></div>
-        <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continuar →</span></button>
+        <div class="email-input-wrap">
+            <label for="checkout-email">EMAIL DE TU CUENTA LINCEYA</label>
+            <input type="email" id="checkout-email" placeholder="tu@email.com" required autocomplete="email">
+            <div class="hint">El correo que usas en la app Linceya, para que tu estado Premium se aplique.</div>
+          </div>
+          <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continuar →</span></button>
         <div class="paywall-terms">
           Al continuar, aceptas las <a href="https://linceya.com/es/privacy-policy.html" target="_blank" rel="noopener noreferrer">condiciones de uso</a>.
           Tu suscripción se renueva automáticamente. Cancelable en cualquier momento.
@@ -408,6 +420,14 @@ function selectPackage(card) {
 
 async function handlePurchase() {
   if (!selectedPriceId) return;
+  const emailInput = document.getElementById('checkout-email');
+  const email = (emailInput.value || '').trim();
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailValid) {
+    showError('Introduce un correo válido.');
+    emailInput.focus();
+    return;
+  }
   const btn = document.getElementById('buy-btn');
   btn.disabled = true;
   btn.innerHTML = '<span>Redirigiendo al pago…</span>';
@@ -420,6 +440,7 @@ async function handlePurchase() {
       body: JSON.stringify({
         price_id: selectedPriceId,
         locale: STRIPE_LOCALE,
+        customer_email: email,
         success_url: SUCCESS_URL,
         cancel_url: CANCEL_URL,
       }),
