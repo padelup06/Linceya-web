@@ -496,7 +496,12 @@ async function handlePurchase() {
     window.location.href = data.url;
   } catch (e) {
     console.error('Purchase error:', e);
-    showError('An error occurred. Please try again.');
+    // Display backend message if any (e.g. "already premium"), otherwise
+    // fall back to the generic localised message.
+    const msg = (e && e.message && e.message !== 'Stripe error')
+      ? e.message
+      : 'An error occurred. Please try again.';
+    showError(msg);
     btn.disabled = false;
     btn.innerHTML = '<span>Continue →</span>';
   }

@@ -496,7 +496,12 @@ async function handlePurchase() {
     window.location.href = data.url;
   } catch (e) {
     console.error('Purchase error:', e);
-    showError('Ha ocurrido un error. Inténtalo de nuevo.');
+    // Muestra el mensaje del backend si existe (p.ej. "ya premium"),
+    // si no recae al mensaje genérico localizado.
+    const msg = (e && e.message && e.message !== 'Stripe error')
+      ? e.message
+      : 'Ha ocurrido un error. Inténtalo de nuevo.';
+    showError(msg);
     btn.disabled = false;
     btn.innerHTML = '<span>Continuar →</span>';
   }

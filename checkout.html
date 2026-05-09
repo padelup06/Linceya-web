@@ -515,7 +515,13 @@ async function handlePurchase() {
     window.location.href = data.url;
   } catch (e) {
     console.error('Purchase error:', e);
-    showError('Une erreur est survenue. Veuillez réessayer.');
+    // Si le backend a renvoyé un message custom (ex: "Cet email a déjà
+    // un abonnement Premium..."), on l'affiche tel quel. Sinon fallback
+    // sur le générique localisé.
+    const msg = (e && e.message && e.message !== 'Stripe error')
+      ? e.message
+      : 'Une erreur est survenue. Veuillez réessayer.';
+    showError(msg);
     btn.disabled = false;
     btn.innerHTML = '<span>Continuer →</span>';
   }
