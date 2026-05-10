@@ -343,7 +343,7 @@ footer {
   <div class="checkout-container">
 
     <!-- LEFT -->
-    <div class="checkout-info">
+    <div class="checkout-info" id="checkout-info">
       <div class="checkout-badge">Premium Edition</div>
       <div class="checkout-title">GO<br><span class="accent">PREMIUM</span></div>
       <div class="checkout-subtitle">Unlock the full potential of Linceya and progress faster than ever.</div>
@@ -518,10 +518,13 @@ function hideError() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderPackages();
-  // Si l'URL contient ?success=1, afficher le block de succès
+  // Si l'URL contient ?success=1, afficher le block de succès et masquer
+  // le bloc pricing qui n'a plus d'utilité post-paiement (sinon il reste
+  // visible en dessous du "WELCOME" sur mobile, confus pour l'user).
   if (new URLSearchParams(window.location.search).get('success') === '1') {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
+    document.getElementById('checkout-info').style.display = 'none';
   }
 });
 </script>
