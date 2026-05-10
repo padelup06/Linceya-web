@@ -526,6 +526,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
   }
+
+  // Hace scroll del input email por encima del teclado iOS al hacer focus.
+  // Sin esto el teclado tapa el input y el usuario no ve lo que escribe.
+  // Delay 300ms = espera a que termine la animación del teclado.
+  var emailInput = document.getElementById('checkout-email');
+  if (emailInput) {
+    emailInput.addEventListener('focus', function() {
+      setTimeout(function() {
+        emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+  }
 });
 </script>
 

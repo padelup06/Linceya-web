@@ -526,6 +526,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
   }
+
+  // Scroll the email input above the iOS keyboard on focus. Without this
+  // the on-screen keyboard hides the input and the user can't see what
+  // they're typing. 300ms delay = wait for keyboard slide-up animation.
+  var emailInput = document.getElementById('checkout-email');
+  if (emailInput) {
+    emailInput.addEventListener('focus', function() {
+      setTimeout(function() {
+        emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+  }
 });
 </script>
 

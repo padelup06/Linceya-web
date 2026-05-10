@@ -547,6 +547,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
   }
+
+  // Scroll l'input email au-dessus du clavier iOS quand on le focus.
+  // Sans ça, le clavier mobile recouvre l'input et l'user ne voit pas
+  // ce qu'il tape. Délai 300ms = temps que le clavier ait fini son
+  // animation d'apparition sinon le scroll est annulé.
+  var emailInput = document.getElementById('checkout-email');
+  if (emailInput) {
+    emailInput.addEventListener('focus', function() {
+      setTimeout(function() {
+        emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+  }
 });
 </script>
 
