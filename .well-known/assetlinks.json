@@ -5,9 +5,9 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.padelup06.padelup",
+      "package_name": "com.padelup.padelup",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_RELEASE_SHA256_FROM_PLAY_CONSOLE"
+        "6F:60:1A:79:92:DD:35:19:72:F9:02:04:26:A1:A3:19:3D:90:E2:87:AB:FA:53:57:95:0C:EA:2E:7B:C2:F4:BC"
       ]
     }
   }
