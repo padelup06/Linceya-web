@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+
+# Pages techniques / transactionnelles — pas d'intérêt SEO
 Disallow: /checkout.html
+Disallow: /en/checkout.html
+Disallow: /es/checkout.html
+Disallow: /welcome-premium.html
+Disallow: /premium.html
 
 Sitemap: https://linceya.com/sitemap.xml
