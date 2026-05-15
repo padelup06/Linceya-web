@@ -231,6 +231,15 @@
       currentConsent = Object.assign({}, consent);
       saveConsent(consent);
       fireListeners(consent);
+      // Émet un event global pour les scripts qui veulent réagir à TOUTES
+      // les transitions (granted ET denied), pas seulement aux "granted"
+      // comme le fait fireListeners. Utilisé par analytics.js pour
+      // basculer Consent Mode v2 de GA4 dans les deux sens.
+      try {
+        window.dispatchEvent(new CustomEvent('linceyaConsentChange', {
+          detail: Object.assign({}, consent)
+        }));
+      } catch (_) {}
       hideBanner();
       hideModal();
     }

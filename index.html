@@ -52,13 +52,15 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "MobileApplication",
   "name": "Linceya",
-  "operatingSystem": "Android",
+  "operatingSystem": "iOS, Android",
   "applicationCategory": "SportsApplication",
   "description": "Application d'analyse IA pour le padel. Filmez votre match, obtenez votre score ELO certifié, 12 points d'analyse et un programme d'entraînement personnalisé.",
   "url": "https://linceya.com",
   "image": "https://linceya.com/logo.png",
+  "downloadUrl": "https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174",
+  "installUrl": "https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174",
   "author": {
     "@type": "Organization",
     "name": "Linceya",
@@ -76,8 +78,15 @@
       "@type": "Offer",
       "price": "9.99",
       "priceCurrency": "EUR",
-      "name": "Premium",
+      "name": "Premium mensuel",
       "description": "15 analyses vidéo IA par mois, programme personnalisé, 12 points d'analyse détaillés"
+    },
+    {
+      "@type": "Offer",
+      "price": "99.99",
+      "priceCurrency": "EUR",
+      "name": "Premium annuel",
+      "description": "Tous les avantages Premium, 2 mois offerts"
     }
   ],
   "aggregateRating": {
@@ -97,10 +106,20 @@
   "logo": "https://linceya.com/logo.png",
   "description": "Linceya est une application d'analyse IA pour le padel, avec classement ELO certifié et programme d'entraînement personnalisé.",
   "foundingDate": "2026",
+  "sameAs": [
+    "https://www.instagram.com/linceya.app/",
+    "https://www.tiktok.com/@linceya.app",
+    "https://x.com/linceyapp",
+    "https://www.snapchat.com/add/Linceyapp",
+    "https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174",
+    "https://play.google.com/store/apps/details?id=com.padelup.padelup"
+  ],
   "contactPoint": {
     "@type": "ContactPoint",
     "url": "https://linceya.com/contact.html",
-    "contactType": "customer service"
+    "contactType": "customer service",
+    "email": "contact@linceya.com",
+    "availableLanguage": ["French", "English", "Spanish"]
   }
 }
 </script>
@@ -1312,5 +1331,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <img id="lightbox-img" src="" alt="">
 </div>
 <script src="/cookies.js" defer></script>
+<script src="/analytics.js" defer></script>
 </body>
 </html>

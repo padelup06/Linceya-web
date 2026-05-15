@@ -479,6 +479,14 @@ async function handlePurchase() {
   btn.innerHTML = '<span>Redirigiendo al pago…</span>';
   hideError();
 
+  // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
+  try {
+    if (window.linceyaTrack) {
+      const plan = selectedPriceId === PRICE_ANNUAL ? 'annual' : 'monthly';
+      window.linceyaTrack.checkoutClick(plan);
+    }
+  } catch (_) {}
+
   try {
     const res = await fetch(EDGE_URL, {
       method: 'POST',
@@ -541,6 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script src="/cookies.js" defer></script>
+<script src="/analytics.js" defer></script>
 </body>
 </html>
                                                        
