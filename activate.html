@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="robots" content="noindex" />
+  <title>Active ton compte Linceya Premium</title>
+  <!--
+    Page d'activation Premium — pont entre le mail Stripe et l'app mobile.
+
+    URL attendue : https://linceya.com/activate?email=X&code=Y
+                   (où X = email du paiement Stripe, Y = code à 6 chiffres)
+
+    Comportement :
+    1. À l'ouverture (sur mobile), on tente automatiquement d'ouvrir le scheme
+       custom de l'app : padelup://activate-premium?email=X&code=Y. Si l'app
+       Linceya est installée, le système d'exploitation prend la main et la
+       page de fallback n'est jamais montrée.
+    2. Si l'app n'est pas installée (ou si on est sur desktop), la page reste
+       affichée avec le code en gros + des liens vers l'App Store / Play Store.
+       L'user installe l'app, l'ouvre, va sur "J'ai un code Premium" et tape
+       le code manuellement.
+
+    Pourquoi cette page existe : Gmail Android (et de plus en plus de clients
+    mail) strippent ou bloquent les liens `padelup://` dans les emails, ce
+    qui rend le bouton "Activer dans l'app" non cliquable. Le bouton mail
+    pointe désormais vers https://linceya.com/activate (lien HTTPS classique
+    accepté par tous les clients), et c'est cette page qui re-tente le deep
+    link côté browser (Safari/Chrome sont autorisés à ouvrir le scheme).
+
+    Pas de dépendance externe : fichier autonome déployable n'importe où
+    (HTML pur, WordPress page custom, Webflow embed, etc.).
+  -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #F2EDE2;
+      color: #0E1B35;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 40px 32px;
+      box-shadow: 0 24px 48px rgba(14, 27, 53, 0.08);
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #B5A56E;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    h1 .gold {
+      color: #B5A56E;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: rgba(14, 27, 53, 0.6);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .code-box {
+      background: #F2EDE2;
+      border-radius: 16px;
+      padding: 24px 12px;
+      margin-bottom: 24px;
+    }
+    .code-label {
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      font-weight: 700;
+      color: rgba(14, 27, 53, 0.45);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .code {
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #0E1B35;
+    }
+    .btn-primary {
+      display: block;
+      background: #1E47F0;
+      color: #FFFFFF;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(30, 71, 240, 0.25);
+      margin-bottom: 16px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary:hover, .btn-primary:active {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(30, 71, 240, 0.30);
+    }
+    .btn-secondary {
+      display: block;
+      background: transparent;
+      color: rgba(14, 27, 53, 0.7);
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid rgba(14, 27, 53, 0.15);
+      margin-bottom: 12px;
+    }
+    .stores {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .store-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: #0E1B35;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .help {
+      font-size: 12px;
+      color: rgba(14, 27, 53, 0.5);
+      margin-top: 24px;
+      line-height: 1.5;
+    }
+    .error {
+      background: rgba(216, 60, 60, 0.08);
+      color: #D83C3C;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">// Bienvenue</div>
+    <h1>Linceya <span class="gold">Premium</span></h1>
+    <p class="subtitle">Ton abonnement est actif.<br/>Voici ton code d'activation.</p>
+
+    <div id="error-block" class="error" style="display: none;">
+      Lien d'activation invalide. Vérifie que tu as bien cliqué le bouton de ton mail.
+    </div>
+
+    <div class="code-box">
+      <div class="code-label">Code d'activation</div>
+      <div class="code" id="code-display">—</div>
+    </div>
+
+    <a href="#" id="open-app" class="btn-primary">Ouvrir dans l'app →</a>
+
+    <p class="help">
+      <strong>L'app ne s'ouvre pas ?</strong><br/>
+      Télécharge Linceya, ouvre l'app, tape sur <em>« J'ai un code Premium »</em> et saisis le code ci-dessus.
+    </p>
+
+    <div class="stores">
+      <a href="https://apps.apple.com/app/id6749488389" class="store-link">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.padelup06.padelup" class="store-link">Play Store</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var email = (params.get('email') || '').trim();
+      var code = (params.get('code') || '').trim();
+
+      var codeDisplay = document.getElementById('code-display');
+      var errorBlock = document.getElementById('error-block');
+      var openButton = document.getElementById('open-app');
+
+      // Validation minimale : email contient '@' + code = 6 chiffres.
+      var valid = email.indexOf('@') > 0 && /^\d{6}$/.test(code);
+      if (!valid) {
+        errorBlock.style.display = 'block';
+        openButton.style.display = 'none';
+        return;
+      }
+
+      codeDisplay.textContent = code;
+
+      // Construction du deep link app — doit matcher EXACTEMENT le format
+      // attendu par _parseActivatePremiumLink() dans lib/main.dart.
+      var deepLink = 'padelup://activate-premium?email=' +
+        encodeURIComponent(email) +
+        '&code=' + encodeURIComponent(code);
+      openButton.href = deepLink;
+
+      // Auto-redirection : on tente d'ouvrir l'app immédiatement. Si l'app
+      // est installée, le système prend la main et cette page n'est jamais
+      // vue. Sinon, l'user reste sur la page de fallback.
+      //
+      // 1500ms de délai pour laisser le DOM se peindre — sans ça, certains
+      // navigateurs (Safari iOS surtout) montrent un flash de la page avant
+      // de switcher vers l'app, ce qui donne une mauvaise impression.
+      // 1.5s est court mais perceptible : on accepte ce trade-off parce
+      // qu'on veut PAS auto-rediriger les users desktop qui doivent voir
+      // le code en grand.
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        // Sur mobile, tentative auto. Si l'app n'est pas là, le browser
+        // affiche éventuellement une erreur "Impossible d'ouvrir cette
+        // page" — la page de fallback (avec le code) reste accessible
+        // après dismissal de l'erreur.
+        setTimeout(function () {
+          window.location.href = deepLink;
+        }, 100);
+      }
+    })();
+  </script>
+</body>
+</html>

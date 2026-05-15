@@ -1,0 +1,17 @@
+# Cloudflare Pages custom headers.
+# Cf. https://developers.cloudflare.com/pages/platform/headers/
+
+# Universal Links iOS : Apple fetch ce fichier et exige un Content-Type
+# `application/json` strict. Sans cette override, Cloudflare Pages le sert
+# en `application/octet-stream` (fichier sans extension) → Apple le rejette
+# silencieusement et les Universal Links ne sont pas activés.
+#
+# ⚠️ NE PAS modifier le path (manque d'extension volontaire — Apple).
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+
+# App Links Android : Google fetch ce fichier et accepte application/json
+# (par défaut Cloudflare le sert correctement vu l'extension .json).
+# On le déclare explicitement par sécurité.
+/.well-known/assetlinks.json
+  Content-Type: application/json

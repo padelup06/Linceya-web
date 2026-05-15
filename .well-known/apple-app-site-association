@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "CTN8UPMV93.com.padelup06.padelup",
+        "paths": [
+          "/activate",
+          "/activate/*",
+          "/activate?*"
+        ]
+      }
+    ]
+  }
+}
