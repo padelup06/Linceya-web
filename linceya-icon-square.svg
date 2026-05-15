@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Fond ink Linceya -->
+  <rect width="1024" height="1024" fill="#0E1B35"/>
+  <!-- Lettre "L" en gold platinum, centrée -->
+  <text x="512" y="700"
+        font-family="Archivo Black, Archivo, Helvetica, sans-serif"
+        font-weight="900"
+        font-size="640"
+        fill="#B48A4A"
+        text-anchor="middle">L</text>
+</svg>
