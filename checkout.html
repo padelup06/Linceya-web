@@ -554,6 +554,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
+
+    // Conversion tracking sur la page de retour Stripe.
+    // On ne connaît pas exactement le plan choisi à ce stade (l'info est
+    // côté Stripe webhook), donc on track une conversion générique.
+    // Pour un attribution précise par plan, faudrait ajouter ?plan= au
+    // success_url côté create-stripe-checkout.
+    if (window.linceyaTrack) {
+      try {
+        window.linceyaTrack.event('purchase', {
+          currency: 'EUR',
+          value: 9.99,
+          items: [{ id: 'linceya_premium', name: 'Linceya Premium' }]
+        });
+        if (window.fbq) window.fbq('track', 'Subscribe', {
+          currency: 'EUR', value: 9.99, predicted_ltv: 119.88
+        });
+        if (window.ttq) window.ttq.track('Subscribe', {
+          value: 9.99, currency: 'EUR', content_id: 'linceya_premium'
+        });
+      } catch (_) {}
+    }
   }
 
   // Scroll l'input email au-dessus du clavier iOS quand on le focus.

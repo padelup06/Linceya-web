@@ -533,6 +533,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
+
+    // Conversion tracking after successful Stripe payment.
+    if (window.linceyaTrack) {
+      try {
+        window.linceyaTrack.event('purchase', {
+          currency: 'EUR',
+          value: 9.99,
+          items: [{ id: 'linceya_premium', name: 'Linceya Premium' }]
+        });
+        if (window.fbq) window.fbq('track', 'Subscribe', {
+          currency: 'EUR', value: 9.99, predicted_ltv: 119.88
+        });
+        if (window.ttq) window.ttq.track('Subscribe', {
+          value: 9.99, currency: 'EUR', content_id: 'linceya_premium'
+        });
+      } catch (_) {}
+    }
   }
 
   // Scroll the email input above the iOS keyboard on focus. Without this
