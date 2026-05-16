@@ -175,13 +175,24 @@
 
   // Lit le bandeau via DOM query (au lieu d'une closure) pour rester
   // simple et résilient au lifecycle (close → re-build hypothétique).
+  //
+  // 2 ajustements nécessaires pour que le bandeau ne cache rien :
+  //   1. padding-top sur body → pousse le contenu normal (in-flow) vers
+  //      le bas.
+  //   2. top: <height> sur les éléments fixed/sticky en haut (nav, header)
+  //      → sinon ils restent à top:0 et notre bandeau (z-index 99999) les
+  //      cache. Le site Linceya a son `<nav>` en `position: fixed; top: 0`.
   function syncBodyPadding() {
     var b = document.getElementById('lnc-android-banner');
-    if (!b || !b.isConnected) {
-      document.body.style.paddingTop = '';
-      return;
-    }
-    document.body.style.paddingTop = b.offsetHeight + 'px';
+    var h = (b && b.isConnected) ? b.offsetHeight : 0;
+    document.body.style.paddingTop = h ? h + 'px' : '';
+    // Push les nav/header fixés au-dessous du bandeau.
+    document.querySelectorAll('nav, header').forEach(function (el) {
+      var pos = getComputedStyle(el).position;
+      if (pos === 'fixed' || pos === 'sticky') {
+        el.style.top = h ? h + 'px' : '';
+      }
+    });
   }
 
   if (document.readyState === 'loading') {
