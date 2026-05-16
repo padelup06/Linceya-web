@@ -120,6 +120,9 @@
     close.innerHTML = '&times;';
     close.onclick = function () {
       banner.remove();
+      // Reset le padding du body (cf. syncBodyPadding plus bas).
+      document.body.style.paddingTop = '';
+      window.removeEventListener('resize', syncBodyPadding);
       try {
         localStorage.setItem(
           'lnc_app_banner_dismissed_at',
@@ -159,6 +162,26 @@
     banner.appendChild(row);
 
     document.body.insertBefore(banner, document.body.firstChild);
+
+    // Push le contenu du body vers le bas pour qu'il ne soit pas caché
+    // par le bandeau fixed (qui flotte au-dessus avec un z-index élevé).
+    // On mesure la hauteur réelle APRÈS insertion pour tenir compte des
+    // tailles dynamiques (responsive, font scaling, etc).
+    syncBodyPadding();
+    // Resync à chaque resize au cas où la hauteur du bandeau change
+    // (rotation portrait/paysage, font scaling système).
+    window.addEventListener('resize', syncBodyPadding);
+  }
+
+  // Lit le bandeau via DOM query (au lieu d'une closure) pour rester
+  // simple et résilient au lifecycle (close → re-build hypothétique).
+  function syncBodyPadding() {
+    var b = document.getElementById('lnc-android-banner');
+    if (!b || !b.isConnected) {
+      document.body.style.paddingTop = '';
+      return;
+    }
+    document.body.style.paddingTop = b.offsetHeight + 'px';
   }
 
   if (document.readyState === 'loading') {
