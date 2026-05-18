@@ -2,137 +2,158 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Home FR (canonical par défaut) -->
   <url>
     <loc>https://linceya.com/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/" />
   </url>
 
-  <!-- Home EN -->
   <url>
     <loc>https://linceya.com/en/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/" />
   </url>
 
-  <!-- Home ES -->
   <url>
     <loc>https://linceya.com/es/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/" />
   </url>
 
-  <!-- Pricing FR -->
   <url>
-    <loc>https://linceya.com/pricing.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html" />
+    <loc>https://linceya.com/blog/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/" />
   </url>
 
-  <!-- Pricing EN -->
+  <url>
+    <loc>https://linceya.com/en/blog/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/es/blog/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/" />
+  </url>
+
   <url>
     <loc>https://linceya.com/en/pricing.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/pricing.html" />
   </url>
 
-  <!-- Pricing ES -->
   <url>
     <loc>https://linceya.com/es/pricing.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/pricing.html" />
   </url>
 
-  <!-- Contact FR -->
+  <url>
+    <loc>https://linceya.com/pricing.html</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/pricing.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/blog/comment-choisir-raquette-padel.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/en/blog/how-to-choose-a-padel-racket.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+  </url>
+
   <url>
     <loc>https://linceya.com/contact.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/contact.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/contact.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/contact.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/contact.html" />
   </url>
 
-  <!-- Contact EN / ES -->
-  <url>
-    <loc>https://linceya.com/en/contact.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/es/contact.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Privacy / Delete account — déclarés mais priority faible
-       car peu de valeur SEO (boilerplate juridique). -->
   <url>
     <loc>https://linceya.com/privacy-policy.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/en/privacy-policy.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/es/privacy-policy.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/delete-account.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/en/delete-account.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://linceya.com/es/delete-account.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/privacy-policy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/privacy-policy.html" />
   </url>
 
 </urlset>
