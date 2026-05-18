@@ -7,5 +7,10 @@ Disallow: /en/checkout.html
 Disallow: /es/checkout.html
 Disallow: /welcome-premium.html
 Disallow: /premium.html
+Disallow: /activate.html
+Disallow: /activate
+
+# Endpoints API (Cloudflare Workers) — pas indexables, retournent du JSON ou des erreurs en GET
+Disallow: /api/
 
 Sitemap: https://linceya.com/sitemap.xml
