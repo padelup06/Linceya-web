@@ -987,6 +987,72 @@ nav.scrolled .nav-hamburger span {
   .hero-stat { gap: 28px; }
   .stat-num { font-size: 32px; }
 }
+
+/* === Lead magnet CTA (between testimonials and pricing) === */
+.lead-magnet-cta {
+  background: var(--ivory);
+  border-top: 1px solid var(--stroke);
+  border-bottom: 1px solid var(--stroke);
+  padding: 80px 24px;
+}
+.lead-magnet-card {
+  max-width: 980px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--cream) 100%);
+  border-radius: 24px;
+  border: 1px solid var(--stroke);
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+  box-shadow: 0 12px 48px rgba(14,27,53,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.lead-magnet-card::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 280px; height: 100%;
+  background: radial-gradient(circle at 100% 50%, rgba(180,138,74,0.16), transparent 70%);
+  pointer-events: none;
+}
+.lead-magnet-content { position: relative; z-index: 1; }
+.lead-magnet-eyebrow {
+  display: inline-block; font-family: var(--font-mono); font-size: 11px;
+  color: var(--platinum); letter-spacing: 0.18em;
+  border: 1px solid rgba(180,138,74,0.4); border-radius: 999px;
+  padding: 6px 14px; margin-bottom: 18px;
+}
+.lead-magnet-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--ink); margin: 0 0 14px;
+}
+.lead-magnet-desc {
+  font-size: 16px; line-height: 1.6;
+  color: var(--graphite); margin: 0 0 26px;
+  max-width: 520px;
+}
+.lead-magnet-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--signal); color: var(--pearl);
+  padding: 14px 28px; border-radius: 100px;
+  text-decoration: none; font-weight: 700; font-size: 14px;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, transform 0.15s;
+}
+.lead-magnet-btn:hover { background: var(--signal-bright); transform: translateY(-1px); }
+.lead-magnet-btn .arrow { transition: transform 0.2s; }
+.lead-magnet-btn:hover .arrow { transform: translateX(3px); }
+.lead-magnet-visual { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.lead-magnet-mockup { width: 150px; height: auto; filter: drop-shadow(0 16px 32px rgba(14,27,53,0.18)); transform: rotate(-4deg); }
+@media (max-width: 760px) {
+  .lead-magnet-card { grid-template-columns: 1fr; padding: 40px 28px; gap: 24px; text-align: center; }
+  .lead-magnet-content { text-align: center; }
+  .lead-magnet-visual { order: -1; }
+  .lead-magnet-mockup { width: 110px; }
+}
 </style>
 <script>
 function toggleMenu() {
@@ -1200,6 +1266,33 @@ document.addEventListener('DOMContentLoaded', function() {
         <p class="testi-text">"Le plan d'entraînement personnalisé change tout. Fini les exercices génériques — chaque session cible mes vraies lacunes. Mon smash s'est nettement amélioré."</p>
         <div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karim B.</div><div class="testi-role">Joueur P500 · Lyon</div></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="lead-magnet-cta">
+  <div class="lead-magnet-card">
+    <div class="lead-magnet-content">
+      <div class="lead-magnet-eyebrow">GUIDE GRATUIT · PDF</div>
+      <h2 class="lead-magnet-title">Tu débutes au padel ?</h2>
+      <p class="lead-magnet-desc">10 erreurs qui te coûtent des points. Pourquoi tu les fais, comment les corriger. 10 pages illustrées, livrées par email en 30 secondes.</p>
+      <a href="/guide-debutant-padel/" class="lead-magnet-btn">Recevoir le guide gratuit <span class="arrow">→</span></a>
+    </div>
+    <div class="lead-magnet-visual">
+      <svg class="lead-magnet-mockup" viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><linearGradient id="lm-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1A2B4D"/><stop offset="100%" stop-color="#0E1B35"/></linearGradient></defs>
+        <rect x="5" y="5" width="140" height="190" rx="8" fill="url(#lm-grad)" stroke="#B48A4A" stroke-width="1.5"/>
+        <rect x="5" y="5" width="140" height="24" rx="8" fill="#B48A4A"/>
+        <rect x="5" y="20" width="140" height="9" fill="#B48A4A"/>
+        <text x="75" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="900" fill="#F2EDE2">LINCEYA</text>
+        <text x="75" y="58" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#D4B87A" letter-spacing="0.05em">GUIDE PADEL</text>
+        <text x="75" y="105" text-anchor="middle" font-family="system-ui,sans-serif" font-size="36" font-weight="900" fill="#B48A4A">10</text>
+        <text x="75" y="125" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#F2EDE2">ERREURS</text>
+        <rect x="22" y="145" width="106" height="4" rx="2" fill="#F2EDE2" opacity="0.7"/>
+        <rect x="22" y="155" width="80" height="4" rx="2" fill="#F2EDE2" opacity="0.45"/>
+        <rect x="22" y="165" width="90" height="4" rx="2" fill="#F2EDE2" opacity="0.45"/>
+        <rect x="22" y="175" width="60" height="4" rx="2" fill="#F2EDE2" opacity="0.45"/>
+      </svg>
     </div>
   </div>
 </section>
