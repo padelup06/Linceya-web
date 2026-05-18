@@ -79,24 +79,73 @@
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--ink); background: var(--cream); -webkit-font-smoothing: antialiased; }
 
-nav { position: sticky; top: 0; z-index: 100; background: rgba(242,237,226,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--stroke); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo img { height: 32px; display: block; }
-.nav-links { display: flex; gap: 28px; list-style: none; }
-.nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 14px; transition: color 0.15s; }
-.nav-links a:hover { color: var(--signal); }
-.nav-cta { background: var(--ink); color: var(--cream); padding: 10px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; transition: background 0.15s; }
-.nav-cta:hover { background: var(--signal); }
-@media (max-width: 768px) { .nav-links { display: none; } }
+/* === NAV : transparent at top, cream on scroll === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+nav.scrolled {
+  background: rgba(242,237,226,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: var(--stroke);
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 44px; width: auto; filter: none; transition: filter 0.3s ease; }
+nav.scrolled .nav-logo img { filter: brightness(0); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.85); font-size: 13px; text-decoration: none;
+  font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+}
+nav.scrolled .nav-links a { color: var(--graphite); }
+.nav-links a:hover { color: var(--platinum-light); }
+nav.scrolled .nav-links a:hover { color: var(--signal); }
+.nav-cta {
+  background: var(--signal); color: var(--pearl);
+  padding: 11px 22px; border-radius: 100px;
+  text-decoration: none; font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--signal-bright); transform: translateY(-1px); }
+@media (max-width: 768px) { .nav-links { display: none; } nav { padding: 14px 20px; } }
 
-.breadcrumb { max-width: 1120px; margin: 24px auto 0; padding: 0 24px; font-size: 13px; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
-.breadcrumb a { color: var(--platinum); text-decoration: none; }
-.breadcrumb a:hover { color: var(--signal); }
+/* === BLOG HERO (dark navy band) === */
+.blog-hero {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 140px 24px 80px;
+  text-align: center;
+}
+.blog-hero-inner { max-width: 1120px; margin: 0 auto; }
+.blog-hero .breadcrumb {
+  font-size: 12px; color: rgba(255,255,255,0.55);
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 20px;
+}
+.blog-hero .breadcrumb a { color: var(--platinum-light); text-decoration: none; }
+.blog-hero .breadcrumb a:hover { color: var(--signal-bright); }
+.blog-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--cream);
+}
+.blog-hero p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-.blog-hero { max-width: 1120px; margin: 32px auto 48px; padding: 0 24px; text-align: center; }
-.blog-hero h1 { font-family: var(--font-display); font-size: clamp(40px, 6vw, 64px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
-.blog-hero p { font-size: 18px; color: var(--graphite); max-width: 600px; margin: 0 auto; }
-
-.articles-grid { max-width: 1120px; margin: 0 auto 80px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+.articles-grid { max-width: 1120px; margin: 56px auto 80px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
 .article-card { background: var(--ivory); border: 1px solid var(--stroke); border-radius: 16px; padding: 24px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
 .article-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(14,27,53,0.10); border-color: var(--platinum); }
 .article-card-date { font-family: var(--font-mono); font-size: 11px; color: var(--platinum); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
@@ -106,19 +155,42 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(242,237,226,0.92)
 
 .no-articles { max-width: 600px; margin: 80px auto; padding: 0 24px; text-align: center; color: var(--muted); font-style: italic; }
 
-footer { background: var(--ink); color: var(--cream); padding: 56px 28px 32px; text-align: center; margin-top: 64px; }
-.footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-.footer-links a { color: var(--cream); text-decoration: none; font-size: 13px; opacity: 0.75; transition: opacity 0.15s; }
-.footer-links a:hover { opacity: 1; }
-.footer-lang { display: flex; gap: 18px; justify-content: center; align-items: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+footer {
+  background: var(--ink);
+  color: var(--pearl);
+  padding: 44px 24px 28px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  border-top: 1px solid rgba(180,138,74,0.2);
+  margin-top: 0;
+}
+.footer-socials { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.footer-socials a {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-socials a:hover { color: var(--platinum-light); border-color: rgba(180,138,74,0.4); }
+.footer-socials svg { width: 16px; height: 16px; }
+.footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-light); }
+.footer-lang {
+  display: flex; gap: 18px; justify-content: center; align-items: center;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
 .footer-lang .active { color: var(--platinum-light); }
-.footer-lang a { color: rgba(255,255,255,0.55); text-decoration: none; }
-.footer-copy { font-size: 12px; opacity: 0.5; }
+.footer-lang a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-lang a:hover { color: var(--platinum-light); }
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; text-align: center; }
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <a href="/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a>
   <ul class="nav-links">
     <li><a href="/#screenshots">App</a></li>
@@ -129,13 +201,14 @@ footer { background: var(--ink); color: var(--cream); padding: 56px 28px 32px; t
   <a href="/#download" class="nav-cta">Télécharger</a>
 </nav>
 
-<div class="breadcrumb">
-  <a href="/">Accueil</a> &nbsp;/&nbsp; Blog
-</div>
-
 <section class="blog-hero">
-  <h1>Blog Linceya</h1>
-  <p>Tout pour progresser au padel : technique, matos, mental, données.</p>
+  <div class="blog-hero-inner">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a> &nbsp;/&nbsp; Blog
+    </div>
+    <h1>Blog Linceya</h1>
+    <p>Tout pour progresser au padel : technique, matos, mental, données.</p>
+  </div>
 </section>
 
 <section class="articles-grid">
@@ -148,9 +221,25 @@ footer { background: var(--ink); color: var(--cream); padding: 56px 28px 32px; t
 </section>
 
 <footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@linceya.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+    </a>
+    <a href="https://x.com/linceyapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.snapchat.com/add/Linceyapp" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 2.001c1.466.024 4.298.404 5.667 3.515.464 1.054.348 2.85.255 4.292l-.004.066c-.014.219-.027.43-.036.625.007.005.026.013.063.016.198-.012.418-.075.65-.181.073-.038.247-.117.448-.117.119 0 .238.026.347.075.323.119.523.354.527.622.005.357-.302.667-.913.92-.06.025-.137.05-.219.078-.291.094-.731.236-.85.515-.061.144-.039.328.066.55l.006.013c.044.103.991 2.292 3.193 2.654.099.016.171.103.165.203a.55.55 0 0 1-.044.179c-.139.323-.7.518-1.713.595-.046.005-.064.054-.105.21-.018.062-.038.131-.062.205l-.014.046c-.046.156-.099.317-.245.317-.013 0-.027 0-.041-.003a.745.745 0 0 1-.17-.038 4.05 4.05 0 0 0-1.121-.155 4.94 4.94 0 0 0-.792.064c-.502.087-.939.388-1.442.737-.731.508-1.561 1.082-2.853 1.082-.058 0-.115-.003-.171-.005a3.27 3.27 0 0 1-.143.005c-1.293 0-2.122-.574-2.853-1.082-.502-.349-.939-.65-1.441-.737a4.91 4.91 0 0 0-.792-.064c-.566 0-.992.131-1.121.155a.95.95 0 0 1-.17.038c-.158 0-.205-.144-.245-.317l-.013-.046a3.4 3.4 0 0 1-.063-.205c-.041-.156-.06-.205-.105-.21-1.012-.077-1.574-.272-1.713-.595a.55.55 0 0 1-.044-.179c-.005-.099.066-.187.165-.203 2.202-.362 3.149-2.551 3.193-2.654l.006-.013c.105-.219.127-.405.066-.55-.119-.279-.559-.421-.85-.515a3.5 3.5 0 0 1-.219-.078c-.612-.255-.918-.563-.913-.92.005-.268.205-.503.527-.622a1.07 1.07 0 0 1 .347-.075c.201 0 .375.079.448.117.232.106.452.169.65.181.04-.003.057-.011.063-.016a17.24 17.24 0 0 0-.036-.625l-.004-.066c-.094-1.443-.21-3.236.255-4.292 1.369-3.111 4.201-3.491 5.667-3.515h.061Z"/></svg>
+    </a>
+  </div>
   <div class="footer-links">
     <a href="/privacy-policy.html">Politique de confidentialité</a>
+    <a href="/delete-account.html">Supprimer mon compte</a>
     <a href="/contact.html">Contact</a>
+    <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang">
     <span class="active">FR</span>
@@ -160,6 +249,17 @@ footer { background: var(--ink); color: var(--cream); padding: 56px 28px 32px; t
   <div class="footer-copy">© 2026 Linceya. Tous droits réservés.</div>
 </footer>
 
+<script>
+(function() {
+  var navEl = document.getElementById('nav');
+  function updateNav() {
+    if (window.scrollY > 30) navEl.classList.add('scrolled');
+    else navEl.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
 <script src="/cookies.js" defer></script>
 <script src="/analytics.js" defer></script>
 </body>
