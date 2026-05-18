@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6760952174">
+<script src="/app-banner.js" defer></script>
+<title>Guía gratis · Los 10 errores de los principiantes en pádel | Linceya</title>
+<meta name="description" content="Descarga el PDF gratis Linceya: los 10 errores de los principiantes en pádel, por qué te cuestan puntos y cómo corregirlos en tu próximo partido.">
+<link rel="canonical" href="https://linceya.com/es/guia-principiante-padel/">
+<link rel="alternate" hreflang="fr" href="https://linceya.com/guide-debutant-padel/">
+<link rel="alternate" hreflang="es" href="https://linceya.com/es/guia-principiante-padel/">
+<link rel="alternate" hreflang="en" href="https://linceya.com/en/padel-beginner-guide/">
+<link rel="alternate" hreflang="x-default" href="https://linceya.com/guide-debutant-padel/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://linceya.com/es/guia-principiante-padel/">
+<meta property="og:title" content="Guía gratis · Los 10 errores de los principiantes en pádel | Linceya">
+<meta property="og:description" content="Descarga el PDF gratis Linceya: los 10 errores de los principiantes en pádel, por qué te cuestan puntos y cómo corregirlos en tu próximo partido.">
+<meta property="og:image" content="https://linceya.com/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Linceya">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guía gratis · Los 10 errores de los principiantes en pádel | Linceya">
+<meta name="twitter:description" content="Descarga el PDF gratis Linceya: los 10 errores de los principiantes en pádel, por qué te cuestan puntos y cómo corregirlos en tu próximo partido.">
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F2EDE2; --bone: #EAE3D2; --ivory: #FAF7EF; --pearl: #FFFFFF;
+  --ink: #0E1B35; --navy: #1A2B4D; --graphite: #2C3A54;
+  --platinum: #B48A4A; --platinum-light: #D4B87A;
+  --signal: #1E47F0; --signal-bright: #3860FF;
+  --muted: #6B7489; --muted-light: #9AA1B2;
+  --stroke: #D8D0BE;
+  --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
+  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--ink); background: var(--cream); -webkit-font-smoothing: antialiased; }
+
+/* === NAV : transparent at top, cream on scroll === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+nav.scrolled {
+  background: rgba(242,237,226,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: var(--stroke);
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 44px; width: auto; filter: none; transition: filter 0.3s ease; }
+nav.scrolled .nav-logo img { filter: brightness(0); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.85); font-size: 13px; text-decoration: none;
+  font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+}
+nav.scrolled .nav-links a { color: var(--graphite); }
+.nav-links a:hover { color: var(--platinum-light); }
+nav.scrolled .nav-links a:hover { color: var(--signal); }
+.nav-cta {
+  background: var(--signal); color: var(--pearl);
+  padding: 11px 22px; border-radius: 100px;
+  text-decoration: none; font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--signal-bright); transform: translateY(-1px); }
+@media (max-width: 768px) { .nav-links { display: none; } nav { padding: 14px 20px; } }
+
+/* === HERO band navy avec form === */
+.hero {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 140px 24px 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(180,138,74,0.18), transparent 60%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; position: relative; }
+@media (max-width: 880px) { .hero-inner { grid-template-columns: 1fr; gap: 40px; } }
+.hero .breadcrumb {
+  font-size: 12px; color: rgba(255,255,255,0.55);
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 18px;
+}
+.hero .breadcrumb a { color: var(--platinum-light); text-decoration: none; }
+.hero .breadcrumb a:hover { color: var(--signal-bright); }
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--platinum-light); letter-spacing: 0.18em;
+  border: 1px solid rgba(180,138,74,0.4); border-radius: 999px;
+  padding: 6px 14px; margin-bottom: 22px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.4vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+  color: var(--cream);
+}
+.hero h1 em { color: var(--platinum-light); font-style: normal; }
+.hero .lede {
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+.social-proof { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+
+/* === Form card (right column of hero) === */
+.form-card {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(180,138,74,0.3);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.32);
+}
+.form-card-label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.form-card form { display: flex; flex-direction: column; gap: 12px; }
+.form-card input[type=email] {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--stroke);
+  font-family: var(--font-body); font-size: 15px;
+  color: var(--ink); background: var(--pearl);
+  transition: border-color 0.2s;
+}
+.form-card input[type=email]:focus { outline: none; border-color: var(--signal); }
+.form-card button {
+  background: var(--signal); color: var(--pearl);
+  padding: 14px 22px; border: none; border-radius: 10px;
+  font-family: var(--font-body); font-weight: 700; font-size: 15px;
+  letter-spacing: 0.02em; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.form-card button:hover { background: var(--signal-bright); transform: translateY(-1px); }
+.form-card button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.form-legal {
+  font-size: 11px; color: var(--muted);
+  line-height: 1.5; margin-top: 4px;
+}
+.form-result { display: none; }
+.form-result.show { display: block; }
+.form-result p { font-size: 14px; color: var(--graphite); margin-bottom: 14px; line-height: 1.5; }
+.form-result a.download {
+  display: inline-block;
+  background: var(--ink); color: var(--cream);
+  padding: 14px 22px; border-radius: 10px;
+  text-decoration: none; font-weight: 700; font-size: 14px;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+.form-result a.download:hover { background: var(--navy); }
+
+/* === "Inside" section === */
+.inside {
+  max-width: 1120px; margin: 0 auto;
+  padding: 90px 24px;
+}
+.inside-header { text-align: center; margin-bottom: 56px; }
+.inside-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15; letter-spacing: -0.015em;
+  color: var(--ink); margin-bottom: 12px;
+}
+.inside-header p { font-size: 16px; color: var(--graphite); max-width: 560px; margin: 0 auto; }
+.inside-list {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+@media (max-width: 760px) { .inside-list { grid-template-columns: 1fr; } }
+.inside-item {
+  background: var(--ivory);
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.inside-item:hover { border-color: var(--platinum); transform: translateY(-1px); }
+.inside-num {
+  font-family: var(--font-display);
+  font-size: 18px; color: var(--platinum);
+  flex-shrink: 0; min-width: 38px;
+}
+.inside-title { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+
+/* === Second CTA band === */
+.cta-band {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--navy) 100%);
+  color: var(--cream);
+  padding: 72px 24px;
+  text-align: center;
+}
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.6vw, 38px);
+  line-height: 1.15; letter-spacing: -0.015em;
+  color: var(--cream); margin-bottom: 12px;
+}
+.cta-band p { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 28px; }
+.cta-band form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.cta-band input[type=email] {
+  flex: 1; min-width: 220px;
+  padding: 14px 16px;
+  border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08); color: var(--cream);
+  font-family: var(--font-body); font-size: 15px;
+}
+.cta-band input[type=email]::placeholder { color: rgba(255,255,255,0.4); }
+.cta-band input[type=email]:focus { outline: none; border-color: var(--platinum-light); background: rgba(255,255,255,0.12); }
+.cta-band button {
+  background: var(--platinum); color: var(--ink);
+  padding: 14px 26px; border: none; border-radius: 10px;
+  font-family: var(--font-body); font-weight: 700; font-size: 15px;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.cta-band button:hover { background: var(--platinum-light); transform: translateY(-1px); }
+
+/* === Footer (réutilise les styles du site) === */
+footer {
+  background: var(--ink);
+  color: var(--pearl);
+  padding: 44px 24px 28px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  border-top: 1px solid rgba(180,138,74,0.2);
+  margin-top: 0;
+}
+.footer-socials { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.footer-socials a {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-socials a:hover { color: var(--platinum-light); border-color: rgba(180,138,74,0.4); }
+.footer-socials svg { width: 16px; height: 16px; }
+.footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-light); }
+.footer-lang {
+  display: flex; gap: 18px; justify-content: center; align-items: center;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.footer-lang .active { color: var(--platinum-light); }
+.footer-lang a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-lang a:hover { color: var(--platinum-light); }
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a>
+  <ul class="nav-links">
+    <li><a href="/es/#screenshots">App</a></li>
+    <li><a href="/es/pricing.html">Suscripciones</a></li>
+    <li><a href="/es/blog/">Blog</a></li>
+    <li><a href="/es/#faq">FAQ</a></li>
+  </ul>
+  <a href="/es/#download" class="nav-cta">Descargar</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="/es/">Inicio</a> &nbsp;/&nbsp; Guía principiante
+      </div>
+      <span class="eyebrow">GUÍA GRATIS · PDF</span>
+      <h1>10 errores de principiante que te cuestan puntos</h1>
+      <p class="lede">Llevas unas semanas o meses jugando al padel y notas algo raro: pierdes puntos sin saber muy bien por qué. La pelota se va larga, tu compañero pone caras, el rival te castiga siempre en el mismo sitio. Tranquilo, no es cuestión de talento. El 90% de los principiantes cometen los mismos 10 errores, una y otra vez. La buena noticia: se corrigen rápido si sabes cuáles son. En esta guía te los explico uno a uno, con el motivo por el que te cuestan puntos y cómo solucionarlos hoy mismo en tu próximo partido.</p>
+      <p class="social-proof">Escrito por el equipo Linceya · Basado en el análisis de cientos de partidos en vídeo.</p>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-label">Recibe el PDF por email</div>
+      <form id="leadForm" novalidate>
+        <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+        <button type="submit">Enviar la guía</button>
+        <p class="form-legal">Email usado solo para enviarte esta guía. Sin spam, baja en 1 clic.</p>
+      </form>
+      <div class="form-result" id="formResult">
+        <p id="formResultMsg">¡Listo! Te la enviamos. También puedes descargarla ahora:</p>
+        <a class="download" href="/guides/linceya-guide-es.pdf" download>Descargar el PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inside">
+  <div class="inside-header">
+    <h2>Lo que vas a encontrar en la guía</h2>
+    <p>10 errores concretos, cada uno con la causa, la corrección y el tip pro.</p>
+  </div>
+  <ul class="inside-list">
+    <li class="inside-item">
+      <span class="inside-num">#01</span>
+      <span class="inside-title">Pegar demasiado fuerte en lugar de colocar</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#02</span>
+      <span class="inside-title">Retroceder demasiado para devolver con la pared</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#03</span>
+      <span class="inside-title">No mirar a tu compañero ni a los rivales</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#04</span>
+      <span class="inside-title">Mal agarre de la pala (grip)</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#05</span>
+      <span class="inside-title">Sacar demasiado fuerte o a mala zona</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#06</span>
+      <span class="inside-title">Rematar todo lo que pasa por encima</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#07</span>
+      <span class="inside-title">Quedarse clavado en la red sin moverse</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#08</span>
+      <span class="inside-title">No salir de la línea de fondo (ni hacer bandeja)</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#09</span>
+      <span class="inside-title">Comunicar tarde (o no comunicar) con tu compañero</span>
+    </li>
+    <li class="inside-item">
+      <span class="inside-num">#10</span>
+      <span class="inside-title">Elegir una pala inadecuada para tu nivel</span>
+    </li>
+  </ul>
+</section>
+
+<section class="cta-band">
+  <h2>¿Listo para corregir tus errores?</h2>
+  <p>10 páginas, ilustrado. Guárdala en tu bolsa, relee antes de cada sesión.</p>
+  <form id="leadForm2" novalidate>
+    <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+    <button type="submit">Enviar la guía</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@linceya.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+    </a>
+    <a href="https://x.com/linceyapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.snapchat.com/add/Linceyapp" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 2.001c1.466.024 4.298.404 5.667 3.515.464 1.054.348 2.85.255 4.292l-.004.066c-.014.219-.027.43-.036.625.007.005.026.013.063.016.198-.012.418-.075.65-.181.073-.038.247-.117.448-.117.119 0 .238.026.347.075.323.119.523.354.527.622.005.357-.302.667-.913.92-.06.025-.137.05-.219.078-.291.094-.731.236-.85.515-.061.144-.039.328.066.55l.006.013c.044.103.991 2.292 3.193 2.654.099.016.171.103.165.203a.55.55 0 0 1-.044.179c-.139.323-.7.518-1.713.595-.046.005-.064.054-.105.21-.018.062-.038.131-.062.205l-.014.046c-.046.156-.099.317-.245.317-.013 0-.027 0-.041-.003a.745.745 0 0 1-.17-.038 4.05 4.05 0 0 0-1.121-.155 4.94 4.94 0 0 0-.792.064c-.502.087-.939.388-1.442.737-.731.508-1.561 1.082-2.853 1.082-.058 0-.115-.003-.171-.005a3.27 3.27 0 0 1-.143.005c-1.293 0-2.122-.574-2.853-1.082-.502-.349-.939-.65-1.441-.737a4.91 4.91 0 0 0-.792-.064c-.566 0-.992.131-1.121.155a.95.95 0 0 1-.17.038c-.158 0-.205-.144-.245-.317l-.013-.046a3.4 3.4 0 0 1-.063-.205c-.041-.156-.06-.205-.105-.21-1.012-.077-1.574-.272-1.713-.595a.55.55 0 0 1-.044-.179c-.005-.099.066-.187.165-.203 2.202-.362 3.149-2.551 3.193-2.654l.006-.013c.105-.219.127-.405.066-.55-.119-.279-.559-.421-.85-.515a3.5 3.5 0 0 1-.219-.078c-.612-.255-.918-.563-.913-.92.005-.268.205-.503.527-.622a1.07 1.07 0 0 1 .347-.075c.201 0 .375.079.448.117.232.106.452.169.65.181.04-.003.057-.011.063-.016a17.24 17.24 0 0 0-.036-.625l-.004-.066c-.094-1.443-.21-3.236.255-4.292 1.369-3.111 4.201-3.491 5.667-3.515h.061Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="/es/privacy-policy.html">Política de privacidad</a>
+    <a href="/es/delete-account.html">Eliminar mi cuenta</a>
+    <a href="/es/contact.html">Contacto</a>
+    <a href="#" data-cookies-settings>Cookies</a>
+  </div>
+  <div class="footer-lang">
+    <a href="https://linceya.com/guide-debutant-padel/">FR</a>
+    <span class="active">ES</span>
+    <a href="https://linceya.com/en/padel-beginner-guide/">EN</a>
+  </div>
+  <div class="footer-copy">© 2026 Linceya. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+(function() {
+  var navEl = document.getElementById('nav');
+  function updateNav() {
+    if (window.scrollY > 30) navEl.classList.add('scrolled');
+    else navEl.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+
+(function() {
+  var PDF_URL = "/guides/linceya-guide-es.pdf";
+  var SOURCE = "guia-principiante-padel";
+  var LANG = "es";
+  var SUCCESS_MSG = "\u00a1Listo! Te la enviamos. Tambi\u00e9n puedes descargarla ahora:";
+  var ERROR_MSG = "Ocurri\u00f3 un error. Desc\u00e1rgalo directamente:";
+
+  function handleForm(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type=email]');
+      var button = form.querySelector('button');
+      var email = (input.value || '').trim();
+      if (!email || email.indexOf('@') < 1) { input.focus(); return; }
+      button.disabled = true;
+      var done = function(success) {
+        // Affiche le bloc result (avec download link) — toujours, même si POST fail.
+        var resultBox = document.getElementById('formResult');
+        var msgEl = document.getElementById('formResultMsg');
+        if (msgEl) msgEl.textContent = success ? SUCCESS_MSG : ERROR_MSG;
+        if (resultBox) {
+          // Sur la 2e form (CTA band) on n'a pas de container — on déclenche juste le download.
+          if (form.id === 'leadForm') {
+            form.style.display = 'none';
+            resultBox.classList.add('show');
+          }
+        }
+        // Trigger download automatique (fallback navigateur si le user a un AdBlock sur le POST).
+        var a = document.createElement('a');
+        a.href = PDF_URL; a.download = ''; document.body.appendChild(a); a.click(); a.remove();
+      };
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: SOURCE, lang: LANG }),
+      }).then(function(r) { done(r.ok); }).catch(function() { done(false); });
+    });
+  }
+  var f1 = document.getElementById('leadForm'); if (f1) handleForm(f1);
+  var f2 = document.getElementById('leadForm2'); if (f2) handleForm(f2);
+})();
+</script>
+<script src="/cookies.js" defer></script>
+<script src="/analytics.js" defer></script>
+</body>
+</html>
