@@ -1026,6 +1026,36 @@ nav.scrolled .nav-hamburger span {
   .lead-magnet-visual { order: -1; }
   .lead-magnet-mockup { width: 110px; }
 }
+
+/* === Newsletter form (footer global) === */
+.footer-newsletter { max-width: 480px; margin: 0 auto; text-align: center; padding-bottom: 8px; }
+.footer-newsletter-title { font-family: var(--font-display); font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+.footer-newsletter-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px; line-height: 1.5; }
+.footer-newsletter-form { display: flex; gap: 8px; }
+.footer-newsletter-form input[type=email] {
+  flex: 1; padding: 11px 14px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
+  color: var(--cream); font-family: var(--font-body); font-size: 14px;
+}
+.footer-newsletter-form input[type=email]::placeholder { color: rgba(255,255,255,0.4); }
+.footer-newsletter-form input[type=email]:focus { outline: none; border-color: var(--platinum-light); background: rgba(255,255,255,0.1); }
+.footer-newsletter-form button {
+  background: var(--platinum); color: var(--ink); border: none; border-radius: 8px;
+  padding: 11px 18px; font-family: var(--font-body); font-weight: 700; font-size: 13px;
+  letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.footer-newsletter-form button:hover { background: var(--platinum-light); transform: translateY(-1px); }
+.footer-newsletter-form button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.footer-newsletter-result {
+  display: none; font-size: 14px; color: var(--platinum-light);
+  padding: 12px 16px; background: rgba(180,138,74,0.1);
+  border: 1px solid rgba(180,138,74,0.3); border-radius: 8px;
+}
+.footer-newsletter-result.show { display: block; }
+@media (max-width: 480px) {
+  .footer-newsletter-form { flex-direction: column; }
+  .footer-newsletter-form button { width: 100%; }
+}
 </style>
 <script>
 function toggleMenu() {
@@ -1366,6 +1396,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <footer>
+  <div class="footer-newsletter">
+    <div class="footer-newsletter-title">Stay in the loop</div>
+    <div class="footer-newsletter-sub">Get the next padel insights and Linceya updates. No spam, 1-click unsubscribe.</div>
+    <form class="footer-newsletter-form" id="footerNewsletterForm" novalidate>
+      <input type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+      <button type="submit">Subscribe</button>
+    </form>
+    <div class="footer-newsletter-result" id="footerNewsletterResult">✓ Subscribed! You'll get the next padel insights.</div>
+  </div>
   <div class="footer-socials">
     <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -1398,6 +1437,35 @@ document.addEventListener('DOMContentLoaded', function() {
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
   <img id="lightbox-img" src="" alt="">
 </div>
+<script>
+// Newsletter footer form (POST /api/subscribe avec source=newsletter-footer)
+(function() {
+  var form = document.getElementById('footerNewsletterForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var input = form.querySelector('input[type=email]');
+    var button = form.querySelector('button');
+    var email = (input.value || '').trim();
+    if (!email || email.indexOf('@') < 1) { input.focus(); return; }
+    button.disabled = true;
+    var done = function() {
+      var result = document.getElementById('footerNewsletterResult');
+      form.style.display = 'none';
+      if (result) result.classList.add('show');
+    };
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'newsletter-footer',
+        lang: document.documentElement.lang || 'en'
+      })
+    }).then(done).catch(done);
+  });
+})();
+</script>
 <script src="/cookies.js" defer></script>
 <script src="/analytics.js" defer></script>
 </body>

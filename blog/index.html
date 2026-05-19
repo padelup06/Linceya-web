@@ -187,6 +187,37 @@ footer {
 .footer-lang a:hover { color: var(--platinum-light); }
 .footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; text-align: center; }
 
+/* === Newsletter form (footer global) === */
+.footer-newsletter { max-width: 480px; margin: 0 auto; text-align: center; padding-bottom: 8px; }
+.footer-newsletter-title { font-family: var(--font-display); font-size: 18px; color: var(--cream); margin-bottom: 6px; }
+.footer-newsletter-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px; line-height: 1.5; }
+.footer-newsletter-form { display: flex; gap: 8px; }
+.footer-newsletter-form input[type=email] {
+  flex: 1; padding: 11px 14px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
+  color: var(--cream); font-family: var(--font-body); font-size: 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.footer-newsletter-form input[type=email]::placeholder { color: rgba(255,255,255,0.4); }
+.footer-newsletter-form input[type=email]:focus { outline: none; border-color: var(--platinum-light); background: rgba(255,255,255,0.1); }
+.footer-newsletter-form button {
+  background: var(--platinum); color: var(--ink); border: none; border-radius: 8px;
+  padding: 11px 18px; font-family: var(--font-body); font-weight: 700; font-size: 13px;
+  letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.footer-newsletter-form button:hover { background: var(--platinum-light); transform: translateY(-1px); }
+.footer-newsletter-form button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.footer-newsletter-result {
+  display: none; font-size: 14px; color: var(--platinum-light);
+  padding: 12px 16px; background: rgba(180,138,74,0.1);
+  border: 1px solid rgba(180,138,74,0.3); border-radius: 8px;
+}
+.footer-newsletter-result.show { display: block; }
+@media (max-width: 480px) {
+  .footer-newsletter-form { flex-direction: column; }
+  .footer-newsletter-form button { width: 100%; }
+}
+
 /* === Sticky lead magnet bar (top, dismissible) === */
 .lead-bar {
   position: fixed; top: 0; left: 0; right: 0;
@@ -270,6 +301,15 @@ body.lead-bar-visible { padding-top: 48px; }
 </section>
 
 <footer>
+  <div class="footer-newsletter">
+    <div class="footer-newsletter-title">Reste informé</div>
+    <div class="footer-newsletter-sub">Reçois les prochaines analyses padel et nouveautés Linceya. Pas de spam, désabonnement en 1 clic.</div>
+    <form class="footer-newsletter-form" id="footerNewsletterForm" novalidate>
+      <input type="email" name="email" placeholder="ton@email.com" required autocomplete="email">
+      <button type="submit">S'abonner</button>
+    </form>
+    <div class="footer-newsletter-result" id="footerNewsletterResult">✓ Inscrit ! Tu recevras les prochaines analyses padel.</div>
+  </div>
   <div class="footer-socials">
     <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -319,6 +359,33 @@ body.lead-bar-visible { padding-top: 48px; }
   if (btn) btn.addEventListener('click', function() {
     document.body.classList.remove('lead-bar-visible');
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  });
+})();
+// Newsletter footer form (POST /api/subscribe avec source=newsletter-footer)
+(function() {
+  var form = document.getElementById('footerNewsletterForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var input = form.querySelector('input[type=email]');
+    var button = form.querySelector('button');
+    var email = (input.value || '').trim();
+    if (!email || email.indexOf('@') < 1) { input.focus(); return; }
+    button.disabled = true;
+    var done = function() {
+      var result = document.getElementById('footerNewsletterResult');
+      form.style.display = 'none';
+      if (result) result.classList.add('show');
+    };
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'newsletter-footer',
+        lang: document.documentElement.lang || 'fr'
+      })
+    }).then(done).catch(done);
   });
 })();
 </script>
