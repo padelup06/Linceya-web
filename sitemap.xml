@@ -200,4 +200,37 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/guide-debutant-padel/" />
   </url>
 
+  <url>
+    <loc>https://linceya.com/coach.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/en/coach.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/es/coach.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
 </urlset>
