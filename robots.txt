@@ -1,16 +1,13 @@
 User-agent: *
 Allow: /
 
-# Pages techniques / transactionnelles — pas d'intérêt SEO
-Disallow: /checkout.html
-Disallow: /en/checkout.html
-Disallow: /es/checkout.html
-Disallow: /welcome-premium.html
-Disallow: /premium.html
-Disallow: /activate.html
-Disallow: /activate
+# Pages transactionnelles : on les laisse crawler pour que Google voie le
+# <meta name="robots" content="noindex"> dans leur <head>. Si on les bloque
+# ici, Google ne peut pas lire le noindex et flag "Bloquée par robots.txt"
+# dans Search Console.
 
-# Endpoints API (Cloudflare Workers) — pas indexables, retournent du JSON ou des erreurs en GET
+# Endpoints API (Cloudflare Workers) : pas indexables, retournent du JSON
+# ou des erreurs en GET. Pas de page HTML à crawler donc on bloque ici.
 Disallow: /api/
 
 Sitemap: https://linceya.com/sitemap.xml
