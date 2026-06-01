@@ -91,6 +91,12 @@
 <script>
 (function() {
   try {
+    // Skip pour les bots : Googlebot a navigator.language='en' par défaut
+    // et déclencherait location.replace('/en/...'). Search Console flag alors
+    // la page comme "Page avec redirection". On laisse les hreflang tags du
+    // <head> guider les bots vers les bonnes versions.
+    var ua = (navigator.userAgent || '').toLowerCase();
+    if (/bot|crawler|spider|googlebot|bingbot|yandex|slurp|duckduckbot|baiduspider|facebookexternalhit|twitterbot|linkedinbot/i.test(ua)) return;
     var seen = localStorage.getItem('lng_seen');
     if (seen) return;
     var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
