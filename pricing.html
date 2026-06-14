@@ -158,23 +158,52 @@ nav {
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--stroke);
 }
+nav::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--platinum-light) 28%, var(--platinum) 72%, transparent);
+  opacity: 0.9; pointer-events: none;
+}
 .nav-logo img { height: 44px; width: auto; filter: brightness(0); }
 /* logo.png is now white-on-transparent; brightness(0) forces black on light nav */
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links { display: flex; gap: 22px; list-style: none; }
 .nav-links a {
-  color: var(--graphite); font-size: 13px; text-decoration: none;
-  font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+  position: relative;
+  color: var(--graphite); font-size: 11px; text-decoration: none;
+  font-family: var(--font-mono); font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 100%; bottom: -7px; height: 2px;
+  background: var(--signal-bright); transition: right 0.25s ease;
 }
 .nav-links a:hover { color: var(--signal); }
-.nav-cta {
-  background: var(--signal); color: var(--pearl);
-  padding: 11px 22px; border-radius: 100px;
-  font-size: 13px; font-weight: 700; text-decoration: none;
-  letter-spacing: 0.5px; text-transform: uppercase;
-  transition: transform 0.2s, background 0.2s;
-  box-shadow: var(--shadow-signal);
+.nav-links a:hover::after { right: 0; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-divider { width: 1px; height: 20px; background: var(--stroke-strong); }
+.nav-lang {
+  display: flex; align-items: center; gap: 1px;
+  padding: 3px; border-radius: 100px;
+  border: 1px solid var(--stroke); background: rgba(14,27,53,0.03);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
 }
-.nav-cta:hover { transform: translateY(-2px); background: var(--signal-bright); }
+.nav-lang a, .nav-lang span {
+  padding: 4px 9px; border-radius: 100px; line-height: 1;
+  text-decoration: none; color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-lang a:hover { color: var(--signal); }
+.nav-lang .lang-on { color: var(--ink); background: var(--platinum-light); font-weight: 700; }
+.nav-cta {
+  background: linear-gradient(135deg, #FFE7A5, #E7BE62 55%, #B67A24); color: #3A2606;
+  padding: 11px 22px; border-radius: 100px;
+  font-size: 12px; font-weight: 800; text-decoration: none;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 8px 22px rgba(180,138,74,0.32);
+}
+.nav-cta:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.nav-cta .nav-cta-arrow { font-size: 14px; line-height: 1; transition: transform 0.2s; }
+.nav-cta:hover .nav-cta-arrow { transform: translateX(3px); }
 
 /* HERO */
 .pricing-hero {
@@ -691,10 +720,19 @@ footer {
   box-shadow: 0 16px 40px rgba(231,190,98,0.32);
 }
 .mobile-menu .mobile-cta::after { content: '→'; font-size: 16px; line-height: 1; }
+.mobile-menu-lang {
+  display: flex; gap: 10px; justify-content: center; margin-top: 30px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em;
+}
+.mobile-menu-lang a, .mobile-menu-lang span {
+  padding: 9px 18px; border-radius: 100px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.6);
+}
+.mobile-menu-lang .lang-on { color: var(--ink); background: var(--platinum-light); border-color: transparent; font-weight: 700; }
 
 @media (max-width: 900px) {
   nav { padding: 14px 20px; }
-  .nav-links, .nav-cta { display: none; }
+  .nav-links, .nav-right { display: none; }
   .nav-hamburger { display: flex; }
   .pricing-hero { padding: 120px 20px 48px; }
   .pricing-cards { grid-template-columns: 1fr; padding: 40px 20px 72px; gap: 16px; }
@@ -721,7 +759,15 @@ footer {
     <li><a href="/blog/">Blog</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="nav-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger</a>
+  <div class="nav-right">
+    <span class="nav-divider" aria-hidden="true"></span>
+    <div class="nav-lang" role="group" aria-label="Choisir la langue">
+      <span class="lang-on" aria-current="true">FR</span>
+      <a href="/en/pricing.html" hreflang="en">EN</a>
+      <a href="/es/pricing.html" hreflang="es">ES</a>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="nav-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger <span class="nav-cta-arrow" aria-hidden="true">→</span></a>
+  </div>
   <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -736,6 +782,11 @@ footer {
     <li><a href="#faq" onclick="toggleMenu()"><span>FAQ</span><span class="menu-arrow">→</span></a></li>
   </ul>
   <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="mobile-cta" target="_blank" rel="noopener noreferrer" data-smart-store>Télécharger l'app</a>
+  <div class="mobile-menu-lang">
+    <span class="lang-on">FR</span>
+    <a href="/en/pricing.html">EN</a>
+    <a href="/es/pricing.html">ES</a>
+  </div>
 </div>
 
 <section class="pricing-hero" id="pricing">
@@ -944,4 +995,3 @@ document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('hi
 <script src="/analytics.js" defer></script>
 </body>
 </html>
-                                                                                                                                                                                                                             

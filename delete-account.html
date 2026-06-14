@@ -101,6 +101,19 @@ nav {
 .nav-logo-text { font-family: var(--font-display); font-size: 18px; letter-spacing: 0.02em; color: var(--ink); }
 .nav-back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
 .nav-back:hover { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-lang {
+  display: flex; align-items: center; gap: 1px;
+  padding: 3px; border-radius: 100px;
+  border: 1px solid var(--stroke-soft); background: rgba(14,27,53,0.03);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+}
+.nav-lang a, .nav-lang span {
+  padding: 4px 9px; border-radius: 100px; line-height: 1;
+  text-decoration: none; color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-lang a:hover { color: var(--signal); }
+.nav-lang .lang-on { color: var(--ink); background: var(--platinum-light); font-weight: 700; }
 
 /* MAIN */
 .wrapper {
@@ -319,7 +332,14 @@ footer {
   <a href="https://linceya.com" class="nav-logo">
     <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
   </a>
-  <a href="index.html" class="nav-back">← Accueil</a>
+  <div class="nav-right">
+    <div class="nav-lang" role="group" aria-label="Choisir la langue">
+      <span class="lang-on" aria-current="true">FR</span>
+      <a href="/en/delete-account.html" hreflang="en">EN</a>
+      <a href="/es/delete-account.html" hreflang="es">ES</a>
+    </div>
+    <a href="index.html" class="nav-back">← Accueil</a>
+  </div>
 </nav>
 
 <div class="wrapper">

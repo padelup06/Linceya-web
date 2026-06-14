@@ -51,40 +51,61 @@
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--ink); background: var(--cream); -webkit-font-smoothing: antialiased; }
 
-/* === NAV : transparent at top, cream on scroll === */
+/* === NAV : permanent cream keyline === */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 48px;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
-}
-nav.scrolled {
   background: rgba(242,237,226,0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom-color: var(--stroke);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--stroke);
+}
+nav::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--platinum-light) 28%, var(--platinum) 72%, transparent);
+  opacity: 0.9; pointer-events: none;
 }
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
-.nav-logo img { height: 44px; width: auto; filter: none; transition: filter 0.3s ease; }
-nav.scrolled .nav-logo img { filter: brightness(0); }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-logo img { height: 44px; width: auto; filter: brightness(0); }
+.nav-links { display: flex; gap: 22px; list-style: none; }
 .nav-links a {
-  color: rgba(255,255,255,0.85); font-size: 13px; text-decoration: none;
-  font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+  position: relative;
+  color: var(--graphite); font-size: 11px; text-decoration: none;
+  font-family: var(--font-mono); font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase; transition: color 0.2s;
 }
-nav.scrolled .nav-links a { color: var(--graphite); }
-.nav-links a:hover { color: var(--platinum-light); }
-nav.scrolled .nav-links a:hover { color: var(--signal); }
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 100%; bottom: -7px; height: 2px;
+  background: var(--signal-bright); transition: right 0.25s ease;
+}
+.nav-links a:hover { color: var(--signal); }
+.nav-links a:hover::after { right: 0; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-divider { width: 1px; height: 20px; background: var(--stroke-strong); }
+.nav-lang {
+  display: flex; align-items: center; gap: 1px;
+  padding: 3px; border-radius: 100px;
+  border: 1px solid var(--stroke); background: rgba(14,27,53,0.03);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+}
+.nav-lang a, .nav-lang span {
+  padding: 4px 9px; border-radius: 100px; line-height: 1;
+  text-decoration: none; color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-lang a:hover { color: var(--signal); }
+.nav-lang .lang-on { color: var(--ink); background: var(--platinum-light); font-weight: 700; }
 .nav-cta {
-  background: var(--signal); color: var(--pearl);
+  background: linear-gradient(135deg, #FFE7A5, #E7BE62 55%, #B67A24); color: #3A2606;
   padding: 11px 22px; border-radius: 100px;
-  text-decoration: none; font-weight: 600; font-size: 12px;
-  text-transform: uppercase; letter-spacing: 0.08em;
-  transition: background 0.2s, transform 0.2s;
+  text-decoration: none; font-weight: 800; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 22px rgba(180,138,74,0.32);
 }
-.nav-cta:hover { background: var(--signal-bright); transform: translateY(-1px); }
+.nav-cta:hover { filter: brightness(1.05); transform: translateY(-2px); }
+.nav-cta .nav-cta-arrow { font-size: 14px; line-height: 1; transition: transform 0.2s; }
+.nav-cta:hover .nav-cta-arrow { transform: translateX(3px); }
 @media (max-width: 768px) { .nav-links { display: none; } nav { padding: 14px 20px; } }
 
 /* === HERO band navy avec form === */
@@ -347,7 +368,15 @@ footer {
     <li><a href="/en/blog/">Blog</a></li>
     <li><a href="/en/#faq">FAQ</a></li>
   </ul>
-  <a href="/en/#download" class="nav-cta">Download</a>
+  <div class="nav-right">
+    <span class="nav-divider" aria-hidden="true"></span>
+    <div class="nav-lang" role="group" aria-label="Choose language">
+      <a href="https://linceya.com/guide-debutant-padel/" hreflang="fr">FR</a>
+      <span class="lang-on" aria-current="true">EN</span>
+      <a href="https://linceya.com/es/guia-principiante-padel/" hreflang="es">ES</a>
+    </div>
+    <a href="/en/#download" class="nav-cta">Download <span class="nav-cta-arrow" aria-hidden="true">→</span></a>
+  </div>
 </nav>
 
 <section class="hero">
