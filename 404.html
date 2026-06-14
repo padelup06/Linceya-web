@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Page introuvable — Linceya</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EDE2; --ivory: #FAF7EF; --ink: #0E1B35; --navy: #1A2B4D;
+    --signal: #1E47F0; --signal-bright: #3860FF; --platinum: #B48A4A;
+    --platinum-light: #D4B87A; --muted: #6B7489; --stroke: #D8D0BE;
+    --font-body: 'Archivo', system-ui, sans-serif;
+    --font-display: 'Archivo Black', 'Archivo', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(ellipse 60% 70% at 50% 0%, rgba(30,71,240,0.10), transparent 60%),
+      var(--cream);
+    color: var(--ink); font-family: var(--font-body); text-align: center; padding: 32px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 460px; }
+  .logo { height: 52px; width: auto; margin-bottom: 28px; }
+  .code {
+    font-family: var(--font-display); font-size: clamp(72px, 22vw, 128px);
+    line-height: 1; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--signal), var(--platinum));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  h1 {
+    font-family: var(--font-display); font-size: clamp(22px, 6vw, 30px);
+    text-transform: uppercase; letter-spacing: -0.01em; margin-top: 8px;
+  }
+  p.sub { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 14px auto 30px; max-width: 380px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--signal); color: #fff; text-decoration: none;
+    padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 14px;
+    letter-spacing: 0.4px; box-shadow: 0 8px 24px rgba(30,71,240,0.25);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .cta:hover { transform: translateY(-2px); background: var(--signal-bright); }
+  .langs {
+    margin-top: 26px; display: flex; gap: 14px; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .langs a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .langs a:hover { color: var(--signal); }
+</style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.png" alt="Linceya" style="filter:brightness(0)">
+    <div class="code">404</div>
+    <h1>Page introuvable</h1>
+    <p class="sub">Cette page n'existe pas ou a été déplacée. Reviens à l'accueil pour analyser tes matchs de padel.</p>
+    <a class="cta" href="/">Retour à l'accueil →</a>
+    <nav class="langs" aria-label="Langues">
+      <a href="/">Français</a>
+      <a href="/en/">English</a>
+      <a href="/es/">Español</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+  </main>
+</body>
+</html>
