@@ -443,7 +443,7 @@ nav.scrolled .nav-lang .lang-on { color: var(--ink); background: var(--platinum-
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(46px, 8vw, 96px);
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--pearl);
   animation: fadeUp 0.6s 0.1s ease both;
@@ -551,7 +551,7 @@ nav.scrolled .nav-lang .lang-on { color: var(--ink); background: var(--platinum-
 .app-menu { color: #9aa1b2; font-weight: 700; letter-spacing: 1px; }
 .app-elo { margin: 4px 12px 0; background: linear-gradient(140deg, #16294f, #0d1a36); border-radius: 14px; padding: 13px 12px; text-align: center; color: #fff; box-shadow: 0 8px 18px rgba(14,27,53,0.22); }
 .app-elo-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.18em; color: var(--platinum-light); }
-.app-elo-num { font-family: var(--font-display); font-size: 36px; line-height: 1.05; letter-spacing: -0.02em; }
+.app-elo-num { font-family: var(--font-display); font-size: 36px; line-height: 1.12; letter-spacing: -0.02em; }
 .app-elo-trend { font-size: 8.5px; color: #7DDBA4; margin-top: 3px; }
 .app-stats { display: flex; justify-content: space-around; padding: 10px 8px 4px; }
 .app-stat { text-align: center; }
@@ -630,7 +630,7 @@ section { padding: 64px 48px; position: relative; }
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(40px, 5.2vw, 68px);
-  line-height: 0.95; letter-spacing: -0.02em;
+  line-height: 1.12; letter-spacing: -0.02em;
   margin-bottom: 18px;
   text-transform: uppercase;
   color: var(--ink);
@@ -1187,11 +1187,17 @@ nav.scrolled .nav-hamburger span {
   .hero-subtitle { font-size: 16px; margin-top: 18px; }
   .hero-seo { font-size: 15px; margin-top: 12px; }
   .hero-badges { margin-top: 22px; }
+  .hero-actions { flex-wrap: nowrap; gap: 10px; }
+  .hero-actions .btn-store { flex: 1 1 0; min-width: 0; justify-content: center; padding: 12px 10px; gap: 8px; }
+  .hero-actions .btn-store-name { font-size: 13.5px; }
   .features-grid { grid-template-columns: 1fr; gap: 12px; }
   .testi-card { width: 280px; padding: 22px; }
   .pricing-cards-mini { grid-template-columns: 1fr; }
   footer { padding: 32px 20px; }
   .cta-download { padding: 56px 20px; }
+  .cta-btns { flex-wrap: nowrap; gap: 10px; }
+  .cta-btns .btn-store-outline { flex: 1 1 0; min-width: 0; justify-content: center; padding: 12px 10px; gap: 8px; }
+  .cta-btns .btn-store-name { font-size: 13.5px; }
   .screenshots-intro { flex-direction: column; align-items: flex-start; }
   .screenshots-intro .section-sub { text-align: left; }
 }
@@ -1504,7 +1510,6 @@ document.addEventListener('DOMContentLoaded', function() {
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <div class="btn-store-text"><span class="btn-store-sub">Disponible sur</span><span class="btn-store-name">App Store</span></div>
         </a>
-        <a href="#demo" class="btn-ghost">Voir la démo</a>
       </div>
     </div>
     <div class="hero-visual">

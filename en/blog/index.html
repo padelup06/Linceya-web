@@ -273,10 +273,14 @@ footer {
 body.lead-bar-visible .lead-bar { display: flex; }
 body.lead-bar-visible nav { top: 48px; }
 body.lead-bar-visible { padding-top: 48px; }
-.lead-bar-content { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.lead-bar-text { font-weight: 600; color: var(--ink); }
+.lead-bar-content { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; justify-content: center; min-width: 0; max-width: 100%; }
+.lead-bar-text { font-weight: 600; color: var(--ink); white-space: nowrap; display: inline-block; }
+.lead-bar-marq { flex: 0 1 auto; min-width: 0; overflow: hidden; }
+.lead-bar.is-scroll .lead-bar-text { animation: leadMarq var(--marq-dur, 12s) linear infinite alternate; }
+@keyframes leadMarq { from { transform: translateX(0); } to { transform: translateX(var(--marq-shift, 0)); } }
 .lead-bar-text strong { font-weight: 800; }
 .lead-bar-btn {
+  flex-shrink: 0;
   background: var(--ink); color: var(--cream);
   padding: 7px 16px; border-radius: 100px;
   text-decoration: none; font-weight: 700; font-size: 12px;
@@ -294,9 +298,9 @@ body.lead-bar-visible { padding-top: 48px; }
 }
 .lead-bar-close:hover { opacity: 1; background: rgba(14,27,53,0.08); }
 @media (max-width: 640px) {
-  .lead-bar { height: auto; min-height: 56px; padding: 8px 48px 8px 16px; font-size: 12px; }
-  body.lead-bar-visible nav { top: 56px; }
-  body.lead-bar-visible { padding-top: 56px; }
+  .lead-bar { height: 48px; padding: 0 48px 0 16px; font-size: 12px; }
+  body.lead-bar-visible nav { top: 48px; }
+  body.lead-bar-visible { padding-top: 48px; }
   .lead-bar-text { font-size: 12px; }
 }
 </style>
@@ -305,7 +309,7 @@ body.lead-bar-visible { padding-top: 48px; }
 
 <div id="leadBar" class="lead-bar" role="region" aria-label="Free guide">
   <div class="lead-bar-content">
-    <span class="lead-bar-text">📘 <strong>Free guide</strong> — 10 padel beginner mistakes</span>
+    <div class="lead-bar-marq"><span class="lead-bar-text">📘 <strong>Free guide</strong> — 10 padel beginner mistakes</span></div>
     <a href="/en/padel-beginner-guide/" class="lead-bar-btn">Get it →</a>
   </div>
   <button class="lead-bar-close" aria-label="Close">×</button>
@@ -409,6 +413,24 @@ body.lead-bar-visible { padding-top: 48px; }
     document.body.classList.remove('lead-bar-visible');
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
   });
+  // Toujours une seule ligne : si le texte depasse, on le fait defiler.
+  var txt = bar.querySelector('.lead-bar-text');
+  var marq = bar.querySelector('.lead-bar-marq');
+  function syncMarq() {
+    if (!txt || !marq) return;
+    bar.classList.remove('is-scroll');
+    txt.style.removeProperty('--marq-shift');
+    txt.style.removeProperty('--marq-dur');
+    var over = txt.scrollWidth - marq.clientWidth;
+    if (over > 4) {
+      txt.style.setProperty('--marq-shift', (-(over + 8)) + 'px');
+      txt.style.setProperty('--marq-dur', Math.max(6, (over + 8) / 22) + 's');
+      bar.classList.add('is-scroll');
+    }
+  }
+  syncMarq();
+  window.addEventListener('load', syncMarq);
+  window.addEventListener('resize', syncMarq);
 })();
 // Newsletter footer form (POST /api/subscribe avec source=newsletter-footer)
 (function() {
