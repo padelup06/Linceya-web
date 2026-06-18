@@ -63,7 +63,7 @@
       "price": "9.99",
       "priceCurrency": "EUR",
       "name": "Premium monthly",
-      "description": "15 AI video analyses per month, personalized plan, 12 detailed analysis insights"
+      "description": "10 AI video analyses per month, personalized plan, 12 detailed analysis insights"
     },
     {
       "@type": "Offer",
@@ -689,8 +689,8 @@ section { padding: 64px 48px; position: relative; }
 .pricing-preview { background: var(--ivory); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); text-align: center; }
 .pricing-cards-mini {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px; max-width: 860px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px; max-width: 1080px;
   margin: 56px auto 0;
 }
 .mini-card {
@@ -706,6 +706,16 @@ section { padding: 64px 48px; position: relative; }
   border-color: var(--platinum);
   background: linear-gradient(180deg, var(--pearl) 0%, #FBF7EF 100%);
 }
+.mini-card.elite {
+  border-color: var(--platinum);
+  background: linear-gradient(180deg, var(--ink) 0%, var(--navy) 100%);
+}
+.mini-card.elite .mini-card-name,
+.mini-card.elite .mini-card-price { color: var(--pearl); }
+.mini-card.elite .mini-card-desc { color: var(--muted-light); }
+.mini-card.elite .mini-feat { color: var(--bone); }
+.mini-card.elite .mini-feat .dot { background: var(--platinum-light); }
+.mini-card-price .soon-price { font-family: var(--font-display); font-size: 30px; color: var(--platinum-light); }
 .mini-card-badge {
   position: absolute;
   top: 18px;
@@ -1753,13 +1763,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="mini-card-badge">Popular</div>
       <div class="mini-card-name">PREMIUM</div>
       <div class="mini-card-price">9.99<span class="currency">€</span><span class="period">/ month</span></div>
-      <div class="mini-card-desc">15 AI video analyses / month and personalized plan.</div>
+      <div class="mini-card-desc">10 AI video analyses / month and personalized plan.</div>
       <div class="mini-card-features">
-        <div class="mini-feat"><span class="dot"></span> 15 AI video analyses / month</div>
+        <div class="mini-feat"><span class="dot"></span> 10 AI video analyses / month</div>
         <div class="mini-feat"><span class="dot"></span> Personalized training plan</div>
         <div class="mini-feat"><span class="dot"></span> 12 analysis points</div>
         <div class="mini-feat"><span class="dot"></span> Certified ELO</div>
         <div class="mini-feat"><span class="dot"></span> Unlimited progress history</div>
+      </div>
+    </div>
+    <div class="mini-card elite reveal">
+      <div class="mini-card-badge">Coming soon</div>
+      <div class="mini-card-name">ELITE</div>
+      <div class="mini-card-price"><span class="soon-price">Coming soon</span></div>
+      <div class="mini-card-desc">Advanced computer-vision AI analysis, on top of everything in Premium.</div>
+      <div class="mini-card-features">
+        <div class="mini-feat"><span class="dot"></span> Everything in Premium</div>
+        <div class="mini-feat"><span class="dot"></span> Advanced AI analysis (vision)</div>
+        <div class="mini-feat"><span class="dot"></span> Shot &amp; movement detection</div>
+        <div class="mini-feat"><span class="dot"></span> In-depth match stats</div>
       </div>
     </div>
   </div>

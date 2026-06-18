@@ -89,7 +89,7 @@
       "price": "9.99",
       "priceCurrency": "EUR",
       "name": "Premium mensuel",
-      "description": "15 analyses vidéo IA par mois, programme personnalisé, 12 points d'analyse détaillés"
+      "description": "10 analyses vidéo IA par mois, programme personnalisé, 12 points d'analyse détaillés"
     },
     {
       "@type": "Offer",
@@ -715,8 +715,8 @@ section { padding: 64px 48px; position: relative; }
 .pricing-preview { background: var(--ivory); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); text-align: center; }
 .pricing-cards-mini {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px; max-width: 860px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px; max-width: 1080px;
   margin: 56px auto 0;
 }
 .mini-card {
@@ -732,6 +732,16 @@ section { padding: 64px 48px; position: relative; }
   border-color: var(--platinum);
   background: linear-gradient(180deg, var(--pearl) 0%, #FBF7EF 100%);
 }
+.mini-card.elite {
+  border-color: var(--platinum);
+  background: linear-gradient(180deg, var(--ink) 0%, var(--navy) 100%);
+}
+.mini-card.elite .mini-card-name,
+.mini-card.elite .mini-card-price { color: var(--pearl); }
+.mini-card.elite .mini-card-desc { color: var(--muted-light); }
+.mini-card.elite .mini-feat { color: var(--bone); }
+.mini-card.elite .mini-feat .dot { background: var(--platinum-light); }
+.mini-card-price .soon-price { font-family: var(--font-display); font-size: 30px; color: var(--platinum-light); }
 .mini-card-badge {
   position: absolute;
   top: 18px;
@@ -1786,13 +1796,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="mini-card-badge">Populaire</div>
       <div class="mini-card-name">PREMIUM</div>
       <div class="mini-card-price">9,99<span class="currency">€</span><span class="period">/ mois</span></div>
-      <div class="mini-card-desc">15 analyses vidéo IA / mois et programme personnalisé.</div>
+      <div class="mini-card-desc">10 analyses vidéo IA / mois et programme personnalisé.</div>
       <div class="mini-card-features">
-        <div class="mini-feat"><span class="dot"></span> 15 analyses vidéo IA / mois</div>
+        <div class="mini-feat"><span class="dot"></span> 10 analyses vidéo IA / mois</div>
         <div class="mini-feat"><span class="dot"></span> Programme entraînement personnalisé</div>
         <div class="mini-feat"><span class="dot"></span> 12 points d'analyse</div>
         <div class="mini-feat"><span class="dot"></span> ELO Certifié</div>
         <div class="mini-feat"><span class="dot"></span> Historique de progression illimité</div>
+      </div>
+    </div>
+    <div class="mini-card elite reveal">
+      <div class="mini-card-badge">Bientôt disponible</div>
+      <div class="mini-card-name">ELITE</div>
+      <div class="mini-card-price"><span class="soon-price">Prochainement</span></div>
+      <div class="mini-card-desc">L'analyse IA avancée par vision par ordinateur, en plus de tout le Premium.</div>
+      <div class="mini-card-features">
+        <div class="mini-feat"><span class="dot"></span> Tout le Premium inclus</div>
+        <div class="mini-feat"><span class="dot"></span> Analyse IA avancée (vision)</div>
+        <div class="mini-feat"><span class="dot"></span> Détection coups &amp; déplacements</div>
+        <div class="mini-feat"><span class="dot"></span> Stats de match approfondies</div>
       </div>
     </div>
   </div>
