@@ -223,6 +223,28 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/en/tools/padel-level/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/padel-level/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/nivel-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/niveau-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/niveau-padel/" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/en/tools/which-padel-racket/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/which-padel-racket/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/que-pala-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/quelle-raquette-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/quelle-raquette-padel/" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/es/coach.html</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -256,6 +278,28 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/es/herramientas/nivel-padel/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/padel-level/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/nivel-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/niveau-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/niveau-padel/" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/es/herramientas/que-pala-padel/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/which-padel-racket/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/que-pala-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/quelle-raquette-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/quelle-raquette-padel/" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/guide-debutant-padel/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -264,6 +308,28 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/guia-principiante-padel/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/guide-debutant-padel/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/guide-debutant-padel/" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/outils/niveau-padel/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/padel-level/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/nivel-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/niveau-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/niveau-padel/" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/outils/quelle-raquette-padel/</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/tools/which-padel-racket/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/herramientas/que-pala-padel/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/outils/quelle-raquette-padel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/outils/quelle-raquette-padel/" />
   </url>
 
 </urlset>
