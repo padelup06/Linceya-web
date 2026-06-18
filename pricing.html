@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Abonnements Premium | Analyse IA Padel</title>
-<meta name="description" content="Comparez les offres Linceya : gratuit ou Premium à 9,99€/mois — 15 analyses vidéo IA par mois, entraînement personnalisé, ELO certifié et classement national.">
+<meta name="description" content="Comparez les offres Linceya : gratuit ou Premium à 9,99€/mois — 10 analyses vidéo IA par mois, entraînement personnalisé, ELO certifié et classement national.">
 <link rel="canonical" href="https://linceya.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html">
 <link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html">
@@ -15,14 +15,14 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://linceya.com/pricing.html">
-<meta property="og:title" content="Linceya Premium — 15 analyses IA/mois dès 9,99€">
+<meta property="og:title" content="Linceya Premium — 10 analyses IA/mois dès 9,99€">
 <meta property="og:description" content="Analyse vidéo IA, programme personnalisé, ELO certifié et classement complet. Comparez Gratuit vs Premium.">
 <meta property="og:image" content="https://linceya.com/og-image.png">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Linceya">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Linceya Premium — 15 analyses IA/mois dès 9,99€">
+<meta name="twitter:title" content="Linceya Premium — 10 analyses IA/mois dès 9,99€">
 <meta name="twitter:description" content="Analyse vidéo IA, programme personnalisé, ELO certifié et classement complet.">
 <meta name="twitter:image" content="https://linceya.com/og-image.png">
 
@@ -62,7 +62,7 @@
       "name": "Premium Mensuel",
       "price": "9.99",
       "priceCurrency": "EUR",
-      "description": "15 analyses vidéo IA par mois, programme d'entraînement personnalisé, ELO Certifié, 12 points d'analyse. Facturé mensuellement.",
+      "description": "10 analyses vidéo IA par mois, programme d'entraînement personnalisé, ELO Certifié, 12 points d'analyse. Facturé mensuellement.",
       "availability": "https://schema.org/InStock",
       "url": "https://linceya.com/pricing.html"
     },
@@ -71,7 +71,7 @@
       "name": "Premium Annuel",
       "price": "99.99",
       "priceCurrency": "EUR",
-      "description": "15 analyses vidéo IA par mois, programme d'entraînement personnalisé, ELO Certifié — 2 mois offerts. Facturé annuellement (équivalent à 8,33€/mois).",
+      "description": "10 analyses vidéo IA par mois, programme d'entraînement personnalisé, ELO Certifié — 2 mois offerts. Facturé annuellement (équivalent à 8,33€/mois).",
       "availability": "https://schema.org/InStock",
       "url": "https://linceya.com/pricing.html"
     }
@@ -89,7 +89,7 @@
       "name": "C'est quoi la différence entre Gratuit et Premium ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois, du classement ELO et des matchs publics. Le Premium passe à 15 analyses par mois, débloque les 12 points d'analyse détaillés (score global, stabilité, jeu au filet, tactique, régularité, forces, axes de progression, erreur critique, plan de coaching), le programme d'entraînement personnalisé par l'IA et l'historique de progression complet."
+        "text": "En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois, du classement ELO et des matchs publics. Le Premium passe à 10 analyses par mois, débloque les 12 points d'analyse détaillés (score global, stabilité, jeu au filet, tactique, régularité, forces, axes de progression, erreur critique, plan de coaching), le programme d'entraînement personnalisé par l'IA et l'historique de progression complet."
       }
     },
     {
@@ -364,9 +364,9 @@ nav::before {
 /* PRICING CARDS */
 .pricing-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 22px;
-  max-width: 1060px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 56px 48px 100px;
 }
@@ -399,6 +399,26 @@ nav::before {
 .plan-card.premium .plan-badge {
   background: var(--platinum);
   box-shadow: var(--shadow-platinum);
+}
+/* ELITE — palier "bientôt disponible" : carte sombre, accents platine */
+.plan-card.elite {
+  background: linear-gradient(180deg, var(--ink) 0%, var(--navy) 100%);
+  border-color: var(--platinum);
+}
+.plan-card.elite .plan-name,
+.plan-card.elite .price-amount { color: var(--pearl); }
+.plan-card.elite .plan-desc { color: var(--muted-light); }
+.plan-card.elite .plan-feature { color: var(--bone); }
+.plan-card.elite .plan-price { border-bottom-color: rgba(255,255,255,0.12); }
+.plan-card.elite .plan-feature .icon.star {
+  background: rgba(212,184,122,0.18); color: var(--platinum-light);
+  border-color: rgba(212,184,122,0.4);
+}
+.plan-badge.soon { background: var(--platinum); color: var(--ink); box-shadow: var(--shadow-platinum); }
+.soon-price { font-family: var(--font-display); font-size: 32px; color: var(--platinum-light); letter-spacing: -0.01em; }
+.plan-btn.soon {
+  background: rgba(255,255,255,0.06); color: var(--platinum-light);
+  border: 1px solid rgba(212,184,122,0.4); cursor: default;
 }
 .plan-name {
   font-family: var(--font-display);
@@ -521,7 +541,7 @@ nav::before {
   max-width: 480px; line-height: 1.65;
 }
 .compare-table {
-  width: 100%; max-width: 900px;
+  width: 100%; max-width: 980px;
   margin: 48px auto 0;
   background: var(--pearl);
   border: 1px solid var(--stroke);
@@ -543,6 +563,13 @@ nav::before {
 .compare-table thead th.premium-col {
   color: var(--platinum); font-weight: 800;
 }
+.compare-table thead th.elite-col { color: var(--ink); font-weight: 800; }
+.compare-table thead th.elite-col .soon-tag {
+  display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 100px;
+  background: var(--platinum); color: var(--pearl);
+  font-size: 9px; letter-spacing: 1px; vertical-align: middle;
+}
+.table-val.gold { color: var(--platinum); font-weight: 700; }
 .compare-table tbody td {
   padding: 16px 20px;
   font-size: 14px; color: var(--graphite);
@@ -900,13 +927,13 @@ footer {
   <div class="plan-card premium">
     <div class="plan-badge">Populaire</div>
     <div class="plan-name">PREMIUM <span class="accent">↗</span></div>
-    <div class="plan-desc">15 analyses vidéo IA par mois, programme personnalisé et classement ELO certifié.</div>
+    <div class="plan-desc">10 analyses vidéo IA par mois, programme personnalisé et classement ELO certifié.</div>
     <div class="plan-price">
       <div class="price-amount"><span id="price-value">9,99</span><span class="currency">€</span><span class="period" id="price-period">/ mois</span></div>
       <div class="price-note" id="price-note">Résiliable à tout moment.</div>
     </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon star">★</span> 15 analyses vidéo IA par mois</div>
+      <div class="plan-feature"><span class="icon star">★</span> 10 analyses vidéo IA par mois</div>
       <div class="plan-feature"><span class="icon star">★</span> Reconnaissance automatique des joueurs</div>
       <div class="plan-feature"><span class="icon star">★</span> 12 points d'analyse détaillés</div>
       <div class="plan-feature"><span class="icon star">★</span> Programme d'entraînement personnalisé IA</div>
@@ -915,6 +942,24 @@ footer {
       <div class="plan-feature"><span class="icon star">★</span> Matchs publics &amp; recherche partenaires</div>
     </div>
     <a href="checkout.html" class="plan-btn pro">Passer Premium</a>
+  </div>
+
+  <div class="plan-card elite">
+    <div class="plan-badge soon">Bientôt disponible</div>
+    <div class="plan-name">ELITE <span class="accent">★</span></div>
+    <div class="plan-desc">Pour les compétiteurs : l'analyse IA avancée par vision par ordinateur, en plus de tout le Premium.</div>
+    <div class="plan-price">
+      <div class="price-amount"><span class="soon-price">Prochainement</span></div>
+      <div class="price-note">Lancement à venir.</div>
+    </div>
+    <div class="plan-features">
+      <div class="plan-feature"><span class="icon star">★</span> Tout le Premium inclus</div>
+      <div class="plan-feature"><span class="icon star">★</span> Analyse IA avancée par vision par ordinateur</div>
+      <div class="plan-feature"><span class="icon star">★</span> Détection auto des coups &amp; déplacements</div>
+      <div class="plan-feature"><span class="icon star">★</span> Heatmaps &amp; statistiques approfondies</div>
+      <div class="plan-feature"><span class="icon star">★</span> Accès prioritaire aux nouveautés</div>
+    </div>
+    <span class="plan-btn soon">Bientôt disponible</span>
   </div>
 </div>
 
@@ -926,20 +971,23 @@ footer {
         <th>Fonctionnalité</th>
         <th>Gratuit</th>
         <th class="premium-col">Premium</th>
+        <th class="elite-col">Elite <span class="soon-tag">Bientôt</span></th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Analyse vidéo IA</td><td><span class="table-val">1 / mois</span></td><td><span class="table-val green">15 / mois</span></td></tr>
-      <tr><td>Score global du match</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>12 points d'analyse détaillés</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Programme entraînement IA</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Exercices ciblés post-analyse</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>ELO &amp; classement</td><td><span class="table-val">Visible</span></td><td><span class="table-val green">Certifié</span></td></tr>
-      <tr><td>Classement national &amp; régional</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Historique de progression</td><td><span class="table-val">30 jours</span></td><td><span class="table-val green">Illimité</span></td></tr>
-      <tr><td>Matchs publics</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Reconnaissance des joueurs</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Support prioritaire</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Analyse vidéo IA</td><td><span class="table-val">1 / mois</span></td><td><span class="table-val green">10 / mois</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Analyse IA avancée (vision par ordinateur)</td><td><span class="table-x">✕</span></td><td><span class="table-x">✕</span></td><td><span class="table-val gold">Bientôt</span></td></tr>
+      <tr><td>Détection auto coups &amp; déplacements</td><td><span class="table-x">✕</span></td><td><span class="table-x">✕</span></td><td><span class="table-val gold">Bientôt</span></td></tr>
+      <tr><td>Score global du match</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>12 points d'analyse détaillés</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Programme entraînement IA</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Exercices ciblés post-analyse</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>ELO &amp; classement</td><td><span class="table-val">Visible</span></td><td><span class="table-val green">Certifié</span></td><td><span class="table-val green">Certifié</span></td></tr>
+      <tr><td>Classement national &amp; régional</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Historique de progression</td><td><span class="table-val">30 jours</span></td><td><span class="table-val green">Illimité</span></td><td><span class="table-val green">Illimité</span></td></tr>
+      <tr><td>Matchs publics</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Reconnaissance des joueurs</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Support prioritaire</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
     </tbody>
   </table>
 </section>
@@ -949,7 +997,7 @@ footer {
   <div class="faq-list">
     <div class="faq-item reveal">
       <button class="faq-q"><span>C'est quoi la différence entre Gratuit et Premium ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois, du classement ELO et des matchs publics. Le Premium passe à 15 analyses par mois, débloque les 12 points d'analyse détaillés (score global, stabilité, jeu au filet, tactique, régularité, forces, axes de progression, erreur critique, plan de coaching), le programme d'entraînement personnalisé par l'IA et l'historique de progression complet.</div>
+      <div class="faq-a">En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois, du classement ELO et des matchs publics. Le Premium passe à 10 analyses par mois, débloque les 12 points d'analyse détaillés (score global, stabilité, jeu au filet, tactique, régularité, forces, axes de progression, erreur critique, plan de coaching), le programme d'entraînement personnalisé par l'IA et l'historique de progression complet.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Comment fonctionne la période d'essai ?</span><span class="faq-icon">+</span></button>
