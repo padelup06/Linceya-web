@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://linceya.com/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -15,7 +15,7 @@
 
   <url>
     <loc>https://linceya.com/en/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -26,7 +26,7 @@
 
   <url>
     <loc>https://linceya.com/es/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -117,13 +117,15 @@
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-leer-y-anticipar-los-golpes-de-tu-rival-en-padel.html" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
   </url>
 
   <url>
     <loc>https://linceya.com/en/blog/how-to-choose-a-padel-racket.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -133,14 +135,36 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-leer-y-anticipar-los-golpes-de-tu-rival-en-padel.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-choisir-raquette-padel.html" />
+  </url>
+
+  <url>
+    <loc>https://linceya.com/es/blog/como-leer-y-anticipar-los-golpes-de-tu-rival-en-padel.html</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/como-leer-y-anticipar-los-golpes-de-tu-rival-en-padel.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
   </url>
 
   <url>
