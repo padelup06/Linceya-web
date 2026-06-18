@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://linceya.com/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -15,7 +15,7 @@
 
   <url>
     <loc>https://linceya.com/en/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -26,7 +26,7 @@
 
   <url>
     <loc>https://linceya.com/es/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -37,7 +37,7 @@
 
   <url>
     <loc>https://linceya.com/blog/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -48,7 +48,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -59,7 +59,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -70,7 +70,7 @@
 
   <url>
     <loc>https://linceya.com/en/pricing.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
@@ -81,7 +81,7 @@
 
   <url>
     <loc>https://linceya.com/es/pricing.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
@@ -92,7 +92,7 @@
 
   <url>
     <loc>https://linceya.com/pricing.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html" />
@@ -103,7 +103,7 @@
 
   <url>
     <loc>https://linceya.com/blog/comment-choisir-raquette-padel.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -113,8 +113,17 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/en/blog/how-to-choose-a-padel-racket.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -125,7 +134,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -135,8 +144,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/coach.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/contact.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/contact.html" />
@@ -146,8 +166,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/en/coach.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/en/contact.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/contact.html" />
@@ -158,7 +189,7 @@
 
   <url>
     <loc>https://linceya.com/en/padel-beginner-guide/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/padel-beginner-guide/" />
@@ -168,8 +199,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/es/coach.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/es/contact.html</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/contact.html" />
@@ -180,7 +222,7 @@
 
   <url>
     <loc>https://linceya.com/es/guia-principiante-padel/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/padel-beginner-guide/" />
@@ -191,46 +233,13 @@
 
   <url>
     <loc>https://linceya.com/guide-debutant-padel/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/padel-beginner-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/guia-principiante-padel/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/guide-debutant-padel/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/guide-debutant-padel/" />
-  </url>
-
-  <url>
-    <loc>https://linceya.com/coach.html</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
-  </url>
-
-  <url>
-    <loc>https://linceya.com/en/coach.html</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
-  </url>
-
-  <url>
-    <loc>https://linceya.com/es/coach.html</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/coach.html" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/coach.html" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/coach.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/coach.html" />
   </url>
 
 </urlset>
