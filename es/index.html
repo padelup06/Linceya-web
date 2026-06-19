@@ -507,7 +507,7 @@ nav.scrolled .nav-lang .lang-on { color: var(--ink); background: var(--platinum-
 .btn-ghost::before { content: '▶'; font-size: 9px; color: var(--platinum-light); }
 .btn-ghost:hover { border-color: var(--platinum-light); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
 .phone {
-  position: relative; width: 250px; aspect-ratio: 250 / 510;
+  position: relative; width: 250px; aspect-ratio: 250 / 552;
   border-radius: 40px; padding: 12px;
   background: linear-gradient(160deg, #1c2740, #0b1426);
   border: 1px solid rgba(255,255,255,0.12);
@@ -541,14 +541,16 @@ nav.scrolled .nav-lang .lang-on { color: var(--ink); background: var(--platinum-
 .app-stat span { font-family: var(--font-mono); font-size: 7.5px; letter-spacing: 0.05em; color: #6B7489; text-transform: uppercase; }
 .app-cta { margin: 6px 12px; background: var(--signal); color: #fff; text-align: center; padding: 10px; border-radius: 11px; font-size: 11.5px; font-weight: 700; box-shadow: 0 6px 14px rgba(30,71,240,0.3); }
 .app-recent-h { margin: 6px 14px 5px; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7489; }
-.app-match { margin: 0 12px 6px; background: #fff; border: 1px solid #E7E0D2; border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 8px; font-size: 10px; }
+.app-match { margin: 0 12px 4px; background: #fff; border: 1px solid #E7E0D2; border-radius: 10px; padding: 7px 10px; display: flex; align-items: center; gap: 8px; font-size: 10px; }
 .app-m-score { font-weight: 700; color: #0E1B35; }
 .app-m-tag { font-family: var(--font-mono); font-size: 7px; color: var(--signal); background: rgba(30,71,240,0.1); padding: 2px 5px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
 .app-m-pts { margin-left: auto; font-family: var(--font-display); font-size: 13px; color: var(--platinum-dim); }
-.app-tabs { margin-top: auto; height: 42px; background: #fff; border-top: 1px solid #E7E0D2; display: flex; align-items: center; justify-content: space-around; }
-.app-tabs span { width: 16px; height: 16px; border-radius: 5px; background: #C9C3B4; }
-.app-tabs span.on { background: var(--signal); }
-.app-tabs span.plus { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--signal-bright), var(--signal)); }
+.app-nav { position: static; margin-top: auto; height: 40px; background: #fff; border-top: 1px solid #E7E0D2; display: flex; align-items: center; justify-content: space-around; padding: 0 4px; }
+.app-nav-item { display: inline-flex; align-items: center; gap: 4px; color: var(--platinum); padding: 4px; border-radius: 999px; }
+.app-nav-item svg { width: 16px; height: 16px; display: block; flex-shrink: 0; }
+.app-nav-item .app-nav-lbl { display: none; font-family: var(--font-mono); font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.app-nav-item.on { background: rgba(30,71,240,0.10); color: var(--signal); padding: 5px 9px; }
+.app-nav-item.on .app-nav-lbl { display: inline; }
 /* 3 écrans qui défilent en fondu enchaîné */
 .app-screen { position: absolute; inset: 0; opacity: 0; animation: appCycle 11s ease-in-out infinite; }
 .app-s1 { animation-delay: 0s; }
@@ -1530,7 +1532,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="app-match"><span class="app-m-score">6-2 / 6-3</span><span class="app-m-tag">certificado</span><span class="app-m-pts">75</span></div>
             <div class="app-match"><span class="app-m-score">7-5 / 6-4</span><span class="app-m-tag">certificado</span><span class="app-m-pts">82</span></div>
             <div class="app-match"><span class="app-m-score">6-3 / 6-4</span><span class="app-m-tag">certificado</span><span class="app-m-pts">70</span></div>
-            <div class="app-tabs"><span class="on"></span><span></span><span class="plus"></span><span></span><span></span></div>
+            <nav class="app-nav" aria-hidden="true">
+              <span class="app-nav-item on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span class="app-nav-lbl">Inicio</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M4.5 7.5c4 2.2 11 2.2 15 0M4.5 16.5c4-2.2 11-2.2 15 0"/></svg><span class="app-nav-lbl">Partido</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6V7H9z"/><path d="M8.5 11h7M8.5 15h5"/></svg><span class="app-nav-lbl">Plan</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 20v-7M12 20V6M18 20v-10"/></svg><span class="app-nav-lbl">Rango</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 6.5a2.6 2.6 0 0 1 0 5"/><path d="M16.5 14c2.5 .3 4 2.3 4 5"/></svg><span class="app-nav-lbl">Amigos</span></span>
+            </nav>
           </div>
           <div class="app-screen app-s2" role="img" aria-label="Vista previa de la app: pantalla de análisis IA, puntuación 80 sobre 100">
             <div class="app-sb"><span>21:03</span><span class="app-sb-i"><i></i><i></i><i class="b"></i></span></div>
@@ -1548,7 +1556,15 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="app-recent-h">Puntos fuertes</div>
             <div class="app-strong">Tu regularidad de fondo mantiene la presión. <em>0:49 · 2:31</em></div>
-            <div class="app-strong">Excelente anticipación defensiva: cubres bien la pista. <em>1:02 · 6:00</em></div>
+            <div class="app-recent-h">Punto a mejorar</div>
+            <div class="app-strong">Sube antes a la red tras tu saque para tomar la iniciativa. <em>2:14 · 4:48</em></div>
+            <nav class="app-nav" aria-hidden="true">
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span class="app-nav-lbl">Inicio</span></span>
+              <span class="app-nav-item on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M4.5 7.5c4 2.2 11 2.2 15 0M4.5 16.5c4-2.2 11-2.2 15 0"/></svg><span class="app-nav-lbl">Partido</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6V7H9z"/><path d="M8.5 11h7M8.5 15h5"/></svg><span class="app-nav-lbl">Plan</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 20v-7M12 20V6M18 20v-10"/></svg><span class="app-nav-lbl">Rango</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 6.5a2.6 2.6 0 0 1 0 5"/><path d="M16.5 14c2.5 .3 4 2.3 4 5"/></svg><span class="app-nav-lbl">Amigos</span></span>
+            </nav>
           </div>
           <div class="app-screen app-s3" role="img" aria-label="Vista previa de la app: plan de entrenamiento personalizado">
             <div class="app-sb"><span>21:03</span><span class="app-sb-i"><i></i><i></i><i class="b"></i></span></div>
@@ -1568,6 +1584,13 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="app-ex-d">Esprinta a la red para tomar la posición ofensiva.</div>
               <div class="app-ex-btn">▶ Ver el vídeo de coaching</div>
             </div>
+            <nav class="app-nav" aria-hidden="true">
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span class="app-nav-lbl">Inicio</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M4.5 7.5c4 2.2 11 2.2 15 0M4.5 16.5c4-2.2 11-2.2 15 0"/></svg><span class="app-nav-lbl">Partido</span></span>
+              <span class="app-nav-item on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6V7H9z"/><path d="M8.5 11h7M8.5 15h5"/></svg><span class="app-nav-lbl">Plan</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 20v-7M12 20V6M18 20v-10"/></svg><span class="app-nav-lbl">Rango</span></span>
+              <span class="app-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 6.5a2.6 2.6 0 0 1 0 5"/><path d="M16.5 14c2.5 .3 4 2.3 4 5"/></svg><span class="app-nav-lbl">Amigos</span></span>
+            </nav>
           </div>
         </div>
       </div>
