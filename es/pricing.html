@@ -711,15 +711,15 @@ nav::before {
 /* CTA BOTTOM */
 .cta-bottom {
   position: relative; overflow: hidden;
-  background: #0B0B0D;
+  background: url('../img/noir/court_center.jpg') center 40% / cover no-repeat #050507;
   text-align: center; padding: 100px 48px;
   color: var(--pearl);
 }
 .cta-bottom::before {
   content: ''; position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 80% at 50% 30%, rgba(201,167,90,0.16) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 50% 100%, rgba(30,71,240,0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 80% at 50% 30%, rgba(201,167,90,0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #0B0B0D 0%, rgba(5,5,7,0.62) 26%, rgba(5,5,7,0.72) 68%, #0B0B0D 100%);
   pointer-events: none;
 }
 .cta-bottom .section-title { color: var(--pearl); position: relative; z-index: 1; filter: drop-shadow(0 6px 24px rgba(0,0,0,0.7)); }
