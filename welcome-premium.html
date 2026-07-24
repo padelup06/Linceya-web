@@ -15,25 +15,39 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* Linceya v6 "NOIR & OR" — welcome premium (re-skin prudent) */
 :root {
-  --cream: #F2EDE2;
+  --cream: #0B0B0D;
   --pearl: #FFFFFF;
-  --ink: #0E1B35;
+  --carbon: #15151A;
+  --carbon-high: #1C1D24;
+  --ink: #F2F3F7;
   --navy: #1A2B4D;
   --platinum: #B48A4A;
   --platinum-light: #D4B87A;
+  --gold: #C9A75A;
+  --gold-light: #F6E5AE;
+  --gold-deep: #8E6825;
+  --on-gold: #1E1503;
   --signal: #1E47F0;
-  --muted: rgba(14,27,53,0.55);
-  --stroke: rgba(14,27,53,0.12);
-  --font-display: 'Archivo Black', 'Archivo', sans-serif;
+  --muted: #8B93A5;
+  --stroke: #26272E;
+  --stroke-strong: #33353E;
+  --font-display: 'Anton', 'Archivo Black', 'Archivo', sans-serif;
+  --font-anton: 'Anton', sans-serif;
   --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
+@keyframes liquid { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+@keyframes sweep { 0% { left: -70%; } 55% { left: 145%; } 100% { left: 145%; } }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  background: var(--cream); color: var(--ink);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,167,90,0.1), transparent 60%),
+    var(--cream);
+  color: var(--ink);
   font-family: var(--font-body);
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -41,52 +55,61 @@ body {
 }
 .card {
   width: 100%; max-width: 480px;
-  background: var(--pearl);
-  border-radius: 28px; border: 1px solid var(--stroke);
+  background: linear-gradient(170deg, var(--carbon-high), var(--carbon));
+  border-radius: 28px; border: 1px solid var(--stroke-strong);
   padding: 48px 36px 40px; text-align: center;
-  box-shadow: 0 24px 60px rgba(14,27,53,0.08);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 .success-icon {
   width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
-  color: var(--pearl); font-size: 32px; line-height: 64px;
-  margin: 0 auto 24px; box-shadow: 0 12px 28px rgba(180,138,74,0.3);
+  background: linear-gradient(160deg, #F6E5AE, #C9A75A 55%, #8E6825);
+  color: var(--on-gold); font-size: 32px; line-height: 64px;
+  margin: 0 auto 24px; box-shadow: 0 12px 28px rgba(201,167,90,0.35), inset 0 1px 0 rgba(255,255,255,0.7);
 }
 .eyebrow {
   font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--platinum); margin-bottom: 14px;
+  color: var(--gold); margin-bottom: 14px;
 }
 h1 {
-  font-family: var(--font-display);
-  font-size: 32px; line-height: 1.05; letter-spacing: -0.01em;
-  text-transform: uppercase; color: var(--ink); margin-bottom: 14px;
+  font-family: var(--font-anton); font-weight: 400;
+  font-size: 32px; line-height: 1.08; letter-spacing: 0.03em;
+  text-transform: uppercase; color: var(--pearl); margin-bottom: 14px;
 }
 h1 .accent {
-  background: linear-gradient(135deg, var(--platinum-light), var(--platinum));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: linear-gradient(115deg, #F7E9B8 0%, #E3C57A 20%, #96742E 42%, #F4E3AC 58%, #C9A75A 78%, #96742E 100%);
+  background-size: 230% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  animation: liquid 6s ease-in-out infinite;
 }
 p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px; }
-.status { font-family: var(--font-mono); font-size: 12px; color: var(--signal); margin: 18px 0 22px; letter-spacing: 0.04em; }
+.status { font-family: var(--font-mono); font-size: 12px; color: var(--platinum-light); margin: 18px 0 22px; letter-spacing: 0.04em; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; padding: 16px 22px; border-radius: 14px;
   font-family: var(--font-body); font-size: 14px; font-weight: 700;
   letter-spacing: 0.04em; text-transform: uppercase;
-  text-decoration: none; transition: transform 0.15s, box-shadow 0.2s;
+  text-decoration: none; transition: transform 0.15s, box-shadow 0.2s, filter 0.2s, border-color 0.2s;
 }
 .btn-primary {
-  background: var(--ink); color: var(--pearl);
-  box-shadow: 0 12px 28px rgba(14,27,53,0.25);
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
+  color: var(--on-gold);
+  box-shadow: 0 12px 34px rgba(201,167,90,0.35), inset 0 2px 0 rgba(255,255,255,0.85), inset 0 -3px 6px rgba(90,60,10,0.5);
 }
-.btn-primary:hover { transform: translateY(-2px); }
+.btn-primary::after {
+  content: ''; position: absolute; top: 0; left: -70%; width: 36%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.7), transparent);
+  transform: skewX(-22deg); animation: sweep 3.6s ease-in-out infinite;
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
 .btn-store {
-  background: var(--pearl); color: var(--ink);
-  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.05); color: var(--ink);
+  border: 1px solid var(--stroke-strong);
   text-transform: none; letter-spacing: 0; font-weight: 600;
 }
-.btn-store:hover { border-color: var(--platinum); }
+.btn-store:hover { border-color: var(--platinum); background: rgba(180,138,74,0.1); }
 .btn-row { display: flex; gap: 10px; margin-top: 12px; }
 .btn-row .btn { flex: 1; padding: 14px; font-size: 13px; }
 .fallback { display: none; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--stroke); }
@@ -95,13 +118,16 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
 .fallback p { font-size: 13px; }
 .spinner {
   display: inline-block; width: 14px; height: 14px;
-  border: 2px solid rgba(30,71,240,0.25); border-top-color: var(--signal);
+  border: 2px solid rgba(201,167,90,0.25); border-top-color: var(--gold);
   border-radius: 50%; animation: spin 0.8s linear infinite;
   vertical-align: middle; margin-right: 8px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .foot { margin-top: 32px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.foot a { color: var(--platinum); text-decoration: none; }
+.foot a { color: var(--platinum-light); text-decoration: none; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::after { animation: none; }
+}
 </style>
 </head>
 <body>

@@ -9,57 +9,91 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <style>
+  /* Linceya v6 "NOIR & OR" — 404 */
   :root {
-    --cream: #F2EDE2; --ivory: #FAF7EF; --ink: #0E1B35; --navy: #1A2B4D;
+    --cream: #0B0B0D; --ivory: #16161B; --ink: #F2F3F7; --navy: #1A2B4D;
+    --pearl: #FFFFFF; --carbon: #15151A;
     --signal: #1E47F0; --signal-bright: #3860FF; --platinum: #B48A4A;
-    --platinum-light: #D4B87A; --muted: #6B7489; --stroke: #D8D0BE;
+    --platinum-light: #D4B87A; --gold: #C9A75A; --gold-light: #F6E5AE;
+    --gold-deep: #8E6825; --on-gold: #1E1503;
+    --muted: #8B93A5; --stroke: #26272E;
     --font-body: 'Archivo', system-ui, sans-serif;
-    --font-display: 'Archivo Black', 'Archivo', sans-serif;
+    --font-display: 'Anton', 'Archivo Black', 'Archivo', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
+  @keyframes liquid { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+  @keyframes sweep { 0% { left: -70%; } 55% { left: 145%; } 100% { left: 145%; } }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background:
-      radial-gradient(ellipse 60% 70% at 50% 0%, rgba(30,71,240,0.10), transparent 60%),
-      var(--cream);
+    background: #0B0B0D;
     color: var(--ink); font-family: var(--font-body); text-align: center; padding: 32px;
     -webkit-font-smoothing: antialiased;
+    position: relative; overflow-x: hidden;
   }
-  main { max-width: 460px; }
+  /* Nappe photo balle fondue dans le noir */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: url('/img/noir/ball.jpg') center 40% / cover no-repeat;
+    opacity: 0.18; filter: saturate(0.85);
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 50% 0%, rgba(201,167,90,0.12), transparent 60%),
+      linear-gradient(180deg, rgba(11,11,13,0.82) 0%, rgba(11,11,13,0.55) 45%, rgba(11,11,13,0.88) 100%);
+  }
+  main { max-width: 460px; position: relative; z-index: 1; }
   .logo { height: 52px; width: auto; margin-bottom: 28px; }
   .code {
-    font-family: var(--font-display); font-size: clamp(72px, 22vw, 128px);
-    line-height: 1; letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--signal), var(--platinum));
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(72px, 22vw, 128px);
+    line-height: 1; letter-spacing: 0.02em;
+    background: linear-gradient(115deg, #F7E9B8 0%, #E3C57A 20%, #96742E 42%, #F4E3AC 58%, #C9A75A 78%, #96742E 100%);
+    background-size: 230% 100%;
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: liquid 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(201,167,90,0.35));
   }
   h1 {
-    font-family: var(--font-display); font-size: clamp(22px, 6vw, 30px);
-    text-transform: uppercase; letter-spacing: -0.01em; margin-top: 8px;
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(22px, 6vw, 30px);
+    text-transform: uppercase; letter-spacing: 0.03em; margin-top: 8px;
+    color: var(--pearl);
   }
   p.sub { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 14px auto 30px; max-width: 380px; }
   .cta {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--signal); color: #fff; text-decoration: none;
-    padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 14px;
-    letter-spacing: 0.4px; box-shadow: 0 8px 24px rgba(30,71,240,0.25);
-    transition: transform 0.2s, background 0.2s;
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
+    color: var(--on-gold); text-decoration: none;
+    padding: 14px 28px; border-radius: 100px; font-weight: 800; font-size: 14px;
+    letter-spacing: 0.4px; text-transform: uppercase;
+    box-shadow: 0 12px 34px rgba(201,167,90,0.35), inset 0 2px 0 rgba(255,255,255,0.85), inset 0 -3px 6px rgba(90,60,10,0.5);
+    transition: transform 0.2s, filter 0.2s;
   }
-  .cta:hover { transform: translateY(-2px); background: var(--signal-bright); }
+  .cta::after {
+    content: ''; position: absolute; top: 0; left: -70%; width: 36%; height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.7), transparent);
+    transform: skewX(-22deg); animation: sweep 3.6s ease-in-out infinite;
+  }
+  .cta:hover { transform: translateY(-2px); filter: brightness(1.05); }
   .langs {
     margin-top: 26px; display: flex; gap: 14px; justify-content: center;
     font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   }
   .langs a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .langs a:hover { color: var(--signal); }
+  .langs a:hover { color: var(--platinum-light); }
+  @media (prefers-reduced-motion: reduce) {
+    .cta::after { animation: none; }
+  }
 </style>
 </head>
 <body>
   <main>
-    <img class="logo" src="/logo.png" alt="Linceya" style="filter:brightness(0)">
+    <img class="logo" src="/logo.png" alt="Linceya">
     <div class="code">404</div>
     <h1>Page introuvable</h1>
     <p class="sub">Cette page n'existe pas ou a été déplacée. Reviens à l'accueil pour analyser tes matchs de padel.</p>
