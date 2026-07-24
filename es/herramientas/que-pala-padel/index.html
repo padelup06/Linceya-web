@@ -72,6 +72,22 @@ nav::before {
 }
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 44px; width: auto; filter: none; }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-left: 18px; padding: 7px 14px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  color: var(--muted); background: rgba(255,255,255,0.03);
+  border: 1px solid var(--stroke); border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.nav-back:hover { color: var(--gold-light); border-color: var(--gold); background: rgba(201,167,90,0.10); }
+.nav-back .nav-back-arrow { font-size: 13px; line-height: 1; transition: transform .2s ease; }
+.nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+.nav-left { display: flex; align-items: center; }
+@media (max-width: 768px) {
+  .nav-back { margin-left: 10px; padding: 6px 11px; font-size: 10px; letter-spacing: 0.08em; }
+}
 .nav-cta {
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
@@ -335,7 +351,7 @@ footer {
 </style>
 </head>
 <body>
-<nav><a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/es/#download" class="nav-cta">Descargar</a></nav>
+<nav><div class="nav-left"><a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/es/" class="nav-back"><span class="nav-back-arrow" aria-hidden="true">&larr;</span>Inicio</a></div><a href="/es/#download" class="nav-cta">Descargar</a></nav>
 <section class="hero"><div class="eyebrow">Herramienta gratis</div><h1>¿Qué pala de pádel es para ti?</h1><p>3 respuestas, tu forma de pala ideal al instante.</p></section>
 <div class="tool"><div class="card"><label class="q-label">Tu nivel</label><select id="r-niveau"><option value="0">Principiante</option><option value="1">Intermedio</option><option value="2">Avanzado</option></select><label class="q-label">Tu estilo de juego</label><select id="r-style"><option value="0">Defensivo (coloco, devuelvo)</option><option value="1" selected>Polivalente</option><option value="2">Ofensivo (ataco, remato)</option></select><label class="q-label">Tu prioridad</label><select id="r-prio"><option value="0">El control</option><option value="1">La comodidad / evitar lesiones</option><option value="2">La potencia</option></select><div class="result"><div class="rlabel">Tu pala ideal</div><div class="rmain" id="forme">Forma redonda</div><div class="rsub" id="detail">Control máximo, punto dulce amplio, muy tolerante (ideal principiantes y brazos sensibles). <b>355–365 g, núcleo EVA blando.</b></div></div><a href="/es/#download" class="cta">Analiza tu juego con Linceya →</a><p class="disclaimer">Recomendación indicativa para orientarte antes de comprar.</p></div></div>
 <div class="embed-box"><div class="embed-title">Inserta esta herramienta gratis en tu web</div><textarea id="embedcode" readonly rows="4">&lt;iframe src="https://linceya.com/es/herramientas/que-pala-padel/?embed=1" width="100%" height="640" style="border:0;border-radius:16px" loading="lazy" title="¿Qué pala de pádel es para ti?"&gt;&lt;/iframe&gt;

@@ -72,6 +72,22 @@ nav::before {
 }
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 44px; width: auto; filter: none; }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-left: 18px; padding: 7px 14px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  color: var(--muted); background: rgba(255,255,255,0.03);
+  border: 1px solid var(--stroke); border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.nav-back:hover { color: var(--gold-light); border-color: var(--gold); background: rgba(201,167,90,0.10); }
+.nav-back .nav-back-arrow { font-size: 13px; line-height: 1; transition: transform .2s ease; }
+.nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+.nav-left { display: flex; align-items: center; }
+@media (max-width: 768px) {
+  .nav-back { margin-left: 10px; padding: 6px 11px; font-size: 10px; letter-spacing: 0.08em; }
+}
 .nav-cta {
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
@@ -335,7 +351,7 @@ footer {
 </style>
 </head>
 <body>
-<nav><a href="/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/#download" class="nav-cta">Télécharger</a></nav>
+<nav><div class="nav-left"><a href="/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/" class="nav-back"><span class="nav-back-arrow" aria-hidden="true">&larr;</span>Accueil</a></div><a href="/#download" class="nav-cta">Télécharger</a></nav>
 <section class="hero"><div class="eyebrow">Outil gratuit</div><h1>Quelle raquette de padel pour toi ?</h1><p>3 réponses, ta forme de raquette idéale en direct.</p></section>
 <div class="tool"><div class="card"><label class="q-label">Ton niveau</label><select id="r-niveau"><option value="0">Débutant</option><option value="1">Intermédiaire</option><option value="2">Confirmé</option></select><label class="q-label">Ton style de jeu</label><select id="r-style"><option value="0">Défensif (je remets, je place)</option><option value="1" selected>Polyvalent</option><option value="2">Offensif (j'attaque, je smashe)</option></select><label class="q-label">Ta priorité</label><select id="r-prio"><option value="0">Le contrôle</option><option value="1">Le confort / éviter les blessures</option><option value="2">La puissance</option></select><div class="result"><div class="rlabel">Ta raquette idéale</div><div class="rmain" id="forme">Forme ronde</div><div class="rsub" id="detail">Contrôle maximal, gros sweet spot, très tolérante (idéale débutants et bras sensibles). <b>355–365 g, noyau EVA tendre.</b></div></div><a href="/#download" class="cta">Analyse ton jeu avec Linceya →</a><p class="disclaimer">Recommandation indicative pour t'orienter avant l'achat.</p></div></div>
 <div class="embed-box"><div class="embed-title">Intègre cet outil gratuitement sur ton site</div><textarea id="embedcode" readonly rows="4">&lt;iframe src="https://linceya.com/outils/quelle-raquette-padel/?embed=1" width="100%" height="640" style="border:0;border-radius:16px" loading="lazy" title="Quelle raquette de padel pour toi ?"&gt;&lt;/iframe&gt;

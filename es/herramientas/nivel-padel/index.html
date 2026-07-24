@@ -72,6 +72,22 @@ nav::before {
 }
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
 .nav-logo img { height: 44px; width: auto; filter: none; }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-left: 18px; padding: 7px 14px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  color: var(--muted); background: rgba(255,255,255,0.03);
+  border: 1px solid var(--stroke); border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.nav-back:hover { color: var(--gold-light); border-color: var(--gold); background: rgba(201,167,90,0.10); }
+.nav-back .nav-back-arrow { font-size: 13px; line-height: 1; transition: transform .2s ease; }
+.nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+.nav-left { display: flex; align-items: center; }
+@media (max-width: 768px) {
+  .nav-back { margin-left: 10px; padding: 6px 11px; font-size: 10px; letter-spacing: 0.08em; }
+}
 .nav-cta {
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
@@ -335,7 +351,7 @@ footer {
 </style>
 </head>
 <body>
-<nav><a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/es/#download" class="nav-cta">Descargar</a></nav>
+<nav><div class="nav-left"><a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a><a href="/es/" class="nav-back"><span class="nav-back-arrow" aria-hidden="true">&larr;</span>Inicio</a></div><a href="/es/#download" class="nav-cta">Descargar</a></nav>
 <section class="hero"><div class="eyebrow">Herramienta gratis</div><h1>Estima tu nivel de pádel</h1><p>Responde 3 preguntas y obtén tu nivel y tu ELO aproximado al instante.</p></section>
 <div class="tool"><div class="card"><label class="q-label">Juegas desde hace…</label><select id="q-exp"><option value="1">Menos de 6 meses</option><option value="2">6 meses – 2 años</option><option value="3">2 – 5 años</option><option value="4">Más de 5 años</option></select><label class="q-label">Juegas…</label><select id="q-freq"><option value="1">1 vez al mes</option><option value="2">1 vez por semana</option><option value="3">2 a 3 veces por semana</option><option value="4">Casi todos los días</option></select><label class="q-label">Dominio de la salida de pared</label><div class="range-row"><input type="range" id="q-vitre" min="1" max="5" step="1" value="3"><span class="range-out" id="q-vitre-o">3</span></div><label class="q-label">Smash / bandeja</label><div class="range-row"><input type="range" id="q-smash" min="1" max="5" step="1" value="3"><span class="range-out" id="q-smash-o">3</span></div><div class="result"><div class="rlabel">Nivel estimado</div><div class="rmain" id="level">Intermedio</div><div class="rsub">ELO aproximado : <b id="elo">1450</b></div></div><a href="/es/#download" class="cta">Mide tu ELO real con Linceya →</a><p class="disclaimer">Estimación indicativa. Linceya calcula tu ELO real a partir de tus partidos grabados.</p></div></div>
 <div class="embed-box"><div class="embed-title">Inserta esta herramienta gratis en tu web</div><textarea id="embedcode" readonly rows="4">&lt;iframe src="https://linceya.com/es/herramientas/nivel-padel/?embed=1" width="100%" height="640" style="border:0;border-radius:16px" loading="lazy" title="Estima tu nivel de pádel"&gt;&lt;/iframe&gt;
