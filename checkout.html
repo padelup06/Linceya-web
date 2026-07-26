@@ -487,6 +487,13 @@ footer {
 const STRIPE_LOCALE = 'fr';
 const PRICE_MONTHLY = 'price_1TUlkGJuVIEBTqQ2szOQJ5Vx';
 const PRICE_ANNUAL  = 'price_1TUllIJuVIEBTqQ2osIqKAZM';
+// Élite — coller ici l'identifiant du prix Stripe (44,99 €/mois).
+// Tant que cette chaîne est vide, l'offre Élite n'est pas rendue : on
+// n'affiche jamais un plan qu'on ne saurait pas encaisser. Le même
+// identifiant doit être connu du serveur :
+//   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
+// C'est lui qui fait écrire subscription_tier='elite' au webhook.
+const PRICE_ELITE   = 'price_1TxWlMJuVIEBTqQ27MkpkDSB';
 const EDGE_URL      = 'https://tykruntstzrskowdvubk.supabase.co/functions/v1/create-stripe-checkout';
 const SUCCESS_URL   = 'https://linceya.com/checkout.html?success=1';
 const CANCEL_URL    = 'https://linceya.com/pricing.html';
@@ -495,6 +502,14 @@ let selectedPriceId = PRICE_ANNUAL;
 
 function renderPackages() {
   const list = document.getElementById('package-list');
+  const eliteCard = PRICE_ELITE ? `
+    <div class="pkg-card" data-price="${PRICE_ELITE}" onclick="selectPackage(this)">
+      <div class="pkg-label">Mensuel</div>
+      <div class="pkg-name">Linceya Élite</div>
+      <div class="pkg-price">44,99 €<span class="period">/ mois</span></div>
+      <div class="pkg-save">Analyse vidéo IA incluse</div>
+    </div>
+  ` : '';
   list.innerHTML = `
     <div class="pkg-card" data-price="${PRICE_ANNUAL}" onclick="selectPackage(this)">
       <div class="pkg-label">Annuel</div>
@@ -507,10 +522,21 @@ function renderPackages() {
       <div class="pkg-name">Linceya Premium</div>
       <div class="pkg-price">9,99 €<span class="period">/ mois</span></div>
     </div>
+    ${eliteCard}
   `;
-  // Sélection par défaut : Annuel (la première card)
-  const first = list.querySelector('.pkg-card');
-  if (first) first.classList.add('selected');
+  // Sélection par défaut : Annuel, sauf si on arrive depuis la carte Élite de
+  // la page tarifs (checkout.html?plan=elite) — sinon le visiteur qui a cliqué
+  // « Passer Élite » se retrouverait sur le Premium annuel présélectionné.
+  const wantsElite =
+    new URLSearchParams(location.search).get('plan') === 'elite';
+  const target = wantsElite && PRICE_ELITE
+    ? list.querySelector(`.pkg-card[data-price="${PRICE_ELITE}"]`)
+    : list.querySelector('.pkg-card');
+  const first = target || list.querySelector('.pkg-card');
+  if (first) {
+    first.classList.add('selected');
+    selectedPriceId = first.dataset.price;
+  }
   document.getElementById('buy-btn').disabled = false;
   document.getElementById('loading').style.display = 'none';
   document.getElementById('packages').style.display = 'block';
@@ -540,7 +566,9 @@ async function handlePurchase() {
   // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
   try {
     if (window.linceyaTrack) {
-      const plan = selectedPriceId === PRICE_ANNUAL ? 'annual' : 'monthly';
+      const plan = selectedPriceId === PRICE_ANNUAL
+        ? 'annual'
+        : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
       window.linceyaTrack.checkoutClick(plan);
     }
   } catch (_) {}
