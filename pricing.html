@@ -440,6 +440,12 @@ nav::before {
 }
 .plan-card {
   position: relative;
+  /* Colonne flex : combinee au margin-top:auto du bouton, elle aligne les
+     trois CTA sur la meme ligne quelle que soit la longueur de la liste de
+     fonctionnalites. La grille rend deja les cartes de hauteur egale, mais
+     le bouton suivait le contenu. */
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(170deg, var(--carbon-high), var(--carbon));
   border: 1px solid var(--stroke);
   border-radius: 24px;
@@ -565,6 +571,7 @@ nav::before {
 
 .plan-btn {
   display: block; width: 100%;
+  margin-top: auto; /* colle le bouton en bas de la carte */
   padding: 16px 22px; border-radius: 14px;
   text-align: center; text-decoration: none;
   font-weight: 700; font-size: 14px;
