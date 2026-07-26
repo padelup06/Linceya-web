@@ -1047,7 +1047,7 @@ footer {
     <div class="plan-desc">For competitors: advanced computer-vision AI analysis, on top of everything in Premium.</div>
     <div class="plan-price">
       <div class="price-amount">44.99<span class="currency">€</span><span class="period">/ month</span></div>
-      <div class="price-note">€49.99 on the stores. Cancel anytime.</div>
+      <div class="price-note" id="elite-note">€49.99 on the stores. Cancel anytime.</div>
     </div>
     <div class="plan-features">
       <div class="plan-feature"><span class="icon star">★</span> Everything in Premium</div>
@@ -1193,6 +1193,12 @@ function togglePlan() {
     document.getElementById('price-value').textContent = '9.99';
     document.getElementById('price-period').textContent = '/ month';
     document.getElementById('price-note').textContent = 'Cancel anytime.';
+  }
+  const eliteNote = document.getElementById('elite-note');
+  if (eliteNote) {
+    eliteNote.textContent = isAnnual
+      ? 'Available on a monthly basis only.'
+      : '€49.99 on the stores. Cancel anytime.';
   }
 }
 document.querySelectorAll('.faq-q').forEach(function(btn) {

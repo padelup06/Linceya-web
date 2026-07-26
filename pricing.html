@@ -1072,7 +1072,7 @@ footer {
     <div class="plan-desc">Pour les compétiteurs : l'analyse IA avancée par vision par ordinateur, en plus de tout le Premium.</div>
     <div class="plan-price">
       <div class="price-amount">44,99<span class="currency">€</span><span class="period">/ mois</span></div>
-      <div class="price-note">49,99€ sur les stores. Résiliable à tout moment.</div>
+      <div class="price-note" id="elite-note">49,99€ sur les stores. Résiliable à tout moment.</div>
     </div>
     <div class="plan-features">
       <div class="plan-feature"><span class="icon star">★</span> Tout le Premium inclus</div>
@@ -1218,6 +1218,12 @@ function togglePlan() {
     document.getElementById('price-value').textContent = '9,99';
     document.getElementById('price-period').textContent = '/ mois';
     document.getElementById('price-note').textContent = 'Résiliable à tout moment.';
+  }
+  const eliteNote = document.getElementById('elite-note');
+  if (eliteNote) {
+    eliteNote.textContent = isAnnual
+      ? 'Disponible en mensuel uniquement.'
+      : '49,99€ sur les stores. Résiliable à tout moment.';
   }
 }
 document.querySelectorAll('.faq-q').forEach(function(btn) {
