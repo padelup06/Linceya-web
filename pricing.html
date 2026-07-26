@@ -570,7 +570,12 @@ nav::before {
 }
 
 .plan-btn {
-  display: block; width: 100%;
+  /* Flex centre + hauteur plancher : les trois boutons forment une ligne
+     franche meme quand un libelle passe sur deux lignes (« Telecharger
+     gratuitement » en francais, alors que l anglais et l espagnol tiennent
+     sur une). 76px = 2 lignes + padding, la valeur naturelle du plus long. */
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 76px;
   margin-top: auto; /* colle le bouton en bas de la carte */
   padding: 16px 22px; border-radius: 14px;
   text-align: center; text-decoration: none;
