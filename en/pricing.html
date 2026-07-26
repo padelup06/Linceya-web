@@ -441,7 +441,7 @@ nav::before {
   box-shadow: var(--shadow-gold), inset 0 1px 0 rgba(255,255,255,0.7);
   z-index: 2;
 }
-/* ELITE — palier "bientôt disponible" : carte navy nuit, accents platine */
+/* ELITE — palier haut de gamme : carte navy nuit, accents platine */
 .plan-card.elite {
   background: linear-gradient(180deg, var(--ink-surface) 0%, #0A1428 100%);
   border-color: rgba(227,197,122,0.35);
@@ -1014,7 +1014,7 @@ footer {
     <div class="plan-name">PREMIUM <span class="accent">↗</span></div>
     <div class="plan-desc">10 AI video analyses per month, personalized plan and certified ELO ranking.</div>
     <div class="plan-price">
-      <div class="price-amount"><span id="price-value">9,99</span><span class="currency">€</span><span class="period" id="price-period">/ month</span></div>
+      <div class="price-amount"><span id="price-value">9.99</span><span class="currency">€</span><span class="period" id="price-period">/ month</span></div>
       <div class="price-note" id="price-note">Cancel anytime.</div>
     </div>
     <div class="plan-features">
@@ -1034,7 +1034,7 @@ footer {
     <div class="plan-name">ELITE <span class="accent">★</span></div>
     <div class="plan-desc">For competitors: advanced computer-vision AI analysis, on top of everything in Premium.</div>
     <div class="plan-price">
-      <div class="price-amount">44,99<span class="currency">€</span><span class="period">/ month</span></div>
+      <div class="price-amount">44.99<span class="currency">€</span><span class="period">/ month</span></div>
       <div class="price-note">€49.99 on the stores. Cancel anytime.</div>
     </div>
     <div class="plan-features">
@@ -1174,11 +1174,11 @@ function togglePlan() {
   document.getElementById('label-annual').classList.toggle('active', isAnnual);
   document.getElementById('save-tag').classList.toggle('visible', isAnnual);
   if (isAnnual) {
-    document.getElementById('price-value').textContent = '99,99';
+    document.getElementById('price-value').textContent = '99.99';
     document.getElementById('price-period').textContent = '/ year';
     document.getElementById('price-note').innerHTML = 'About €8.33/month · <span class="green">2 months free</span>';
   } else {
-    document.getElementById('price-value').textContent = '9,99';
+    document.getElementById('price-value').textContent = '9.99';
     document.getElementById('price-period').textContent = '/ month';
     document.getElementById('price-note').textContent = 'Cancel anytime.';
   }
