@@ -611,6 +611,19 @@ nav::before {
 }
 
 /* COMPARISON TABLE */
+/* Sortie de secours de l abonne : sans elle, le seul moyen d atteindre son
+   portail etait de RETENTER un achat pour se faire bloquer. */
+.manage-line {
+  text-align: center; padding: 0 48px 72px;
+  font-size: 13px; color: var(--muted);
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+}
+.manage-line a {
+  color: var(--platinum-light); text-decoration: none;
+  border-bottom: 1px solid rgba(212,184,122,0.4);
+  transition: color 0.2s, border-color 0.2s;
+}
+.manage-line a:hover { color: var(--gold-light); border-color: var(--gold-light); }
 .compare-section {
   background: var(--ivory);
   border-top: 1px solid var(--stroke);
@@ -1086,6 +1099,8 @@ footer {
     <a href="checkout.html?plan=elite" class="plan-btn pro">Passer Élite</a>
   </div>
 </div>
+
+<div class="manage-line">Déjà abonné ? <a href="https://billing.stripe.com/p/login/fZu14o6Bh2Xy5TJ2DU1Jm00" target="_blank" rel="noopener noreferrer">Gérer mon abonnement</a></div>
 
 <section class="compare-section">
   <h2 class="section-title reveal"><span class="title-over">TOUT EN</span><span class="accent">DÉTAIL</span></h2>
