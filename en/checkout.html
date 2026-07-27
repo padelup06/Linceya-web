@@ -377,10 +377,10 @@ footer {
 
     <!-- LEFT -->
     <div class="checkout-info" id="checkout-info">
-      <div class="checkout-badge">Premium Edition</div>
-      <div class="checkout-title">GO<br><span class="accent">PREMIUM</span></div>
-      <div class="checkout-subtitle">Unlock the full potential of Linceya and progress faster than ever.</div>
-      <div class="checkout-features">
+      <div class="checkout-badge" id="side-badge">Premium Edition</div>
+      <div class="checkout-title">GO<br><span class="accent" id="side-accent">PREMIUM</span></div>
+      <div class="checkout-subtitle" id="side-sub">Unlock the full potential of Linceya and progress faster than ever.</div>
+      <div class="checkout-features" id="side-features">
         <div class="checkout-feat"><span class="check">✓</span>10 AI video analyses per month</div>
         <div class="checkout-feat"><span class="check">✓</span>Personalized training plan</div>
         <div class="checkout-feat"><span class="check">✓</span>12 detailed analysis points</div>
@@ -508,6 +508,7 @@ function renderPackages() {
     ? list.querySelector(`.pkg-card[data-price="${PRICE_ELITE}"]`)
     : list.querySelector('.pkg-card');
   const first = target || list.querySelector('.pkg-card');
+  updateSidePanel(!!PRICE_ELITE && (target || {}).dataset?.price === PRICE_ELITE);
   if (first) {
     first.classList.add('selected');
     selectedPriceId = first.dataset.price;
@@ -517,8 +518,40 @@ function renderPackages() {
   document.getElementById('packages').style.display = 'block';
 }
 
+
+// Le panneau de gauche annoncait « Premium » meme quand l Elite etait
+// selectionne : le visiteur lisait un argumentaire qui n etait pas celui
+// de l offre cochee a droite.
+const SIDE_ELITE = {
+  badge: "Elite Edition",
+  accent: "ELITE",
+  sub: "AI video analysis on top of everything in Premium: every shot, every move, measured.",
+  feats: "<div class=\"checkout-feat\"><span class=\"check\">✓</span>Everything in Premium</div><div class=\"checkout-feat\"><span class=\"check\">✓</span>6 computer-vision analyses / month</div><div class=\"checkout-feat\"><span class=\"check\">✓</span>Automatic shot &amp; movement detection</div><div class=\"checkout-feat\"><span class=\"check\">✓</span>Distance covered &amp; ball speed</div><div class=\"checkout-feat\"><span class=\"check\">✓</span>Court coverage heatmap</div>",
+};
+const SIDE_PREMIUM = {
+  badge: "Premium Edition",
+  accent: "PREMIUM",
+  sub: "Unlock the full potential of Linceya and progress faster than ever.",
+  feats: null,
+};
+let sidePremiumFeats = null;
+
+function updateSidePanel(isElite) {
+  const feats = document.getElementById('side-features');
+  if (sidePremiumFeats === null && feats) sidePremiumFeats = feats.innerHTML;
+  const d = isElite ? SIDE_ELITE : SIDE_PREMIUM;
+  const badge = document.getElementById('side-badge');
+  const accent = document.getElementById('side-accent');
+  const sub = document.getElementById('side-sub');
+  if (badge) badge.textContent = d.badge;
+  if (accent) accent.textContent = d.accent;
+  if (sub) sub.textContent = d.sub;
+  if (feats) feats.innerHTML = d.feats ?? sidePremiumFeats;
+}
+
 function selectPackage(card) {
   selectedPriceId = card.dataset.price;
+  updateSidePanel(!!PRICE_ELITE && selectedPriceId === PRICE_ELITE);
   document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
   card.classList.add('selected');
 }
