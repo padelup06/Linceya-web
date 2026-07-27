@@ -445,8 +445,8 @@ footer {
 
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
-        <div class="success-title">BIENVENUE DANS<br>LINCEYA <span class="accent">PREMIUM</span></div>
-        <div class="success-sub"><strong>Vérifiez votre boîte mail.</strong> Vous allez recevoir un code d'activation à 6 chiffres. Téléchargez l'app, tapez « J'ai un code Premium » sur l'écran de connexion, puis entrez le code reçu.</div>
+        <div class="success-title">BIENVENUE DANS<br>LINCEYA <span class="accent" id="success-tier">PREMIUM</span></div>
+        <div class="success-sub"><strong>Votre abonnement est actif.</strong> Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code Premium » sur l'écran de connexion, puis saisissez-le.</div>
       </div>
     </div>
 
@@ -564,13 +564,12 @@ async function handlePurchase() {
   hideError();
 
   // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
+  const plan = selectedPriceId === PRICE_ANNUAL
+    ? 'annual'
+    : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
+
   try {
-    if (window.linceyaTrack) {
-      const plan = selectedPriceId === PRICE_ANNUAL
-        ? 'annual'
-        : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
-      window.linceyaTrack.checkoutClick(plan);
-    }
+    if (window.linceyaTrack) window.linceyaTrack.checkoutClick(plan);
   } catch (_) {}
 
   try {
@@ -581,7 +580,7 @@ async function handlePurchase() {
         price_id: selectedPriceId,
         locale: STRIPE_LOCALE,
         customer_email: email,
-        success_url: SUCCESS_URL,
+        success_url: SUCCESS_URL + '&plan=' + plan,
         cancel_url: CANCEL_URL,
       }),
     });
@@ -621,6 +620,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
+
+  // Le palier vient de ?plan= : Stripe ne le renvoie pas, et le titre
+  // annoncait « Premium » a un acheteur Elite.
+    if (new URLSearchParams(window.location.search).get('plan') === 'elite') {
+      const tierEl = document.getElementById('success-tier');
+      if (tierEl) tierEl.textContent = 'ÉLITE';
+    }
 
     // Conversion tracking sur la page de retour Stripe.
     // On ne connaît pas exactement le plan choisi à ce stade (l'info est

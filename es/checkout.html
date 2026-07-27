@@ -420,8 +420,8 @@ footer {
 
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
-        <div class="success-title">BIENVENIDO A<br>LINCEYA <span class="accent">PREMIUM</span></div>
-        <div class="success-sub"><strong>Revisa tu correo.</strong> Recibirás un código de activación de 6 cifras. Descarga la app, pulsa «Tengo un código Premium» en la pantalla de inicio de sesión y luego introduce el código.</div>
+        <div class="success-title">BIENVENIDO A<br>LINCEYA <span class="accent" id="success-tier">PREMIUM</span></div>
+        <div class="success-sub"><strong>Tu suscripción está activa.</strong> Si ya tienes una cuenta Linceya con esta dirección, solo inicia sesión en la app: no hay nada más que hacer. Si no, recibirás un código de activación de 6 cifras: descarga la app, pulsa «Tengo un código Premium» en la pantalla de inicio de sesión e introdúcelo.</div>
       </div>
     </div>
 
@@ -539,13 +539,12 @@ async function handlePurchase() {
   hideError();
 
   // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
+  const plan = selectedPriceId === PRICE_ANNUAL
+    ? 'annual'
+    : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
+
   try {
-    if (window.linceyaTrack) {
-      const plan = selectedPriceId === PRICE_ANNUAL
-        ? 'annual'
-        : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
-      window.linceyaTrack.checkoutClick(plan);
-    }
+    if (window.linceyaTrack) window.linceyaTrack.checkoutClick(plan);
   } catch (_) {}
 
   try {
@@ -556,7 +555,7 @@ async function handlePurchase() {
         price_id: selectedPriceId,
         locale: STRIPE_LOCALE,
         customer_email: email,
-        success_url: SUCCESS_URL,
+        success_url: SUCCESS_URL + '&plan=' + plan,
         cancel_url: CANCEL_URL,
       }),
     });
@@ -594,6 +593,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
+
+  // El nivel viene de ?plan=: Stripe no lo devuelve, y el titulo
+  // anunciaba Premium a un comprador Elite.
+    if (new URLSearchParams(window.location.search).get('plan') === 'elite') {
+      const tierEl = document.getElementById('success-tier');
+      if (tierEl) tierEl.textContent = 'ÉLITE';
+    }
 
     // Tracking de conversión tras pago Stripe exitoso.
     if (window.linceyaTrack) {
