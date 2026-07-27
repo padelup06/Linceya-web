@@ -446,7 +446,7 @@ footer {
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
         <div class="success-title">BIENVENUE DANS<br>LINCEYA <span class="accent" id="success-tier">PREMIUM</span></div>
-        <div class="success-sub"><strong>Votre abonnement est actif.</strong> Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code Premium » sur l'écran de connexion, puis saisissez-le.</div>
+        <div class="success-sub" id="success-sub"><strong>Votre abonnement est actif.</strong> Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code Premium » sur l'écran de connexion, puis saisissez-le.</div>
       </div>
     </div>
 
@@ -626,6 +626,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (new URLSearchParams(window.location.search).get('plan') === 'elite') {
       const tierEl = document.getElementById('success-tier');
       if (tierEl) tierEl.textContent = 'ÉLITE';
+    }
+
+    // known=1 : le serveur a confirme qu un compte existe pour cette
+    // adresse. Aucun code d activation ne sera envoye — inutile d en
+    // faire attendre un.
+    if (new URLSearchParams(window.location.search).get('known') === '1') {
+      const subEl = document.getElementById('success-sub');
+      if (subEl) subEl.innerHTML = "<strong>Votre abonnement est actif.</strong> Connectez-vous simplement à l'app avec cette adresse : il n'y a rien d'autre à faire.";
     }
 
     // Conversion tracking sur la page de retour Stripe.
