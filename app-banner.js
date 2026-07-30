@@ -69,6 +69,26 @@
     ? 'https://apps.apple.com/app/id6760952174'
     : 'https://play.google.com/store/apps/details?id=com.padelup.padelup';
 
+  // Le site est trilingue et le bandeau se chargeait sur les 33 pages
+  // anglaises et les 33 espagnoles — en français.
+  //
+  // Le TITRE n'est volontairement pas traduit : c'est le nom de la fiche
+  // store, identique sur les trois storefronts (vérifié via l'API iTunes).
+  // Un bandeau qui annonce autre chose que ce que le visiteur va trouver sur
+  // le store désoriente plus qu'il n'aide.
+  var TEXTES = {
+    fr: {sous: "Ouvrir dans l'app Linceya", cta: 'Installer', fermer: 'Fermer'},
+    en: {sous: 'Open in the Linceya app', cta: 'Install', fermer: 'Close'},
+    es: {sous: 'Abrir en la app Linceya', cta: 'Instalar', fermer: 'Cerrar'},
+  };
+
+  // Toutes les pages du site portent un <html lang>. Repli sur le français,
+  // langue d'origine du site, si l'attribut manque ou est inconnu.
+  var codeLangue = (document.documentElement.getAttribute('lang') || '')
+    .slice(0, 2)
+    .toLowerCase();
+  var t = TEXTES[codeLangue] || TEXTES.fr;
+
   // Construit l'élément DOM directement (pas innerHTML pour éviter
   // d'éventuels conflits CSP).
   var style = document.createElement('style');
@@ -167,7 +187,7 @@
 
     var close = document.createElement('button');
     close.className = 'lnc-close';
-    close.setAttribute('aria-label', 'Fermer');
+    close.setAttribute('aria-label', t.fermer);
     close.innerHTML = '&times;';
     close.onclick = function () {
       banner.remove();
@@ -194,14 +214,14 @@
     title.textContent = 'Linceya — Coach IA Padel';
     var subtitle = document.createElement('div');
     subtitle.className = 'lnc-subtitle';
-    subtitle.textContent = "Ouvrir dans l'app Linceya";
+    subtitle.textContent = t.sous;
     text.appendChild(title);
     text.appendChild(subtitle);
 
     var cta = document.createElement('a');
     cta.className = 'lnc-cta';
     cta.href = STORE_URL;
-    cta.textContent = 'Installer';
+    cta.textContent = t.cta;
     // Les deux stores affichent "OUVRIR" d'eux-mêmes si l'app est déjà
     // installée — pas besoin de tenter un deep link (`intent://` côté
     // Android, schéma custom côté iOS) qui complique la vie et échoue
