@@ -131,9 +131,19 @@
     '  color: rgba(14, 27, 53, 0.55);',
     '  margin-top: 2px;',
     '}',
+    // Dégradé or vertical + texte --on-gold : le traitement canonique des
+    // boutons store du site (`.btn-store` dans index.html). Le bouton était
+    // resté en #1E47F0, le bleu d'avant la refonte Noir & Or — seul élément
+    // bleu de la page.
+    //
+    // Une seule différence assumée avec `.btn-store` : le dégradé s'arrête à
+    // #B58A3C au lieu de descendre jusqu'à #8E6825. Sur ce libellé de 12px,
+    // #1E1503 sur le brun le plus sombre tombe à 3,6:1 — sous le seuil de
+    // 4,5:1 exigé pour du texte courant. En s'arrêtant plus haut, le pire
+    // point du bouton reste à 5,7:1.
     '#lnc-app-banner .lnc-cta {',
-    '  background: #1E47F0;',
-    '  color: #FFFFFF;',
+    '  background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 45%, #B58A3C 100%);',
+    '  color: #1E1503;',
     '  padding: 7px 14px;',
     '  border-radius: 8px;',
     '  font-size: 12px;',
@@ -142,6 +152,8 @@
     '  text-transform: uppercase;',
     '  letter-spacing: 0.04em;',
     '  flex-shrink: 0;',
+    '  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8),',
+    '              inset 0 -2px 4px rgba(90, 60, 10, 0.35);',
     '}',
   ].join('\n');
   document.head.appendChild(style);
