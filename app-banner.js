@@ -1,21 +1,59 @@
-// Bandeau "Ouvrir/Installer l'app" pour Android.
+// Bandeau "Ouvrir/Installer l'app" — Android, et iOS là où Apple ne le fait
+// pas lui-même.
 //
 // Équivalent home-made du Smart App Banner Apple (qui n'existe pas sur
-// Chrome Android — Google l'a déprécié en 2019). Détecte Android, injecte
-// un bandeau fixe en haut de page avec un lien Play Store, et persiste
-// le dismiss dans localStorage pour ne pas re-afficher à chaque visite.
+// Chrome Android — Google l'a déprécié en 2019). Injecte un bandeau fixe en
+// haut de page avec un lien vers le store, et persiste le dismiss dans
+// localStorage pour ne pas re-afficher à chaque visite.
 //
-// On skip iOS car Safari affiche déjà le Smart App Banner natif Apple
-// via le meta tag `apple-itunes-app`.
+// Sur iOS, la bannière native d'Apple (meta `apple-itunes-app`) ne s'affiche
+// QUE dans Safari lui-même. Jamais dans Chrome/Firefox iOS, jamais dans un
+// navigateur intégré à une app (Snapchat, Instagram, TikTok…) — c'est-à-dire
+// jamais pour un visiteur venu d'un réseau social, soit l'essentiel du trafic
+// mobile. On prend donc le relais dans ces contextes-là, et uniquement
+// là : dans Safari on laisse la native, sinon on empilerait deux bannières.
 //
 // Utilisation : <script src="/app-banner.js" defer></script> dans le head.
 
 (function () {
   var ua = navigator.userAgent || '';
-  // Skip iOS — Apple Smart App Banner s'affiche déjà via le meta tag.
-  if (/iPhone|iPad|iPod/i.test(ua)) return;
-  // Skip non-Android (desktop, autres mobiles).
-  if (!/Android/i.test(ua)) return;
+
+  /// Sur quel store envoyer ce visiteur, ou null s'il ne faut rien afficher.
+  ///
+  /// Isolée et sans effet de bord pour être vérifiable en collant une chaîne
+  /// User-Agent dans la console.
+  function plateformeCible(ua) {
+    if (/Android/i.test(ua)) return 'android';
+    if (!/iPhone|iPad|iPod/i.test(ua)) return null;
+
+    // App installée sur l'écran d'accueil : elle EST déjà là.
+    if (window.navigator.standalone === true) return null;
+
+    // Navigateurs tiers : moteur WebKit imposé par Apple, mais pas la
+    // bannière native.
+    if (/CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser|DuckDuckGo/i.test(ua)) return 'ios';
+
+    // Navigateurs intégrés aux apps (WKWebView), reconnus à leur marqueur.
+    if (/FBAN|FBAV|FB_IAB|Instagram|Snapchat|Line\/|Twitter|LinkedInApp|Pinterest|TikTok|musical_ly|MicroMessenger|GSA\//i.test(ua)) {
+      return 'ios';
+    }
+
+    // WKWebView générique : un vrai Safari porte TOUJOURS les jetons
+    // `Version/` et `Safari/`. Leur absence trahit une webview embarquée.
+    if (!/Safari\//.test(ua) || !/Version\//.test(ua)) return 'ios';
+
+    // Safari : sa bannière native fait le travail, on ne double pas.
+    //
+    // Limite connue et assumée : SFSafariViewController (la vue Safari que
+    // certaines apps ouvrent) envoie un User-Agent Safari complet alors
+    // qu'Apple n'y affiche PAS la bannière. Aucun moyen fiable de l'en
+    // distinguer côté client — ces visiteurs-là restent sans bandeau.
+    return null;
+  }
+
+  var plateforme = plateformeCible(ua);
+  if (!plateforme) return;
+
   // Skip si dismiss < 30 jours.
   try {
     var dismissedAt = localStorage.getItem('lnc_app_banner_dismissed_at');
@@ -27,14 +65,15 @@
     // localStorage indispo (mode privé) → on affiche quand même.
   }
 
-  var PLAY_STORE_URL =
-    'https://play.google.com/store/apps/details?id=com.padelup.padelup';
+  var STORE_URL = plateforme === 'ios'
+    ? 'https://apps.apple.com/app/id6760952174'
+    : 'https://play.google.com/store/apps/details?id=com.padelup.padelup';
 
   // Construit l'élément DOM directement (pas innerHTML pour éviter
   // d'éventuels conflits CSP).
   var style = document.createElement('style');
   style.textContent = [
-    '#lnc-android-banner {',
+    '#lnc-app-banner {',
     '  position: fixed;',
     '  top: 0; left: 0; right: 0;',
     '  z-index: 99999;',
@@ -48,7 +87,7 @@
     '  from { transform: translateY(-100%); }',
     '  to { transform: translateY(0); }',
     '}',
-    '#lnc-android-banner .lnc-row {',
+    '#lnc-app-banner .lnc-row {',
     '  display: flex;',
     '  align-items: center;',
     '  gap: 12px;',
@@ -56,7 +95,7 @@
     '  max-width: 680px;',
     '  margin: 0 auto;',
     '}',
-    '#lnc-android-banner .lnc-close {',
+    '#lnc-app-banner .lnc-close {',
     '  background: transparent;',
     '  border: none;',
     '  padding: 6px 8px;',
@@ -66,7 +105,7 @@
     '  cursor: pointer;',
     '  flex-shrink: 0;',
     '}',
-    '#lnc-android-banner .lnc-icon {',
+    '#lnc-app-banner .lnc-icon {',
     '  width: 44px;',
     '  height: 44px;',
     '  border-radius: 10px;',
@@ -74,12 +113,12 @@
     '  background: #F2EDE2;',
     '  object-fit: cover;',
     '}',
-    '#lnc-android-banner .lnc-text {',
+    '#lnc-app-banner .lnc-text {',
     '  flex: 1;',
     '  min-width: 0;',
     '  line-height: 1.3;',
     '}',
-    '#lnc-android-banner .lnc-title {',
+    '#lnc-app-banner .lnc-title {',
     '  font-size: 13px;',
     '  font-weight: 600;',
     '  color: #0E1B35;',
@@ -87,12 +126,12 @@
     '  overflow: hidden;',
     '  text-overflow: ellipsis;',
     '}',
-    '#lnc-android-banner .lnc-subtitle {',
+    '#lnc-app-banner .lnc-subtitle {',
     '  font-size: 11px;',
     '  color: rgba(14, 27, 53, 0.55);',
     '  margin-top: 2px;',
     '}',
-    '#lnc-android-banner .lnc-cta {',
+    '#lnc-app-banner .lnc-cta {',
     '  background: #1E47F0;',
     '  color: #FFFFFF;',
     '  padding: 7px 14px;',
@@ -109,7 +148,7 @@
 
   function build() {
     var banner = document.createElement('div');
-    banner.id = 'lnc-android-banner';
+    banner.id = 'lnc-app-banner';
 
     var row = document.createElement('div');
     row.className = 'lnc-row';
@@ -149,11 +188,12 @@
 
     var cta = document.createElement('a');
     cta.className = 'lnc-cta';
-    cta.href = PLAY_STORE_URL;
+    cta.href = STORE_URL;
     cta.textContent = 'Installer';
-    // Le Play Store affichera "OUVRIR" si l'app est déjà installée — pas
-    // besoin de tenter un deep link `intent://` qui complique la vie
-    // (et qui fail sur les browsers in-app type Facebook/Instagram).
+    // Les deux stores affichent "OUVRIR" d'eux-mêmes si l'app est déjà
+    // installée — pas besoin de tenter un deep link (`intent://` côté
+    // Android, schéma custom côté iOS) qui complique la vie et échoue
+    // justement dans les navigateurs intégrés qu'on vise ici.
 
     row.appendChild(close);
     row.appendChild(icon);
@@ -183,7 +223,7 @@
   //      → sinon ils restent à top:0 et notre bandeau (z-index 99999) les
   //      cache. Le site Linceya a son `<nav>` en `position: fixed; top: 0`.
   function syncBodyPadding() {
-    var b = document.getElementById('lnc-android-banner');
+    var b = document.getElementById('lnc-app-banner');
     var h = (b && b.isConnected) ? b.offsetHeight : 0;
     document.body.style.paddingTop = h ? h + 'px' : '';
     // Push les nav/header fixés au-dessous du bandeau.
