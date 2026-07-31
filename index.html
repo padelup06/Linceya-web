@@ -636,6 +636,23 @@ nav.scrolled .nav-lang .lang-on { color: var(--on-gold); background: var(--plati
 .app-stat span { font-family: var(--font-mono); font-size: 7.5px; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
 .app-cta {
   position: relative; overflow: hidden;
+  /* flex-shrink: 0 n'est pas cosmetique.
+
+     `overflow: hidden` (necessaire au reflet dore de ::after) annule la
+     taille minimale automatique de cet element flex. Il devient donc le SEUL
+     enfant de .app-screen que le navigateur ait le droit de comprimer : tous
+     les autres sont proteges par leur min-height: auto.
+
+     Le mockup demande 506px de contenu pour 423px de hauteur fixe. Les 83px
+     manquants tombaient integralement ici : la boite passait a 20px pour un
+     texte qui en demande 37, et le libelle etait tranche en deux dans la
+     hauteur. Sans ce flex-shrink, le defaut revient des qu'on ajoute une
+     ligne au mockup.
+
+     Le deficit part desormais en bas de l'ecran, ou il est deja masque par
+     la nav en position absolue — ce qui donne justement l'impression d'une
+     liste qui continue. */
+  flex-shrink: 0;
   margin: 6px 12px; text-align: center; padding: 10px; border-radius: 999px;
   background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
   color: var(--on-gold); font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em;
