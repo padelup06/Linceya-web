@@ -343,9 +343,10 @@ footer {
         <li><strong>Vídeos:</strong> vídeos de partido subidos para el análisis IA</li>
         <li><strong>Análisis IA:</strong> puntuaciones, métricas, coaching personalizado</li>
         <li><strong>Suscripción:</strong> estado Premium (gestionado por RevenueCat)</li>
-        <li><strong>Identificadores técnicos:</strong> token de notificaciones push (Firebase Cloud Messaging), identificador de instalación</li>
+        <li><strong>Identificadores técnicos:</strong> token de notificaciones push (Firebase Cloud Messaging), identificador de instalación, identificador publicitario de Android</li>
         <li><strong>Geolocalización:</strong> ciudad/región aproximada para sugerir clubes cercanos (solo con tu consentimiento explícito)</li>
         <li><strong>Datos de diagnóstico:</strong> informes de errores anonimizados a través de Sentry (stack trace, versión de SO, contexto técnico — sin contenido personal)</li>
+        <li><strong>Datos de uso:</strong> eventos de navegación en la aplicación (pantallas consultadas, oferta de suscripción mostrada, plan seleccionado, compra completada o abandonada) y eventos de suscripción (alta, renovación, cancelación, reembolso)</li>
       </ul>
 
       <h2 data-num="03">Uso de los datos</h2>
@@ -365,9 +366,11 @@ footer {
       <ul>
         <li><strong>Supabase</strong> — almacenamiento y autenticación (servidores UE)</li>
         <li><strong>Google Gemini</strong> — análisis IA de los vídeos (servidores US, transferencia regulada por las Cláusulas Contractuales Tipo de la Comisión Europea)</li>
-        <li><strong>Firebase (Google)</strong> — notificaciones push, servidores UE/US</li>
+        <li><strong>Firebase (Google)</strong> — notificaciones push y medición de audiencia, atribución de instalaciones, servidores UE/US</li>
         <li><strong>Sentry</strong> — monitorización de errores (servidores UE)</li>
-        <li><strong>RevenueCat</strong> — gestión de suscripciones</li>
+        <li><strong>PostHog</strong> — analítica de producto: recorrido de suscripción y estadísticas de uso (servidores UE)</li>
+        <li><strong>RevenueCat</strong> — gestión de las suscripciones contratadas en la App Store y Google Play</li>
+        <li><strong>Stripe</strong> — pago de las suscripciones contratadas en linceya.com</li>
       </ul>
 
       <h2 data-num="05">Vídeos de partido</h2>

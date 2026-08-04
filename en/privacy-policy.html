@@ -343,9 +343,10 @@ footer {
         <li><strong>Videos:</strong> match videos uploaded for AI analysis</li>
         <li><strong>AI analyses:</strong> scores, metrics, personalized coaching</li>
         <li><strong>Subscription:</strong> Premium status (managed by RevenueCat)</li>
-        <li><strong>Technical identifiers:</strong> push notification token (Firebase Cloud Messaging), install identifier</li>
+        <li><strong>Technical identifiers:</strong> push notification token (Firebase Cloud Messaging), install identifier, Android advertising ID</li>
         <li><strong>Geolocation:</strong> approximate city/region to suggest nearby clubs (only with your explicit consent)</li>
         <li><strong>Diagnostic data:</strong> anonymized error reports via Sentry (stack trace, OS version, technical context — no personal content)</li>
+        <li><strong>Usage data:</strong> in-app navigation events (screens viewed, subscription offer displayed, plan selected, purchase completed or abandoned) and subscription events (sign-up, renewal, cancellation, refund)</li>
       </ul>
 
       <h2 data-num="03">Use of data</h2>
@@ -365,9 +366,11 @@ footer {
       <ul>
         <li><strong>Supabase</strong> — storage and authentication (EU servers)</li>
         <li><strong>Google Gemini</strong> — AI analysis of match videos (US servers, transfer covered by the European Commission's Standard Contractual Clauses)</li>
-        <li><strong>Firebase (Google)</strong> — push notifications, EU/US servers</li>
+        <li><strong>Firebase (Google)</strong> — push notifications and audience measurement, install attribution, EU/US servers</li>
         <li><strong>Sentry</strong> — error monitoring (EU servers)</li>
-        <li><strong>RevenueCat</strong> — subscription management</li>
+        <li><strong>PostHog</strong> — product analytics: subscription journey and usage statistics (EU servers)</li>
+        <li><strong>RevenueCat</strong> — management of subscriptions purchased on the App Store and Google Play</li>
+        <li><strong>Stripe</strong> — payment for subscriptions purchased on linceya.com</li>
       </ul>
 
       <h2 data-num="05">Match videos</h2>
