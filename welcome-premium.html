@@ -129,6 +129,34 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   .btn-primary::after { animation: none; }
 }
 </style>
+<!--
+  MESURE — cette page est un cas particulier, lire avant de modifier.
+
+  Son URL porte un SECRET (voir le bloc de drapeaux ci-dessous). Toutes les
+  regies transmettent l adresse courante avec leur pageview, donc les deux
+  drapeaux doivent etre poses AVANT le chargement d analytics.js — d ou leur
+  presence ici, en tete, et non en pied de page.
+
+  Consequence assumee : ces deux scripts ne sont PAS en `defer` ici, alors
+  qu ils le sont sur les 106 autres pages. C est necessaire. Le script en
+  ligne du corps de page mesure des evenements des les premieres
+  millisecondes puis quitte la page vers l application ; avec `defer`, la
+  facade de mesure n existait pas encore au moment de ces appels et ils
+  etaient perdus — en particulier sur le chemin de SUCCES, ou la page part
+  en arriere-plan immediatement. Ne pas « harmoniser » sans lire ce qui suit.
+-->
+<script>
+  // GA4 envoie l URL complete dans `page_location`. On lui en substitue une
+  // version reduite au chemin : le secret ne quitte jamais le navigateur.
+  window.linceyaPageLocation = window.location.origin + window.location.pathname;
+  // Les SDK publicitaires, eux, lisent `location.href` eux-memes — on ne peut
+  // pas leur mentir. Seule garantie possible : ne pas les charger du tout.
+  // Aucune perte : page en noindex, posterieure au paiement, dont la
+  // conversion est deja comptee sur la page de retour Stripe.
+  window.linceyaNoAdPixels = true;
+</script>
+<script src="/cookies.js"></script>
+<script src="/analytics.js"></script>
 </head>
 <body>
 <div class="card">
@@ -157,6 +185,42 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
 
 <script>
 (function() {
+  // ── Mesure ──────────────────────────────────────────────────────────
+  // analytics.js est chargé en `defer` : il ne s'exécute qu'APRÈS ce script
+  // inline, qui tourne pendant l'analyse du document. Un appel direct à
+  // window.linceyaTrack trouverait `undefined` et serait perdu en silence.
+  // Ce helper sonde jusqu'à ce que la façade arrive — même logique que le
+  // poll de consentement d'analytics.js : 100 ms x 20 tentatives (2 s), puis
+  // abandon.
+  //
+  // Tout est enveloppé : le client a DÉJÀ payé, aucune mesure ne doit
+  // pouvoir casser l'ouverture de son app.
+  function track(name, props) {
+    try {
+      var attempts = 0;
+      var send = function () {
+        try {
+          if (window.linceyaTrack && typeof window.linceyaTrack.event === 'function') {
+            window.linceyaTrack.event(name, props || {});
+            return true;
+          }
+        } catch (e) {
+          return true; // façade en erreur : on abandonne, on ne réessaie pas
+        }
+        return false;
+      };
+      if (send()) return;
+      var timer = setInterval(function () {
+        if (send() || ++attempts >= 20) clearInterval(timer);
+      }, 100);
+    } catch (e) {}
+  }
+
+  // SÉCURITÉ : l'URL de cette page porte un JETON D'AUTHENTIFICATION (query
+  // en flow PKCE, fragment en flow implicit). La protection est posée en tête
+  // de page, avant le chargement d'analytics.js — voir le bloc de drapeaux
+  // dans le <head>. Ici, ne jamais dériver autre chose qu'un booléen de
+  // `location.search` ou `location.hash`.
   var lang = (navigator.language || 'fr').slice(0,2).toLowerCase();
   var I18N = {
     fr: {
@@ -215,9 +279,34 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
   var fragment = window.location.hash || '';
   var deepLink = 'padelup://login-callback/' + search + fragment;
 
+  // RÈGLE ABSOLUE : `search` et `fragment` contiennent le jeton d'auth. On
+  // n'en dérive qu'un booléen — savoir s'il y a quelque chose à transmettre
+  // suffit à diagnostiquer un lien vide. Jamais le contenu, nulle part.
+  var hasToken = search.length > 1 || fragment.length > 1;
+  track('welcome_premium_viewed', { has_token: hasToken });
+
   var visibilityChanged = false;
+  var deeplinkTracked = false;
+  // Passé à true dès que le repli s'affiche, c'est-à-dire dès qu'on a conclu
+  // que l'app ne s'est PAS ouverte. Sans ce verrou, le simple fait que
+  // l'utilisateur verrouille son téléphone dix secondes plus tard ferait
+  // partir un « l'app s'est ouverte » — la même session émettrait alors les
+  // deux événements contradictoires, et la métrique mesurerait en réalité
+  // « la page est passée en arrière-plan un jour », ce qui ne se compte pas.
+  var gaveUp = false;
   document.addEventListener('visibilitychange', function() {
-    if (document.hidden) visibilityChanged = true;
+    if (!document.hidden) return;
+    visibilityChanged = true;
+    // Le passage en arrière-plan est notre seul signal que l'app s'est
+    // ouverte — mais il ne vaut que TANT QU'ON ATTEND encore. Passé le délai,
+    // il ne dit plus rien sur l'ouverture de l'app.
+    //
+    // Réserve connue : l'événement peut ne pas partir si le navigateur gèle
+    // la page avant l'envoi. GA4 utilise déjà sendBeacon quand il le peut ;
+    // il n'y a pas de garantie meilleure sans point de collecte propre.
+    if (gaveUp || deeplinkTracked) return;
+    deeplinkTracked = true;
+    track('welcome_premium_deeplink_opened');
   });
 
   // Tente immédiatement le deep link. Si l'app est installée, iOS prompt
@@ -227,11 +316,23 @@ p { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 12px;
 
   setTimeout(function() {
     if (visibilityChanged) return;
+    // À partir d'ici, on a conclu : l'app ne s'est pas ouverte. Tout passage
+    // en arrière-plan ultérieur n'est plus un signal d'ouverture.
+    gaveUp = true;
+    // Le client a payé et reste bloqué sur le web. C'est la métrique la plus
+    // utile de la page — elle compte exactement les clients encaissés qui
+    // n'ont pas pu entrer.
+    track('welcome_premium_fallback_shown', {});
     document.getElementById('status-text').textContent = t.statusReady;
     document.querySelector('.spinner').style.display = 'none';
     var btn = document.getElementById('open-app-btn');
     btn.href = deepLink;
     btn.style.display = 'inline-flex';
+    // Réessai manuel : lien padelup://, donc invisible pour la délégation de
+    // clic d'analytics.js, qui ne capte que les liens vers les magasins.
+    btn.addEventListener('click', function () {
+      track('welcome_premium_open_app_click');
+    });
     document.getElementById('fallback').classList.add('show');
   }, 1500);
 })();

@@ -617,6 +617,110 @@ function hideError() {
   document.getElementById('error').style.display = 'none';
 }
 
+// Les pixels publicitaires ne sont chargés qu'après consentement marketing.
+// Or quand ce consentement vient de localStorage, cookies.js le restaure sans
+// émettre le moindre event : au DOMContentLoaded, window.ttq pouvait donc
+// encore être undefined et la conversion TikTok partait dans le vide.
+// On passe donc par la file d'attente de cookies.js, qui exécute tout de suite
+// si le marketing est déjà accordé et met en attente sinon. window.linceyaConsent
+// peut lui-même arriver après nous (scripts en defer) : on le sonde brièvement.
+function onMarketingConsent(fn) {
+  var fired = false;
+  function run() {
+    if (fired) return;   // la file peut être rejouée : on ne track qu'une fois
+    fired = true;
+    try { fn(); } catch (_) {}
+  }
+  var tries = 0;
+  (function waitForApi() {
+    if (window.linceyaConsent && window.linceyaConsent.onConsent) {
+      window.linceyaConsent.onConsent('marketing', run);
+    } else if (++tries <= 20) {
+      setTimeout(waitForApi, 100);   // 2 s max, puis on renonce
+    }
+  })();
+}
+
+// Conversion tracking sur la page de retour Stripe.
+// Le palier vient de ?plan=, ajouté au success_url juste avant le départ vers
+// Stripe : on connaît donc le montant réellement encaissé. L'ancien code
+// envoyait 9,99 € en dur, ce qui remontait un achat annuel dix fois trop bas
+// et un Élite quatre fois et demie trop bas.
+function trackPurchase() {
+  // `plan` est une API ajoutee en meme temps que ce bloc. Si un navigateur
+  // sert un analytics.js anterieur alors que ce HTML est deja a jour (fenetre
+  // de deploiement, revalidation ratee, proxy), l appel leverait et le
+  // `catch` plus bas avalerait l achat en silence : on perdrait la conversion
+  // ENTIERE la ou l ancien code remontait au moins un montant faux. On prefere
+  // alors une conversion comptee sans montant a une conversion invisible.
+  if (!window.linceyaTrack) return;
+  if (typeof window.linceyaTrack.plan !== 'function') {
+    try {
+      window.linceyaTrack.event('purchase', { currency: 'EUR' });
+    } catch (_) {}
+    return;
+  }
+  try {
+    // Les montants et libellés vivent dans analytics.js (linceyaTrack.plan) :
+    // une seule table pour les trois langues, pas un prix recopié par page.
+    const info = window.linceyaTrack.plan(
+      new URLSearchParams(window.location.search).get('plan')
+    );
+
+    // Déduplication. Un rafraîchissement, un retour arrière ou une URL de
+    // succès partagée rejouait l'achat à chaque affichage. Garde-fou local
+    // pour la durée de l'onglet + transaction_id pour que GA4 déduplique
+    // aussi de son côté.
+    // L'identifiant est tiré au sort puis mémorisé : Stripe ne renvoie aucun
+    // identifiant de session dans l'URL de retour, et une clé déduite du seul
+    // plan serait commune à tous les acheteurs du même palier — GA4 les
+    // fusionnerait alors en un seul achat et effacerait du chiffre d'affaires.
+    // Cle UNIQUE, volontairement pas indexee sur le palier : une URL de
+    // succes rejouee sans ?plan= retombe sur « monthly » et aurait donc sa
+    // propre cle, ce qui laissait recompter un achat annuel a 9,99 €. On ne
+    // peut acheter qu une fois par session de toute facon.
+    const key = 'linceya_purchase_tracked';
+    let txnId = null;
+    try { txnId = sessionStorage.getItem(key); } catch (_) {}
+    if (txnId) return;   // déjà compté dans cet onglet
+    txnId = 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+    // Schéma e-commerce GA4 : item_id / item_name / price / quantity. Avec
+    // id / name, la valeur était enregistrée mais l'article n'apparaissait
+    // pas dans les rapports Monétisation.
+    window.linceyaTrack.event('purchase', {
+      transaction_id: txnId,
+      currency: 'EUR',
+      value: info.value,
+      items: [{
+        item_id: info.contentId,
+        item_name: info.label,
+        price: info.value,
+        quantity: 1
+      }]
+    });
+
+    // Verrou pose APRES l envoi, jamais avant : si l emission echouait
+    // (facade en erreur, gtag remplace par une extension), une cle deja
+    // ecrite aurait rendu cet achat definitivement irrecuperable pour
+    // l onglet, rechargement compris.
+    try { sessionStorage.setItem(key, txnId); } catch (_) {}
+
+    // Régies pub : on attend le consentement marketing plutôt que de tester
+    // window.fbq / window.ttq à un instant où ils n'existent pas encore.
+    // (fbq reste inerte tant que META_PIXEL_ID est vide dans analytics.js ;
+    // le code est gardé pour le jour où l'identifiant sera renseigné.)
+    onMarketingConsent(function() {
+      if (window.fbq) window.fbq('track', 'Subscribe', {
+        currency: 'EUR', value: info.value, predicted_ltv: info.ltv
+      });
+      if (window.ttq) window.ttq.track('Subscribe', {
+        value: info.value, currency: 'EUR', content_id: info.contentId
+      });
+    });
+  } catch (_) {}
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderPackages();
   // Si l'URL contient ?success=1, afficher le block de succès et masquer
@@ -642,22 +746,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (subEl) subEl.innerHTML = "<strong>Your subscription is active.</strong> Just sign in to the app with this address — there is nothing else to do.";
     }
 
-    // Conversion tracking after successful Stripe payment.
-    if (window.linceyaTrack) {
-      try {
-        window.linceyaTrack.event('purchase', {
-          currency: 'EUR',
-          value: 9.99,
-          items: [{ id: 'linceya_premium', name: 'Linceya Premium' }]
-        });
-        if (window.fbq) window.fbq('track', 'Subscribe', {
-          currency: 'EUR', value: 9.99, predicted_ltv: 119.88
-        });
-        if (window.ttq) window.ttq.track('Subscribe', {
-          value: 9.99, currency: 'EUR', content_id: 'linceya_premium'
-        });
-      } catch (_) {}
-    }
+    trackPurchase();
   }
 
   // Scroll the email input above the iOS keyboard on focus. Without this

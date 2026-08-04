@@ -212,6 +212,34 @@
       .btn-primary::after { animation: none; }
     }
 </style>
+<!--
+  MESURE — cette page est un cas particulier, lire avant de modifier.
+
+  Son URL porte un SECRET (voir le bloc de drapeaux ci-dessous). Toutes les
+  regies transmettent l adresse courante avec leur pageview, donc les deux
+  drapeaux doivent etre poses AVANT le chargement d analytics.js — d ou leur
+  presence ici, en tete, et non en pied de page.
+
+  Consequence assumee : ces deux scripts ne sont PAS en `defer` ici, alors
+  qu ils le sont sur les 106 autres pages. C est necessaire. Le script en
+  ligne du corps de page mesure des evenements des les premieres
+  millisecondes puis quitte la page vers l application ; avec `defer`, la
+  facade de mesure n existait pas encore au moment de ces appels et ils
+  etaient perdus — en particulier sur le chemin de SUCCES, ou la page part
+  en arriere-plan immediatement. Ne pas « harmoniser » sans lire ce qui suit.
+-->
+<script>
+  // GA4 envoie l URL complete dans `page_location`. On lui en substitue une
+  // version reduite au chemin : le secret ne quitte jamais le navigateur.
+  window.linceyaPageLocation = window.location.origin + window.location.pathname;
+  // Les SDK publicitaires, eux, lisent `location.href` eux-memes — on ne peut
+  // pas leur mentir. Seule garantie possible : ne pas les charger du tout.
+  // Aucune perte : page en noindex, posterieure au paiement, dont la
+  // conversion est deja comptee sur la page de retour Stripe.
+  window.linceyaNoAdPixels = true;
+</script>
+<script src="/cookies.js"></script>
+<script src="/analytics.js"></script>
 </head>
 <body>
   <div class="card">
@@ -235,14 +263,57 @@
       Télécharge Linceya, ouvre l'app, tape sur <em>« J'ai un code Premium »</em> et saisis le code ci-dessus.
     </p>
 
+    <!--
+      Nouvel onglet, comme sur welcome-premium.html : toute la raison d'être
+      de cette page est d'afficher un code à 6 chiffres que le client devra
+      saisir dans l'app. Naviguer vers le magasin dans le même onglet le lui
+      ferait perdre de vue, juste avant le moment où il en a besoin.
+      `rel="noopener noreferrer"` va avec `target="_blank"` : sans lui, la page
+      ouverte peut manipuler celle-ci via `window.opener`.
+    -->
     <div class="stores">
-      <a href="https://apps.apple.com/app/id6749488389" class="store-link">App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.padelup06.padelup" class="store-link">Play Store</a>
+      <a href="https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174" class="store-link" target="_blank" rel="noopener noreferrer">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="store-link" target="_blank" rel="noopener noreferrer">Play Store</a>
     </div>
   </div>
 
   <script>
     (function () {
+      // ── Mesure ────────────────────────────────────────────────────────
+      // analytics.js est chargé en `defer` : il ne s'exécute qu'APRÈS ce
+      // script inline, qui tourne pendant l'analyse du document. Un appel
+      // direct à window.linceyaTrack trouverait donc `undefined` et serait
+      // perdu en silence. On fait passer tous les appels par ce helper, qui
+      // sonde jusqu'à ce que la façade arrive — même logique que le poll de
+      // consentement d'analytics.js : 100 ms x 20 tentatives (2 s), puis
+      // abandon.
+      //
+      // Tout est enveloppé : cette page est sur le chemin d'un client qui a
+      // DÉJÀ payé, aucune mesure ne doit pouvoir casser son activation.
+      function track(name, props) {
+        try {
+          var attempts = 0;
+          var send = function () {
+            try {
+              if (window.linceyaTrack && typeof window.linceyaTrack.event === 'function') {
+                window.linceyaTrack.event(name, props || {});
+                return true;
+              }
+            } catch (e) {
+              return true; // façade en erreur : on abandonne, on ne réessaie pas
+            }
+            return false;
+          };
+          if (send()) return;
+          var timer = setInterval(function () {
+            if (send() || ++attempts >= 20) clearInterval(timer);
+          }, 100);
+        } catch (e) {}
+      }
+
+      // La protection de l'URL — qui porte l'email du client — est posée en
+      // tête de page, avant le chargement d'analytics.js. Voir le bloc de
+      // drapeaux dans le <head>.
       var params = new URLSearchParams(window.location.search);
       var email = (params.get('email') || '').trim();
       var code = (params.get('code') || '').trim();
@@ -253,6 +324,28 @@
 
       // Validation minimale : email contient '@' + code = 6 chiffres.
       var valid = email.indexOf('@') > 0 && /^\d{6}$/.test(code);
+
+      // On ne mesure ici que l'INTENTION, jamais le succès : la page ne fait
+      // aucun appel réseau, la vérification du code se passe dans l'app. Il
+      // n'existe donc pas d'event de succès d'activation côté web.
+      //
+      // Les trois échecs racontent trois histoires différentes :
+      //  - missing_params : aucun paramètre → arrivée directe sur /activate
+      //    (bookmark, historique, curiosité) ; ce n'est pas un client perdu.
+      //  - bad_email / bad_code : le lien du mail est arrivé abîmé (client
+      //    mail qui tronque, copier-coller partiel) → là, c'est un client qui
+      //    a payé et qui ne peut pas activer. Les confondre masquerait
+      //    exactement le problème qu'on cherche.
+      if (valid) {
+        track('activation_page_viewed', { valid: true });
+      } else if (!email && !code) {
+        track('activation_page_viewed', { valid: false, reason: 'missing_params' });
+      } else if (email.indexOf('@') <= 0) {
+        track('activation_page_viewed', { valid: false, reason: 'bad_email' });
+      } else {
+        track('activation_page_viewed', { valid: false, reason: 'bad_code' });
+      }
+
       if (!valid) {
         errorBlock.style.display = 'block';
         openButton.style.display = 'none';
@@ -267,6 +360,13 @@
         encodeURIComponent(email) +
         '&code=' + encodeURIComponent(code);
       openButton.href = deepLink;
+
+      // Ce bouton pointe vers un scheme padelup:// : la délégation de clic
+      // d'analytics.js ne capte que les liens App Store / Play Store, il faut
+      // donc le tracker explicitement.
+      openButton.addEventListener('click', function () {
+        track('activation_open_app_click');
+      });
 
       // Auto-redirection : on tente d'ouvrir l'app immédiatement. Si l'app
       // est installée, le système prend la main et cette page n'est jamais
@@ -285,6 +385,10 @@
         // page" — la page de fallback (avec le code) reste accessible
         // après dismissal de l'erreur.
         setTimeout(function () {
+          // Tentative d'ouverture automatique : mesurée à l'instant exact où
+          // on la déclenche, car si l'app est installée la page part en
+          // arrière-plan aussitôt et plus rien ne s'exécute ensuite.
+          track('activation_deeplink_attempt');
           window.location.href = deepLink;
         }, 100);
       }

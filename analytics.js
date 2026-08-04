@@ -10,8 +10,9 @@
  *
  * Custom events exposés :
  *   window.linceyaTrack.appDownloadClick(store)   // 'apple' | 'google'
- *   window.linceyaTrack.checkoutClick(plan)       // 'monthly' | 'annual'
+ *   window.linceyaTrack.checkoutClick(plan)       // 'monthly' | 'annual' | 'elite'
  *   window.linceyaTrack.contactSubmit()
+ *   window.linceyaTrack.plan(plan)                // descripteur du palier
  *   window.linceyaTrack.event(name, params)       // event custom
  */
 (function() {
@@ -24,6 +25,32 @@
   var META_PIXEL_ID = '';     // 16 chiffres — https://business.facebook.com → Events Manager
   var TIKTOK_PIXEL_ID = 'D83L7EBC77U7C4HA8BM0';   // https://ads.tiktok.com → Events Manager
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // ── Pages dont l'URL porte un secret ─────────────────────────────
+  // Deux pages du site reçoivent des données sensibles en paramètres :
+  // /activate (email du client + code d'activation Premium à 6 chiffres) et
+  // /welcome-premium (code d'échange de session Supabase, ou jeton d'accès
+  // en fragment). Or TOUTES les régies transmettent l'URL courante avec leur
+  // pageview : GA4 dans `page_location`, TikTok via ttq.page(), Meta via
+  // fbq PageView. Poser un simple tag sur ces pages enverrait donc des
+  // identifiants d'authentification et une donnée personnelle à trois tiers.
+  //
+  // Ces deux drapeaux, posés par la page AVANT le chargement de ce fichier,
+  // ferment les deux fuites :
+  //   window.linceyaPageLocation — URL de substitution envoyée à GA4 en lieu
+  //                                et place de l'adresse réelle.
+  //   window.linceyaNoAdPixels   — n'initialise jamais les pixels
+  //                                publicitaires sur cette page.
+  //
+  // Le second est volontairement radical plutôt que chirurgical : le SDK
+  // TikTok lit `location.href` lui-même, on ne peut pas lui mentir depuis
+  // ici. Ne rien charger est la seule garantie. Ces pages sont en noindex,
+  // arrivent après le paiement, et la conversion est déjà comptée sur la
+  // page de retour Stripe : leur valeur publicitaire est nulle.
+  var pageLocationOverride = typeof window.linceyaPageLocation === 'string'
+    ? window.linceyaPageLocation
+    : null;
+  var adPixelsBlocked = window.linceyaNoAdPixels === true;
 
   // 1. Init dataLayer + gtag stub (sync, avant le chargement de gtag.js)
   window.dataLayer = window.dataLayer || [];
@@ -50,18 +77,25 @@
 
   // 4. Configure GA4
   gtag('js', new Date());
-  gtag('config', GA_ID, {
+  var gaConfig = {
     'anonymize_ip': true,              // anonymisation IP (CNIL recommandé)
     'allow_google_signals': false,     // pas de remarketing tant que consent pas donné
     'cookie_flags': 'SameSite=None;Secure'
-  });
+  };
+  // Substitution posée DANS le `config`, et pas par un `gtag('set', …)` en
+  // amont : un `set` empilé avant le `gtag('js', …)` n'est garanti nulle part
+  // par la documentation Google, et s'il était ignoré la vraie URL — donc le
+  // secret — partirait sans que rien ne le signale. Ici, la valeur fait
+  // partie de la commande qui déclenche le pageview.
+  if (pageLocationOverride) gaConfig.page_location = pageLocationOverride;
+  gtag('config', GA_ID, gaConfig);
 
   // ── Meta Pixel (Facebook + Instagram ads) ────────────────────────
   // Chargé uniquement après consent marketing (RGPD). Stub présent dès
   // le départ pour pouvoir queue les events avant le load.
   var metaLoaded = false;
   function initMetaPixel() {
-    if (metaLoaded || !META_PIXEL_ID) return;
+    if (adPixelsBlocked || metaLoaded || !META_PIXEL_ID) return;
     metaLoaded = true;
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -75,7 +109,11 @@
   // ── TikTok Pixel ─────────────────────────────────────────────────
   var tiktokLoaded = false;
   function initTikTokPixel() {
-    if (tiktokLoaded || !TIKTOK_PIXEL_ID) return;
+    // Garde en tete de fonction plutot qu au site d appel : c est le seul
+    // moyen d etre sur qu aucun chemin present ou futur (file d attente de
+    // consentement, appel depuis une page) ne puisse charger le SDK sur une
+    // page dont l URL porte un secret.
+    if (adPixelsBlocked || tiktokLoaded || !TIKTOK_PIXEL_ID) return;
     tiktokLoaded = true;
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify",
@@ -95,9 +133,47 @@
     }(window, document, 'ttq');
   }
 
+  // ── Catalogue des paliers vendus ─────────────────────────────────
+  // Source de vérité unique des montants remontés aux régies. Ce sont les
+  // prix du paiement WEB (Stripe sur linceya.com) : sur les stores mobiles
+  // l'Élite est à 49,99 €, ce tarif-là n'a rien à faire ici.
+  // Les trois checkout.html (fr/en/es) lisent cette table via
+  // linceyaTrack.plan() — sinon le prix serait recopié dans quatre fichiers
+  // et c'est exactement comme ça qu'un 9,99 € en dur avait survécu partout.
+  var PLAN_CATALOG = {
+    monthly: { value: 9.99,  label: 'Linceya Premium', ltv: 119.88 },
+    annual:  { value: 99.99, label: 'Linceya Premium', ltv: 99.99  },
+    elite:   { value: 44.99, label: 'Linceya Élite',   ltv: 539.88 }
+  };
+
+  // Palier inconnu (lien ancien, paramètre tronqué, visiteur qui bricole
+  // l'URL) → on retombe sur le mensuel, le moins cher : mieux vaut
+  // sous-estimer une conversion que gonfler le CA remonté aux régies.
+  // contentId garde le préfixe historique 'linceya_premium_' pour que le
+  // begin_checkout et le purchase d'un même achat portent le même
+  // identifiant côté TikTok (sinon le funnel ne se recolle plus).
+  function planInfo(plan) {
+    // hasOwnProperty et pas PLAN_CATALOG[plan] : la valeur vient de l'URL,
+    // et ?plan=toString ferait remonter une méthode héritée d'Object — donc
+    // un montant undefined envoyé aux régies.
+    var known = Object.prototype.hasOwnProperty.call(PLAN_CATALOG, plan);
+    var key = known ? plan : 'monthly';
+    var d = PLAN_CATALOG[key];
+    return {
+      key: key,
+      value: d.value,
+      label: d.label,
+      ltv: d.ltv,
+      contentId: 'linceya_premium_' + key
+    };
+  }
+
   // 5. Helpers de tracking custom — appelés depuis les boutons clés du site.
   // Forwardent vers GA4 + Meta Pixel + TikTok Pixel quand chargés.
   window.linceyaTrack = {
+    // Exposé pour les pages de paiement : elles ont besoin du montant, du
+    // libellé et de l'identifiant produit du palier acheté.
+    plan: planInfo,
     appDownloadClick: function(store) {
       gtag('event', 'app_download_click', {
         'store': store,           // 'apple' ou 'google'
@@ -107,19 +183,29 @@
       if (window.ttq) window.ttq.track('ClickButton', { content_name: 'app_download_' + store });
     },
     checkoutClick: function(plan) {
-      var value = plan === 'annual' ? 99.99 : 9.99;
+      // Le ternaire précédent ne connaissait que 'annual' : tout le reste,
+      // Élite compris, était valorisé 9,99 € au lieu de 44,99 €. La table
+      // évite que l'ajout d'un palier repasse en silence au tarif mensuel.
+      // TOUT vient de la table, pas seulement le montant. Concatener
+      // l argument brut dans l identifiant produit — comme le faisait ce code
+      // — casse precisement ce que le prefixe est cense garantir : pour un
+      // palier inconnu, TikTok recevait un begin_checkout
+      // « linceya_premium_<n importe quoi> » puis un purchase
+      // « linceya_premium_monthly », deux identifiants differents, donc un
+      // funnel qui ne se recolle jamais.
+      var info = planInfo(plan);
       gtag('event', 'begin_checkout', {
-        'plan': plan,             // 'monthly' ou 'annual'
+        'plan': info.key,         // 'monthly', 'annual' ou 'elite', normalise
         'currency': 'EUR',
-        'value': value
+        'value': info.value
       });
       // Meta Pixel standard event "InitiateCheckout"
       if (window.fbq) window.fbq('track', 'InitiateCheckout', {
-        currency: 'EUR', value: value, content_name: 'Linceya Premium ' + plan
+        currency: 'EUR', value: info.value, content_name: info.label
       });
       // TikTok Pixel standard event "InitiateCheckout"
       if (window.ttq) window.ttq.track('InitiateCheckout', {
-        value: value, currency: 'EUR', content_id: 'linceya_premium_' + plan
+        value: info.value, currency: 'EUR', content_id: info.contentId
       });
     },
     contactSubmit: function() {
@@ -180,14 +266,36 @@
 
   // Cas où l'user a déjà consenti à un précédent visit : cookies.js a
   // restauré currentConsent depuis localStorage SANS dispatch d'event.
-  // On poll pour attraper l'init initial.
-  var attempts = 0;
-  var poll = setInterval(function() {
-    if (window.linceyaConsent) {
-      clearInterval(poll);
-      syncConsent();
-    } else if (++attempts > 20) {
-      clearInterval(poll);
-    }
-  }, 100);
+  //
+  // Ce cas n'était rattrapé que par le poll ci-dessous : les pixels pub ne
+  // partaient donc qu'au bout de ~100 ms. Toute page qui trackait dès son
+  // DOMContentLoaded — la page de retour Stripe, celle qui compte — trouvait
+  // window.ttq encore undefined et perdait sa conversion. On synchronise
+  // maintenant dès que l'API de consentement est là, sans attendre un tick.
+  //
+  // On s'inscrit en plus dans la file d'attente 'marketing' de cookies.js.
+  // Deux raisons : elle est vidée AVANT le dispatch de 'linceyaConsentChange',
+  // et elle est servie dans l'ordre d'inscription. analytics.js étant chargé
+  // avant le code des pages, on y est premier — les pixels existent donc déjà
+  // quand une page track sa conversion depuis son propre onConsent().
+  function bindConsent() {
+    if (!window.linceyaConsent) return false;
+    syncConsent();
+    try {
+      window.linceyaConsent.onConsent('marketing', function() {
+        initMetaPixel();
+        initTikTokPixel();
+      });
+    } catch (_) {}
+    return true;
+  }
+
+  // cookies.js peut malgré tout arriver après nous selon les pages et le
+  // cache : on garde le sondage en filet de sécurité (2 s max).
+  if (!bindConsent()) {
+    var attempts = 0;
+    var poll = setInterval(function() {
+      if (bindConsent() || ++attempts > 20) clearInterval(poll);
+    }, 100);
+  }
 })();
