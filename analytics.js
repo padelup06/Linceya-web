@@ -22,7 +22,7 @@
   // IDs des plateformes — remplis-les quand tu auras créé chaque pixel.
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   var GA_ID = 'G-Q4S2XFZENT';
-  var META_PIXEL_ID = '';     // 16 chiffres — https://business.facebook.com → Events Manager
+  var META_PIXEL_ID = '1746089276583500';   // dataset « Linceya Web » — https://business.facebook.com → Gestionnaire d'événements
   var TIKTOK_PIXEL_ID = 'D83L7EBC77U7C4HA8BM0';   // https://ads.tiktok.com → Events Manager
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
