@@ -707,16 +707,15 @@ function trackPurchase() {
     try { sessionStorage.setItem(key, txnId); } catch (_) {}
 
     // Régies pub : on attend le consentement marketing plutôt que de tester
-    // window.fbq / window.ttq à un instant où ils n'existent pas encore.
-    // (fbq reste inerte tant que META_PIXEL_ID est vide dans analytics.js ;
-    // le code est gardé pour le jour où l'identifiant sera renseigné.)
+    // les SDK à un instant où ils n'existent pas encore.
+    //
+    // La diffusion vit dans analytics.js et non ici. Cette page décrivait
+    // auparavant la même vente en deux dialectes, et les trois checkout.html
+    // en faisaient autant : ajouter une régie imposait de rouvrir les trois
+    // fichiers et d'y répéter le même montant. Désormais une seule ligne, et
+    // chaque régie absente reste simplement muette.
     onMarketingConsent(function() {
-      if (window.fbq) window.fbq('track', 'Subscribe', {
-        currency: 'EUR', value: info.value, predicted_ltv: info.ltv
-      });
-      if (window.ttq) window.ttq.track('Subscribe', {
-        value: info.value, currency: 'EUR', content_id: info.contentId
-      });
+      window.linceyaTrack.adConversion('purchase', info, txnId);
     });
   } catch (_) {}
 }

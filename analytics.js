@@ -24,6 +24,24 @@
   var GA_ID = 'G-Q4S2XFZENT';
   var META_PIXEL_ID = '1746089276583500';   // dataset « Linceya Web » — https://business.facebook.com → Gestionnaire d'événements
   var TIKTOK_PIXEL_ID = 'D83L7EBC77U7C4HA8BM0';   // https://ads.tiktok.com → Events Manager
+  var X_PIXEL_ID = '';        // https://ads.x.com → Outils → Gestionnaire d'événements
+  // X n'accepte pas de noms d'événements : chaque conversion doit être créée
+  // dans son gestionnaire, qui renvoie un identifiant de la forme
+  // « tw-<pixel>-<event> ». Sans ces identifiants, seule la vue de page part.
+  var X_EVENTS = {
+    checkout: '',   // conversion « début de paiement »
+    purchase: ''    // conversion « abonnement souscrit »
+  };
+  // Google Ads. Le site mesure déjà tout correctement via GA4 ; deux chemins
+  // existent donc, et ils ne s'excluent pas :
+  //   a) importer les conversions GA4 dans Google Ads — zéro code, mais
+  //      attribution passée par le modèle GA4, donc plus tardive ;
+  //   b) renseigner ces trois valeurs pour une remontée directe, plus fidèle,
+  //      que Google recommande désormais pour l'optimisation des enchères.
+  // L'étiquette se lit dans Google Ads → Objectifs → Conversions → l'action.
+  var GOOGLE_ADS_ID = '';               // AW-XXXXXXXXX
+  var GOOGLE_ADS_LABEL_CHECKOUT = '';   // étiquette de l'action « début de paiement »
+  var GOOGLE_ADS_LABEL_PURCHASE = '';   // étiquette de l'action « achat »
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   // ── Pages dont l'URL porte un secret ─────────────────────────────
@@ -90,6 +108,12 @@
   if (pageLocationOverride) gaConfig.page_location = pageLocationOverride;
   gtag('config', GA_ID, gaConfig);
 
+  // Google Ads partage la balise gtag deja chargee pour GA4 : aucun script
+  // supplementaire, aucune requete de plus. Et le Consent Mode v2 configure
+  // plus haut s applique automatiquement — `ad_storage` reste refuse tant que
+  // l utilisateur n a pas accepte le marketing, sans code specifique.
+  if (GOOGLE_ADS_ID) gtag('config', GOOGLE_ADS_ID);
+
   // ── Meta Pixel (Facebook + Instagram ads) ────────────────────────
   // Chargé uniquement après consent marketing (RGPD). Stub présent dès
   // le départ pour pouvoir queue les events avant le load.
@@ -133,6 +157,67 @@
     }(window, document, 'ttq');
   }
 
+  // ── Pixel X (ex-Twitter) ─────────────────────────────────────────
+  var xLoaded = false;
+  function initXPixel() {
+    if (adPixelsBlocked || xLoaded || !X_PIXEL_ID) return;
+    xLoaded = true;
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):
+    s.queue.push(arguments)},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,
+    u.src='https://static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],
+    a.parentNode.insertBefore(u,a))}(window,document,'script');
+    window.twq('config', X_PIXEL_ID);
+  }
+
+  /**
+   * Une conversion publicitaire, diffusee a toutes les regies chargees.
+   *
+   * Les pages n appellent plus `fbq` ou `ttq` elles-memes : elles decrivaient
+   * la meme vente en trois dialectes, dans trois fichiers, et ajouter une
+   * regie obligeait a les rouvrir tous. Ici, une seule.
+   *
+   * `kind` vaut 'checkout' (depart vers le paiement) ou 'purchase' (encaisse).
+   */
+  function adConversion(kind, info, txnId) {
+    var isPurchase = kind === 'purchase';
+    try {
+      if (window.fbq) {
+        window.fbq('track', isPurchase ? 'Subscribe' : 'InitiateCheckout',
+          isPurchase
+            ? { currency: 'EUR', value: info.value, predicted_ltv: info.ltv }
+            : { currency: 'EUR', value: info.value, content_name: info.label });
+      }
+    } catch (_) {}
+    try {
+      if (window.ttq) {
+        window.ttq.track(isPurchase ? 'Subscribe' : 'InitiateCheckout',
+          { value: info.value, currency: 'EUR', content_id: info.contentId });
+      }
+    } catch (_) {}
+    try {
+      var xEvent = isPurchase ? X_EVENTS.purchase : X_EVENTS.checkout;
+      if (window.twq && xEvent) {
+        window.twq('event', xEvent, {
+          value: info.value,
+          currency: 'EUR',
+          conversion_id: txnId || undefined,
+          contents: [{ content_id: info.contentId, content_name: info.label }]
+        });
+      }
+    } catch (_) {}
+    try {
+      var label = isPurchase ? GOOGLE_ADS_LABEL_PURCHASE : GOOGLE_ADS_LABEL_CHECKOUT;
+      if (GOOGLE_ADS_ID && label) {
+        gtag('event', 'conversion', {
+          send_to: GOOGLE_ADS_ID + '/' + label,
+          value: info.value,
+          currency: 'EUR',
+          transaction_id: txnId || ''
+        });
+      }
+    } catch (_) {}
+  }
+
   // ── Catalogue des paliers vendus ─────────────────────────────────
   // Source de vérité unique des montants remontés aux régies. Ce sont les
   // prix du paiement WEB (Stripe sur linceya.com) : sur les stores mobiles
@@ -174,6 +259,9 @@
     // Exposé pour les pages de paiement : elles ont besoin du montant, du
     // libellé et de l'identifiant produit du palier acheté.
     plan: planInfo,
+    // Diffusion d'une conversion a toutes les regies. Utilise par les trois
+    // checkout.html, qui n ont ainsi plus a connaitre le moindre SDK.
+    adConversion: adConversion,
     appDownloadClick: function(store) {
       gtag('event', 'app_download_click', {
         'store': store,           // 'apple' ou 'google'
@@ -181,6 +269,7 @@
       });
       if (window.fbq) window.fbq('trackCustom', 'AppDownloadClick', { store: store });
       if (window.ttq) window.ttq.track('ClickButton', { content_name: 'app_download_' + store });
+      try { if (window.twq && X_PIXEL_ID) window.twq('event', 'tw-' + X_PIXEL_ID + '-click'); } catch (_) {}
     },
     checkoutClick: function(plan) {
       // Le ternaire précédent ne connaissait que 'annual' : tout le reste,
@@ -199,14 +288,7 @@
         'currency': 'EUR',
         'value': info.value
       });
-      // Meta Pixel standard event "InitiateCheckout"
-      if (window.fbq) window.fbq('track', 'InitiateCheckout', {
-        currency: 'EUR', value: info.value, content_name: info.label
-      });
-      // TikTok Pixel standard event "InitiateCheckout"
-      if (window.ttq) window.ttq.track('InitiateCheckout', {
-        value: info.value, currency: 'EUR', content_id: info.contentId
-      });
+      adConversion('checkout', info);
     },
     contactSubmit: function() {
       gtag('event', 'contact_submit', { 'event_category': 'engagement' });
@@ -235,6 +317,7 @@
     if (marketing) {
       initMetaPixel();
       initTikTokPixel();
+      initXPixel();
     }
   }
 
@@ -285,6 +368,7 @@
       window.linceyaConsent.onConsent('marketing', function() {
         initMetaPixel();
         initTikTokPixel();
+        initXPixel();
       });
     } catch (_) {}
     return true;
