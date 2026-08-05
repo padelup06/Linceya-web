@@ -24,13 +24,16 @@
   var GA_ID = 'G-Q4S2XFZENT';
   var META_PIXEL_ID = '1746089276583500';   // dataset « Linceya Web » — https://business.facebook.com → Gestionnaire d'événements
   var TIKTOK_PIXEL_ID = 'D83L7EBC77U7C4HA8BM0';   // https://ads.tiktok.com → Events Manager
-  var X_PIXEL_ID = '';        // https://ads.x.com → Outils → Gestionnaire d'événements
+  var X_PIXEL_ID = 're8do';   // https://ads.x.com → Outils → Gestionnaire d'événements
   // X n'accepte pas de noms d'événements : chaque conversion doit être créée
   // dans son gestionnaire, qui renvoie un identifiant de la forme
-  // « tw-<pixel>-<event> ». Sans ces identifiants, seule la vue de page part.
+  // « tw-<pixel>-<event> ». Ces identifiants ne se devinent PAS — un
+  // identifiant fabriqué est rejeté en silence, sans le moindre message.
+  // Attention à la ressemblance avec le pixel : un caractère les sépare.
   var X_EVENTS = {
-    checkout: '',   // conversion « début de paiement »
-    purchase: ''    // conversion « abonnement souscrit »
+    checkout: 'tw-re8do-re8ds',  // « Checkout initiated », type Add to cart
+    purchase: 'tw-re8do-re8du',  // « Abonnement souscrit », type Purchase
+    appDownload: ''              // aucune conversion créée pour ça à ce jour
   };
   // Google Ads. Le site mesure déjà tout correctement via GA4 ; deux chemins
   // existent donc, et ils ne s'excluent pas :
@@ -197,11 +200,19 @@
     try {
       var xEvent = isPurchase ? X_EVENTS.purchase : X_EVENTS.checkout;
       if (window.twq && xEvent) {
+        // Structure `contents` telle que X la documente. Un objet incomplet
+        // est accepte mais prive son optimisation d une partie du signal.
         window.twq('event', xEvent, {
           value: info.value,
           currency: 'EUR',
           conversion_id: txnId || undefined,
-          contents: [{ content_id: info.contentId, content_name: info.label }]
+          contents: [{
+            content_type: 'product',
+            content_id: info.contentId,
+            content_name: info.label,
+            content_price: info.value,
+            num_items: 1
+          }]
         });
       }
     } catch (_) {}
@@ -269,7 +280,14 @@
       });
       if (window.fbq) window.fbq('trackCustom', 'AppDownloadClick', { store: store });
       if (window.ttq) window.ttq.track('ClickButton', { content_name: 'app_download_' + store });
-      try { if (window.twq && X_PIXEL_ID) window.twq('event', 'tw-' + X_PIXEL_ID + '-click'); } catch (_) {}
+      // Conditionne a une conversion REELLEMENT creee cote X. La version
+      // precedente fabriquait « tw-<pixel>-click », un identifiant qui
+      // n existe pas : X l aurait rejete sans rien signaler.
+      try {
+        if (window.twq && X_EVENTS.appDownload) {
+          window.twq('event', X_EVENTS.appDownload, { contents: [{ content_name: 'app_download_' + store }] });
+        }
+      } catch (_) {}
     },
     checkoutClick: function(plan) {
       // Le ternaire précédent ne connaissait que 'annual' : tout le reste,
