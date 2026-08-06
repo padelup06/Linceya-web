@@ -78,6 +78,65 @@
   // cours de visite, il faut le faire taire activement.
   var marketingGranted = false;
 
+  // ── Cookies posés par les régies ─────────────────────────────────
+  // Faire taire les SDK ne suffit pas : leurs cookies restent sur la machine
+  // du visiteur. Un retrait qui laisse les traces en place n'est pas un
+  // retrait, et la politique de confidentialité promet l'inverse.
+  //
+  // `_tt_enable_cookie` est le piège de cette liste : TikTok en pose DEUX,
+  // et celui-là survit à un nettoyage qui ne viserait que `_ttp`.
+  var MARKETING_COOKIES = [
+    '_fbp', '_fbc',                      // Meta
+    '_ttp', '_tt_enable_cookie',         // TikTok — les deux, pas seulement _ttp
+    '_gcl_au', '_gcl_aw', '_gcl_dc'      // Google Ads (conversion linker)
+  ];
+  // Les cookies de X (`personalization_id`, `muc_ads`) sont posés sur SON
+  // domaine : inaccessibles depuis le nôtre. Ne rien promettre à leur sujet.
+
+  /**
+   * Efface un cookie.
+   *
+   * Un cookie ne s'efface que si le domaine ET le chemin correspondent
+   * exactement à ceux de la pose — or `document.cookie` ne les expose pas en
+   * lecture. On balaie donc les combinaisons plausibles : hôte courant, hôte
+   * préfixé d'un point (la forme qu'emploient les régies pour couvrir les
+   * sous-domaines), domaine apex, et sans domaine du tout.
+   */
+  function deleteCookie(name) {
+    var host = window.location.hostname;
+    var domains = [null, host, '.' + host];
+    var parts = host.split('.');
+    if (parts.length > 2) {
+      var apex = parts.slice(-2).join('.');
+      domains.push(apex, '.' + apex);
+    }
+    var expired = '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    for (var i = 0; i < domains.length; i++) {
+      try {
+        document.cookie = name + expired + (domains[i] ? '; domain=' + domains[i] : '');
+      } catch (_) {}
+    }
+  }
+
+  function purgeMarketingCookies() {
+    for (var i = 0; i < MARKETING_COOKIES.length; i++) deleteCookie(MARKETING_COOKIES[i]);
+  }
+
+  /**
+   * Cookies GA4. `_ga_<identifiant de flux>` porte un suffixe qui dépend de la
+   * propriété : une liste figée le raterait. On balaie donc les cookies
+   * réellement présents et on filtre par préfixe.
+   */
+  function purgeAnalyticsCookies() {
+    try {
+      var all = document.cookie ? document.cookie.split(';') : [];
+      for (var i = 0; i < all.length; i++) {
+        var name = all[i].split('=')[0].replace(/^\s+|\s+$/g, '');
+        if (name === '_ga' || name.indexOf('_ga_') === 0) deleteCookie(name);
+      }
+    } catch (_) {}
+  }
+
   // 1. Init dataLayer + gtag stub (sync, avant le chargement de gtag.js)
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
@@ -339,6 +398,11 @@
       'ad_user_data': marketing ? 'granted' : 'denied',
       'ad_personalization': marketing ? 'granted' : 'denied'
     });
+
+    // Le Consent Mode empêche GA4 d'écrire de NOUVEAUX cookies, mais n'efface
+    // pas ceux d'un accord précédent. Sans appel explicite, `_ga` survivrait
+    // au refus.
+    if (!analytics) purgeAnalyticsCookies();
     marketingGranted = marketing;
 
     if (marketing) {
@@ -362,6 +426,7 @@
     // envoi (cf. `adConversion`).
     try { if (window.fbq) window.fbq('consent', 'revoke'); } catch (_) {}
     try { if (window.ttq && window.ttq.revokeConsent) window.ttq.revokeConsent(); } catch (_) {}
+    purgeMarketingCookies();
   }
 
   // Auto-tracking des clics App Store / Play Store partout sur le site,
