@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://linceya.com/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/" />
@@ -37,7 +37,7 @@
 
   <url>
     <loc>https://linceya.com/blog/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -48,7 +48,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -59,7 +59,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/" />
@@ -136,7 +136,7 @@
 
   <url>
     <loc>https://linceya.com/blog/combien-coute-padel-prix-heure-raquette-terrain-licence.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-much-does-padel-cost.html" />
@@ -169,7 +169,7 @@
 
   <url>
     <loc>https://linceya.com/blog/comment-choisir-raquette-padel.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -191,7 +191,7 @@
 
   <url>
     <loc>https://linceya.com/blog/comment-lire-et-anticiper-les-coups-de-son-adversaire-au-pad.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
@@ -213,7 +213,7 @@
 
   <url>
     <loc>https://linceya.com/blog/comment-tenir-sa-raquette-de-padel-prises-essentielles.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-hold-a-padel-racket-essential-grips.html" />
@@ -224,7 +224,7 @@
 
   <url>
     <loc>https://linceya.com/blog/comparatif-raquettes-padel-2025-meilleurs-modeles.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/best-padel-rackets-2025-tested-compared.html" />
@@ -235,7 +235,7 @@
 
   <url>
     <loc>https://linceya.com/blog/equipement-padel-guide-achat-2025.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-equipment-buying-guide-2025.html" />
@@ -246,7 +246,7 @@
 
   <url>
     <loc>https://linceya.com/blog/histoire-du-padel-origines-expansion-succes-mondial.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/history-of-padel-origins-expansion-global-success.html" />
@@ -267,8 +267,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-which-sport-should-you-choose.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/padel-vs-tenis-que-deporte-elegir.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/blog/padel-vs-tennis-squash-pickleball-differences.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-squash-pickleball-differences.html" />
@@ -279,7 +290,7 @@
 
   <url>
     <loc>https://linceya.com/blog/placement-padel-positionnement-phases-de-jeu.html</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-positioning-where-to-stand-court-phase-of-play.html" />
@@ -301,7 +312,7 @@
 
   <url>
     <loc>https://linceya.com/blog/quand-monter-au-filet-padel-timing.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/when-to-move-to-the-net-in-padel.html" />
@@ -312,7 +323,7 @@
 
   <url>
     <loc>https://linceya.com/blog/quel-niveau-padel-classement-elo.html</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/whats-my-real-padel-level-elo-ranking.html" />
@@ -323,7 +334,7 @@
 
   <url>
     <loc>https://linceya.com/blog/quelle-raquette-de-padel-pour-un-debutant.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/best-padel-racket-for-beginners.html" />
@@ -345,7 +356,7 @@
 
   <url>
     <loc>https://linceya.com/blog/regles-du-padel-expliquees-simplement.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-rules-explained-simply-beginners-guide.html" />
@@ -389,7 +400,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/history-of-padel-origins-expansion-global-success.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/history-of-padel-origins-expansion-global-success.html" />
@@ -433,7 +444,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/how-to-choose-a-padel-racket.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -499,7 +510,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
@@ -565,7 +576,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/padel-vs-tennis-squash-pickleball-differences.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-squash-pickleball-differences.html" />
@@ -575,8 +586,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/en/blog/padel-vs-tennis-which-sport-should-you-choose.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-which-sport-should-you-choose.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/padel-vs-tenis-que-deporte-elegir.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/en/blog/whats-my-real-padel-level-elo-ranking.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/whats-my-real-padel-level-elo-ranking.html" />
@@ -587,7 +609,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/when-to-move-to-the-net-in-padel.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/when-to-move-to-the-net-in-padel.html" />
@@ -598,7 +620,7 @@
 
   <url>
     <loc>https://linceya.com/en/blog/why-is-padel-almost-never-played-as-singles.html</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/why-is-padel-almost-never-played-as-singles.html" />
@@ -620,7 +642,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/colocacion-en-padel-donde-posicionarse-segun-fase-de-juego.html</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-positioning-where-to-stand-court-phase-of-play.html" />
@@ -642,7 +664,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/como-elegir-una-pala-de-padel.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-choose-a-padel-racket.html" />
@@ -664,7 +686,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/como-leer-y-anticipar-los-golpes-de-tu-rival-en-padel.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/how-to-read-and-anticipate-your-opponent-s-shots-in-padel.html" />
@@ -719,7 +741,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/cuando-subir-a-la-red-en-padel-timing-perfecto.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/when-to-move-to-the-net-in-padel.html" />
@@ -795,8 +817,19 @@
   </url>
 
   <url>
+    <loc>https://linceya.com/es/blog/padel-vs-tenis-que-deporte-elegir.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-which-sport-should-you-choose.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://linceya.com/es/blog/padel-vs-tenis-que-deporte-elegir.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://linceya.com/blog/padel-vs-tennis-quel-sport-choisir-selon-profil.html" />
+  </url>
+
+  <url>
     <loc>https://linceya.com/es/blog/padel-vs-tenis-squash-pickleball-diferencias.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-vs-tennis-squash-pickleball-differences.html" />
@@ -807,7 +840,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/por-que-el-padel-no-se-juega-individual.html</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/why-is-padel-almost-never-played-as-singles.html" />
@@ -829,7 +862,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/que-pala-de-padel-para-nivel-intermedio.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/best-padel-racket-for-intermediate-level.html" />
@@ -851,7 +884,7 @@
 
   <url>
     <loc>https://linceya.com/es/blog/reglas-del-padel-explicadas-forma-sencilla.html</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://linceya.com/en/blog/padel-rules-explained-simply-beginners-guide.html" />
