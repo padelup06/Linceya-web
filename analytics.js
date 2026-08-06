@@ -73,6 +73,11 @@
     : null;
   var adPixelsBlocked = window.linceyaNoAdPixels === true;
 
+  // Consentement marketing courant. Nécessaire parce qu'un SDK publicitaire
+  // déjà chargé ne se décharge pas : si le visiteur revient sur son accord en
+  // cours de visite, il faut le faire taire activement.
+  var marketingGranted = false;
+
   // 1. Init dataLayer + gtag stub (sync, avant le chargement de gtag.js)
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
@@ -182,6 +187,10 @@
    * `kind` vaut 'checkout' (depart vers le paiement) ou 'purchase' (encaisse).
    */
   function adConversion(kind, info, txnId) {
+    // Dernier rempart : aucun envoi publicitaire si le consentement a été
+    // retiré. Indispensable pour X, qui n'expose aucune méthode de révocation,
+    // et utile pour toute régie ajoutée plus tard qui n'en aurait pas non plus.
+    if (!marketingGranted) return;
     var isPurchase = kind === 'purchase';
     try {
       if (window.fbq) {
@@ -330,13 +339,29 @@
       'ad_user_data': marketing ? 'granted' : 'denied',
       'ad_personalization': marketing ? 'granted' : 'denied'
     });
-    // Marketing consent → on charge les pixels publicitaires
-    // (Meta + TikTok). Ils restent inertes tant que consent pas donné.
+    marketingGranted = marketing;
+
     if (marketing) {
+      // Accord : on charge les pixels, puis on lève une éventuelle
+      // suspension posée lors d'un refus précédent dans la même visite.
       initMetaPixel();
       initTikTokPixel();
       initXPixel();
+      try { if (window.fbq) window.fbq('consent', 'grant'); } catch (_) {}
+      try { if (window.ttq && window.ttq.grantConsent) window.ttq.grantConsent(); } catch (_) {}
+      return;
     }
+
+    // RETRAIT. GA4 s'arrête tout seul via le `consent update` ci-dessus, mais
+    // un SDK publicitaire déjà chargé, lui, continue : il faut le faire taire.
+    // Sans ce bloc, un visiteur qui acceptait puis se ravisait restait suivi
+    // jusqu'au rechargement de la page — un retrait qui ne retire rien.
+    //
+    // Les deux régies qui exposent une API de consentement l'utilisent. X n'en
+    // publie pas : c'est `marketingGranted` qui le musèle, en amont de chaque
+    // envoi (cf. `adConversion`).
+    try { if (window.fbq) window.fbq('consent', 'revoke'); } catch (_) {}
+    try { if (window.ttq && window.ttq.revokeConsent) window.ttq.revokeConsent(); } catch (_) {}
   }
 
   // Auto-tracking des clics App Store / Play Store partout sur le site,
