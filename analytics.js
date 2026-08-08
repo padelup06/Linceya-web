@@ -35,7 +35,7 @@
     purchase: 'tw-re8do-re8du',  // « Abonnement souscrit », type Purchase
     appDownload: ''              // aucune conversion créée pour ça à ce jour
   };
-  var SNAPCHAT_PIXEL_ID = '';   // https://ads.snapchat.com → Gestionnaire d'événements → Pixel Snap
+  var SNAPCHAT_PIXEL_ID = '4caca82b-9d91-43a1-b02d-7793717cb09f';   // https://ads.snapchat.com → Gestionnaire d'événements → Pixel Snap
   // Google Ads. Le site mesure déjà tout correctement via GA4 ; deux chemins
   // existent donc, et ils ne s'excluent pas :
   //   a) importer les conversions GA4 dans Google Ads — zéro code, mais
