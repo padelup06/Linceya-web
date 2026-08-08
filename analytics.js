@@ -35,6 +35,7 @@
     purchase: 'tw-re8do-re8du',  // « Abonnement souscrit », type Purchase
     appDownload: ''              // aucune conversion créée pour ça à ce jour
   };
+  var SNAPCHAT_PIXEL_ID = '';   // https://ads.snapchat.com → Gestionnaire d'événements → Pixel Snap
   // Google Ads. Le site mesure déjà tout correctement via GA4 ; deux chemins
   // existent donc, et ils ne s'excluent pas :
   //   a) importer les conversions GA4 dans Google Ads — zéro code, mais
@@ -88,10 +89,13 @@
   var MARKETING_COOKIES = [
     '_fbp', '_fbc',                      // Meta
     '_ttp', '_tt_enable_cookie',         // TikTok — les deux, pas seulement _ttp
+    '_scid', '_scid_r',                  // Snapchat — first-party, donc effaçables
     '_gcl_au', '_gcl_aw', '_gcl_dc'      // Google Ads (conversion linker)
   ];
   // Les cookies de X (`personalization_id`, `muc_ads`) sont posés sur SON
   // domaine : inaccessibles depuis le nôtre. Ne rien promettre à leur sujet.
+  // Même remarque pour `sc_at`, que Snapchat pose sur le sien : seuls ses
+  // cookies first-party (`_scid`, `_scid_r`) sont à notre portée.
 
   /**
    * Efface un cookie.
@@ -236,6 +240,34 @@
     window.twq('config', X_PIXEL_ID);
   }
 
+  // ── Pixel Snapchat ───────────────────────────────────────────────
+  var snapchatLoaded = false;
+  function initSnapchatPixel() {
+    if (adPixelsBlocked || snapchatLoaded || !SNAPCHAT_PIXEL_ID) return;
+    snapchatLoaded = true;
+    // Le snippet officiel de Snap est recopié ici avec UNE correction : il
+    // écrit `r=t.createElement(s)` sans déclarer `r`. Ce fichier tourne en
+    // 'use strict', où une affectation à une variable non déclarée lève une
+    // ReferenceError — le pixel ne se chargerait jamais, et l'erreur
+    // remonterait dans la console sans que rien n'indique la cause. D'où le
+    // `var r`. Ne pas « restaurer » le snippet d'origine en le recopiant.
+    (function(e, t, n) {
+      if (e.snaptr) return;
+      var a = e.snaptr = function() {
+        a.handleRequest ? a.handleRequest.apply(a, arguments) : a.queue.push(arguments);
+      };
+      a.queue = [];
+      var s = 'script';
+      var r = t.createElement(s);
+      r.async = !0;
+      r.src = n;
+      var u = t.getElementsByTagName(s)[0];
+      u.parentNode.insertBefore(r, u);
+    })(window, document, 'https://sc-static.net/scevent.min.js');
+    window.snaptr('init', SNAPCHAT_PIXEL_ID);
+    window.snaptr('track', 'PAGE_VIEW');
+  }
+
   /**
    * Une conversion publicitaire, diffusee a toutes les regies chargees.
    *
@@ -281,6 +313,27 @@
             content_price: info.value,
             num_items: 1
           }]
+        });
+      }
+    } catch (_) {}
+    try {
+      if (window.snaptr) {
+        // Snap nomme ses paramètres autrement que les autres régies : `price`
+        // et non `value`, `number_items` et non `num_items`. Recopier le
+        // vocabulaire de Meta ici ferait remonter une conversion sans montant,
+        // acceptée en silence, et l'optimisation à la valeur serait aveugle.
+        //
+        // PURCHASE plutôt que SUBSCRIBE, alors que Meta et TikTok reçoivent
+        // « Subscribe » : les deux existent chez Snap, mais PURCHASE est celui
+        // que ses enchères à la valeur savent optimiser partout. Un seul des
+        // deux doit partir, sinon la vente est comptée en double.
+        window.snaptr('track', isPurchase ? 'PURCHASE' : 'START_CHECKOUT', {
+          price: info.value,
+          currency: 'EUR',
+          item_ids: [info.contentId],
+          item_category: info.label,
+          number_items: 1,
+          transaction_id: txnId || undefined
         });
       }
     } catch (_) {}
@@ -411,6 +464,7 @@
       initMetaPixel();
       initTikTokPixel();
       initXPixel();
+      initSnapchatPixel();
       try { if (window.fbq) window.fbq('consent', 'grant'); } catch (_) {}
       try { if (window.ttq && window.ttq.grantConsent) window.ttq.grantConsent(); } catch (_) {}
       return;
@@ -421,9 +475,11 @@
     // Sans ce bloc, un visiteur qui acceptait puis se ravisait restait suivi
     // jusqu'au rechargement de la page — un retrait qui ne retire rien.
     //
-    // Les deux régies qui exposent une API de consentement l'utilisent. X n'en
-    // publie pas : c'est `marketingGranted` qui le musèle, en amont de chaque
-    // envoi (cf. `adConversion`).
+    // Les deux régies qui exposent une API de consentement l'utilisent. Ni X
+    // ni Snapchat n'en publient : c'est `marketingGranted` qui les musèle, en
+    // amont de chaque envoi (cf. `adConversion`). Leur pageview initial, lui,
+    // est déjà parti — d'où l'importance de ne charger ces SDK qu'APRÈS
+    // l'accord, jamais avant.
     try { if (window.fbq) window.fbq('consent', 'revoke'); } catch (_) {}
     try { if (window.ttq && window.ttq.revokeConsent) window.ttq.revokeConsent(); } catch (_) {}
     purgeMarketingCookies();
@@ -477,6 +533,7 @@
         initMetaPixel();
         initTikTokPixel();
         initXPixel();
+        initSnapchatPixel();
       });
     } catch (_) {}
     return true;
