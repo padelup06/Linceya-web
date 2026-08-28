@@ -97,7 +97,7 @@
       "price": "0",
       "priceCurrency": "EUR",
       "name": "Gratuit",
-      "description": "Classement ELO, matchs publics, 1 analyse vidéo IA par mois"
+      "description": "Classement ELO, matchs publics, ligues entre amis, 1 analyse vidéo IA par mois"
     },
     {
       "@type": "Offer",
@@ -257,6 +257,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Linceya est le complément idéal à un coach de padel. L'IA analyse votre match de padel et détecte des détails que même un coach peut manquer (comme le timing de montée au filet ou des patterns répétitifs). Beaucoup de coachs de padel utilisent Linceya pour enrichir leurs analyses et proposer des exercices plus ciblés à leurs élèves."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment créer une ligue entre amis au padel ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depuis l'app, créez la ligue avec un nom et une date de fin de saison : Linceya génère un code d'invitation de six caractères, à coller dans votre groupe de discussion. C'est la seule porte d'entrée. Après avoir joué, vous saisissez la manche — deux paires, un score en jeux — et un joueur de la paire adverse la confirme. Le classement donne 3 points par victoire, puis départage à la différence de jeux, à la confrontation directe et au nombre de manches jouées. L'app peut aussi tirer les équipes de la soirée en Americano : à quatre joueurs, les six duos possibles sont épuisés en trois tours, et personne ne reste sur le banc. Les ligues entre amis sont gratuites et sans limite, sur tous les paliers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on gonfler son score dans une ligue entre amis ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Une manche déclarée reste en attente tant qu'un joueur de la paire adverse ne l'a pas confirmée, et ni le déclarant ni son partenaire ne peuvent la valider. Ce n'est pas une règle d'honneur mais une contrainte de la base de données, vérifiée à chaque écriture : une manche non confirmée vaut zéro point et n'entre pas dans le calcul du classement. La paire adverse reçoit une notification dès qu'un score attend sa confirmation, et la saison se clôture d'un geste explicite — c'est ce geste qui sacre le champion."
       }
     }
   ]
@@ -1580,6 +1596,89 @@ nav.scrolled .nav-hamburger span {
 @media (max-width: 900px) { .analysis-cards { grid-template-columns: 1fr; gap: 14px; } }
 
 /* ============================================================
+   LIGUES — section #ligues, reprend la grammaire des .acard
+   ============================================================ */
+.leagues { background: var(--ivory); border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); overflow: hidden; }
+.leagues > :not(.section-veil) { position: relative; z-index: 1; }
+.ligue-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 30px; }
+/* Carte 1 — l'entree */
+.lg-slot, .lg-char { opacity: 0; transform: translateY(7px); transform-box: fill-box; transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.2,0.9,0.25,1.12); }
+.acard.in .lg-slot, .acard.in .lg-char { opacity: 1; transform: translateY(0); }
+.lg-slot { fill: rgba(255,255,255,0.035); stroke: var(--stroke-strong); stroke-width: 1; }
+.lg-char { font-family: var(--font-mono); font-size: 17px; font-weight: 700; fill: var(--gold-light); text-anchor: middle; }
+.lg-rule { fill: #E3C57A; opacity: 0.3; transform: scaleX(0); transform-box: fill-box; transform-origin: left center; transition: transform 0.6s ease 0.42s; }
+.acard.in .lg-rule { transform: scaleX(1); }
+.lg-cap { font-family: var(--font-mono); font-size: 8px; fill: var(--muted); letter-spacing: 0.14em; }
+.lg-cap-gold { fill: var(--gold); }
+.lg-ring, .lg-gate { fill: none; stroke: var(--stroke-strong); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.lg-ring { transition: stroke 0.5s ease 1s; }
+.acard.in .lg-ring { stroke: rgba(227,197,122,0.45); }
+.lg-gate { stroke-dasharray: 28; stroke-dashoffset: 28; transition: stroke-dashoffset 0.5s ease 0.95s, stroke 0.5s ease 1s; }
+.acard.in .lg-gate { stroke-dashoffset: 0; stroke: rgba(227,197,122,0.45); }
+.lg-join { fill: var(--carbon-high); stroke: var(--stroke-strong); stroke-width: 1; opacity: 0; transform: scale(0.4); transform-box: fill-box; transform-origin: center; transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.2,0.9,0.25,1.12); }
+.acard.in .lg-join { opacity: 1; transform: scale(1); }
+.lg-join-on { fill: rgba(201,167,90,0.18); stroke: #E3C57A; }
+.lg-ini { font-family: var(--font-mono); font-size: 9px; font-weight: 700; fill: var(--muted); text-anchor: middle; opacity: 0; transition: opacity 0.4s ease; }
+.acard.in .lg-ini { opacity: 1; }
+.lg-ini-on { fill: var(--gold-light); }
+.lg-newcomer { transform: translateX(-46px); transition: transform 0.7s cubic-bezier(0.2,0.9,0.25,1.12) 0.6s; }
+.acard.in .lg-newcomer { transform: translateX(0); }
+/* Carte 2 — le contreseing */
+.lg-net { stroke: var(--graphite); stroke-width: 1.6; opacity: 0.55; }
+.lg-us { fill: rgba(255,255,255,0.04); stroke: var(--stroke-strong); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.lg-them { fill: rgba(201,167,90,0.14); stroke: #E3C57A; stroke-width: 1.4; }
+.lg-no { fill: none; stroke: var(--stroke-strong); stroke-width: 1.4; stroke-linecap: round; opacity: 0; transition: opacity 0.4s ease 0.55s; }
+.acard.in .lg-no { opacity: 1; }
+.lg-sign { fill: none; stroke: #E3C57A; stroke-width: 2.6; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(227,197,122,0.8)); stroke-dasharray: 90; stroke-dashoffset: 90; transition: stroke-dashoffset 0.8s ease 1.25s; }
+.acard.in .lg-sign { stroke-dashoffset: 0; }
+.lg-chip { fill: var(--carbon); stroke: var(--stroke-strong); stroke-width: 1.3; stroke-dasharray: 4 4; transition: stroke 0.4s ease 2.05s, stroke-dasharray 0s linear 2.05s; }
+.acard.in .lg-chip { stroke: #E3C57A; stroke-dasharray: 0; }
+.lg-score { font-family: var(--font-display); font-size: 18px; fill: var(--muted); transition: fill 0.4s ease 2.05s; }
+.acard.in .lg-score { fill: var(--gold-light); }
+.lg-wait, .lg-ok { font-family: var(--font-mono); font-size: 7.5px; letter-spacing: 0.14em; text-anchor: middle; }
+.lg-wait { fill: var(--muted); transition: opacity 0.3s ease 2.05s; }
+.acard.in .lg-wait { opacity: 0; }
+.lg-ok { fill: var(--gold); opacity: 0; transition: opacity 0.3s ease 2.15s; }
+.acard.in .lg-ok { opacity: 1; }
+.lg-plus { font-family: var(--font-display); font-size: 16px; fill: var(--gold-light); opacity: 0; transform: translateY(24px); transform-box: fill-box; transition: opacity 0.5s ease 2.15s, transform 0.7s cubic-bezier(0.2,0.9,0.25,1.12) 2.15s; }
+.acard.in .lg-plus { opacity: 1; transform: translateY(0); }
+/* Carte 3 — le tableau */
+.lg-rank { font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: var(--muted); }
+.lg-rank-1 { fill: var(--gold-light); }
+.lg-name { font-family: var(--font-body); font-size: 11px; fill: var(--ink); }
+.lg-name-off { fill: var(--muted); }
+.lg-bar { fill: var(--stroke-strong); transform: scaleX(0); transform-box: fill-box; transform-origin: left center; transition: transform 0.7s cubic-bezier(0.2,0.9,0.25,1.12); }
+.acard.in .lg-bar { transform: scaleX(1); }
+.lg-bar-1 { fill: #C9A75A; }
+.lg-total { font-family: var(--font-display); font-size: 15px; fill: var(--ink); text-anchor: end; }
+.lg-total-1 { fill: var(--gold-light); }
+.lg-total-off { fill: var(--muted); }
+.lg-badge { fill: rgba(201,167,90,0.14); stroke: rgba(227,197,122,0.35); stroke-width: 1; opacity: 0; transition: opacity 0.4s ease 0.85s; }
+.lg-badge-txt { font-family: var(--font-mono); font-size: 6.5px; font-weight: 700; fill: #F0DCA0; opacity: 0; transition: opacity 0.4s ease 0.85s; }
+.acard.in .lg-badge, .acard.in .lg-badge-txt { opacity: 1; }
+.lg-sep { stroke: var(--stroke); stroke-width: 1; }
+.lg-wait-box { fill: none; stroke: var(--stroke-strong); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.lg-wait-txt { font-family: var(--font-mono); font-size: 7px; fill: var(--muted); letter-spacing: 0.12em; }
+@media (prefers-reduced-motion: reduce) {
+  .lg-slot, .lg-char, .lg-join, .lg-ini, .lg-no, .lg-plus, .lg-badge, .lg-badge-txt { opacity: 1; transform: none; transition: none; }
+  .lg-rule, .lg-bar { transform: scaleX(1); transition: none; }
+  .lg-newcomer { transform: translateX(0); transition: none; }
+  .lg-sign, .lg-gate { stroke-dashoffset: 0; transition: none; }
+  .lg-ring, .lg-gate { stroke: rgba(227,197,122,0.45); }
+  .lg-chip { stroke: #E3C57A; stroke-dasharray: 0; transition: none; }
+  .lg-score { fill: var(--gold-light); transition: none; }
+  .lg-wait { opacity: 0; transition: none; }
+  .lg-ok { opacity: 1; transition: none; }
+}
+@media (max-width: 900px) { .ligue-pills { margin-top: 22px; } }
+/* Sur telephone les pastilles tombent une par ligne : on les resserre pour
+   qu'elles se lisent comme une bande et non comme une seconde liste. */
+@media (max-width: 640px) {
+  .ligue-pills { gap: 6px; }
+  .ligue-pills .hero-badge { font-size: 10px; padding: 6px 10px; letter-spacing: 0.6px; }
+}
+
+/* ============================================================
    STATS ODOMETER — bande dans #avis
    ============================================================ */
 .avis-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 40px 0 4px; max-width: 740px; }
@@ -1671,6 +1770,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <li><a href="#screenshots">App</a></li>
     <li><a href="pricing.html">Abonnements</a></li>
     <li><a href="#avis">Avis</a></li>
+    <li><a href="#ligues">Ligues</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -1692,6 +1792,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <ul class="mobile-menu-list">
     <li><a href="#screenshots" onclick="toggleMenu()"><span>App</span><span class="menu-arrow">→</span></a></li>
     <li><a href="#avis" onclick="toggleMenu()"><span>Avis</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="#ligues" onclick="toggleMenu()"><span>Ligues</span><span class="menu-arrow">→</span></a></li>
     <li><a href="pricing.html"><span>Abonnements</span><span class="menu-arrow">→</span></a></li>
     <li><a href="/blog/"><span>Blog</span><span class="menu-arrow">→</span></a></li>
     <li><a href="#faq" onclick="toggleMenu()"><span>FAQ</span><span class="menu-arrow">→</span></a></li>
@@ -1963,6 +2064,143 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+<section class="leagues analysis" id="ligues">
+  <div class="section-veil veil-ivory" aria-hidden="true"><img src="img/noir/training.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="screenshots-intro">
+    <div>
+      <div class="section-tag reveal">Les ligues entre amis</div>
+      <h2 class="section-title reveal"><span class="title-over">TON SCORE,</span><span class="accent">CONTRESIGNÉ</span></h2>
+    </div>
+    <p class="section-sub reveal" style="text-align:right;">Ta ligue, ta saison, ton classement. Avec la règle que le tableur du groupe n'a jamais eue : une manche ne compte que si l'adversaire l'a signée.</p>
+  </div>
+  <div class="analysis-cards">
+
+    <article class="acard reveal" data-acard>
+      <div class="acard-kicker">L'entrée</div>
+      <div class="acard-title">Un code, et c'est fermé</div>
+      <div class="acard-viz">
+        <svg viewBox="0 0 260 196" role="img" aria-label="Un code d'invitation à six caractères, et le dernier joueur qui entre dans la ligue avant qu'elle se referme">
+          <g>
+            <rect class="lg-slot" x="19" y="18" width="32" height="40" rx="7" style="transition-delay:.06s"/>
+            <rect class="lg-slot" x="57" y="18" width="32" height="40" rx="7" style="transition-delay:.12s"/>
+            <rect class="lg-slot" x="95" y="18" width="32" height="40" rx="7" style="transition-delay:.18s"/>
+            <rect class="lg-slot" x="133" y="18" width="32" height="40" rx="7" style="transition-delay:.24s"/>
+            <rect class="lg-slot" x="171" y="18" width="32" height="40" rx="7" style="transition-delay:.30s"/>
+            <rect class="lg-slot" x="209" y="18" width="32" height="40" rx="7" style="transition-delay:.36s"/>
+            <text class="lg-char" x="35" y="45" style="transition-delay:.09s">K</text>
+            <text class="lg-char" x="73" y="45" style="transition-delay:.15s">7</text>
+            <text class="lg-char" x="111" y="45" style="transition-delay:.21s">M</text>
+            <text class="lg-char" x="149" y="45" style="transition-delay:.27s">4</text>
+            <text class="lg-char" x="187" y="45" style="transition-delay:.33s">X</text>
+            <text class="lg-char" x="225" y="45" style="transition-delay:.39s">Z</text>
+          </g>
+          <rect class="lg-rule" x="33" y="68" width="194" height="1"/>
+          <text class="lg-cap" x="33" y="82">COLLÉ DANS LE GROUPE</text>
+          <path class="lg-ring" d="M58,96 H202 A14,14 0 0 1 216,110 V158 A14,14 0 0 1 202,172 H58 A14,14 0 0 1 44,158 V148 M44,120 V110 A14,14 0 0 1 58,96"/>
+          <path class="lg-gate" d="M44,148 V120"/>
+          <g class="lg-newcomer">
+            <circle class="lg-join lg-join-on" cx="68" cy="134" r="11"/>
+            <text class="lg-ini lg-ini-on" x="68" y="137">M</text>
+          </g>
+          <circle class="lg-join" cx="102" cy="134" r="11" style="transition-delay:.20s"/>
+          <text class="lg-ini" x="102" y="137" style="transition-delay:.20s">J</text>
+          <circle class="lg-join" cx="136" cy="134" r="11" style="transition-delay:.30s"/>
+          <text class="lg-ini" x="136" y="137" style="transition-delay:.30s">S</text>
+          <circle class="lg-join" cx="170" cy="134" r="11" style="transition-delay:.40s"/>
+          <text class="lg-ini" x="170" y="137" style="transition-delay:.40s">T</text>
+          <text class="lg-cap" x="130" y="190" text-anchor="middle">LIGUE PRIVÉE</text>
+        </svg>
+      </div>
+      <div class="acard-foot">
+        <span class="acard-metric">0<small>€</small></span>
+        <span class="acard-cap">Gratuit, sans limite.<br>Sur tous les paliers.</span>
+      </div>
+    </article>
+
+    <article class="acard reveal" data-acard>
+      <div class="acard-kicker">Le contreseing</div>
+      <div class="acard-title">Signé d'en face, ou rien</div>
+      <div class="acard-viz">
+        <svg viewBox="0 0 260 196" role="img" aria-label="Une manche déclarée par une paire : les deux chemins de sa propre paire sont barrés, seule la signature adverse la valide">
+          <rect class="court-surface" x="16" y="30" width="228" height="132" rx="4"/>
+          <rect class="court-line" x="16" y="30" width="228" height="132" rx="4"/>
+          <line class="court-line" x1="64" y1="30" x2="64" y2="162"/>
+          <line class="court-line" x1="196" y1="30" x2="196" y2="162"/>
+          <line class="lg-net" x1="130" y1="24" x2="130" y2="168"/>
+          <circle class="lg-us" cx="56" cy="68" r="11"/>
+          <circle class="lg-us" cx="56" cy="124" r="11"/>
+          <circle class="lg-them" cx="204" cy="68" r="11"/>
+          <circle class="lg-them" cx="204" cy="124" r="11"/>
+          <g class="lg-no">
+            <path d="M68,73 L92,84"/>
+            <path d="M76,74 l8,8 M84,74 l-8,8"/>
+            <path d="M68,119 L92,108"/>
+            <path d="M76,110 l8,8 M84,110 l-8,8"/>
+          </g>
+          <path class="lg-sign" d="M194,72 C172,76 146,84 124,94"/>
+          <rect class="lg-chip" x="96" y="80" width="68" height="32" rx="9"/>
+          <text class="lg-score" x="130" y="102" text-anchor="middle">6 — 4</text>
+          <text class="lg-wait" x="130" y="128" text-anchor="middle">EN ATTENTE</text>
+          <text class="lg-ok" x="130" y="128" text-anchor="middle">CONFIRMÉE</text>
+          <text class="lg-plus" x="178" y="72">+3</text>
+          <text class="lg-cap" x="16" y="184">TOI + TON PARTENAIRE</text>
+          <text class="lg-cap lg-cap-gold" x="244" y="184" text-anchor="end">PEUVENT VALIDER</text>
+        </svg>
+      </div>
+      <div class="acard-foot">
+        <span class="acard-metric">2</span>
+        <span class="acard-cap">joueurs peuvent valider<br>ta manche. Les deux d'en face.</span>
+      </div>
+    </article>
+
+    <article class="acard reveal" data-acard>
+      <div class="acard-kicker">Le classement</div>
+      <div class="acard-title">Le tableau ne se gonfle pas</div>
+      <div class="acard-viz">
+        <svg viewBox="0 0 260 196" role="img" aria-label="Le classement de la ligue : quatre manches confirmées, et une manche en attente qui ne rapporte rien">
+          <text class="lg-cap" x="6" y="12">MERCREDI · 07:12</text>
+          <rect class="lg-rule" x="6" y="18" width="248" height="1"/>
+          <text class="lg-rank lg-rank-1" x="6" y="38">1</text>
+          <text class="lg-name" x="22" y="38">Maxime</text>
+          <rect class="lg-bar lg-bar-1" x="104" y="33" width="96" height="6" rx="3" style="transition-delay:.10s"/>
+          <text class="lg-total lg-total-1" x="254" y="38">12</text>
+          <text class="lg-rank" x="6" y="68">2</text>
+          <text class="lg-name" x="22" y="68">Julien</text>
+          <rect class="lg-badge" x="74" y="59" width="18" height="11" rx="3"/>
+          <text class="lg-badge-txt" x="83" y="67" text-anchor="middle">IA</text>
+          <rect class="lg-bar" x="104" y="63" width="72" height="6" rx="3" style="transition-delay:.20s"/>
+          <text class="lg-total" x="254" y="68">9</text>
+          <text class="lg-rank" x="6" y="98">3</text>
+          <text class="lg-name" x="22" y="98">Sarah</text>
+          <rect class="lg-bar" x="104" y="93" width="48" height="6" rx="3" style="transition-delay:.30s"/>
+          <text class="lg-total" x="254" y="98">6</text>
+          <text class="lg-rank" x="6" y="128">4</text>
+          <text class="lg-name" x="22" y="128">Thomas</text>
+          <rect class="lg-bar" x="104" y="123" width="24" height="6" rx="3" style="transition-delay:.40s"/>
+          <text class="lg-total" x="254" y="128">3</text>
+          <line class="lg-sep" x1="6" y1="150" x2="254" y2="150"/>
+          <text class="lg-name lg-name-off" x="22" y="175">Ta manche de mardi</text>
+          <rect class="lg-wait-box" x="104" y="165" width="96" height="14" rx="7"/>
+          <text class="lg-wait-txt" x="152" y="174" text-anchor="middle">EN ATTENTE</text>
+          <text class="lg-total lg-total-off" x="254" y="175">0</text>
+        </svg>
+      </div>
+      <div class="acard-foot">
+        <span class="acard-metric">3<small>pts</small></span>
+        <span class="acard-cap">par victoire. Zéro pour<br>une manche en attente.</span>
+      </div>
+    </article>
+
+  </div>
+  <div class="ligue-pills reveal">
+    <span class="hero-badge gold">Gratuit, sans limite</span>
+    <span class="hero-badge">Tirage Americano</span>
+    <span class="hero-badge">Notification à l'adversaire</span>
+    <span class="hero-badge">Badge analyse IA</span>
+    <span class="hero-badge">Clôture de saison</span>
+  </div>
+</section>
+
 <section class="testimonials" id="avis">
   <div class="section-veil" aria-hidden="true"><img src="img/noir/fistbump.jpg" alt="" loading="lazy" decoding="async"></div>
   <h2 class="section-title reveal"><span class="title-over">ILS ONT</span><span class="accent">PROGRESSÉ</span></h2>
@@ -2023,12 +2261,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="mini-card reveal">
       <div class="mini-card-name">GRATUIT</div>
       <div class="mini-card-price">0<span class="currency">€</span><span class="period">/ mois</span></div>
-      <div class="mini-card-desc">Classement, matchs publics et communauté.</div>
+      <div class="mini-card-desc">Classement, matchs publics, ligues entre amis.</div>
       <div class="mini-card-features">
         <div class="mini-feat"><span class="dot"></span> Classement ELO visible</div>
         <div class="mini-feat"><span class="dot"></span> Matchs publics</div>
         <div class="mini-feat"><span class="dot"></span> Classement national & régional</div>
         <div class="mini-feat"><span class="dot"></span> 1 analyse vidéo IA / mois</div>
+        <div class="mini-feat"><span class="dot"></span> Ligues entre amis illimitées</div>
         <div class="mini-feat off"><span class="dot"></span> Programme entraînement IA</div>
       </div>
     </div>
@@ -2043,6 +2282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="mini-feat"><span class="dot"></span> 12 points d'analyse</div>
         <div class="mini-feat"><span class="dot"></span> ELO Certifié</div>
         <div class="mini-feat"><span class="dot"></span> Historique de progression illimité</div>
+        <div class="mini-feat"><span class="dot"></span> Ligues entre amis illimitées</div>
       </div>
     </div>
     <div class="mini-card elite reveal">
@@ -2056,6 +2296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="mini-feat"><span class="dot"></span> Détection coups &amp; déplacements</div>
         <div class="mini-feat"><span class="dot"></span> Stats de match approfondies</div>
         <div class="mini-feat"><span class="dot"></span> Heatmap &amp; distance parcourue</div>
+        <div class="mini-feat"><span class="dot"></span> Ligues entre amis illimitées</div>
       </div>
     </div>
   </div>
@@ -2124,6 +2365,14 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="faq-item reveal">
       <button class="faq-q" data-faq><span>Linceya remplace-t-il un coach de padel ?</span><span class="faq-icon">+</span></button>
       <div class="faq-a">Linceya est le complément idéal à un coach de padel. L'IA analyse votre match de padel et détecte des détails que même un coach peut manquer (comme le timing de montée au filet ou des patterns répétitifs). Beaucoup de coachs de padel utilisent Linceya pour enrichir leurs analyses et proposer des exercices plus ciblés à leurs élèves.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" data-faq><span>Comment créer une ligue entre amis au padel ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">Depuis l'app, créez la ligue avec un nom et une date de fin de saison : Linceya génère un code d'invitation de six caractères, à coller dans votre groupe de discussion. C'est la seule porte d'entrée. Après avoir joué, vous saisissez la manche — deux paires, un score en jeux — et un joueur de la paire adverse la confirme. Le classement donne 3 points par victoire, puis départage à la différence de jeux, à la confrontation directe et au nombre de manches jouées. L'app peut aussi tirer les équipes de la soirée en Americano : à quatre joueurs, les six duos possibles sont épuisés en trois tours, et personne ne reste sur le banc. Les ligues entre amis sont gratuites et sans limite, sur tous les paliers.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" data-faq><span>Peut-on gonfler son score dans une ligue entre amis ?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">Non. Une manche déclarée reste en attente tant qu'un joueur de la paire adverse ne l'a pas confirmée, et ni le déclarant ni son partenaire ne peuvent la valider. Ce n'est pas une règle d'honneur mais une contrainte de la base de données, vérifiée à chaque écriture : une manche non confirmée vaut zéro point et n'entre pas dans le calcul du classement. La paire adverse reçoit une notification dès qu'un score attend sa confirmation, et la saison se clôture d'un geste explicite — c'est ce geste qui sacre le champion.</div>
     </div>
   </div>
 </section>
