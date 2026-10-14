@@ -178,6 +178,14 @@
   ].join('\n');
   document.head.appendChild(style);
 
+  // Vrai si build() a masqué la barre « Guide gratuit » des index de blog,
+  // qu'il faut alors rendre à la fermeture du bandeau.
+  var leadBarMasquee = false;
+
+  // ResizeObserver qui suit la hauteur du bandeau (cf. build), coupé à la
+  // fermeture.
+  var observateur = null;
+
   function build() {
     var banner = document.createElement('div');
     banner.id = 'lnc-app-banner';
@@ -190,10 +198,31 @@
     close.setAttribute('aria-label', t.fermer);
     close.innerHTML = '&times;';
     close.onclick = function () {
+      if (observateur) {
+        observateur.disconnect();
+        observateur = null;
+      }
       banner.remove();
-      // Reset le padding du body (cf. syncBodyPadding plus bas).
-      document.body.style.paddingTop = '';
+      // Barre « Guide gratuit » rendue (cf. build) : la feuille de style de
+      // la page redescend alors d'elle-même la nav et le body pour elle.
+      var rendreLeadBar = leadBarMasquee;
+      leadBarMasquee = false;
+      if (rendreLeadBar) document.body.classList.add('lead-bar-visible');
+      // Bandeau retiré : syncBodyPadding mesure 0 et remet à zéro le body,
+      // la nav ET le menu mobile. Remettre seulement le body laissait la nav
+      // décalée de la hauteur du bandeau, avec un vide en haut de page.
+      syncBodyPadding();
       window.removeEventListener('resize', syncBodyPadding);
+      window.removeEventListener('load', syncBodyPadding);
+      if (rendreLeadBar) {
+        // Le défilement du texte de la barre (trop long pour l'écran) est
+        // calculé par la page au `load` et au `resize`. Au `load`, la barre
+        // était masquée : largeur nulle, défilement coupé, texte tronqué et
+        // immobile une fois rendue. Un `resize` le fait recalculer.
+        try {
+          window.dispatchEvent(new Event('resize'));
+        } catch (_) {}
+      }
       try {
         localStorage.setItem(
           'lnc_app_banner_dismissed_at',
@@ -235,6 +264,18 @@
 
     document.body.insertBefore(banner, document.body.firstChild);
 
+    // Barre « Guide gratuit » des index de blog (`body.lead-bar-visible` :
+    // fixée en haut sur 48 px, sous notre z-index). Le bandeau la couvrait
+    // en entier, croix comprise, mais elle restait atteignable au clavier.
+    // Masquée franchement le temps du bandeau (un seul bandeau en haut à la
+    // fois), rendue à sa fermeture. AVANT syncBodyPadding : sans la classe,
+    // la page ne réserve plus ses 48 px dans le padding du body que
+    // syncBodyPadding relit, ni dans le top de la nav.
+    if (document.body.classList.contains('lead-bar-visible')) {
+      leadBarMasquee = true;
+      document.body.classList.remove('lead-bar-visible');
+    }
+
     // Push le contenu du body vers le bas pour qu'il ne soit pas caché
     // par le bandeau fixed (qui flotte au-dessus avec un z-index élevé).
     // On mesure la hauteur réelle APRÈS insertion pour tenir compte des
@@ -243,27 +284,67 @@
     // Resync à chaque resize au cas où la hauteur du bandeau change
     // (rotation portrait/paysage, font scaling système).
     window.addEventListener('resize', syncBodyPadding);
+    // La hauteur du bandeau change aussi SANS resize : mesurée au
+    // DOMContentLoaded, elle suit une mise en page provisoire, avant les
+    // polices de la page. Un titre en police de repli peut alors élargir la
+    // page au-delà de l'écran (330 px pour 320 sur en/pricing.html) ; les
+    // polices arrivées, la page revient à 320 px, le texte du bandeau passe
+    // à la ligne (65 -> 68,5 px) et la nav, restée à 65 px, passait 3,5 px
+    // sous le bandeau. On suit donc la taille du bandeau lui-même. Sans
+    // ResizeObserver (iOS < 13.4) : resync aux polices chargées et au load.
+    if (typeof ResizeObserver === 'function') {
+      observateur = new ResizeObserver(function () {
+        syncBodyPadding();
+      });
+      observateur.observe(banner);
+    } else {
+      window.addEventListener('load', syncBodyPadding);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncBodyPadding);
+      }
+    }
   }
 
   // Lit le bandeau via DOM query (au lieu d'une closure) pour rester
   // simple et résilient au lifecycle (close → re-build hypothétique).
   //
-  // 2 ajustements nécessaires pour que le bandeau ne cache rien :
+  // 3 ajustements nécessaires pour que le bandeau ne cache rien :
   //   1. padding-top sur body → pousse le contenu normal (in-flow) vers
-  //      le bas.
+  //      le bas. La hauteur du bandeau s'AJOUTE au padding propre de la
+  //      page (24 px sur activate.html, 32 px sur welcome-premium.html) :
+  //      le remplacer collait le contenu au bandeau. Ce padding est relu à
+  //      chaque passage, style inline retiré, pour suivre les media queries
+  //      et les classes de la page.
   //   2. top: <height> sur les éléments fixed/sticky en haut (nav, header)
   //      → sinon ils restent à top:0 et notre bandeau (z-index 99999) les
   //      cache. Le site Linceya a son `<nav>` en `position: fixed; top: 0`.
+  //   3. top: <height> sur le menu mobile (plein écran, fixé à top:0),
+  //      comme pour la nav : on décale sa boîte et non son padding, qui
+  //      reste celui de la feuille de style (variantes comprises). Ce
+  //      padding ne réserve que la hauteur de la nav : sans décalage, la
+  //      nav étant descendue sous le bandeau, le premier lien passait
+  //      dessous.
   function syncBodyPadding() {
     var b = document.getElementById('lnc-app-banner');
     var h = (b && b.isConnected) ? b.offsetHeight : 0;
-    document.body.style.paddingTop = h ? h + 'px' : '';
+    var body = document.body;
+    body.style.paddingTop = '';
+    if (h) {
+      var propre = parseFloat(getComputedStyle(body).paddingTop) || 0;
+      body.style.paddingTop = (propre + h) + 'px';
+    }
     // Push les nav/header fixés au-dessous du bandeau.
     document.querySelectorAll('nav, header').forEach(function (el) {
       var pos = getComputedStyle(el).position;
       if (pos === 'fixed' || pos === 'sticky') {
         el.style.top = h ? h + 'px' : '';
       }
+    });
+    // Le menu mobile aussi, s'il est fixé à l'écran (cf. point 3). Un menu
+    // placé dans la nav suit déjà celle-ci : on n'y touche pas.
+    document.querySelectorAll('.mobile-menu').forEach(function (el) {
+      var fixe = getComputedStyle(el).position === 'fixed';
+      el.style.top = (h && fixe) ? h + 'px' : '';
     });
   }
 

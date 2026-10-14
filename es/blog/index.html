@@ -18,13 +18,14 @@
 <meta property="og:url" content="https://linceya.com/es/blog/">
 <meta property="og:title" content="Blog Linceya — Consejos, técnica y material de padel">
 <meta property="og:description" content="El blog de Linceya: guías técnicas, consejos de material, análisis de partidos para mejorar tu padel. Artículos del equipo Linceya.">
-<meta property="og:image" content="https://linceya.com/og-image.png">
+<meta property="og:image" content="https://linceya.com/og-image-es.jpg">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Linceya">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Blog Linceya — Consejos, técnica y material de padel">
 <meta name="twitter:description" content="El blog de Linceya: guías técnicas, consejos de material, análisis de partidos para mejorar tu padel. Artículos del equipo Linceya.">
+<meta name="twitter:image" content="https://linceya.com/og-image-es.jpg">
 
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -672,6 +673,7 @@ footer {
 }
 body.lead-bar-visible .lead-bar { display: flex; }
 body.lead-bar-visible nav { top: 48px; }
+body.lead-bar-visible .mobile-menu { top: 48px; } /* le menu descend avec la nav : sinon son premier lien passe sous elle */
 body.lead-bar-visible { padding-top: 48px; }
 .lead-bar-content { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; justify-content: center; min-width: 0; max-width: 100%; }
 .lead-bar-text { font-weight: 600; color: var(--on-gold); white-space: nowrap; display: inline-block; }
@@ -719,26 +721,43 @@ body.lead-bar-visible { padding-top: 48px; }
 </div>
 
 <nav id="nav">
-  <a href="/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a>
+  <a href="/es/" class="nav-logo"><img src="/logo.png" alt="Linceya"></a>
   <ul class="nav-links">
-    <li><a href="/#screenshots">App</a></li>
-    <li><a href="/pricing.html">Abonnements</a></li>
-    <li><a href="/blog/">Blog</a></li>
-    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="/es/#screenshots">App</a></li>
+    <li><a href="/es/pricing.html">Suscripciones</a></li>
+    <li><a href="/es/blog/">Blog</a></li>
+    <li><a href="/es/#faq">FAQ</a></li>
   </ul>
   <div class="nav-right">
     <span class="nav-divider" aria-hidden="true"></span>
-    <div class="nav-lang" role="group" aria-label="Choisir la langue">
-      <span class="lang-on" aria-current="true">FR</span>
+    <div class="nav-lang" role="group" aria-label="Elegir idioma">
+      <a href="/blog/" hreflang="fr">FR</a>
       <a href="/en/blog/" hreflang="en">EN</a>
-      <a href="/es/blog/" hreflang="es">ES</a>
+      <span class="lang-on" aria-current="true">ES</span>
     </div>
-    <a href="/#download" class="nav-cta">Télécharger <span class="nav-cta-arrow" aria-hidden="true">→</span></a>
+    <a href="/es/#download" class="nav-cta">Descargar <span class="nav-cta-arrow" aria-hidden="true">→</span></a>
   </div>
-  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menú" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
+
+<!-- LINCEYA:noir-mobile-menu:start -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-menu-list">
+    <li><a href="/es/#screenshots"><span>App</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="/es/pricing.html"><span>Suscripciones</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="/es/blog/"><span>Blog</span><span class="menu-arrow">→</span></a></li>
+    <li><a href="/es/#faq"><span>FAQ</span><span class="menu-arrow">→</span></a></li>
+  </ul>
+  <a href="/es/#download" class="mobile-cta">Descargar</a>
+  <div class="mobile-menu-lang">
+    <a href="/blog/">FR</a>
+    <a href="/en/blog/">EN</a>
+    <span class="lang-on">ES</span>
+  </div>
+</div>
+<!-- LINCEYA:noir-mobile-menu:end -->
 
 <section class="blog-hero">
   <div class="blog-hero-inner">
@@ -1056,23 +1075,24 @@ body.lead-bar-visible { padding-top: 48px; }
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang">
-    <a href="/blog/">FR</a>
+    <a href="/blog/" hreflang="fr">FR</a>
+    <a href="/en/blog/" hreflang="en">EN</a>
     <span class="active">ES</span>
-    <a href="/en/blog/">EN</a>
   </div>
   <div class="footer-copy">© 2026 Linceya. Todos los derechos reservados.</div>
 </footer>
 
 <script>
-(function() {
-  var navEl = document.getElementById('nav');
-  function updateNav() {
-    if (window.scrollY > 30) navEl.classList.add('scrolled');
-    else navEl.classList.remove('scrolled');
-  }
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav();
-})();
+function toggleMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  var open = !menu.classList.contains('open');
+  menu.classList.toggle('open', open);
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 // Lead magnet bar : visible si pas déjà fermée
 (function() {
   var bar = document.getElementById('leadBar');

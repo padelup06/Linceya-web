@@ -60,6 +60,9 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      /* Le height: 100% de html, body figeait le body à la hauteur de l'écran : en paysage,
+         la carte centrée débordait vers le haut, titre hors d'atteinte. */
+      height: auto;
       padding: 24px;
       background:
         radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,167,90,0.1), transparent 60%),

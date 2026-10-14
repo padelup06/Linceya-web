@@ -45,6 +45,9 @@
   var css = [
     '.lcc-banner{position:fixed;bottom:14px;left:14px;right:14px;max-width:560px;margin:0 auto;background:#0E1B35;color:#F2EDE2;border:1px solid rgba(180,138,74,0.3);border-radius:12px;padding:14px 16px;box-shadow:0 10px 28px rgba(0,0,0,0.35);z-index:9999;font-family:Archivo,system-ui,sans-serif;display:none}',
     '.lcc-banner.show{display:block;animation:lcc-up .4s ease}',
+    // Menu mobile ouvert : la bannière s'efface (cf. suivreMenusMobiles).
+    'body:has(.mobile-menu.open) .lcc-banner{display:none}',
+    '.lcc-banner.show.lcc-menu-ouvert{display:none}',
     '@keyframes lcc-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}',
     '.lcc-text{font-size:12.5px;line-height:1.5;color:rgba(242,237,226,0.82);margin-bottom:12px}',
     '.lcc-text strong{color:#D4B87A;font-weight:700;letter-spacing:.04em;margin-right:6px}',
@@ -192,6 +195,32 @@
     return o;
   }
 
+  // La bannière (fixée en bas, au-dessus de tout) recouvrait le bas du menu
+  // mobile ouvert : dernier lien, bouton, choix de la langue. Elle s'efface
+  // le temps du menu et revient à sa fermeture ; le consentement ne change pas.
+  // La règle CSS `body:has(.mobile-menu.open)` y suffit là où :has est compris ;
+  // ailleurs, on suit la classe `open` des menus pour poser `lcc-menu-ouvert`.
+  function suivreMenusMobiles(banner) {
+    var hasCompris = false;
+    try { hasCompris = !!(window.CSS && CSS.supports && CSS.supports('selector(:has(*))')); } catch (e) {}
+    if (hasCompris || !window.MutationObserver) return;
+    var menus = document.querySelectorAll('.mobile-menu');
+    if (!menus.length) return;
+    function maj() {
+      var ouvert = false;
+      for (var i = 0; i < menus.length; i++) {
+        if (menus[i].classList.contains('open')) { ouvert = true; break; }
+      }
+      if (ouvert) banner.classList.add('lcc-menu-ouvert');
+      else banner.classList.remove('lcc-menu-ouvert');
+    }
+    var obs = new MutationObserver(maj);
+    for (var i = 0; i < menus.length; i++) {
+      obs.observe(menus[i], { attributes: true, attributeFilter: ['class'] });
+    }
+    maj();
+  }
+
   var listeners = { analytics: [], marketing: [] };
 
   function fireListeners(consent) {
@@ -209,6 +238,7 @@
   function init() {
     injectStyles();
     var banner = createBanner();
+    suivreMenusMobiles(banner);
     var overlay = createOverlay();
     var modal = overlay.querySelector('.lcc-modal');
 
