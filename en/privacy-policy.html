@@ -326,7 +326,7 @@ footer {
   <div class="container">
     <div class="eyebrow">Legal information</div>
     <h1>Privacy<br>Policy</h1>
-    <div class="date">Last updated: October 15, 2026</div>
+    <div class="date">Last updated: October 16, 2026</div>
 
     <div class="content">
       <p>Linceya ("we", "our") is committed to protecting your personal data. This policy explains what data we collect, how we use it and your rights.</p>
@@ -352,7 +352,7 @@ footer {
       <h2 data-num="03">Use of data</h2>
       <ul>
         <li>Calculate and display your certified ELO</li>
-        <li>Generate AI analyses of your matches via Gemini (Google)</li>
+        <li>Generate AI analyses of your matches: the classic analysis via Gemini (Google), the Elite analysis on machines operated by Linceya</li>
         <li>Create the replay of your Elite matches and, when sharing is available, the videos you can choose to share</li>
         <li>Personalize your training plan</li>
         <li>Display regional and national rankings</li>
@@ -366,7 +366,8 @@ footer {
       <p>Your data is never sold. It may be shared with the following processors:</p>
       <ul>
         <li><strong>Supabase</strong> — storage and authentication (EU servers)</li>
-        <li><strong>Google Gemini</strong> — AI analysis of match videos (US servers, transfer covered by the European Commission's Standard Contractual Clauses)</li>
+        <li><strong>PowerSync</strong> — synchronization of your data (matches, profile, analyses) between our servers and the app on your phone (EU servers)</li>
+        <li><strong>Google Gemini</strong> — AI analysis of match videos (classic analysis), coaching texts and training plans (US servers, transfer covered by the European Commission's Standard Contractual Clauses)</li>
         <li><strong>Firebase (Google)</strong> — push notifications and audience measurement, install attribution, EU/US servers</li>
         <li><strong>Sentry</strong> — error monitoring (EU servers)</li>
         <li><strong>PostHog</strong> — product analytics: subscription journey and usage statistics (EU servers)</li>
@@ -386,7 +387,7 @@ footer {
       <p>The four advertising tools are <strong>not loaded at all</strong> until you accept the "marketing" category in the consent banner. You can change your mind at any time via the "Cookies" link in the footer. They are also deliberately disabled on subscription activation pages, whose addresses contain personal information.</p>
 
       <h2 data-num="05">Match videos</h2>
-      <p>Uploaded videos are used solely for AI analysis and for the match replay described below. They are sent to the Google Gemini API and may be temporarily retained by Google in accordance with their terms of use. We do not share your videos with other users.</p>
+      <p>Uploaded videos are used solely for AI analysis and, for the Elite analysis, for the match replay and the short videos to share (when sharing is available) described below. For the classic analysis, they are sent to the Google Gemini API and may be temporarily retained by Google in accordance with their terms of use. The Elite analysis is computed on machines operated by Linceya: the video is transferred there from our storage space for the analysis. In that case, the video is not sent to Google Gemini, which only receives numerical measurements from your match (number and types of shots, distance, speeds, time at the net and at the back of the court, duration analyzed), without any images, to write your coaching texts and your training plan. With each Elite analysis, Linceya also keeps a small image (192 pixels wide) of each player in the match, four at most, cropped from the video at the moment they are most visible: it may show their face and outfit. In the app, these images let you recognize yourself and indicate who the other players are. They are stored with the analysis in our database (Supabase, EU servers), kept as long as the match exists in your account, and erased from this database when the match or your account is deleted. If you have linked a coach to your account, they can also see your analyses, including these images. We do not share your videos with other users.</p>
       <p><strong>Match replay (Elite analysis).</strong> After an Elite analysis, Linceya may keep an animated summary of a few rallies from the match: your movement on court (path, distance, speed) and where the other players were, stored as plain positions with no image and no identity. This summary is kept as long as the match exists in your account, and erased after the match or your account is deleted. When sharing is available, Linceya also creates short vertical videos of these rallies from your match video, along with preview images. They are stored in a private space reserved for your account: only you can download them, from the app. They are deleted after 30 days, or sooner if the match is deleted. <strong>These videos may show the other players on the court: ask for their consent before posting them.</strong> Linceya never posts these videos for you: nothing is shared unless you choose to share it.</p>
 
       <h2 data-num="06">Legal basis for processing</h2>
@@ -399,7 +400,7 @@ footer {
       </ul>
 
       <h2 data-num="07">Data retention</h2>
-      <p>Your data is retained as long as your account is active. If your account is deleted, all your personal data is removed within 7 days, except billing data which is kept for 30 days for legal obligations.</p>
+      <p>Your data is retained as long as your account is active. If your account is deleted, all your personal data is removed within 8 days, except billing data which is kept for 30 days for legal obligations.</p>
 
       <h2 data-num="08">Your rights</h2>
       <ul>
