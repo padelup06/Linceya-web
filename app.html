@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="l-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Linceya · App Store &amp; Google Play</title>
+<meta name="description" content="Télécharge Linceya, le coach IA du padel, sur l'App Store ou Google Play. · Download Linceya, the AI padel coach, on the App Store or Google Play. · Descarga Linceya, el coach IA de pádel, en App Store o Google Play.">
+<!-- Apercu du lien partage (reseaux, messageries) : les robots d'apercu
+     n'executent pas le script, donc une seule langue ici. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://linceya.com/app">
+<meta property="og:site_name" content="Linceya">
+<meta property="og:title" content="Linceya · App Store &amp; Google Play">
+<meta property="og:description" content="Télécharge Linceya, le coach IA du padel, sur l'App Store ou Google Play.">
+<meta property="og:image" content="https://linceya.com/og-image-fr.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<!--
+  Lien https://linceya.com/app : le bouton « Telecharger Linceya » des
+  e-mails, les QR codes, les reseaux.
+
+  - iPhone, iPad (iPadOS compris, qui se presente comme un Mac a ecran
+    tactile), iPod : App Store, des que la page est lue (location.replace :
+    la page ne reste pas dans l'historique, « Retour » ramene d'ou l'on
+    vient).
+  - Android : Google Play, de meme.
+  - Le reste (ordinateur, robots) : cette page, dans la langue du navigateur
+    (fr, en, es ; sinon en), avec les deux boutons.
+
+  Les deux liens sont TOUJOURS dans la page : sans JavaScript, ou si une
+  app bloque la redirection automatique, on clique soi-meme.
+
+  Aucun cookie, aucun stockage, aucun traceur, aucun script externe : pas de
+  cookies.js ni d'analytics.js ici, volontairement. Les polices Google
+  (comme sur les autres pages) ne sont demandees QUE quand on reste sur la
+  page : un telephone redirige ne contacte que linceya.com puis son store.
+
+  Servie a /app par Cloudflare Pages (app.html -> /app, sans redirection).
+  Ne pas renommer : l'adresse /app est ecrite dans des e-mails deja partis.
+-->
+<script>
+(function () {
+  var APP_STORE = 'https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174';
+  var GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=com.padelup.padelup';
+  var TITRES = {fr: 'Télécharger Linceya', en: 'Download Linceya', es: 'Descargar Linceya'};
+  var nav = window.navigator || {};
+  var ua = nav.userAgent || '';
+
+  // Langue : la premiere des langues preferees du navigateur qui soit fr,
+  // en ou es ; sinon en.
+  function langueVoulue() {
+    var liste = (nav.languages && nav.languages.length) ? nav.languages : [nav.language || nav.userLanguage || ''];
+    for (var i = 0; i < liste.length; i++) {
+      var code = String(liste[i] || '').slice(0, 2).toLowerCase();
+      if (code === 'fr' || code === 'en' || code === 'es') return code;
+    }
+    return 'en';
+  }
+
+  // Store de ce visiteur, ou null pour rester sur la page.
+  function storeVoulu() {
+    // Robots (moteurs, apercus de lien, controle des annonces) : ils restent
+    // sur la page. « bot/ » et pas « bot » seul : la marque de telephones
+    // Cubot (« CUBOT_X30 ») ne doit pas etre prise pour un robot. AdsBot et
+    // Mediapartners-Google se disent iPhone sans « bot/ » : nommes a part.
+    if (/bot\/|crawler|spider|facebookexternalhit|Slackbot|AdsBot|Mediapartners-Google|Google-InspectionTool|Chrome-Lighthouse/i.test(ua)) return null;
+    // Windows Phone se dit aussi « Android » et « iPhone » : aucun des deux.
+    if (/Windows Phone|IEMobile/i.test(ua)) return null;
+    if (/iPhone|iPad|iPod/i.test(ua)) return APP_STORE;
+    // iPadOS 13 et plus se presente comme un Mac (« Macintosh ») ; seul
+    // l'ecran tactile le trahit : aucun Mac n'en a.
+    if (/Macintosh/i.test(ua) && (nav.maxTouchPoints || 0) > 1) return APP_STORE;
+    if (/Android/i.test(ua)) return GOOGLE_PLAY;
+    // Chrome Android en « version pour ordinateur » (par defaut sur les
+    // grandes tablettes) : User-Agent de Linux, et l'indice de plateforme dit
+    // sans doute Linux lui aussi (non mesure) : une telle tablette voit alors
+    // la page et ses deux boutons. Cette ligne ne sert que s'il dit Android.
+    if (nav.userAgentData && nav.userAgentData.platform === 'Android') return GOOGLE_PLAY;
+    return null;
+  }
+
+  var langue = 'en';
+  try { langue = langueVoulue(); } catch (e) {}
+  var racine = document.documentElement;
+  racine.lang = langue;
+  racine.className = 'l-' + langue;
+  document.title = TITRES[langue];
+
+  var store = null;
+  try { store = storeVoulu(); } catch (e) {}
+  if (store) {
+    // Si la redirection est bloquee (certaines apps), la page reste : le
+    // bouton du store de l'appareil y passe en premier (CSS, .s-ios).
+    racine.className += store === APP_STORE ? ' s-ios' : ' s-android';
+    // Depart quand la page est lue en entier (DOMContentLoaded, quelques
+    // millisecondes) : le navigateur arrete de lire la page des qu'une
+    // navigation part. Lancee directement ici (dans le head), une
+    // redirection bloquee laissait une page VIDE, sans les deux boutons
+    // (MESURE Chromium, revue du 08/11).
+    var partir = function () { window.location.replace(store); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', partir);
+    else partir();
+    return;
+  }
+
+  // On reste sur la page : les polices du site.
+  var polices = document.createElement('link');
+  polices.rel = 'stylesheet';
+  polices.href = 'https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=JetBrains+Mono:wght@600&display=swap';
+  document.head.appendChild(polices);
+})();
+</script>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=JetBrains+Mono:wght@600&display=swap"></noscript>
+<meta name="theme-color" content="#0B0B0D">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<style>
+  /* Linceya v6 « NOIR & OR » : jetons et bouton store repris de index.html
+     et 404.html (.btn-store). */
+  :root {
+    --noir: #0B0B0D;
+    --blanc: #FFFFFF;
+    --or-clair: #F6E5AE;
+    --sur-or: #1E1503;
+    --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  @keyframes sweep { 0% { left: -70%; } 55% { left: 145%; } 100% { left: 145%; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--noir); }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px 16px;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,167,90,0.14), transparent 65%),
+      var(--noir);
+    color: var(--blanc); font-family: var(--font-body); text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { width: 100%; max-width: 480px; }
+  .logo { display: block; width: 96px; height: 96px; margin: 0 auto 24px; }
+  h1 {
+    font-weight: 800; font-size: clamp(20px, 5.4vw, 26px); line-height: 1.35;
+    color: var(--blanc); text-wrap: balance;
+  }
+  /* Textes en trois langues : seule celle de <html class="l-xx"> se voit
+     (en sans JavaScript). display:none les retire aussi du lecteur d'ecran. */
+  .t { display: none; }
+  .l-fr .t-fr, .l-en .t-en, .l-es .t-es { display: inline; }
+  .stores {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+    margin-top: 32px;
+  }
+  /* Le bouton store du site, avec le degrade du bandeau app-banner.js qui
+     s'arrete a #B58A3C : le texte #1E1503 y garde 5,7:1 au pire point
+     (jusqu'a #8E6825, il tombait a 3,6:1). */
+  .btn-store {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: 12px;
+    min-height: 56px; min-width: 210px;
+    padding: 12px 22px; border-radius: 14px;
+    background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 45%, #B58A3C 100%);
+    color: var(--sur-or); text-decoration: none;
+    box-shadow: 0 12px 34px rgba(201,167,90,0.35), inset 0 2px 0 rgba(255,255,255,0.85), inset 0 -3px 6px rgba(90,60,10,0.35);
+    transition: transform 0.2s, filter 0.2s;
+  }
+  .btn-store::after {
+    content: ''; position: absolute; top: 0; left: -70%; width: 36%; height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.7), transparent);
+    transform: skewX(-22deg); animation: sweep 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .btn-store:hover { transform: translateY(-2px); filter: brightness(1.05); }
+  .btn-store:focus-visible { outline: 3px solid var(--or-clair); outline-offset: 3px; }
+  .btn-store svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .btn-store-text { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+  .btn-store-sub {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; line-height: 1.2;
+  }
+  .btn-store-name { font-size: 17px; font-weight: 700; line-height: 1.3; }
+  /* iPhone, iPad, iPod reste sur la page (redirection bloquee) : App Store
+     d'abord. Ordre visuel seulement : deux liens equivalents. */
+  .s-ios .btn-store:last-child { order: -1; }
+  @media (max-width: 480px) {
+    .btn-store { width: 100%; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-store::after { animation: none; display: none; }
+    .btn-store { transition: none; }
+    .btn-store:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/logo.png" alt="" width="96" height="96">
+    <h1>
+      <span class="t t-fr" lang="fr">Linceya est une app mobile&nbsp;: télécharge-la sur ton iPhone ou ton téléphone Android.</span>
+      <span class="t t-en" lang="en">Linceya is a mobile app: download it on your iPhone or Android phone.</span>
+      <span class="t t-es" lang="es">Linceya es una app móvil: descárgala en tu iPhone o en tu móvil Android.</span>
+    </h1>
+    <div class="stores">
+      <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.padelup.padelup">
+        <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="#4CAF50" d="M48 428.7L254.9 256 48 83.3z"/><path fill="#F44336" d="M48 83.3l206.9 172.7L340.3 170 99 32.1C78.4 20.4 55.3 29.2 48 83.3z"/><path fill="#FFC107" d="M464 256c0-41.4-22.1-77.7-55.3-98.2L340.3 170 254.9 256l85.4 86 68.4-42.2C441.9 333.7 464 297.4 464 256z"/><path fill="#2196F3" d="M254.9 256L48 428.7c7.3 54.1 30.4 62.9 51 51.2L340.3 342l-85.4-86z"/></svg>
+        <span class="btn-store-text">
+          <span class="btn-store-sub"><span class="t t-fr" lang="fr">Disponible sur</span><span class="t t-en" lang="en">Get it on</span><span class="t t-es" lang="es">Disponible en</span></span>
+          <span class="btn-store-name">Google Play</span>
+        </span>
+      </a>
+      <a class="btn-store" href="https://apps.apple.com/app/linceya-coach-ia-padel/id6760952174">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span class="btn-store-text">
+          <span class="btn-store-sub"><span class="t t-fr" lang="fr">Disponible sur</span><span class="t t-en" lang="en">Download on the</span><span class="t t-es" lang="es">Disponible en</span></span>
+          <span class="btn-store-name">App Store</span>
+        </span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
