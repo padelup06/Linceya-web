@@ -53,7 +53,7 @@
       "name": "Free",
       "price": "0",
       "priceCurrency": "EUR",
-      "description": "Visible ELO ranking, public matches, leagues with friends, 1 AI video analysis per month.",
+      "description": "Visible ELO ranking, public matches, leagues with friends, global and regional ranking.",
       "availability": "https://schema.org/InStock",
       "url": "https://linceya.com/en/pricing.html"
     },
@@ -80,7 +80,7 @@
       "name": "What's the difference between Free and Elite?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Free gives you 1 AI video analysis per month with the 12 detailed analysis points (overall score, stability, net play, tactics, consistency, 2 strengths, 3 improvement areas, critical error, coaching advice), ELO ranking, public matches and leagues with friends. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations."
+        "text": "Free gives you the ELO ranking, public matches, global and regional rankings and leagues with friends, with no card required and no video analysis. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations."
       }
     },
     {
@@ -96,7 +96,7 @@
       "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, there is no free trial: the free plan plays that role, with no time limit and no card required. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app."
+        "text": "No, there is no free trial. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app."
       }
     },
     {
@@ -980,7 +980,7 @@ footer {
 <section class="pricing-hero" id="pricing">
   <div class="hero-veil" aria-hidden="true"><img src="../img/noir/trophy.jpg" alt=""></div>
   <h1><span class="title-over">CHOOSE YOUR</span><span class="accent">PLAN</span></h1>
-  <p>Start for free, go Elite for advanced AI analysis.</p>
+  <p>Start for free, go Elite to get your matches analyzed.</p>
 </section>
 
 <div class="pricing-cards">
@@ -992,12 +992,11 @@ footer {
       <div class="price-note">Forever. No card required.</div>
     </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon check">✓</span> 1 AI video analysis / month</div>
-      <div class="plan-feature"><span class="icon check">✓</span> 12 detailed analysis points</div>
       <div class="plan-feature"><span class="icon check">✓</span> Visible ELO ranking</div>
       <div class="plan-feature"><span class="icon check">✓</span> Public matches &amp; partner search</div>
       <div class="plan-feature"><span class="icon check">✓</span> Global &amp; regional ranking</div>
       <div class="plan-feature"><span class="icon check">✓</span> Unlimited leagues with friends</div>
+      <div class="plan-feature dimmed"><span class="icon x">✕</span> AI video analysis</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Personalized training plan</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Full progress history</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Coach invitation</div>
@@ -1042,16 +1041,15 @@ footer {
       </tr>
     </thead>
     <tbody>
-      <tr><td>Advanced AI analysis (computer vision)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">6 / month</span></td></tr>
+      <tr><td>AI video analysis (computer vision)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">6 / month</span></td></tr>
       <tr><td>Auto shot &amp; movement detection</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Court coverage heatmap</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distance covered &amp; movement speeds</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Time at the net / at the back</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Overall match score</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>12 detailed analysis points</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Strengths, improvement areas &amp; critical error</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>AI training plan</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Targeted post-analysis drills</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Player recognition</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Player recognition</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>ELO &amp; ranking</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Global &amp; regional ranking</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Progress history</td><td><span class="table-val">30 days</span></td><td><span class="table-val green">Unlimited</span></td></tr>
@@ -1067,7 +1065,7 @@ footer {
   <div class="faq-list">
     <div class="faq-item reveal">
       <button class="faq-q"><span>What's the difference between Free and Elite?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Free gives you 1 AI video analysis per month with the 12 detailed analysis points (overall score, stability, net play, tactics, consistency, 2 strengths, 3 improvement areas, critical error, coaching advice), ELO ranking, public matches and leagues with friends. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations.</div>
+      <div class="faq-a">Free gives you the ELO ranking, public matches, global and regional rankings and leagues with friends, with no card required and no video analysis. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>What is the Elite plan?</span><span class="faq-icon">+</span></button>
@@ -1075,7 +1073,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Is there a free trial?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">No, there is no free trial: the free plan plays that role, with no time limit and no card required. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app.</div>
+      <div class="faq-a">No, there is no free trial. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Can I cancel anytime?</span><span class="faq-icon">+</span></button>
@@ -1098,7 +1096,7 @@ footer {
 
 <section class="cta-bottom">
   <h2 class="section-title"><span class="title-over">READY TO</span><span class="accent">LEVEL UP?</span></h2>
-  <p class="section-sub">Download Linceya for free and analyze your first match today.</p>
+  <p class="section-sub">Download Linceya for free, then go Elite to get your matches analyzed.</p>
   <div class="cta-btns">
     <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="btn-store" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 512 512"><path fill="#4CAF50" d="M48 428.7L254.9 256 48 83.3z"/><path fill="#F44336" d="M48 83.3l206.9 172.7L340.3 170 99 32.1C78.4 20.4 55.3 29.2 48 83.3z"/><path fill="#FFC107" d="M464 256c0-41.4-22.1-77.7-55.3-98.2L340.3 170 254.9 256l85.4 86 68.4-42.2C441.9 333.7 464 297.4 464 256z"/><path fill="#2196F3" d="M254.9 256L48 428.7c7.3 54.1 30.4 62.9 51 51.2L340.3 342l-85.4-86z"/></svg>

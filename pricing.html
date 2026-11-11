@@ -53,7 +53,7 @@
       "name": "Gratuit",
       "price": "0",
       "priceCurrency": "EUR",
-      "description": "Classement ELO visible, matchs publics, ligues entre amis, 1 analyse vidéo IA par mois.",
+      "description": "Classement ELO visible, matchs publics, ligues entre amis, classement global et régional.",
       "availability": "https://schema.org/InStock",
       "url": "https://linceya.com/pricing.html"
     },
@@ -80,7 +80,7 @@
       "name": "C'est quoi la différence entre Gratuit et Elite ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois avec les 12 points d'analyse détaillés (note globale, stabilité, jeu au filet, tactique, régularité, 2 forces, 3 axes de progression, erreur critique, conseil de coaching), du classement ELO, des matchs publics et des ligues entre amis. Elite ajoute 6 analyses vidéo IA par mois, le programme d'entraînement personnalisé par l'IA, l'ELO certifié, l'historique de progression complet et l'invitation d'un coach."
+        "text": "En Gratuit, vous avez le classement ELO, les matchs publics, le classement global et régional et les ligues entre amis, sans carte bancaire et sans analyse vidéo. Elite ajoute 6 analyses vidéo IA par mois, le programme d'entraînement personnalisé par l'IA, l'ELO certifié, l'historique de progression complet et l'invitation d'un coach."
       }
     },
     {
@@ -96,7 +96,7 @@
       "name": "Y a-t-il une période d'essai ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Non, il n'y a pas d'essai gratuit : la version gratuite en tient lieu, sans limite de temps et sans carte bancaire. Vous pouvez passer Elite à tout moment, ici ou depuis l'app. Le paiement se fait de manière sécurisée via Stripe sur le site, ou via Google Play ou l'App Store dans l'app."
+        "text": "Non, il n'y a pas d'essai gratuit. La version gratuite, sans limite de temps et sans carte bancaire, donne le classement ELO, les matchs publics et les ligues entre amis ; l'analyse vidéo IA vient avec l'Elite. Vous pouvez passer Elite à tout moment, ici ou depuis l'app. Le paiement se fait de manière sécurisée via Stripe sur le site, ou via Google Play ou l'App Store dans l'app."
       }
     },
     {
@@ -1005,7 +1005,7 @@ footer {
 <section class="pricing-hero" id="pricing">
   <div class="hero-veil" aria-hidden="true"><img src="img/noir/trophy.jpg" alt=""></div>
   <h1><span class="title-over">CHOISISSEZ VOTRE</span><span class="accent">PLAN</span></h1>
-  <p>Commencez gratuitement, passez Elite pour l'analyse IA avancée.</p>
+  <p>Commencez gratuitement, passez Elite pour faire analyser vos matchs.</p>
 </section>
 
 <div class="pricing-cards">
@@ -1017,12 +1017,11 @@ footer {
       <div class="price-note">Pour toujours. Aucune carte requise.</div>
     </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon check">✓</span> 1 analyse vidéo IA / mois</div>
-      <div class="plan-feature"><span class="icon check">✓</span> 12 points d'analyse détaillés</div>
       <div class="plan-feature"><span class="icon check">✓</span> Classement ELO visible</div>
       <div class="plan-feature"><span class="icon check">✓</span> Matchs publics &amp; recherche partenaires</div>
       <div class="plan-feature"><span class="icon check">✓</span> Classement global &amp; régional</div>
       <div class="plan-feature"><span class="icon check">✓</span> Ligues entre amis illimitées</div>
+      <div class="plan-feature dimmed"><span class="icon x">✕</span> Analyse vidéo IA</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Programme d'entraînement personnalisé</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Historique complet de progression</div>
       <div class="plan-feature dimmed"><span class="icon x">✕</span> Invitation d'un coach</div>
@@ -1067,16 +1066,15 @@ footer {
       </tr>
     </thead>
     <tbody>
-      <tr><td>Analyse IA avancée (vision par ordinateur)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">6 / mois</span></td></tr>
+      <tr><td>Analyse vidéo IA (vision par ordinateur)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">6 / mois</span></td></tr>
       <tr><td>Détection auto coups &amp; déplacements</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Heatmap de couverture du terrain</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distance parcourue &amp; vitesses de déplacement</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Temps au filet / au fond</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Note globale du match</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>12 points d'analyse détaillés</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Points forts, axes de progression &amp; erreur critique</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Programme entraînement IA</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Exercices ciblés post-analyse</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
-      <tr><td>Reconnaissance des joueurs</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Reconnaissance des joueurs</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>ELO &amp; classement</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Classement global &amp; régional</td><td><span class="table-check">✓</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Historique de progression</td><td><span class="table-val">30 jours</span></td><td><span class="table-val green">Illimité</span></td></tr>
@@ -1092,7 +1090,7 @@ footer {
   <div class="faq-list">
     <div class="faq-item reveal">
       <button class="faq-q"><span>C'est quoi la différence entre Gratuit et Elite ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">En Gratuit, vous bénéficiez d'1 analyse vidéo IA par mois avec les 12 points d'analyse détaillés (note globale, stabilité, jeu au filet, tactique, régularité, 2 forces, 3 axes de progression, erreur critique, conseil de coaching), du classement ELO, des matchs publics et des ligues entre amis. Elite ajoute 6 analyses vidéo IA par mois, le programme d'entraînement personnalisé par l'IA, l'ELO certifié, l'historique de progression complet et l'invitation d'un coach.</div>
+      <div class="faq-a">En Gratuit, vous avez le classement ELO, les matchs publics, le classement global et régional et les ligues entre amis, sans carte bancaire et sans analyse vidéo. Elite ajoute 6 analyses vidéo IA par mois, le programme d'entraînement personnalisé par l'IA, l'ELO certifié, l'historique de progression complet et l'invitation d'un coach.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>C'est quoi le palier Elite ?</span><span class="faq-icon">+</span></button>
@@ -1100,7 +1098,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Y a-t-il une période d'essai ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Non, il n'y a pas d'essai gratuit : la version gratuite en tient lieu, sans limite de temps et sans carte bancaire. Vous pouvez passer Elite à tout moment, ici ou depuis l'app. Le paiement se fait de manière sécurisée via Stripe sur le site, ou via Google Play ou l'App Store dans l'app.</div>
+      <div class="faq-a">Non, il n'y a pas d'essai gratuit. La version gratuite, sans limite de temps et sans carte bancaire, donne le classement ELO, les matchs publics et les ligues entre amis ; l'analyse vidéo IA vient avec l'Elite. Vous pouvez passer Elite à tout moment, ici ou depuis l'app. Le paiement se fait de manière sécurisée via Stripe sur le site, ou via Google Play ou l'App Store dans l'app.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Je peux résilier quand je veux ?</span><span class="faq-icon">+</span></button>
@@ -1123,7 +1121,7 @@ footer {
 
 <section class="cta-bottom">
   <h2 class="section-title"><span class="title-over">PRÊT À</span><span class="accent">PROGRESSER ?</span></h2>
-  <p class="section-sub">Téléchargez Linceya gratuitement et analysez votre premier match dès aujourd'hui.</p>
+  <p class="section-sub">Téléchargez Linceya gratuitement, puis passez Elite pour faire analyser vos matchs.</p>
   <div class="cta-btns">
     <a href="https://play.google.com/store/apps/details?id=com.padelup.padelup" class="btn-store" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 512 512"><path fill="#4CAF50" d="M48 428.7L254.9 256 48 83.3z"/><path fill="#F44336" d="M48 83.3l206.9 172.7L340.3 170 99 32.1C78.4 20.4 55.3 29.2 48 83.3z"/><path fill="#FFC107" d="M464 256c0-41.4-22.1-77.7-55.3-98.2L340.3 170 254.9 256l85.4 86 68.4-42.2C441.9 333.7 464 297.4 464 256z"/><path fill="#2196F3" d="M254.9 256L48 428.7c7.3 54.1 30.4 62.9 51 51.2L340.3 342l-85.4-86z"/></svg>
