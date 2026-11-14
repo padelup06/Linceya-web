@@ -259,6 +259,8 @@ h1 {
 }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+/* Liens vers les conditions de vente et la politique (abonnement pris sur linceya.com). */
+.info-list a { color: var(--platinum-light); text-decoration: underline; }
 .badge-del {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--danger); font-weight: 600; font-size: 12px;
@@ -414,7 +416,11 @@ footer {
         <tr><td>Copies de travail de l'analyse Elite (machines de Linceya)</td><td><span class="badge-del">Supprimé</span></td><td>Sous 7 jours</td></tr>
         <tr><td>ELO et classement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
         <tr><td>Plan d'entraînement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
-        <tr><td>Données de facturation</td><td><span class="badge-keep">Conservé</span></td><td>30 jours (obligation légale)</td></tr>
+        <tr><td>Abonnement pris sur linceya.com (part non utilisée remboursée au prorata)</td><td><span class="badge-del">Arrêté</span></td><td>Au traitement de la demande</td></tr>
+        <tr><td>Contrat d'un abonnement pris sur linceya.com, sans votre adresse e-mail (seulement son empreinte)</td><td><span class="badge-keep">Conservé</span></td><td>10 ans après la fin du contrat</td></tr>
+        <tr><td>Demandes de rétractation et de résiliation, sans votre nom, votre adresse ni votre message</td><td><span class="badge-keep">Conservé</span></td><td>5 ans après leur réception</td></tr>
+        <tr><td>Copies des e-mails sur vos demandes et sur la fin de votre abonnement (boîte contact@linceya.com)</td><td><span class="badge-keep">Conservé</span></td><td>5 ans</td></tr>
+        <tr><td>Factures et données de paiement d'un abonnement pris sur linceya.com (chez Stripe, notre prestataire de paiement)</td><td><span class="badge-keep">Conservé</span></td><td>10 ans (obligation comptable)</td></tr>
       </table>
     </div>
 
@@ -427,9 +433,9 @@ footer {
       </div>
       <ul class="info-list">
         <li>La suppression du compte n'arrête pas un abonnement pris sur l'App Store ou Google Play : résiliez-le d'abord dans les réglages du store (iPhone : Réglages → votre nom → Abonnements ; Android : Play Store → Paiements et abonnements → Abonnements)</li>
-        <li>Un abonnement payé sur linceya.com est résilié par nos soins au traitement de la demande</li>
+        <li>Un abonnement payé sur linceya.com prend fin tout de suite, au traitement de la demande, même avec la formule annuelle. Nous vous remboursons au prorata la part de la période payée qui n'a pas servi, avec le même moyen de paiement. Exemple&nbsp;: formule annuelle à 199&nbsp;€, compte supprimé après 100 jours, 144,48&nbsp;€ remboursés. Le calcul est dans nos <a href="/terms-of-sale.html#suppression-compte">conditions de vente</a></li>
         <li>Les données supprimées ne peuvent pas être récupérées</li>
-        <li>Les données de facturation sont conservées 30 jours conformément aux obligations légales</li>
+        <li>Si vous avez souscrit sur linceya.com, nous gardons votre contrat 10 ans après sa fin, sans votre adresse e-mail, seulement son empreinte&nbsp;; vos demandes de rétractation et de résiliation 5 ans&nbsp;; les copies des e-mails sur vos demandes et sur la fin de votre abonnement, dans notre boîte contact@linceya.com, 5 ans&nbsp;; et les factures et les données de paiement, chez Stripe, 10 ans (voir notre <a href="/privacy-policy.html">politique de confidentialité</a>)</li>
         <li>Délai de traitement : <strong>7 jours ouvrés</strong></li>
       </ul>
     </div>
@@ -456,6 +462,10 @@ footer {
     <a href="/privacy-policy.html">Politique de confidentialité</a>
     <a href="/contact.html">Contact</a>
     <a href="/index.html">Accueil</a>
+    <a href="/terms-of-sale.html">Conditions de vente</a>
+    <a href="/legal-notice.html">Mentions légales</a>
+    <a href="/cancel-subscription.html">Résilier votre contrat</a>
+    <a href="/withdraw.html">Renoncer au contrat ici</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>

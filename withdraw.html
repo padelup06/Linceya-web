@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Lien « Ce n'est pas vous ? » de l'accusé de réception : withdraw.html#o=<jeton>.
+// Le jeton vit dans le FRAGMENT : le navigateur ne l'envoie à aucun serveur et il n'entre dans
+// aucun journal. Il est lu ici, avant tout autre script, puis retiré de l'adresse (historique,
+// favoris, partage). Jamais en paramètre d'adresse, jamais dans le stockage du navigateur.
+(function () {
+  var jeton = null;
+  try {
+    var fragment = window.location.hash || '';
+    if (fragment.indexOf('#o=') === 0) {
+      jeton = fragment.slice(3);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  } catch (e) {}
+  window.__linceyaJetonAnnulation = jeton;
+})();
+</script>
+<title>Linceya — Renoncer au contrat</title>
+<meta name="description" content="Renoncez à votre abonnement Linceya Elite pris sur linceya.com, pendant le délai de rétractation de 14 jours.">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Linceya" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://linceya.com/withdraw.html">
+<link rel="alternate" hreflang="fr" href="https://linceya.com/withdraw.html">
+<link rel="alternate" hreflang="en" href="https://linceya.com/en/withdraw.html">
+<link rel="alternate" hreflang="es" href="https://linceya.com/es/withdraw.html">
+<link rel="alternate" hreflang="x-default" href="https://linceya.com/withdraw.html">
+<!-- Page de droit : pas de détection de langue (elle écrit dans le stockage du navigateur et sa
+     redirection perdrait le fragment #o=), pas de script de mesure d'audience. cookies.js reste
+     pour le lien « Cookies ». -->
+<style>
+/* Linceya v6 "NOIR & OR" — page de droit (formulaire en deux étapes, sans mesure d'audience) */
+:root {
+  --cream: #0B0B0D;
+  --ivory: #16161B;
+  --pearl: #FFFFFF;
+  --carbon: #15151A;
+  --carbon-high: #1C1D24;
+  --ink: #F2F3F7;
+  --platinum: #B48A4A;
+  --platinum-light: #D4B87A;
+  --gold: #C9A75A;
+  --gold-light: #F6E5AE;
+  --on-gold: #1E1503;
+  --graphite: #C9CEDA;
+  --stroke: #26272E;
+  --stroke-soft: rgba(255,255,255,0.08);
+  --muted: #8B93A5;
+  --font-display: 'Anton', 'Archivo Black', 'Archivo', sans-serif;
+  --font-anton: 'Anton', sans-serif;
+  --font-body: 'Archivo', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+@keyframes sweep { 0% { left: -70%; } 55% { left: 145%; } 100% { left: 145%; } }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(ellipse 700px 400px at 80% 0%, rgba(201,167,90,0.06) 0%, transparent 60%);
+}
+a { color: var(--platinum-light); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(11,11,13,0.92); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--stroke);
+}
+nav::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--platinum-light) 28%, var(--platinum) 72%, transparent);
+  opacity: 0.9; pointer-events: none;
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 34px; width: auto; filter: none; }
+.nav-back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
+.nav-back:hover { color: var(--platinum-light); }
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-lang {
+  display: flex; align-items: center; gap: 1px;
+  padding: 3px; border-radius: 100px;
+  border: 1px solid var(--stroke); background: rgba(255,255,255,0.05);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+}
+.nav-lang a, .nav-lang span {
+  padding: 4px 9px; border-radius: 100px; line-height: 1;
+  text-decoration: none; color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-lang a:hover { color: var(--platinum-light); }
+.nav-lang .lang-on { color: var(--on-gold); background: var(--platinum-light); font-weight: 700; }
+
+/* MAIN */
+.wrapper {
+  flex: 1; display: flex; justify-content: center;
+  padding: 140px 24px 80px;
+  position: relative; z-index: 2;
+}
+.container { max-width: 720px; width: 100%; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); display: inline-block; }
+h1 {
+  font-family: var(--font-anton); font-weight: 400; font-size: 52px;
+  line-height: 1.08; letter-spacing: 0.02em;
+  color: var(--pearl); text-transform: uppercase; margin-bottom: 18px;
+}
+.intro { margin-bottom: 36px; max-width: 640px; }
+.lead { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+.lead:last-child { margin-bottom: 0; }
+.lead a, .texte a, .aide a, .note-bas a, .msg-erreur a, .msg-ok a {
+  color: var(--platinum-light); text-decoration: none; font-weight: 500;
+  border-bottom: 1px solid rgba(212,184,122,0.4);
+}
+.lead a:hover, .texte a:hover, .aide a:hover, .note-bas a:hover, .msg-erreur a:hover, .msg-ok a:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+.card {
+  background: linear-gradient(170deg, var(--carbon-high), var(--carbon)); border: 1px solid var(--stroke);
+  border-radius: 20px; padding: 32px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+/* Une étape amenée en haut de l'écran ne passe pas sous la barre de navigation fixe. */
+.card { scroll-margin-top: 96px; }
+.card.annulation { border-color: rgba(227,197,122,0.45); }
+.card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.card-icon {
+  width: 40px; height: 40px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: rgba(201,167,90,0.12); border: 1px solid rgba(227,197,122,0.35); color: #E3C57A;
+}
+.card-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.card-title {
+  font-family: var(--font-anton); font-weight: 400; font-size: 17px;
+  letter-spacing: 0.04em; color: var(--ink); line-height: 1.25;
+  text-transform: uppercase;
+}
+.card-title:focus { outline: none; }
+.texte { font-size: 14px; color: var(--graphite); line-height: 1.7; margin-bottom: 14px; }
+.texte strong { color: var(--ink); font-weight: 700; }
+
+/* FORM */
+.form-group { margin-bottom: 20px; border: none; min-width: 0; }
+.form-group label.champ, .form-group legend {
+  display: block; font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; color: var(--gold);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 8px; padding: 0;
+}
+.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="date"], .form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid var(--stroke);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: var(--ink);
+  font-size: 16px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  color-scheme: dark;
+}
+.form-group input[type="date"] { min-height: 50px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(242,243,247,0.3); }
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--gold); background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 0 4px rgba(201,167,90,0.12);
+}
+.form-group input[aria-invalid="true"] { border-color: rgba(224,58,90,0.65); }
+.form-group textarea { resize: vertical; min-height: 110px; line-height: 1.55; }
+.aide { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.55; }
+.champ-erreur { font-size: 13px; color: #FF9DB0; margin-top: 7px; line-height: 1.5; }
+
+.choix { display: flex; flex-direction: column; gap: 10px; }
+.choix-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px; border-radius: 12px;
+  border: 1.5px solid var(--stroke); background: rgba(255,255,255,0.03);
+  font-size: 14px; color: var(--ink); line-height: 1.5; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.choix-item input { accent-color: var(--gold); color-scheme: dark; width: 18px; height: 18px; margin-top: 1px; flex-shrink: 0; cursor: pointer; }
+.choix-item:has(input:checked) { border-color: rgba(227,197,122,0.65); background: rgba(201,167,90,0.08); }
+.choix-item:has(input:focus-visible) { box-shadow: 0 0 0 4px rgba(201,167,90,0.18); }
+
+.declaration {
+  border: 1.5px solid rgba(227,197,122,0.45);
+  background: rgba(201,167,90,0.06);
+  border-radius: 14px; padding: 16px 18px; margin: 4px 0 22px;
+  font-size: 14px; line-height: 1.65; color: var(--ink);
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(180deg, #F8E9B6 0%, #DDBC6E 30%, #B58A3C 70%, #8E6825 100%);
+  color: var(--on-gold);
+  border: none; border-radius: 14px;
+  padding: 16px; font-size: 15px; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+  box-shadow: 0 12px 34px rgba(201,167,90,0.35), inset 0 2px 0 rgba(255,255,255,0.85), inset 0 -3px 6px rgba(90,60,10,0.5);
+}
+.btn-submit::before {
+  content: ''; position: absolute; top: 0; left: -70%; width: 36%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.7), transparent);
+  transform: skewX(-22deg); animation: sweep 4s ease-in-out infinite;
+}
+.btn-submit span { position: relative; z-index: 2; }
+.btn-submit:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
+.btn-submit:disabled { opacity: 0.55; cursor: wait; transform: none; }
+.btn-secondaire {
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--stroke); border-radius: 14px;
+  padding: 15px 22px; font-size: 15px; font-weight: 700;
+  font-family: var(--font-body); cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondaire:hover:not(:disabled) { border-color: rgba(227,197,122,0.55); color: var(--gold-light); }
+.btn-secondaire:disabled { opacity: 0.5; cursor: not-allowed; }
+.actions { display: flex; gap: 12px; align-items: stretch; }
+.actions .btn-secondaire { flex: 0 0 auto; }
+.actions .btn-submit { flex: 1 1 auto; width: auto; }
+
+/* RÉCAPITULATIF */
+.recap-note {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--platinum-light);
+  margin: -6px 0 18px;
+}
+dl.recap {
+  display: grid; grid-template-columns: minmax(150px, 36%) 1fr;
+  border: 1px solid var(--stroke); border-radius: 12px; overflow: hidden;
+  margin-bottom: 18px;
+}
+dl.recap dt, dl.recap dd { padding: 12px 14px; border-bottom: 1px solid var(--stroke); line-height: 1.5; }
+dl.recap dt {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+  background: rgba(255,255,255,0.03);
+}
+dl.recap dd { font-size: 14px; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+dl.recap dt:nth-last-of-type(1), dl.recap dd:nth-last-of-type(1) { border-bottom: none; }
+dl.recap dd.vide { color: var(--muted); font-style: italic; }
+
+.msg-erreur {
+  background: rgba(224,58,90,0.1); color: #FF9DB0;
+  border: 1px solid rgba(224,58,90,0.35); border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 16px;
+  font-size: 14px; line-height: 1.55;
+}
+.msg-ok {
+  background: rgba(201,167,90,0.08); color: #F0DCA0;
+  border: 1px solid rgba(227,197,122,0.4); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 16px;
+  font-size: 14px; line-height: 1.55; font-weight: 500;
+}
+.note-bas {
+  margin-top: 28px; padding-top: 22px;
+  border-top: 1px solid var(--stroke-soft);
+  font-size: 13px; color: var(--muted); line-height: 1.75; text-align: center;
+}
+
+/* Repère à remplir avant la mise en ligne : aucun ne doit rester (grep "a-remplir"). */
+.a-remplir {
+  color: #FFB4C2; background: rgba(224,58,90,0.12);
+  border: 1px dashed rgba(224,58,90,0.55); border-radius: 4px;
+  padding: 0 4px;
+}
+
+/* MAIN FOOTER */
+footer {
+  background: #08080A; color: rgba(255,255,255,0.55);
+  padding: 40px 24px 26px; display: flex; flex-direction: column;
+  align-items: center; gap: 22px;
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(201,167,90,0.22);
+}
+.footer-copy {
+  font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  width: 100%; max-width: 720px;
+}
+.footer-links { display: flex; gap: 14px 28px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-light); }
+.footer-socials { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.footer-socials a {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.footer-socials a:hover {
+  color: var(--platinum-light);
+  border-color: rgba(180,138,74,0.4);
+  background: rgba(180,138,74,0.06);
+}
+.footer-socials svg { width: 15px; height: 15px; }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 16px; }
+  .nav-right { gap: 12px; }
+  .wrapper { padding: 110px 16px 60px; }
+  h1 { font-size: 38px; }
+  .lead { font-size: 15px; }
+  .card { padding: 24px 18px; }
+  footer { padding: 32px 16px 22px; gap: 18px; }
+  .footer-links { gap: 14px 22px; }
+}
+@media (max-width: 520px) {
+  dl.recap { grid-template-columns: 1fr; }
+  dl.recap dt { border-bottom: none; padding-bottom: 2px; }
+  dl.recap dt:nth-last-of-type(1) { border-bottom: none; }
+  .actions { flex-direction: column; }
+  .actions .btn-secondaire, .actions .btn-submit { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn-submit::before { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://linceya.com" class="nav-logo">
+    <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
+  </a>
+  <div class="nav-right">
+    <div class="nav-lang" role="group" aria-label="Choisir la langue">
+      <span class="lang-on" aria-current="true">FR</span>
+      <a href="/en/withdraw.html" hreflang="en">EN</a>
+      <a href="/es/withdraw.html" hreflang="es">ES</a>
+    </div>
+    <a href="/index.html" class="nav-back">← Accueil</a>
+  </div>
+</nav>
+
+<main class="wrapper">
+  <div class="container">
+    <div class="eyebrow">Droit de rétractation</div>
+    <h1>Renoncer au contrat</h1>
+
+    <section class="card annulation" id="annulation" hidden aria-labelledby="annulation-titre">
+      <div class="card-head">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+        <h2 class="card-title" id="annulation-titre" tabindex="-1">Annuler une demande de rétractation</h2>
+      </div>
+      <p class="texte">Vous avez reçu un accusé de réception pour une rétractation que vous n'avez pas demandée&nbsp;? Annulez-la ici&nbsp;: votre abonnement continuera.</p>
+      <div class="msg-erreur" id="annulation-erreur" role="alert" hidden></div>
+      <div class="msg-ok" id="annulation-ok" role="status" hidden></div>
+      <button type="button" class="btn-submit" id="annulation-bouton"><span>Annuler cette demande</span></button>
+    </section>
+
+    <div class="intro">
+      <p class="lead">Vous avez souscrit l'Elite sur linceya.com&nbsp;? Vous pouvez renoncer au contrat ici pendant 14 jours à partir du lendemain de la souscription (la date limite est dans votre e-mail de confirmation), gratuitement et sans donner de motif.</p>
+      <p class="lead">Un abonnement pris dans l'application, sur l'App Store ou sur Google Play, se gère chez Apple ou chez Google&nbsp;: ce formulaire ne le concerne pas.</p>
+    </div>
+
+    <section class="card" id="etape-formulaire">
+      <div class="card-head">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <h2 class="card-title" tabindex="-1">Renoncer au contrat ici</h2>
+      </div>
+      <form id="formulaire" novalidate>
+        <div class="form-group">
+          <label class="champ" for="nom">Nom et prénom *</label>
+          <input type="text" id="nom" name="nom" maxlength="120" autocomplete="name" required>
+          <div class="champ-erreur" id="nom-erreur" hidden>Indiquez votre nom et prénom.</div>
+          <div class="champ-erreur" id="nom-refus" hidden></div>
+        </div>
+        <div class="form-group">
+          <label class="champ" for="email">Adresse e-mail de votre abonnement *</label>
+          <input type="email" id="email" name="email" maxlength="254" autocomplete="email" inputmode="email" spellcheck="false" autocapitalize="off" required aria-describedby="email-aide">
+          <div class="aide" id="email-aide">Celle que vous avez donnée au paiement. Nous vous envoyons l'accusé de réception à cette adresse.</div>
+          <div class="champ-erreur" id="email-erreur" hidden>Indiquez une adresse e-mail valide.</div>
+        </div>
+        <fieldset class="form-group">
+          <legend>Formule</legend>
+          <div class="choix">
+            <label class="choix-item"><input type="radio" name="formule" value="mensuelle"><span>Mensuelle</span></label>
+            <label class="choix-item"><input type="radio" name="formule" value="annuelle"><span>Annuelle</span></label>
+            <label class="choix-item"><input type="radio" name="formule" value="inconnue" checked><span>Je ne sais pas</span></label>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label class="champ" for="date_souscription">Date de souscription (facultatif)</label>
+          <input type="date" id="date_souscription" name="date_souscription" min="2020-01-01" placeholder="AAAA-MM-JJ" pattern="\d{4}-\d{2}-\d{2}">
+        </div>
+        <div class="form-group">
+          <label class="champ" for="message">Message (facultatif)</label>
+          <textarea id="message" name="message" maxlength="1000" aria-describedby="message-aide"></textarea>
+          <div class="aide" id="message-aide">Sans lien ni adresse e-mail.</div>
+          <div class="champ-erreur" id="message-refus" hidden></div>
+        </div>
+        <div class="declaration">Votre déclaration&nbsp;: «&nbsp;Je me rétracte de mon contrat d'abonnement Linceya Elite souscrit sur linceya.com.&nbsp;»</div>
+        <button type="submit" class="btn-submit"><span>Vérifier ma demande</span></button>
+      </form>
+    </section>
+
+    <section class="card" id="etape-recap" hidden>
+      <div class="card-head">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h2 class="card-title" tabindex="-1">Vérifiez votre demande</h2>
+      </div>
+      <p class="recap-note">Rien n'est encore envoyé.</p>
+      <dl class="recap">
+        <dt>Nom et prénom</dt><dd id="r-nom"></dd>
+        <dt>Adresse e-mail de votre abonnement</dt><dd id="r-email"></dd>
+        <dt>Formule</dt><dd id="r-formule"></dd>
+        <dt>Date de souscription</dt><dd id="r-date"></dd>
+        <dt>Message</dt><dd id="r-message"></dd>
+      </dl>
+      <div class="declaration">Votre déclaration&nbsp;: «&nbsp;Je me rétracte de mon contrat d'abonnement Linceya Elite souscrit sur linceya.com.&nbsp;»</div>
+      <div class="msg-erreur" id="envoi-erreur" role="alert" hidden></div>
+      <div class="actions">
+        <button type="button" class="btn-secondaire" id="bouton-modifier">Modifier</button>
+        <button type="button" class="btn-submit" id="bouton-confirmer"><span>Confirmer la rétractation</span></button>
+      </div>
+    </section>
+
+    <section class="card" id="etape-succes" hidden>
+      <div class="card-head">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h2 class="card-title" tabindex="-1">Rétractation envoyée</h2>
+      </div>
+      <p class="texte" role="status">Envoyée le <strong id="s-date"></strong> à <strong id="s-heure"></strong>. Référence&nbsp;: <strong id="s-ref"></strong>.</p>
+      <p class="texte">Nous vous envoyons un accusé de réception par e-mail. Vous ne le voyez pas d'ici quelques minutes&nbsp;? Regardez dans les courriers indésirables, ou écrivez-nous à <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</p>
+    </section>
+
+    <p class="note-bas">Vous pouvez aussi vous rétracter par e-mail à <a href="mailto:contact@linceya.com">contact@linceya.com</a>, ou avec le <a href="/terms-of-sale.html#formulaire">modèle de formulaire de nos conditions générales de vente</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@linceya.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+    </a>
+    <a href="https://x.com/linceyapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.snapchat.com/add/Linceyapp" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 2.001c1.466.024 4.298.404 5.667 3.515.464 1.054.348 2.85.255 4.292l-.004.066c-.014.219-.027.43-.036.625.007.005.026.013.063.016.198-.012.418-.075.65-.181.073-.038.247-.117.448-.117.119 0 .238.026.347.075.323.119.523.354.527.622.005.357-.302.667-.913.92-.06.025-.137.05-.219.078-.291.094-.731.236-.85.515-.061.144-.039.328.066.55l.006.013c.044.103.991 2.292 3.193 2.654.099.016.171.103.165.203a.55.55 0 0 1-.044.179c-.139.323-.7.518-1.713.595-.046.005-.064.054-.105.21-.018.062-.038.131-.062.205l-.014.046c-.046.156-.099.317-.245.317-.013 0-.027 0-.041-.003a.745.745 0 0 1-.17-.038 4.05 4.05 0 0 0-1.121-.155 4.94 4.94 0 0 0-.792.064c-.502.087-.939.388-1.442.737-.731.508-1.561 1.082-2.853 1.082-.058 0-.115-.003-.171-.005a3.27 3.27 0 0 1-.143.005c-1.293 0-2.122-.574-2.853-1.082-.502-.349-.939-.65-1.441-.737a4.91 4.91 0 0 0-.792-.064c-.566 0-.992.131-1.121.155a.95.95 0 0 1-.17.038c-.158 0-.205-.144-.245-.317l-.013-.046a3.4 3.4 0 0 1-.063-.205c-.041-.156-.06-.205-.105-.21-1.012-.077-1.574-.272-1.713-.595a.55.55 0 0 1-.044-.179c-.005-.099.066-.187.165-.203 2.202-.362 3.149-2.551 3.193-2.654l.006-.013c.105-.219.127-.405.066-.55-.119-.279-.559-.421-.85-.515a3.5 3.5 0 0 1-.219-.078c-.612-.255-.918-.563-.913-.92.005-.268.205-.503.527-.622a1.07 1.07 0 0 1 .347-.075c.201 0 .375.079.448.117.232.106.452.169.65.181.04-.003.057-.011.063-.016a17.24 17.24 0 0 0-.036-.625l-.004-.066c-.094-1.443-.21-3.236.255-4.292 1.369-3.111 4.201-3.491 5.667-3.515h.061Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy-policy.html">Politique de confidentialité</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/index.html">Accueil</a>
+    <a href="/terms-of-sale.html">Conditions de vente</a>
+    <a href="/legal-notice.html">Mentions légales</a>
+    <a href="/cancel-subscription.html">Résilier votre contrat</a>
+    <a href="/withdraw.html">Renoncer au contrat ici</a>
+    <a href="#" data-cookies-settings>Cookies</a>
+  </div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/withdraw.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/withdraw.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
+  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var LANGUE = 'fr';
+  var T = {
+    "formules": {
+      "mensuelle": "Mensuelle",
+      "annuelle": "Annuelle",
+      "inconnue": "Je ne sais pas"
+    },
+    "nonIndiquee": "non indiquée",
+    "aucun": "aucun",
+    "erreur429": "Trop de demandes depuis cet appareil. Réessayez dans quelques minutes, ou envoyez votre rétractation par e-mail à contact@linceya.com.",
+    "erreurEnvoi": "Votre demande n'est pas partie. Réessayez. Vous pouvez aussi envoyer votre rétractation par e-mail à contact@linceya.com\u00a0: elle a la même valeur.",
+    "annulationOkEmail": "La demande est annulée. Votre abonnement continue. Un e-mail vous le confirme.",
+    "annulationOk": "La demande est annulée.",
+    "annulationExpire": "Ce lien n'est plus valable\u00a0: la demande a peut-être déjà été traitée ou annulée. Écrivez-nous à contact@linceya.com.",
+    "annulationErreur": "Votre demande n'est pas partie. Réessayez.",
+    "envoiEnCours": "Envoi en cours…",
+    "refusLien": {
+      "nom": "Le nom ne doit contenir ni lien, ni adresse e-mail, ni numéro de téléphone.",
+      "message": "Le message ne doit contenir ni lien ni adresse e-mail."
+    }
+  };
+  var URL_FONCTION = 'https://tykruntstzrskowdvubk.supabase.co/functions/v1/contrat-web';
+  var DELAI_MS = 20000;
+
+  function $(id) { return document.getElementById(id); }
+  function montrer(el, oui) { if (oui) el.removeAttribute('hidden'); else el.setAttribute('hidden', ''); }
+  function deux(n) { return (n < 10 ? '0' : '') + n; }
+
+  // Texte fixe, adresse contact@linceya.com rendue cliquable (jamais un texte saisi).
+  function ecrire(el, texte) {
+    el.textContent = '';
+    var morceaux = texte.split('contact@linceya.com');
+    for (var i = 0; i < morceaux.length; i++) {
+      if (i > 0) {
+        var a = document.createElement('a');
+        a.href = 'mailto:contact@linceya.com';
+        a.textContent = 'contact@linceya.com';
+        el.appendChild(a);
+      }
+      el.appendChild(document.createTextNode(morceaux[i]));
+    }
+  }
+
+  // Les règles de contrat-web (regles.ts) : une demande que la page laisse
+  // partir n'est jamais refusée en 400 pour un champ que la page a accepté,
+  // sauf un lien ou une adresse e-mail dans un texte libre, ou un numéro de
+  // téléphone dans le nom (le serveur le dit, montrerRefus l'affiche).
+  // Caractères invisibles et de contrôle (invisiblesEnEspaces) : des espaces.
+  var INVISIBLES = /[\u0000-\u001F\u007F-\u009F\u061C\u200B\u200E\u200F\u2028\u2029\u202A-\u202E\u2060-\u2069\uFEFF]/g;
+  function ligneNormale(v) { return v.replace(INVISIBLES, ' ').replace(/\s+/g, ' ').trim(); }
+  function longueur(v) { return Array.from(v).length; }
+  function couper(v, n) { return Array.from(v).slice(0, n).join(''); }
+  function nomValide(v) { var n = longueur(ligneNormale(v)); return n >= 1 && n <= 120; }
+
+  function adresseValide(v) {
+    return v.length >= 3 && v.length <= 254 && /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:".]{2,}$/.test(v);
+  }
+
+  // Date de souscription : entre le 1er janvier 2020 et aujourd'hui (le serveur
+  // ignore, sans refuser la demande, une date hors de ces bornes).
+  var DATE_MIN = '2020-01-01';
+  function aujourdhui() {
+    var d = new Date();
+    return d.getFullYear() + '-' + deux(d.getMonth() + 1) + '-' + deux(d.getDate());
+  }
+
+  // AAAA-MM-JJ d'un vrai jour du calendrier, dans les bornes, sinon '' (« non indiquée »).
+  function dateValide(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+    if (!m) return '';
+    var an = +m[1], mois = +m[2], jour = +m[3];
+    var d = new Date(Date.UTC(an, mois - 1, jour));
+    if (d.getUTCFullYear() !== an || d.getUTCMonth() !== mois - 1 || d.getUTCDate() !== jour) return '';
+    if (v < DATE_MIN || v > aujourdhui()) return '';
+    return v;
+  }
+
+  var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août',
+    'septembre', 'octobre', 'novembre', 'décembre'];
+  // « 3 décembre 2026 », « 1er décembre 2026 » ; « 18:05 ».
+  function texteDate(an, mois, jour) {
+    return (jour === 1 ? '1er' : String(jour)) + '\u00a0' + MOIS[mois - 1] + ' ' + an;
+  }
+  function texteHeure(heure, minute) { return deux(heure) + ':' + deux(minute); }
+
+  // Date et heure de Paris, comme l'accusé de réception envoyé par e-mail.
+  function partiesParis(d) {
+    try {
+      var p = {};
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Europe/Paris', year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: '2-digit', hourCycle: 'h23'
+      }).formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
+      var r = { an: +p.year, mois: +p.month, jour: +p.day, heure: (+p.hour) % 24, minute: +p.minute };
+      if (r.an && r.mois && r.jour && !isNaN(r.heure) && !isNaN(r.minute)) return r;
+    } catch (e) {}
+    return { an: d.getFullYear(), mois: d.getMonth() + 1, jour: d.getDate(), heure: d.getHours(), minute: d.getMinutes() };
+  }
+
+  // POST JSON vers contrat-web. Ne lève jamais : { statut, donnees } (statut 0 = réseau ou délai).
+  async function poster(corps) {
+    var controle = typeof AbortController === 'function' ? new AbortController() : null;
+    var minuteur = controle ? setTimeout(function () { controle.abort(); }, DELAI_MS) : null;
+    try {
+      var reponse = await fetch(URL_FONCTION, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(corps),
+        credentials: 'omit',
+        cache: 'no-store',
+        referrerPolicy: 'no-referrer',
+        signal: controle ? controle.signal : undefined
+      });
+      var donnees = null;
+      try { donnees = await reponse.json(); } catch (e) { donnees = null; }
+      return { statut: reponse.status, donnees: donnees && typeof donnees === 'object' ? donnees : {} };
+    } catch (e) {
+      return { statut: 0, donnees: {} };
+    } finally {
+      if (minuteur) clearTimeout(minuteur);
+    }
+  }
+
+  var ETAPES = ['etape-formulaire', 'etape-recap', 'etape-succes'];
+  function allerA(id) {
+    ETAPES.forEach(function (e) { montrer($(e), e === id); });
+    var cible = $(id).querySelector('.card-title') || $(id).querySelector('input, textarea, button');
+    if (cible) {
+      try { cible.focus({ preventScroll: true }); } catch (e) { cible.focus(); }
+    }
+    $(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function remplirRecap(id, valeur) {
+    var dd = $(id);
+    dd.textContent = valeur.texte;
+    dd.classList.toggle('vide', !!valeur.vide);
+  }
+
+  // Réponse 200 : référence, date et heure de réception données par le serveur.
+  function afficherSucces(donnees) {
+    var d = new Date(typeof donnees.recue_le === 'string' ? donnees.recue_le : NaN);
+    if (isNaN(d.getTime())) d = new Date();
+    var p = partiesParis(d);
+    $('s-date').textContent = texteDate(p.an, p.mois, p.jour);
+    $('s-heure').textContent = texteHeure(p.heure, p.minute);
+    $('s-ref').textContent = typeof donnees.reference === 'string' && donnees.reference ? donnees.reference : '—';
+    allerA('etape-succes');
+  }
+
+  // Champ refusé par le serveur : un lien ou une adresse e-mail (ou, pour le
+  // nom, un numéro de téléphone) ; contrat-web répond 400 avec `champ` et
+  // `error` (le message dans la langue de la page). Retour au formulaire, le
+  // message sous le champ, le curseur dans le champ (revue du 14/11 au soir :
+  // avant, la page disait « Réessayez » et chaque essai rendait le même 400).
+  var CHAMPS_REFUS = ["nom", "message"];
+  function cacherRefus(champ) {
+    var el = $(champ + '-refus');
+    if (el.hasAttribute('hidden')) return;
+    montrer(el, false);
+    el.textContent = '';
+    $(champ).removeAttribute('aria-errormessage');
+    $(champ).setAttribute('aria-invalid', 'false');
+  }
+  function montrerRefus(champ, texte) {
+    allerA('etape-formulaire');
+    var el = $(champ + '-refus');
+    el.textContent = typeof texte === 'string' && texte ? texte : T.refusLien[champ];
+    montrer(el, true);
+    var saisie = $(champ);
+    saisie.setAttribute('aria-invalid', 'true');
+    saisie.setAttribute('aria-errormessage', champ + '-refus');
+    try { saisie.focus({ preventScroll: true }); } catch (e) { saisie.focus(); }
+  }
+  CHAMPS_REFUS.forEach(function (c) {
+    $(c).addEventListener('input', function () { cacherRefus(c); });
+  });
+
+  function verifierIdentite(nom, email) {
+    var nomOk = nomValide(nom);
+    var emailOk = adresseValide(email);
+    montrer($('nom-erreur'), !nomOk);
+    montrer($('email-erreur'), !emailOk);
+    $('nom').setAttribute('aria-invalid', nomOk ? 'false' : 'true');
+    $('email').setAttribute('aria-invalid', emailOk ? 'false' : 'true');
+    if (!nomOk) { $('nom').focus(); return false; }
+    if (!emailOk) { $('email').focus(); return false; }
+    return true;
+  }
+
+  // Envoi depuis le récapitulatif. Un seul envoi à la fois.
+  var envoiEnCours = false;
+  var corpsPret = null;
+  async function confirmer() {
+    if (envoiEnCours || !corpsPret) return;
+    envoiEnCours = true;
+    var bouton = $('bouton-confirmer');
+    var libelle = bouton.innerHTML;
+    bouton.disabled = true;
+    $('bouton-modifier').disabled = true;
+    bouton.querySelector('span').textContent = T.envoiEnCours;
+    montrer($('envoi-erreur'), false);
+    var r = await poster(corpsPret);
+    envoiEnCours = false;
+    bouton.disabled = false;
+    $('bouton-modifier').disabled = false;
+    bouton.innerHTML = libelle;
+    if (r.statut === 200 && r.donnees.ok === true) {
+      corpsPret = null;
+      $('formulaire').reset();
+      apresReinitialisation();
+      afficherSucces(r.donnees);
+      return;
+    }
+    if (r.statut === 400 && r.donnees && typeof r.donnees.champ === 'string' && CHAMPS_REFUS.indexOf(r.donnees.champ) >= 0) {
+      montrerRefus(r.donnees.champ, r.donnees.error);
+      return;
+    }
+    // Champ refusé par le serveur (400) : retour au formulaire avec l'erreur
+    // du champ quand la page la voit (nom, adresse), plutôt que le message
+    // d'une panne.
+    if (r.statut === 400 && !(nomValide($('nom').value) && adresseValide($('email').value.trim()))) {
+      allerA('etape-formulaire');
+      verifierIdentite($('nom').value.trim(), $('email').value.trim());
+      return;
+    }
+    ecrire($('envoi-erreur'), r.statut === 429 ? T.erreur429 : T.erreurEnvoi);
+    montrer($('envoi-erreur'), true);
+  }
+
+  function apresReinitialisation() {}
+  // Le calendrier du téléphone ne propose pas une date à venir.
+  $('date_souscription').max = aujourdhui();
+
+  function lire() {
+    var f = $('formulaire');
+    var coche = f.querySelector('input[name="formule"]:checked');
+    return {
+      nom: $('nom').value.trim(),
+      email: $('email').value.trim(),
+      formule: coche ? coche.value : 'inconnue',
+      date_souscription: dateValide($('date_souscription').value.trim()),
+      message: couper($('message').value.trim(), 1000)
+    };
+  }
+
+  $('formulaire').addEventListener('submit', function (e) {
+    e.preventDefault();
+    CHAMPS_REFUS.forEach(cacherRefus);
+    var c = lire();
+    if (!verifierIdentite(c.nom, c.email)) return;
+    // Corps de l'action « renoncer » (contrat de contrat-web) : champs facultatifs omis quand vides.
+    var corps = { action: 'renoncer', langue: LANGUE, nom: c.nom, email: c.email, formule: c.formule };
+    if (c.date_souscription) corps.date_souscription = c.date_souscription;
+    if (c.message) corps.message = c.message;
+    corpsPret = corps;
+    remplirRecap('r-nom', { texte: c.nom });
+    remplirRecap('r-email', { texte: c.email });
+    remplirRecap('r-formule', { texte: T.formules[c.formule] || T.formules.inconnue });
+    if (c.date_souscription) {
+      var morceaux = c.date_souscription.split('-');
+      remplirRecap('r-date', { texte: texteDate(+morceaux[0], +morceaux[1], +morceaux[2]) });
+    } else {
+      remplirRecap('r-date', { texte: T.nonIndiquee, vide: true });
+    }
+    remplirRecap('r-message', c.message ? { texte: c.message } : { texte: T.aucun, vide: true });
+    montrer($('envoi-erreur'), false);
+    allerA('etape-recap');
+  });
+  $('bouton-modifier').addEventListener('click', function () { allerA('etape-formulaire'); });
+  $('bouton-confirmer').addEventListener('click', confirmer);
+
+  // Annulation d'une demande par son titulaire (lien de l'accusé de réception, 24 h, une fois).
+  // Toujours par un POST après un clic : jamais à l'ouverture de la page (les antivirus de
+  // messagerie ouvrent les liens).
+  var jeton = window.__linceyaJetonAnnulation;
+  window.__linceyaJetonAnnulation = null;
+  if (typeof jeton === 'string') {
+    var bloc = $('annulation');
+    var bouton = $('annulation-bouton');
+    var annulationEnCours = false;
+    var finir = function (texte, ok) {
+      ecrire($(ok ? 'annulation-ok' : 'annulation-erreur'), texte);
+      montrer($(ok ? 'annulation-ok' : 'annulation-erreur'), true);
+      montrer($(ok ? 'annulation-erreur' : 'annulation-ok'), false);
+    };
+    montrer(bloc, true);
+    if (!/^[A-Za-z0-9_-]{43}$/.test(jeton)) {
+      jeton = null;
+      montrer(bouton, false);
+      finir(T.annulationExpire, false);
+    }
+    bouton.addEventListener('click', async function () {
+      if (annulationEnCours || !jeton) return;
+      annulationEnCours = true;
+      bouton.disabled = true;
+      montrer($('annulation-erreur'), false);
+      var r = await poster({ action: 'annuler', jeton: jeton });
+      annulationEnCours = false;
+      bouton.disabled = false;
+      if (r.statut === 200 && r.donnees.ok === true) {
+        jeton = null;
+        montrer(bouton, false);
+        finir(r.donnees.email_envoye === true ? T.annulationOkEmail : T.annulationOk, true);
+      } else if (r.statut === 410 || r.statut === 400) {
+        jeton = null;
+        montrer(bouton, false);
+        finir(T.annulationExpire, false);
+      } else {
+        finir(T.annulationErreur, false);
+      }
+    });
+    var titre = $('annulation-titre');
+    try { titre.focus({ preventScroll: true }); } catch (e) { titre.focus(); }
+  }
+})();
+</script>
+<script src="/cookies.js" defer></script>
+</body>
+</html>

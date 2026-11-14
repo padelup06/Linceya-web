@@ -110,7 +110,7 @@
       "name": "¿Puedo cancelar cuando quiera?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. La suscripción mensual es sin compromiso: puedes cancelar en cualquier momento, con «Gestionar mi suscripción» en esta página si te suscribiste en la web, o desde los ajustes de tu cuenta Google Play o App Store si te suscribiste en la app. El plan anual de las stores se paga por 12 meses por adelantado: puedes detener su renovación en cualquier momento. Tu suscripción se mantiene activa hasta el final del periodo pagado."
+        "text": "Sí. La suscripción mensual es sin compromiso: puedes cancelar en cualquier momento, con «Cancelar tu contrato» o «Gestionar mi suscripción» en esta página si te suscribiste en la web, o desde los ajustes de tu cuenta Google Play o App Store si te suscribiste en la app. El plan anual de las stores se paga por 12 meses por adelantado: puedes detener su renovación en cualquier momento. Tu suscripción se mantiene activa hasta el final del periodo pagado."
       }
     },
     {
@@ -574,9 +574,10 @@ nav::before {
   text-align: center; padding: 0 48px 72px;
   font-size: 13px; color: var(--muted);
   font-family: var(--font-mono); letter-spacing: 0.04em;
+  line-height: 2.1;
 }
 .manage-line a {
-  color: var(--platinum-light); text-decoration: none;
+  color: var(--platinum-light); text-decoration: none; white-space: nowrap;
   border-bottom: 1px solid rgba(212,184,122,0.4);
   transition: color 0.2s, border-color 0.2s;
 }
@@ -827,6 +828,7 @@ footer {
 }
 .footer-socials svg { width: 16px; height: 16px; }
 @media (max-width: 720px) {
+  .manage-line { padding: 0 20px 60px; }
   footer { padding: 36px 20px 24px; gap: 20px; }
   .footer-links { gap: 14px 24px; }
 }
@@ -1042,7 +1044,7 @@ footer {
   </div>
 </div>
 
-<div class="manage-line">¿Ya estás suscrito? <a href="https://billing.stripe.com/p/login/fZu14o6Bh2Xy5TJ2DU1Jm00" target="_blank" rel="noopener noreferrer">Gestionar mi suscripción</a></div>
+<div class="manage-line">¿Ya estás suscrito? <a href="https://billing.stripe.com/p/login/fZu14o6Bh2Xy5TJ2DU1Jm00" target="_blank" rel="noopener noreferrer">Gestionar mi suscripción</a> · <a href="/es/cancel-subscription.html">Cancelar tu contrato</a> · <a href="/es/withdraw.html">Desistir del contrato aquí</a></div>
 
 <section class="compare-section">
   <h2 class="section-title reveal"><span class="title-over">TODO EN</span><span class="accent">DETALLE</span></h2>
@@ -1091,7 +1093,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Puedo cancelar cuando quiera?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Sí. La suscripción mensual es sin compromiso: puedes cancelar en cualquier momento, con «Gestionar mi suscripción» en esta página si te suscribiste en la web, o desde los ajustes de tu cuenta Google Play o App Store si te suscribiste en la app. El plan anual de las stores se paga por 12 meses por adelantado: puedes detener su renovación en cualquier momento. Tu suscripción se mantiene activa hasta el final del periodo pagado.</div>
+      <div class="faq-a">Sí. La suscripción mensual es sin compromiso: puedes cancelar en cualquier momento, con «Cancelar tu contrato» o «Gestionar mi suscripción» en esta página si te suscribiste en la web, o desde los ajustes de tu cuenta Google Play o App Store si te suscribiste en la app. El plan anual de las stores se paga por 12 meses por adelantado: puedes detener su renovación en cualquier momento. Tu suscripción se mantiene activa hasta el final del periodo pagado.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Pierdo mis datos al pasar de Gratis a Elite?</span><span class="faq-icon">+</span></button>
@@ -1142,6 +1144,10 @@ footer {
     <a href="https://linceya.com/es/privacy-policy.html">Política de privacidad</a>
     <a href="https://linceya.com/es/delete-account.html">Eliminar mi cuenta</a>
     <a href="https://linceya.com/es/contact.html">Contacto</a>
+    <a href="https://linceya.com/es/terms-of-sale.html">Condiciones de venta</a>
+    <a href="https://linceya.com/es/legal-notice.html">Aviso legal</a>
+    <a href="https://linceya.com/es/cancel-subscription.html">Cancelar tu contrato</a>
+    <a href="https://linceya.com/es/withdraw.html">Desistir del contrato aquí</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <a href="/en/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <span style="color:var(--platinum-light);">ES</span></div>

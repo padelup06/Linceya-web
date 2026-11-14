@@ -259,8 +259,12 @@ nav::before {
   transform: skewX(-22deg); animation: sweep 3.6s ease-in-out infinite;
 }
 .buy-btn span { position: relative; z-index: 2; }
-.buy-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
+.buy-btn:hover:not(:disabled):not([aria-disabled="true"]) { transform: translateY(-2px); filter: brightness(1.05); }
 .buy-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+/* Grisé tant que la case d'accès immédiat n'est pas cochée, mais toujours cliquable :
+   un clic dit pourquoi (un bouton `disabled` ne reçoit aucun clic). */
+.buy-btn[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; transform: none; }
+.buy-btn[aria-disabled="true"]::before { animation: none; opacity: 0; }
 
 .paywall-terms {
   margin-top: 18px; font-size: 11px; color: var(--muted);
@@ -359,6 +363,29 @@ footer {
 .email-input-wrap input:focus { border-color: var(--gold); background: rgba(255,255,255,0.06); box-shadow: 0 0 0 4px rgba(201,167,90,0.12); }
 .email-input-wrap .hint { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
 
+/* Demande d'accès immédiat (L221-25 du Code de la consommation) : case jamais cochée d'avance. */
+.acces-immediat {
+  margin: 4px 0 0; padding: 14px 14px 12px;
+  border: 1px solid var(--stroke); border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.2s, background 0.2s;
+}
+.acces-immediat.coche { border-color: rgba(227,197,122,0.55); background: rgba(201,167,90,0.06); }
+.acces-immediat.en-erreur { border-color: rgba(224,58,90,0.6); }
+.acces-case { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 12.5px; line-height: 1.55; color: var(--graphite); }
+.acces-case input { accent-color: var(--gold); color-scheme: dark; width: 18px; height: 18px; margin-top: 1px; flex-shrink: 0; cursor: pointer; }
+.acces-immediat .hint { font-size: 11px; color: var(--muted); margin: 8px 0 0 30px; line-height: 1.45; }
+.paywall-moyens { margin-top: 14px; font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
+.success-sub a { color: var(--platinum-light); text-decoration: none; font-weight: 500; }
+.success-sub a:hover { text-decoration: underline; }
+.success-contrat { margin-top: 14px; }
+/* Repère à remplir avant la mise en ligne : aucun ne doit rester (grep "a-remplir"). */
+.a-remplir {
+  color: #FFB4C2; background: rgba(224,58,90,0.12);
+  border: 1px dashed rgba(224,58,90,0.55); border-radius: 4px;
+  padding: 0 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .buy-btn::before { animation: none; }
 }
@@ -411,19 +438,29 @@ footer {
         <div class="email-input-wrap">
             <label for="checkout-email">YOUR LINCEYA ACCOUNT EMAIL</label>
             <input type="email" id="checkout-email" placeholder="your@email.com" required autocomplete="email">
-            <div class="hint">The email of your Linceya account. If you don't have an account yet, we'll create one automatically with this email — you'll receive a link to set your password.</div>
+            <div class="hint">The email of your Linceya account. If you don't have an account yet, you will receive a 6-digit activation code by email to open it in the app.</div>
           </div>
-          <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continue →</span></button>
+          <div class="acces-immediat" id="acces-immediat-bloc">
+            <label class="acces-case" for="acces-immediat">
+              <input type="checkbox" id="acces-immediat" name="acces_immediat" aria-describedby="acces-immediat-aide">
+              <span>I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days already elapsed. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.</span>
+            </label>
+            <div class="hint" id="acces-immediat-aide">This box is required to subscribe online: Elite opens as soon as you pay.</div>
+          </div>
+          <button class="buy-btn" id="buy-btn" disabled aria-disabled="true" onclick="handlePurchase()"><span>Continue →</span></button>
+        <div class="paywall-moyens">Payment methods: credit or debit card <span class="a-remplir">[ET LES AUTRES MOYENS ACTIVÉS DANS STRIPE, A CONFIRMER PAR MAX : and the other methods enabled in Stripe]</span>.</div>
         <div class="paywall-terms">
-          By continuing, you accept the <a href="https://linceya.com/en/privacy-policy.html" target="_blank" rel="noopener noreferrer">terms of use</a>.
+          Our <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a> apply: you will accept them on the payment page. You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.
           <span id="paywall-renouvellement">Your subscription renews automatically every month. Cancel anytime.</span>
         </div>
+        <div class="paywall-moyens paywall-mediateur">Consumer mediator: <span class="a-remplir">[NOM ET SITE DU MEDIATEUR, A FOURNIR PAR MAX (F1) : name and website of the mediator]</span>.</div>
       </div>
 
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
         <div class="success-title">WELCOME TO<br>LINCEYA <span class="accent" id="success-tier">ELITE</span></div>
         <div class="success-sub" id="success-sub"><strong>Your subscription is active.</strong> If you already have a Linceya account with this address, just sign in to the app — there is nothing else to do. Otherwise you'll receive a 6-digit activation code: download the app, tap "I have a Premium code" on the sign-in screen, then enter it.</div>
+        <div class="success-sub success-contrat" id="success-contrat">We are emailing you the confirmation of your subscription, with your terms of sale. You have 14 days to withdraw from the contract: <a href="https://linceya.com/en/withdraw.html">Withdraw from the contract here</a>.</div>
       </div>
     </div>
 
@@ -449,6 +486,10 @@ footer {
     <a href="https://linceya.com/en/privacy-policy.html">Privacy Policy</a>
     <a href="https://linceya.com/en/delete-account.html">Delete my account</a>
     <a href="https://linceya.com/en/contact.html">Contact</a>
+    <a href="https://linceya.com/en/terms-of-sale.html">Terms of sale</a>
+    <a href="https://linceya.com/en/legal-notice.html">Legal notice</a>
+    <a href="https://linceya.com/en/cancel-subscription.html">Cancel your contract</a>
+    <a href="https://linceya.com/en/withdraw.html">Withdraw from the contract here</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);">
@@ -471,9 +512,8 @@ const STRIPE_LOCALE = 'en';
 // sale page is online (Max's decision of 14/11/2026); the day it is filled
 // in, also add the yearly offer to the JSON-LD of the pricing pages and
 // `site_an` to the faits-machine block of the drip.
-// TO FILL IN on day J: the two new Stripe prices do not exist yet. The old
-// monthly price (€44.99) must not be put back here. The server must know
-// the same ids:
+// TO FILL IN on day J: the two new Stripe prices do not exist yet. The
+// server must know the same ids:
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 //   supabase secrets set STRIPE_PRICE_ELITE_ANNUEL=price_yyy
 // They are what makes the webhook write subscription_tier='elite'.
@@ -519,7 +559,7 @@ function renderPackages() {
       <div class="pkg-label">Yearly</div>
       <div class="pkg-name">Linceya Elite</div>
       <div class="pkg-price">${montant(MONTANT_ANNUEL)}<span class="period">/ year</span></div>
-      <div class="pkg-note">That's ${montantTexte(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100)}/month. 12 months paid upfront, renewal can be canceled anytime.</div>
+      <div class="pkg-note">That is ${montantTexte(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100)}/month. 12 months paid upfront. 12-month commitment; you can stop the renewal at any time.</div>
       <div class="pkg-save">−${economieAnnuel()}% · 4 AI video analyses per month</div>
     </div>
   ` : '';
@@ -540,6 +580,7 @@ function renderPackages() {
   }
   // No offer (ids not filled in yet): nothing to buy.
   document.getElementById('buy-btn').disabled = !cible;
+  majBoutonAcces();
   document.getElementById('loading').style.display = 'none';
   document.getElementById('packages').style.display = 'block';
   if (!cible) showError("Online payment is not available right now. You can subscribe from the app.");
@@ -552,6 +593,38 @@ function selectPackage(card) {
   card.classList.add('selected');
 }
 
+// Immediate access request (French Consumer Code, L221-25): the box is required to subscribe
+// online. The server asks for it again (`acces_immediat` must be exactly true) and answers
+// 400 `acces_immediat_requis` otherwise.
+const TEXTE_CASE_REQUISE = "Check the immediate access box to continue.";
+const TEXTE_ACCES_REQUIS = "To subscribe online, check the box asking for your subscription to start right away.";
+
+function caseAccesCochee() {
+  const caseAcces = document.getElementById('acces-immediat');
+  return !!(caseAcces && caseAcces.checked);
+}
+
+// "Continue" grayed out while the box is not checked (aria-disabled: it stays clickable to say
+// why). `disabled` stays reserved for "no offer" and for the request in flight.
+function majBoutonAcces() {
+  const btn = document.getElementById('buy-btn');
+  const bloc = document.getElementById('acces-immediat-bloc');
+  const cochee = caseAccesCochee();
+  btn.setAttribute('aria-disabled', cochee ? 'false' : 'true');
+  if (bloc) {
+    bloc.classList.toggle('coche', cochee);
+    if (cochee) bloc.classList.remove('en-erreur');
+  }
+}
+
+function demanderCaseAcces(message) {
+  showError(message);
+  const bloc = document.getElementById('acces-immediat-bloc');
+  if (bloc) bloc.classList.add('en-erreur');
+  const caseAcces = document.getElementById('acces-immediat');
+  if (caseAcces) caseAcces.focus();
+}
+
 async function handlePurchase() {
   if (!selectedPriceId) return;
   const emailInput = document.getElementById('checkout-email');
@@ -560,6 +633,10 @@ async function handlePurchase() {
   if (!emailValid) {
     showError('Please enter a valid email.');
     emailInput.focus();
+    return;
+  }
+  if (!caseAccesCochee()) {
+    demanderCaseAcces(TEXTE_CASE_REQUISE);
     return;
   }
   const btn = document.getElementById('buy-btn');
@@ -583,23 +660,34 @@ async function handlePurchase() {
         price_id: selectedPriceId,
         locale: STRIPE_LOCALE,
         customer_email: email,
+        acces_immediat: caseAccesCochee(),
         success_url: SUCCESS_URL + '&plan=' + plan,
         cancel_url: CANCEL_URL,
       }),
     });
-    const data = await res.json();
-    if (!res.ok || !data.url) throw new Error(data.error || 'Stripe error');
+    // A response that is not JSON (gateway) falls back to the generic message.
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.url) {
+      const erreur = new Error(data.error || 'Stripe error');
+      erreur.code = data.code;
+      throw erreur;
+    }
     window.location.href = data.url;
   } catch (e) {
     console.error('Purchase error:', e);
+    btn.disabled = false;
+    btn.innerHTML = '<span>Continue →</span>';
+    // The server did not receive the immediate access request: ask for the box again.
+    if (e && e.code === 'acces_immediat_requis') {
+      demanderCaseAcces(e.message && e.message !== 'Stripe error' ? e.message : TEXTE_ACCES_REQUIS);
+      return;
+    }
     // Display backend message if any (e.g. "already premium"), otherwise
     // fall back to the generic localised message.
     const msg = (e && e.message && e.message !== 'Stripe error')
       ? e.message
-      : 'An error occurred. Please try again.';
+      : "An error occurred. Please try again.";
     showError(msg);
-    btn.disabled = false;
-    btn.innerHTML = '<span>Continue →</span>';
   }
 }
 
@@ -716,6 +804,13 @@ function trackPurchase() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const caseAcces = document.getElementById('acces-immediat');
+  if (caseAcces) {
+    caseAcces.addEventListener('change', () => {
+      majBoutonAcces();
+      if (caseAcces.checked) hideError();
+    });
+  }
   renderPackages();
   // Si l'URL contient ?success=1, afficher le block de succès et masquer
   // le bloc pricing qui n'a plus d'utilité post-paiement (sinon il reste

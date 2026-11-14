@@ -234,6 +234,8 @@ h1 {
 }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+/* Links to the terms of sale and the policy (subscription bought on linceya.com). */
+.info-list a { color: var(--platinum-light); text-decoration: underline; }
 .badge-del {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--danger); font-weight: 600; font-size: 12px;
@@ -389,7 +391,11 @@ footer {
         <tr><td>Elite analysis working copies (Linceya machines)</td><td><span class="badge-del">Deleted</span></td><td>Within 7 days</td></tr>
         <tr><td>ELO and ranking</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Training plan</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
-        <tr><td>Billing data</td><td><span class="badge-keep">Retained</span></td><td>30 days (legal obligation)</td></tr>
+        <tr><td>Subscription bought on linceya.com (unused part refunded in proportion)</td><td><span class="badge-del">Ended</span></td><td>When the request is processed</td></tr>
+        <tr><td>Contract for a subscription bought on linceya.com, without your email address (only its fingerprint)</td><td><span class="badge-keep">Retained</span></td><td>10 years after the contract ends</td></tr>
+        <tr><td>Withdrawal and cancellation requests, without your name, your address or your message</td><td><span class="badge-keep">Retained</span></td><td>5 years after we receive them</td></tr>
+        <tr><td>Copies of the emails about your requests and the end of your subscription (contact@linceya.com mailbox)</td><td><span class="badge-keep">Retained</span></td><td>5 years</td></tr>
+        <tr><td>Invoices and payment data for a subscription bought on linceya.com (at Stripe, our payment provider)</td><td><span class="badge-keep">Retained</span></td><td>10 years (accounting obligation)</td></tr>
       </table>
     </div>
 
@@ -402,9 +408,9 @@ footer {
       </div>
       <ul class="info-list">
         <li>Deleting your account does not stop a subscription bought on the App Store or Google Play: cancel it first in the store settings (iPhone: Settings → your name → Subscriptions; Android: Play Store → Payments &amp; subscriptions → Subscriptions)</li>
-        <li>A subscription paid on linceya.com is canceled by us when the request is processed</li>
+        <li>A subscription paid on linceya.com ends right away, when the request is processed, even with the annual plan. We refund you, in proportion, the part of the paid period that has not been used, with the same payment method. Example: annual plan at €199, account deleted after 100 days, €144.48 refunded. The calculation is in our <a href="/en/terms-of-sale.html#account-deletion">terms of sale</a></li>
         <li>Deleted data cannot be recovered</li>
-        <li>Billing data is kept for 30 days as required by legal obligations</li>
+        <li>If you subscribed on linceya.com, we keep your contract for 10 years after it ends, without your email address, only its fingerprint; your withdrawal and cancellation requests for 5 years; the copies of the emails about your requests and the end of your subscription, in our contact@linceya.com mailbox, for 5 years; and invoices and payment data, at Stripe, for 10 years (see our <a href="/en/privacy-policy.html">privacy policy</a>)</li>
         <li>Processing time: <strong>7 business days</strong></li>
       </ul>
     </div>
@@ -431,6 +437,10 @@ footer {
     <a href="/en/privacy-policy.html">Privacy Policy</a>
     <a href="/en/contact.html">Contact</a>
     <a href="/en/index.html">Home</a>
+    <a href="/en/terms-of-sale.html">Terms of sale</a>
+    <a href="/en/legal-notice.html">Legal notice</a>
+    <a href="/en/cancel-subscription.html">Cancel your contract</a>
+    <a href="/en/withdraw.html">Withdraw from the contract here</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><a href="/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">FR</a> <span style="color:var(--platinum-light);">EN</span> <a href="/es/delete-account.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>

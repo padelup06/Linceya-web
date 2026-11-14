@@ -110,7 +110,7 @@
       "name": "Je peux résilier quand je veux ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. L'abonnement mensuel est sans engagement : vous pouvez annuler à tout moment, via « Gérer mon abonnement » sur cette page si vous vous êtes abonné sur le site, ou depuis les paramètres de votre compte Google Play ou App Store si vous vous êtes abonné dans l'app. L'abonnement annuel des stores est payé pour 12 mois d'avance : vous pouvez arrêter son renouvellement à tout moment. Votre abonnement reste actif jusqu'à la fin de la période payée."
+        "text": "Oui. L'abonnement mensuel est sans engagement\u00a0: vous pouvez annuler à tout moment, via «\u00a0Résilier votre contrat\u00a0» ou «\u00a0Gérer mon abonnement\u00a0» sur cette page si vous vous êtes abonné sur le site, ou depuis les paramètres de votre compte Google Play ou App Store si vous vous êtes abonné dans l'app. L'abonnement annuel des stores est payé pour 12 mois d'avance\u00a0: vous pouvez arrêter son renouvellement à tout moment. Votre abonnement reste actif jusqu'à la fin de la période payée."
       }
     },
     {
@@ -599,9 +599,10 @@ nav::before {
   text-align: center; padding: 0 48px 72px;
   font-size: 13px; color: var(--muted);
   font-family: var(--font-mono); letter-spacing: 0.04em;
+  line-height: 2.1;
 }
 .manage-line a {
-  color: var(--platinum-light); text-decoration: none;
+  color: var(--platinum-light); text-decoration: none; white-space: nowrap;
   border-bottom: 1px solid rgba(212,184,122,0.4);
   transition: color 0.2s, border-color 0.2s;
 }
@@ -852,6 +853,7 @@ footer {
 }
 .footer-socials svg { width: 16px; height: 16px; }
 @media (max-width: 720px) {
+  .manage-line { padding: 0 20px 60px; }
   footer { padding: 36px 20px 24px; gap: 20px; }
   .footer-links { gap: 14px 24px; }
 }
@@ -1067,7 +1069,7 @@ footer {
   </div>
 </div>
 
-<div class="manage-line">Déjà abonné ? <a href="https://billing.stripe.com/p/login/fZu14o6Bh2Xy5TJ2DU1Jm00" target="_blank" rel="noopener noreferrer">Gérer mon abonnement</a></div>
+<div class="manage-line">Déjà abonné&nbsp;? <a href="https://billing.stripe.com/p/login/fZu14o6Bh2Xy5TJ2DU1Jm00" target="_blank" rel="noopener noreferrer">Gérer mon abonnement</a> · <a href="/cancel-subscription.html">Résilier votre contrat</a> · <a href="/withdraw.html">Renoncer au contrat ici</a></div>
 
 <section class="compare-section">
   <h2 class="section-title reveal"><span class="title-over">TOUT EN</span><span class="accent">DÉTAIL</span></h2>
@@ -1116,7 +1118,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Je peux résilier quand je veux ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Oui. L'abonnement mensuel est sans engagement : vous pouvez annuler à tout moment, via « Gérer mon abonnement » sur cette page si vous vous êtes abonné sur le site, ou depuis les paramètres de votre compte Google Play ou App Store si vous vous êtes abonné dans l'app. L'abonnement annuel des stores est payé pour 12 mois d'avance : vous pouvez arrêter son renouvellement à tout moment. Votre abonnement reste actif jusqu'à la fin de la période payée.</div>
+      <div class="faq-a">Oui. L'abonnement mensuel est sans engagement&nbsp;: vous pouvez annuler à tout moment, via «&nbsp;Résilier votre contrat&nbsp;» ou «&nbsp;Gérer mon abonnement&nbsp;» sur cette page si vous vous êtes abonné sur le site, ou depuis les paramètres de votre compte Google Play ou App Store si vous vous êtes abonné dans l'app. L'abonnement annuel des stores est payé pour 12 mois d'avance&nbsp;: vous pouvez arrêter son renouvellement à tout moment. Votre abonnement reste actif jusqu'à la fin de la période payée.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Je perds mes données si je passe de Gratuit à Elite ?</span><span class="faq-icon">+</span></button>
@@ -1167,6 +1169,10 @@ footer {
     <a href="https://linceya.com/privacy-policy.html">Politique de confidentialité</a>
     <a href="https://linceya.com/delete-account.html">Supprimer mon compte</a>
     <a href="https://linceya.com/contact.html">Contact</a>
+    <a href="https://linceya.com/terms-of-sale.html">Conditions de vente</a>
+    <a href="https://linceya.com/legal-notice.html">Mentions légales</a>
+    <a href="https://linceya.com/cancel-subscription.html">Résilier votre contrat</a>
+    <a href="https://linceya.com/withdraw.html">Renoncer au contrat ici</a>
     <a href="#" data-cookies-settings>Cookies</a>
   </div>
   <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/pricing.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
