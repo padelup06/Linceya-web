@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Elite Plan | AI Padel Analysis</title>
-<meta name="description" content="Compare Linceya plans: free or Elite (€44.99/month on linceya.com). 6 AI video analyses per month, personalized training plan, certified ELO and global and regional ranking.">
+<meta name="description" content="Compare Linceya plans: free or Elite (€24.99/month on linceya.com). 4 AI video analyses per month, personalized training plan, certified ELO and global and regional ranking.">
 <link rel="canonical" href="https://linceya.com/en/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://linceya.com/pricing.html">
 <link rel="alternate" hreflang="en" href="https://linceya.com/en/pricing.html">
@@ -15,14 +15,14 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://linceya.com/en/pricing.html">
-<meta property="og:title" content="Linceya Elite — 6 AI video analyses/month, €44.99">
+<meta property="og:title" content="Linceya Elite — 4 AI video analyses/month, €24.99">
 <meta property="og:description" content="Frame-by-frame AI video analysis, personalized plan, certified ELO and full ranking. Compare Free and Elite.">
 <meta property="og:image" content="https://linceya.com/og-image-en.jpg">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Linceya">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Linceya Elite — 6 AI video analyses/month, €44.99">
+<meta name="twitter:title" content="Linceya Elite — 4 AI video analyses/month, €24.99">
 <meta name="twitter:description" content="Frame-by-frame AI video analysis, personalized plan, certified ELO and full ranking.">
 <meta name="twitter:image" content="https://linceya.com/og-image-en.jpg">
 
@@ -60,9 +60,15 @@
     {
       "@type": "Offer",
       "name": "Elite Monthly",
-      "price": "44.99",
+      "price": "24.99",
       "priceCurrency": "EUR",
-      "description": "6 AI video analyses per month powered by computer vision: court coverage heatmap, automatic shot and movement detection, distance covered and movement speeds, personalized training plan and Certified ELO. Billed monthly.",
+      "description": "4 AI video analyses per month powered by computer vision: court coverage heatmap, automatic shot and movement detection, distance covered and movement speeds, personalized training plan and Certified ELO. Billed monthly.",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "24.99",
+        "priceCurrency": "EUR",
+        "billingDuration": "P1M"
+      },
       "availability": "https://schema.org/InStock",
       "url": "https://linceya.com/en/pricing.html"
     }
@@ -80,7 +86,7 @@
       "name": "What's the difference between Free and Elite?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Free gives you the ELO ranking, global and regional rankings and public matches (after a free evaluation video approved by our coach), plus leagues with friends, with no card required and no video analysis. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations."
+        "text": "Free gives you the ELO ranking, global and regional rankings and public matches (after a free evaluation video approved by our coach), plus leagues with friends, with no card required and no video analysis. Elite adds 4 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations."
       }
     },
     {
@@ -88,7 +94,7 @@
       "name": "What is the Elite plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Elite is Linceya's video analysis: 6 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €44.99/month here, or €49.99/month from the app, monthly only."
+        "text": "Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way."
       }
     },
     {
@@ -104,7 +110,7 @@
       "name": "Can I cancel anytime?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, the subscription is no-commitment. You can cancel anytime: via “Manage my subscription” on this page if you subscribed on the website, or from your Google Play or App Store account settings if you subscribed in the app. Your subscription remains active until the end of your paid period."
+        "text": "Yes. The monthly subscription is no-commitment: you can cancel anytime, via “Manage my subscription” on this page if you subscribed on the website, or from your Google Play or App Store account settings if you subscribed in the app. The yearly plan on the stores is paid 12 months upfront: you can stop its renewal anytime. Your subscription remains active until the end of your paid period."
       }
     },
     {
@@ -128,7 +134,7 @@
       "name": "Why is the subscription more expensive in the app?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "On iOS and Android, Apple and Google take up to 30% commission on every subscription purchased inside the app — that extra cost is reflected in the in-store price. By subscribing directly here, payment goes through Stripe and you get our base price (€44.99/month). The features are exactly the same, whichever option you choose."
+        "text": "On iOS and Android, Apple and Google take up to 30% commission on every subscription purchased inside the app — that extra cost is reflected in the in-store price. By subscribing directly here, payment goes through Stripe and you get our base price (€24.99/month). The features are exactly the same, whichever option you choose."
       }
     }
   ]
@@ -377,6 +383,8 @@ nav::before {
   box-shadow: 0 6px 16px rgba(201,167,90,0.35), inset 0 1px 0 rgba(255,255,255,0.7);
 }
 .save-tag.visible { opacity: 1; }
+/* La bascule n'est montrée que si l'annuel du site est en vente (script du bas). */
+.toggle-wrapper[hidden] { display: none; }
 
 /* PRICING CARDS */
 .pricing-cards {
@@ -981,6 +989,12 @@ footer {
   <div class="hero-veil" aria-hidden="true"><img src="../img/noir/trophy.jpg" alt=""></div>
   <h1><span class="title-over">CHOOSE YOUR</span><span class="accent">PLAN</span></h1>
   <p>Start for free, go Elite to get your matches analyzed.</p>
+  <div class="toggle-wrapper" id="bascule-formule" hidden>
+    <span class="toggle-label active" id="label-monthly" onclick="choisirFormule(false)">Monthly</span>
+    <div class="toggle-track" id="toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Yearly plan" onclick="choisirFormule(!formuleAnnuelle)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); choisirFormule(!formuleAnnuelle); }"></div>
+    <span class="toggle-label" id="label-annual" onclick="choisirFormule(true)">Yearly</span>
+    <span class="save-tag" id="save-tag"></span>
+  </div>
 </section>
 
 <div class="pricing-cards">
@@ -1007,13 +1021,13 @@ footer {
   <div class="plan-card elite">
     <div class="plan-badge">New</div>
     <div class="plan-name">ELITE <span class="accent">★</span></div>
-    <div class="plan-desc">6 AI video analyses per month, frame by frame, and your personalized training plan.</div>
+    <div class="plan-desc">4 AI video analyses per month, frame by frame, and your personalized training plan.</div>
     <div class="plan-price">
-      <div class="price-amount">44.99<span class="currency">€</span><span class="period">/ month</span></div>
-      <div class="price-note" id="elite-note">€49.99 on the stores. Cancel anytime.</div>
+      <div class="price-amount"><span id="elite-prix">24.99</span><span class="currency">€</span><span class="period" id="elite-periode">/ month</span></div>
+      <div class="price-note" id="elite-note">No commitment. On the stores: €29.99/month or €249.99/year.</div>
     </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon star">★</span> 6 AI video analyses / month (computer vision)</div>
+      <div class="plan-feature"><span class="icon star">★</span> 4 AI video analyses / month (computer vision)</div>
       <div class="plan-feature"><span class="icon star">★</span> Automatic shot &amp; movement detection</div>
       <div class="plan-feature"><span class="icon star">★</span> Distance covered &amp; movement speeds</div>
       <div class="plan-feature"><span class="icon star">★</span> In-depth heatmaps &amp; stats</div>
@@ -1024,7 +1038,7 @@ footer {
       <div class="plan-feature"><span class="icon star">★</span> Detailed progress history</div>
       <div class="plan-feature"><span class="icon star">★</span> Coach invitation</div>
     </div>
-    <a href="checkout.html?plan=elite" class="plan-btn pro">Go Elite</a>
+    <a href="checkout.html?plan=elite" class="plan-btn pro" id="elite-bouton">Go Elite</a>
   </div>
 </div>
 
@@ -1041,7 +1055,7 @@ footer {
       </tr>
     </thead>
     <tbody>
-      <tr><td>AI video analysis (computer vision)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">6 / month</span></td></tr>
+      <tr><td>AI video analysis (computer vision)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">4 / month</span></td></tr>
       <tr><td>Auto shot &amp; movement detection</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Court coverage heatmap</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distance covered &amp; movement speeds</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
@@ -1065,11 +1079,11 @@ footer {
   <div class="faq-list">
     <div class="faq-item reveal">
       <button class="faq-q"><span>What's the difference between Free and Elite?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Free gives you the ELO ranking, global and regional rankings and public matches (after a free evaluation video approved by our coach), plus leagues with friends, with no card required and no video analysis. Elite adds 6 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations.</div>
+      <div class="faq-a">Free gives you the ELO ranking, global and regional rankings and public matches (after a free evaluation video approved by our coach), plus leagues with friends, with no card required and no video analysis. Elite adds 4 AI video analyses per month, the AI personalized training plan, certified ELO, full progress history and coach invitations.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>What is the Elite plan?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Elite is Linceya's video analysis: 6 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €44.99/month here, or €49.99/month from the app, monthly only.</div>
+      <div class="faq-a">Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Is there a free trial?</span><span class="faq-icon">+</span></button>
@@ -1077,7 +1091,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Can I cancel anytime?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Yes, the subscription is no-commitment. You can cancel anytime: via “Manage my subscription” on this page if you subscribed on the website, or from your Google Play or App Store account settings if you subscribed in the app. Your subscription remains active until the end of your paid period.</div>
+      <div class="faq-a">Yes. The monthly subscription is no-commitment: you can cancel anytime, via “Manage my subscription” on this page if you subscribed on the website, or from your Google Play or App Store account settings if you subscribed in the app. The yearly plan on the stores is paid 12 months upfront: you can stop its renewal anytime. Your subscription remains active until the end of your paid period.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Do I lose my data when going from Free to Elite?</span><span class="faq-icon">+</span></button>
@@ -1089,7 +1103,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Why is the subscription more expensive in the app?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">On iOS and Android, Apple and Google take up to 30% commission on every subscription purchased inside the app — that extra cost is reflected in the in-store price. By subscribing directly here, payment goes through Stripe and you get our base price (€44.99/month). The features are exactly the same, whichever option you choose.</div>
+      <div class="faq-a">On iOS and Android, Apple and Google take up to 30% commission on every subscription purchased inside the app — that extra cost is reflected in the in-store price. By subscribing directly here, payment goes through Stripe and you get our base price (€24.99/month). The features are exactly the same, whichever option you choose.</div>
     </div>
   </div>
 </section>
@@ -1157,6 +1171,44 @@ var observer = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('hidden'); observer.observe(el); });
+
+// Yearly plan of the website (€199/year): not on sale until the terms of
+// sale page is online (Max's decision of 14/11/2026).
+// Set to true AT THE SAME TIME as PRICE_ELITE_ANNUAL of the three checkout.html,
+// the yearly offer of the JSON-LD of the pricing pages, the FAQ (text and JSON-LD)
+// and `site_an` of the faits-machine block of the drip (tools/seo/STANDARDS_SEO.md).
+var ANNUEL_SITE_EN_VENTE = false;
+// Website amounts (Stripe prices): the per-month equivalent and the saving are
+// computed from them, never written by hand.
+var MONTANT_MENSUEL = 24.99;
+var MONTANT_ANNUEL = 199;
+var formuleAnnuelle = false;
+var NOTE_MENSUEL = document.getElementById('elite-note').textContent;
+function montantPrix(v) {
+  return Number.isInteger(v) ? String(v) : v.toFixed(2);
+}
+function choisirFormule(annuel) {
+  if (!ANNUEL_SITE_EN_VENTE) return;
+  formuleAnnuelle = annuel;
+  var track = document.getElementById('toggle');
+  track.classList.toggle('annual', annuel);
+  track.setAttribute('aria-checked', annuel ? 'true' : 'false');
+  document.getElementById('label-monthly').classList.toggle('active', !annuel);
+  document.getElementById('label-annual').classList.toggle('active', annuel);
+  document.getElementById('save-tag').classList.toggle('visible', annuel);
+  document.getElementById('elite-prix').textContent = montantPrix(annuel ? MONTANT_ANNUEL : MONTANT_MENSUEL);
+  document.getElementById('elite-periode').textContent = annuel ? '/ year' : '/ month';
+  document.getElementById('elite-note').textContent = annuel
+    ? 'That\'s €' + montantPrix(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100) + '/month, 12 months paid upfront. On the stores: €249.99/year.'
+    : NOTE_MENSUEL;
+  document.getElementById('elite-bouton').href = 'checkout.html?plan=' + (annuel ? 'elite_annual' : 'elite');
+}
+if (ANNUEL_SITE_EN_VENTE) {
+  // Saving against 12 months of the website monthly plan, rounded down.
+  document.getElementById('save-tag').textContent =
+    '−' + Math.floor((1 - MONTANT_ANNUEL / (12 * MONTANT_MENSUEL)) * 100) + '%';
+  document.getElementById('bascule-formule').hidden = false;
+}
 
 // Smart store redirect : iOS → App Store, Android → Google Play, desktop → Google Play.
 // On override le href des boutons taggés [data-smart-store] au chargement de la page.

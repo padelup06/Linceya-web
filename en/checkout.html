@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Elite Checkout</title>
-<meta name="description" content="Go Linceya Elite: 6 AI video analyses per month, personalized plan, certified ELO. €44.99/month, cancel anytime.">
+<meta name="description" content="Go Linceya Elite: 4 AI video analyses per month, personalized plan, certified ELO. €24.99/month, cancel anytime.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -231,6 +231,7 @@ nav::before {
   color: var(--muted); margin-left: 6px;
   text-transform: none;
 }
+.pkg-note { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.5; }
 .pkg-save {
   display: inline-flex; align-items: center; gap: 6px;
   margin-top: 10px; font-family: var(--font-mono);
@@ -381,7 +382,7 @@ footer {
       <div class="checkout-title">GO<br><span class="accent" id="side-accent">ELITE</span></div>
       <div class="checkout-subtitle" id="side-sub">AI video analysis: your shots estimated, your movement measured.</div>
       <div class="checkout-features" id="side-features">
-        <div class="checkout-feat"><span class="check">✓</span>6 AI video analyses per month</div>
+        <div class="checkout-feat"><span class="check">✓</span>4 AI video analyses per month</div>
         <div class="checkout-feat"><span class="check">✓</span>Automatic shot &amp; movement detection</div>
         <div class="checkout-feat"><span class="check">✓</span>Distance covered &amp; movement speeds</div>
         <div class="checkout-feat"><span class="check">✓</span>Court coverage heatmap</div>
@@ -404,7 +405,7 @@ footer {
       <div id="packages" style="display:none;">
         <div class="paywall-eyebrow">› Subscription</div>
         <div class="paywall-title">Choose<br>your plan</div>
-        <div class="paywall-sub">Cancel anytime. No commitment.</div>
+        <div class="paywall-sub" id="paywall-sub">Cancel anytime. No commitment.</div>
         <div class="error-msg" id="error"></div>
         <div id="package-list"></div>
         <div class="email-input-wrap">
@@ -415,7 +416,7 @@ footer {
           <button class="buy-btn" id="buy-btn" disabled onclick="handlePurchase()"><span>Continue →</span></button>
         <div class="paywall-terms">
           By continuing, you accept the <a href="https://linceya.com/en/privacy-policy.html" target="_blank" rel="noopener noreferrer">terms of use</a>.
-          Your subscription renews automatically. Cancel anytime.
+          <span id="paywall-renouvellement">Your subscription renews automatically every month. Cancel anytime.</span>
         </div>
       </div>
 
@@ -461,45 +462,87 @@ footer {
 <script>
 // Stripe Checkout integration
 const STRIPE_LOCALE = 'en';
-// Premium : retiré de la vente le 30/10/2026 (retrait de l'analyse classique),
-// plus proposé ici. Ces deux prix ne restent que pour le calcul de « plan »
-// dans handlePurchase, qui vaut désormais toujours « elite ».
-const PRICE_MONTHLY = 'price_1TUlkGJuVIEBTqQ2szOQJ5Vx';
-const PRICE_ANNUAL  = 'price_1TUllIJuVIEBTqQ2osIqKAZM';
-// Elite — paste the Stripe price id here (€44.99/month).
-// While this string is empty, the Elite offer is not rendered: we never
-// display a plan we wouldn't be able to charge. The same id must be known
-// to the server:
+// Elite — Stripe price ids of the website (live mode). Premium: no longer
+// sold since 30/10/2026, not offered here.
+//   PRICE_ELITE        : monthly, €24.99/month.
+//   PRICE_ELITE_ANNUAL : yearly, €199/year.
+// An empty string = card not rendered: we never display an offer we
+// wouldn't be able to charge. The yearly one stays empty until the terms of
+// sale page is online (Max's decision of 14/11/2026); the day it is filled
+// in, also add the yearly offer to the JSON-LD of the pricing pages and
+// `site_an` to the faits-machine block of the drip.
+// TO FILL IN on day J: the two new Stripe prices do not exist yet. The old
+// monthly price (€44.99) must not be put back here. The server must know
+// the same ids:
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
-// That's what makes the webhook write subscription_tier='elite'.
-const PRICE_ELITE   = 'price_1TxWlMJuVIEBTqQ27MkpkDSB';
+//   supabase secrets set STRIPE_PRICE_ELITE_ANNUEL=price_yyy
+// They are what makes the webhook write subscription_tier='elite'.
+const PRICE_ELITE        = '';
+const PRICE_ELITE_ANNUAL = '';
+// Amounts shown on the cards: those of the two Stripe prices above. The
+// per-month equivalent and the yearly saving are computed from them, never
+// written by hand.
+const MONTANT_MENSUEL = 24.99;
+const MONTANT_ANNUEL  = 199;
 const EDGE_URL      = 'https://tykruntstzrskowdvubk.supabase.co/functions/v1/create-stripe-checkout';
 const SUCCESS_URL   = 'https://linceya.com/en/checkout.html?success=1';
 const CANCEL_URL    = 'https://linceya.com/en/pricing.html';
 
 let selectedPriceId = PRICE_ELITE;
 
+// 24.99 -> « 24.99 € » (cards), « €24.99 » (text) ; 199 -> « 199 € », « €199 ».
+function montant(valeur) {
+  return (Number.isInteger(valeur) ? String(valeur) : valeur.toFixed(2)) + ' €';
+}
+function montantTexte(valeur) {
+  return '€' + (Number.isInteger(valeur) ? String(valeur) : valeur.toFixed(2));
+}
+
+// Saving of the yearly plan against 12 months of the monthly one, rounded down.
+function economieAnnuel() {
+  return Math.floor((1 - MONTANT_ANNUEL / (12 * MONTANT_MENSUEL)) * 100);
+}
+
 function renderPackages() {
   const list = document.getElementById('package-list');
-  const eliteCard = PRICE_ELITE ? `
-    <div class="pkg-card" data-price="${PRICE_ELITE}" onclick="selectPackage(this)">
+  const monthlyCard = PRICE_ELITE ? `
+    <div class="pkg-card" data-price="${PRICE_ELITE}" data-plan="elite" onclick="selectPackage(this)">
       <div class="pkg-label">Monthly</div>
       <div class="pkg-name">Linceya Elite</div>
-      <div class="pkg-price">44.99 €<span class="period">/ month</span></div>
-      <div class="pkg-save">6 AI video analyses per month</div>
+      <div class="pkg-price">${montant(MONTANT_MENSUEL)}<span class="period">/ month</span></div>
+      <div class="pkg-note">No commitment, cancel anytime.</div>
+      <div class="pkg-save">4 AI video analyses per month</div>
     </div>
   ` : '';
-  list.innerHTML = eliteCard;
-  // Seule l'Élite est vendue (Premium retiré de la vente le 30/10/2026) :
-  // son offre est cochée d'office, ?plan=elite ou non.
-  const first = list.querySelector('.pkg-card');
-  if (first) {
-    first.classList.add('selected');
-    selectedPriceId = first.dataset.price;
+  const annualCard = PRICE_ELITE_ANNUAL ? `
+    <div class="pkg-card" data-price="${PRICE_ELITE_ANNUAL}" data-plan="elite_annual" onclick="selectPackage(this)">
+      <div class="pkg-label">Yearly</div>
+      <div class="pkg-name">Linceya Elite</div>
+      <div class="pkg-price">${montant(MONTANT_ANNUEL)}<span class="period">/ year</span></div>
+      <div class="pkg-note">That's ${montantTexte(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100)}/month. 12 months paid upfront, renewal can be canceled anytime.</div>
+      <div class="pkg-save">−${economieAnnuel()}% · 4 AI video analyses per month</div>
+    </div>
+  ` : '';
+  list.innerHTML = monthlyCard + annualCard;
+  // Two plans: ?plan=elite_annual selects the yearly one, otherwise the monthly
+  // one (behavior before the yearly plan). Only one: it is selected by default.
+  const voulu = new URLSearchParams(window.location.search).get('plan');
+  const cible = list.querySelector('.pkg-card[data-plan="' + (voulu === 'elite_annual' ? 'elite_annual' : 'elite') + '"]')
+    || list.querySelector('.pkg-card');
+  if (cible) {
+    cible.classList.add('selected');
+    selectedPriceId = cible.dataset.price;
   }
-  document.getElementById('buy-btn').disabled = false;
+  if (monthlyCard && annualCard) {
+    document.getElementById('paywall-sub').textContent = "Monthly with no commitment, or yearly paid 12 months upfront.";
+    document.getElementById('paywall-renouvellement').textContent =
+      "Your subscription renews automatically, every month or every year depending on the plan. Cancel anytime: access stays open until the end of the paid period.";
+  }
+  // No offer (ids not filled in yet): nothing to buy.
+  document.getElementById('buy-btn').disabled = !cible;
   document.getElementById('loading').style.display = 'none';
   document.getElementById('packages').style.display = 'block';
+  if (!cible) showError("Online payment is not available right now. You can subscribe from the app.");
 }
 
 
@@ -525,9 +568,8 @@ async function handlePurchase() {
   hideError();
 
   // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
-  const plan = selectedPriceId === PRICE_ANNUAL
-    ? 'annual'
-    : (PRICE_ELITE && selectedPriceId === PRICE_ELITE ? 'elite' : 'monthly');
+  // elite_annual, never « annual » (the former Premium yearly plan).
+  const plan = PRICE_ELITE_ANNUAL && selectedPriceId === PRICE_ELITE_ANNUAL ? 'elite_annual' : 'elite';
 
   try {
     if (window.linceyaTrack) window.linceyaTrack.checkoutClick(plan);
