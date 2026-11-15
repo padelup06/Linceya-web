@@ -102,7 +102,7 @@
       "name": "¿Hay periodo de prueba?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, no hay prueba gratuita. La versión gratuita, sin límite de tiempo y sin tarjeta, te da el ranking ELO, los partidos públicos y las ligas entre amigos; el análisis de vídeo IA viene con Elite. Puedes pasar a Elite en cualquier momento, aquí o desde la app. El pago se gestiona de forma segura vía Stripe en la web, o vía Google Play o la App Store en la app."
+        "text": "En la web, no: el pago se hace el día en que te suscribes. En la app, el App Store o Google Play te muestra antes de la compra si se te ofrece una prueba, cuánto dura y el precio que sigue. La versión gratuita, sin límite de tiempo y sin tarjeta, te da el ranking ELO, los partidos públicos y las ligas entre amigos; el análisis de vídeo IA viene con Elite. Puedes pasar a Elite en cualquier momento, aquí o desde la app. El pago se gestiona de forma segura vía Stripe en la web, o vía Google Play o la App Store en la app."
       }
     },
     {
@@ -385,6 +385,22 @@ nav::before {
 .save-tag.visible { opacity: 1; }
 /* La bascule n'est montrée que si l'annuel du site est en vente (script du bas). */
 .toggle-wrapper[hidden] { display: none; }
+/* Mes gratis: solo se muestra si ESSAI_SITE_EN_VENTE (script del final). */
+.essai-bloc[hidden] { display: none; }
+.essai-bloc {
+  margin-top: 22px; padding: 16px 18px; border-radius: 14px;
+  background: rgba(201,167,90,0.08); border: 1px solid rgba(227,197,122,0.35);
+}
+.essai-titre { font-size: 15px; font-weight: 700; color: var(--pearl); line-height: 1.5; }
+.essai-pastille {
+  display: inline-block; margin-right: 6px; padding: 3px 10px; border-radius: 100px;
+  background: linear-gradient(160deg, #F6E5AE, #C9A75A 60%, #96742E); color: var(--on-gold);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; vertical-align: 1px;
+}
+.essai-detail { margin-top: 8px; font-size: 13px; color: var(--muted-light); line-height: 1.6; }
+.essai-detail strong { color: var(--pearl); }
+.essai-detail a { color: var(--platinum-light); }
 
 /* PRICING CARDS */
 .pricing-cards {
@@ -1028,8 +1044,12 @@ footer {
       <div class="price-amount"><span id="elite-prix">24,99</span><span class="currency">€</span><span class="period" id="elite-periode">/ mes</span></div>
       <div class="price-note" id="elite-note">Sin compromiso. En las stores: 29,99€/mes o 249,99€/año.</div>
     </div>
+    <div class="essai-bloc" id="essai-bloc" hidden>
+      <div class="essai-titre" id="essai-titre"></div>
+      <p class="essai-detail" id="essai-detail"></p>
+    </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon star">★</span> 4 análisis vídeo IA / mes (visión por computador)</div>
+      <div class="plan-feature" id="elite-quota"><span class="icon star">★</span> 4 análisis vídeo IA / mes (visión por computador)</div>
       <div class="plan-feature"><span class="icon star">★</span> Detección automática de golpes y desplazamientos</div>
       <div class="plan-feature"><span class="icon star">★</span> Distancia recorrida y velocidades de desplazamiento</div>
       <div class="plan-feature"><span class="icon star">★</span> Heatmaps y estadísticas en profundidad</div>
@@ -1089,7 +1109,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Hay periodo de prueba?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">No, no hay prueba gratuita. La versión gratuita, sin límite de tiempo y sin tarjeta, te da el ranking ELO, los partidos públicos y las ligas entre amigos; el análisis de vídeo IA viene con Elite. Puedes pasar a Elite en cualquier momento, aquí o desde la app. El pago se gestiona de forma segura vía Stripe en la web, o vía Google Play o la App Store en la app.</div>
+      <div class="faq-a" id="faq-essai">En la web, no: el pago se hace el día en que te suscribes. En la app, el App Store o Google Play te muestra antes de la compra si se te ofrece una prueba, cuánto dura y el precio que sigue. La versión gratuita, sin límite de tiempo y sin tarjeta, te da el ranking ELO, los partidos públicos y las ligas entre amigos; el análisis de vídeo IA viene con Elite. Puedes pasar a Elite en cualquier momento, aquí o desde la app. El pago se gestiona de forma segura vía Stripe en la web, o vía Google Play o la App Store en la app.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Puedo cancelar cuando quiera?</span><span class="faq-icon">+</span></button>
@@ -1208,12 +1228,70 @@ function choisirFormule(annuel) {
     ? 'Es decir, ' + montantPrix(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100) + '€/mes, 12 meses pagados por adelantado. En las stores: 249,99€/año.'
     : NOTE_MENSUEL;
   document.getElementById('elite-bouton').href = 'checkout.html?plan=' + (annuel ? 'elite_annual' : 'elite');
+  majEssai();
 }
+
+// Mes gratis de Élite en la web (decisiones de Max del 14/11/2026,
+// MOIS_GRATUIT_PROPOSITION.md, partes 4.1 y 8, R24). No se muestra nada
+// mientras este indicador sea false: la página diría «1 mes gratis» y llevaría
+// a un pago el mismo día. Pasar a true solo DESPUÉS de CGV_VERSION (la versión
+// de las condiciones con la cláusula del mes gratis) y luego del secreto de la
+// prueba de create-stripe-checkout, en un mismo push con ESSAI_SITE_EN_VENTE
+// de los tres checkout.html y de los otros dos pricing.html (paso C14 de
+// CONSOLES.md), CON LA HERRAMIENTA allumer_essai_site.mjs: también escribe en
+// el HTML la respuesta de las FAQ sobre la prueba (texto visible y JSON-LD, la
+// de texteFaqEssai), que el script no toca (revisión del 14/11, noche: un robot
+// sin JavaScript debe leer lo mismo). Vuelta atrás: la misma herramienta con
+// --eteindre, en el push que sigue a la retirada del secreto. La página de pago
+// sigue la respuesta del servidor y avisa antes de Stripe si es distinta.
+var ESSAI_SITE_EN_VENTE = false;
+// Decisión D13 de Max (15/11/2026): la página no calcula ni escribe ninguna
+// fecha del mes gratis. Dice solo la duración; la fecha exacta del primer pago
+// es la de la página de pago segura (Stripe) y la del correo de confirmación
+// (una fecha calculada aquí podría diferir en un día).
+// La respuesta de las FAQ sobre la prueba, interruptor encendido. La página
+// nunca la llama: la herramienta allumer_essai_site.mjs la lee y la escribe
+// en el HTML (C14).
+function texteFaqEssai() {
+  return 'Sí: 1 mes gratis para una primera suscripción, mensual o anual, con 2 análisis de vídeo. '
+    + 'Se pide tarjeta al registrarte. Al terminar el mes gratis, la suscripción pasa a ser de pago automáticamente: '
+    + (ANNUEL_SITE_EN_VENTE ? '24,99 €/mes o 199 €/año aquí' : '24,99 €/mes aquí')
+    + ', 29,99 €/mes o 249,99 €/año en la app. Puedes cancelar antes de que termine el mes gratis, '
+    + 'aquí desde «Cancelar tu contrato», o en la app desde el App Store (al menos 24 horas antes) '
+    + 'o Google Play: no se cobra nada. '
+    + 'La versión gratuita, por su parte, sigue sin límite de tiempo y sin tarjeta.';
+}
+function majEssai() {
+  if (!ESSAI_SITE_EN_VENTE) return;
+  var annuel = ANNUEL_SITE_EN_VENTE && formuleAnnuelle;
+  // Todo el texto del mes gratis se escribe aquí, nunca en el HTML: antes del
+  // secreto, ningún buscador debe leerlo, ni siquiera oculto.
+  document.getElementById('essai-titre').innerHTML = '<span class="essai-pastille">1 mes gratis</span> luego '
+    + (annuel ? montantPrix(MONTANT_ANNUEL) + ' €/año' : montantPrix(MONTANT_MENSUEL) + ' €/mes');
+  // La línea de la cuota de la tarjeta también dice la prueba (revisión del 14/11, noche).
+  document.getElementById('elite-quota').innerHTML =
+    '<span class="icon star">★</span> 2 análisis vídeo IA durante el mes gratis, luego 4 / mes (visión por computador)';
+  document.getElementById('essai-detail').innerHTML =
+    'Para una primera suscripción. 1 mes gratis, con 2 análisis de vídeo, luego 4 al mes. '
+    + 'Se pide tarjeta al registrarte. Al terminar el mes gratis, la suscripción pasa a ser de pago automáticamente'
+    + (annuel ? ': los 12 meses pagados y el compromiso de 12 meses empiezan ese día. ' : '. ')
+    + 'La fecha exacta del primer pago aparece en la página de pago de Stripe y en el correo de confirmación. '
+    + 'Cancela en línea antes de que termine el mes gratis, desde <a href="/es/cancel-subscription.html">Cancelar tu contrato</a>: no pagas nada. '
+    + 'Un solo mes gratis por persona.';
+}
+// La pregunta de las FAQ sobre la prueba (la lee la herramienta, que escribe su
+// respuesta en el HTML: texto visible y JSON-LD, siempre iguales).
+var QUESTION_ESSAI = '¿Hay periodo de prueba?';
+
 if (ANNUEL_SITE_EN_VENTE) {
   // Ahorro frente a 12 meses del mensual de la web, redondeado hacia abajo.
   document.getElementById('save-tag').textContent =
     '−' + Math.floor((1 - MONTANT_ANNUEL / (12 * MONTANT_MENSUEL)) * 100) + ' %';
   document.getElementById('bascule-formule').hidden = false;
+}
+if (ESSAI_SITE_EN_VENTE) {
+  majEssai();
+  document.getElementById('essai-bloc').hidden = false;
 }
 
 // Smart store redirect : iOS → App Store, Android → Google Play, desktop → Google Play.

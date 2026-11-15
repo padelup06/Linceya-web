@@ -13,6 +13,7 @@
  *   window.linceyaTrack.checkoutClick(plan)       // 'elite' | 'elite_annual' (anciens : 'monthly' | 'annual')
  *   window.linceyaTrack.contactSubmit()
  *   window.linceyaTrack.plan(plan)                // descripteur du palier
+ *   window.linceyaTrack.adConversion(kind, info, txnId)  // 'checkout' | 'purchase' | 'trial'
  *   window.linceyaTrack.event(name, params)       // event custom
  */
 (function() {
@@ -275,13 +276,45 @@
    * la meme vente en trois dialectes, dans trois fichiers, et ajouter une
    * regie obligeait a les rouvrir tous. Ici, une seule.
    *
-   * `kind` vaut 'checkout' (depart vers le paiement) ou 'purchase' (encaisse).
+   * `kind` vaut 'checkout' (depart vers le paiement), 'purchase' (encaisse)
+   * ou 'trial' (mois gratuit commence : RIEN n est encaisse).
    */
   function adConversion(kind, info, txnId) {
     // Dernier rempart : aucun envoi publicitaire si le consentement a été
     // retiré. Indispensable pour X, qui n'expose aucune méthode de révocation,
     // et utile pour toute régie ajoutée plus tard qui n'en aurait pas non plus.
     if (!marketingGranted) return;
+    if (kind === 'trial') {
+      // Mois gratuit (MOIS_GRATUIT_PROPOSITION.md, 2.5 et R13) : un essai
+      // n'est pas une vente. Montant 0, jamais le prix d'apres : sinon les
+      // regies liraient 24,99 ou 199 EUR de chiffre d'affaires par essai. Le
+      // premier vrai paiement arrive 1 mois plus tard, sans page ouverte : il
+      // n'est compte que par le serveur (PostHog), jamais ici.
+      // Seulement les evenements d'essai documentes par la regie. TikTok, X et
+      // Google Ads : aucune conversion d'essai creee chez eux, donc rien
+      // (a creer par Max avant une pub qui y mene, puis a brancher ici).
+      // Pas de predicted_ltv non plus (revue du 14/11, nuit) : 299,88 ou
+      // 199 EUR de valeur prevue par essai, alors qu'un essai sur quatre
+      // seulement devrait payer (Q26) ; Meta optimiserait sur une valeur qui
+      // n'arrivera pas.
+      try {
+        if (window.fbq) {
+          window.fbq('track', 'StartTrial', { currency: 'EUR', value: 0 });
+        }
+      } catch (_) {}
+      try {
+        if (window.snaptr) {
+          window.snaptr('track', 'START_TRIAL', {
+            price: 0,
+            currency: 'EUR',
+            item_ids: [info.contentId],
+            item_category: info.label,
+            transaction_id: txnId || undefined
+          });
+        }
+      } catch (_) {}
+      return;
+    }
     var isPurchase = kind === 'purchase';
     try {
       if (window.fbq) {
@@ -399,6 +432,10 @@
     // Diffusion d'une conversion a toutes les regies. Utilise par les trois
     // checkout.html, qui n ont ainsi plus a connaitre le moindre SDK.
     adConversion: adConversion,
+    // Vrai : adConversion connait 'trial' (mois gratuit, sans montant). Les
+    // checkout.html ne l appellent qu avec ce drapeau : un analytics.js plus
+    // ancien, servi en cache, en ferait un depart vers le paiement avec le prix.
+    trialConversion: true,
     appDownloadClick: function(store) {
       gtag('event', 'app_download_click', {
         'store': store,           // 'apple' ou 'google'

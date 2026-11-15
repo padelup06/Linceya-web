@@ -102,7 +102,7 @@
       "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, there is no free trial. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app."
+        "text": "Not on the website: payment is taken on the day you subscribe. In the app, the App Store or Google Play shows you before you buy whether a trial is offered to you, how long it lasts and the price that follows. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app."
       }
     },
     {
@@ -385,6 +385,22 @@ nav::before {
 .save-tag.visible { opacity: 1; }
 /* La bascule n'est montrée que si l'annuel du site est en vente (script du bas). */
 .toggle-wrapper[hidden] { display: none; }
+/* Free month: shown only if ESSAI_SITE_EN_VENTE (script at the bottom). */
+.essai-bloc[hidden] { display: none; }
+.essai-bloc {
+  margin-top: 22px; padding: 16px 18px; border-radius: 14px;
+  background: rgba(201,167,90,0.08); border: 1px solid rgba(227,197,122,0.35);
+}
+.essai-titre { font-size: 15px; font-weight: 700; color: var(--pearl); line-height: 1.5; }
+.essai-pastille {
+  display: inline-block; margin-right: 6px; padding: 3px 10px; border-radius: 100px;
+  background: linear-gradient(160deg, #F6E5AE, #C9A75A 60%, #96742E); color: var(--on-gold);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; vertical-align: 1px;
+}
+.essai-detail { margin-top: 8px; font-size: 13px; color: var(--muted-light); line-height: 1.6; }
+.essai-detail strong { color: var(--pearl); }
+.essai-detail a { color: var(--platinum-light); }
 
 /* PRICING CARDS */
 .pricing-cards {
@@ -1028,8 +1044,12 @@ footer {
       <div class="price-amount"><span id="elite-prix">24.99</span><span class="currency">€</span><span class="period" id="elite-periode">/ month</span></div>
       <div class="price-note" id="elite-note">No commitment. On the stores: €29.99/month or €249.99/year.</div>
     </div>
+    <div class="essai-bloc" id="essai-bloc" hidden>
+      <div class="essai-titre" id="essai-titre"></div>
+      <p class="essai-detail" id="essai-detail"></p>
+    </div>
     <div class="plan-features">
-      <div class="plan-feature"><span class="icon star">★</span> 4 AI video analyses / month (computer vision)</div>
+      <div class="plan-feature" id="elite-quota"><span class="icon star">★</span> 4 AI video analyses / month (computer vision)</div>
       <div class="plan-feature"><span class="icon star">★</span> Automatic shot &amp; movement detection</div>
       <div class="plan-feature"><span class="icon star">★</span> Distance covered &amp; movement speeds</div>
       <div class="plan-feature"><span class="icon star">★</span> In-depth heatmaps &amp; stats</div>
@@ -1089,7 +1109,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Is there a free trial?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">No, there is no free trial. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app.</div>
+      <div class="faq-a" id="faq-essai">Not on the website: payment is taken on the day you subscribe. In the app, the App Store or Google Play shows you before you buy whether a trial is offered to you, how long it lasts and the price that follows. The free version, with no time limit and no card required, gives you the ELO ranking, public matches and leagues with friends; AI video analysis comes with Elite. You can upgrade to Elite anytime, here or from the app. Payment is handled securely via Stripe on the website, or via Google Play or the App Store in the app.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Can I cancel anytime?</span><span class="faq-icon">+</span></button>
@@ -1208,12 +1228,69 @@ function choisirFormule(annuel) {
     ? 'That\'s €' + montantPrix(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100) + '/month, 12 months paid upfront. On the stores: €249.99/year.'
     : NOTE_MENSUEL;
   document.getElementById('elite-bouton').href = 'checkout.html?plan=' + (annuel ? 'elite_annual' : 'elite');
+  majEssai();
 }
+
+// Elite free month on the website (Max's decisions of 14/11/2026,
+// MOIS_GRATUIT_PROPOSITION.md, parts 4.1 and 8, R24). Nothing about it is
+// shown while this flag is false: the page would say "1 month free" and lead
+// to a payment the same day. Set to true only AFTER CGV_VERSION (the version
+// of the terms with the free-month clause) and then the trial secret of
+// create-stripe-checkout, in one push with ESSAI_SITE_EN_VENTE of the three
+// checkout.html and the two other pricing.html (step C14 of CONSOLES.md),
+// WITH THE allumer_essai_site.mjs TOOL: it also writes into the HTML the FAQ
+// answer about the trial (visible text and JSON-LD, from texteFaqEssai), which
+// the script does not touch (review of 14/11, night: a robot without
+// JavaScript must read the same thing). Rollback: the same tool with
+// --eteindre, in the push that follows removing the secret. The payment page
+// follows the server's answer and warns before Stripe if it differs.
+var ESSAI_SITE_EN_VENTE = false;
+// Max's decision D13 (15/11/2026): the page neither computes nor writes any
+// date of the free month. It gives the length only; the exact date of the
+// first payment is the one on the secure payment page (Stripe) and in the
+// confirmation email (a date computed here could be one day off).
+// The FAQ answer about the trial, switch on. Never called by the page: the
+// allumer_essai_site.mjs tool reads it and writes it into the HTML (C14).
+function texteFaqEssai() {
+  return 'Yes: 1 month free for a first subscription, monthly or yearly, with 2 video analyses. '
+    + 'Card required at sign-up. When the free month ends, the subscription becomes paid automatically: '
+    + (ANNUEL_SITE_EN_VENTE ? '€24.99/month or €199/year here' : '€24.99/month here')
+    + ', €29.99/month or €249.99/year in the app. You can cancel before the free month ends, '
+    + 'here from “Cancel your contract”, or in the app from the App Store (at least 24 hours before) '
+    + 'or Google Play: nothing is charged. '
+    + 'The free version, for its part, has no time limit and needs no card.';
+}
+function majEssai() {
+  if (!ESSAI_SITE_EN_VENTE) return;
+  var annuel = ANNUEL_SITE_EN_VENTE && formuleAnnuelle;
+  // All the free-month text is written here, never in the HTML: before the
+  // secret, no search engine may read it, even hidden.
+  document.getElementById('essai-titre').innerHTML = '<span class="essai-pastille">1 month free</span> then '
+    + (annuel ? '€' + montantPrix(MONTANT_ANNUEL) + '/year' : '€' + montantPrix(MONTANT_MENSUEL) + '/month');
+  // The card's quota line also tells the trial (review of 14/11, night).
+  document.getElementById('elite-quota').innerHTML =
+    '<span class="icon star">★</span> 2 AI video analyses during the free month, then 4 / month (computer vision)';
+  document.getElementById('essai-detail').innerHTML =
+    'For a first subscription. 1 month free, with 2 video analyses, then 4 a month. '
+    + 'Card required at sign-up. When the free month ends, the subscription becomes paid automatically'
+    + (annuel ? ': the 12 paid months and the 12-month commitment start that day. ' : '. ')
+    + 'The exact date of your first payment is shown on Stripe\'s payment page and in the confirmation email. '
+    + 'Cancel online before the free month ends, from <a href="/en/cancel-subscription.html">Cancel your contract</a>: you pay nothing. '
+    + 'One free month per person.';
+}
+// The FAQ question about the trial (read by the tool, which writes its answer
+// into the HTML: visible text and JSON-LD, always the same).
+var QUESTION_ESSAI = 'Is there a free trial?';
+
 if (ANNUEL_SITE_EN_VENTE) {
   // Saving against 12 months of the website monthly plan, rounded down.
   document.getElementById('save-tag').textContent =
     '−' + Math.floor((1 - MONTANT_ANNUEL / (12 * MONTANT_MENSUEL)) * 100) + '%';
   document.getElementById('bascule-formule').hidden = false;
+}
+if (ESSAI_SITE_EN_VENTE) {
+  majEssai();
+  document.getElementById('essai-bloc').hidden = false;
 }
 
 // Smart store redirect : iOS → App Store, Android → Google Play, desktop → Google Play.

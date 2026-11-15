@@ -386,6 +386,23 @@ footer {
   padding: 0 4px;
 }
 
+/* Free month (ESSAI_SITE_EN_VENTE and the server's answer, script at the bottom). */
+.pkg-essai { margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--gold-light); line-height: 1.45; }
+.essai-ecart[hidden], .buy-btn[hidden] { display: none; }
+.essai-ecart {
+  margin-top: 22px; padding: 16px; border-radius: 12px;
+  border: 1px solid rgba(227,197,122,0.55); background: rgba(201,167,90,0.08);
+  font-size: 13px; line-height: 1.6; color: var(--graphite);
+}
+.essai-ecart strong { color: var(--pearl); }
+.essai-ecart .buy-btn { margin-top: 14px; }
+.essai-ecart-retour {
+  display: block; width: 100%; margin-top: 10px; padding: 10px;
+  background: none; border: 1px solid var(--stroke); border-radius: 12px;
+  color: var(--muted); font-family: var(--font-body); font-size: 13px; cursor: pointer;
+}
+.essai-ecart-retour:hover { color: var(--platinum-light); border-color: var(--platinum); }
+
 @media (prefers-reduced-motion: reduce) {
   .buy-btn::before { animation: none; }
 }
@@ -409,7 +426,7 @@ footer {
       <div class="checkout-title">GO<br><span class="accent" id="side-accent">ELITE</span></div>
       <div class="checkout-subtitle" id="side-sub">AI video analysis: your shots estimated, your movement measured.</div>
       <div class="checkout-features" id="side-features">
-        <div class="checkout-feat"><span class="check">✓</span>4 AI video analyses per month</div>
+        <div class="checkout-feat"><span class="check">✓</span><span id="side-quota">4 AI video analyses per month</span></div>
         <div class="checkout-feat"><span class="check">✓</span>Automatic shot &amp; movement detection</div>
         <div class="checkout-feat"><span class="check">✓</span>Distance covered &amp; movement speeds</div>
         <div class="checkout-feat"><span class="check">✓</span>Court coverage heatmap</div>
@@ -443,12 +460,17 @@ footer {
           <div class="acces-immediat" id="acces-immediat-bloc">
             <label class="acces-case" for="acces-immediat">
               <input type="checkbox" id="acces-immediat" name="acces_immediat" aria-describedby="acces-immediat-aide">
-              <span>I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days already elapsed. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.</span>
+              <span id="acces-immediat-texte">I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days already elapsed. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.</span>
             </label>
             <div class="hint" id="acces-immediat-aide">This box is required to subscribe online: Elite opens as soon as you pay.</div>
           </div>
           <button class="buy-btn" id="buy-btn" disabled aria-disabled="true" onclick="handlePurchase()"><span>Continue →</span></button>
-        <div class="paywall-moyens">Payment methods: credit or debit card <span class="a-remplir">[ET LES AUTRES MOYENS ACTIVÉS DANS STRIPE, A CONFIRMER PAR MAX : and the other methods enabled in Stripe]</span>.</div>
+          <div class="essai-ecart" id="essai-ecart" role="alert" hidden>
+            <p id="essai-ecart-texte"></p>
+            <button class="buy-btn" id="essai-ecart-continuer" type="button"><span>Continue to payment →</span></button>
+            <button class="essai-ecart-retour" id="essai-ecart-retour" type="button" onclick="fermerEcart()">Don't order</button>
+          </div>
+        <div class="paywall-moyens">Payment methods: credit or debit card <span class="a-remplir">[ET LES AUTRES MOYENS ACTIVÉS DANS STRIPE, A CONFIRMER PAR MAX : and the other methods enabled in Stripe]</span>.<span id="moyens-essai"></span></div>
         <div class="paywall-terms">
           Our <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a> apply: you will accept them on the payment page. You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.
           <span id="paywall-renouvellement">Your subscription renews automatically every month. Cancel anytime.</span>
@@ -543,9 +565,50 @@ function economieAnnuel() {
   return Math.floor((1 - MONTANT_ANNUEL / (12 * MONTANT_MENSUEL)) * 100);
 }
 
+// ── Free month (Max's decisions of 14/11/2026, MOIS_GRATUIT_PROPOSITION.md,
+// parts 1.2, 4.1, 4.2 and R24) ──────────────────────────────────────────────
+// False: nothing is said about the free month (same rendering as before). Set
+// to true only AFTER CGV_VERSION (the version of the terms with the free-month
+// clause) and then the trial secret of create-stripe-checkout, in one push
+// with the two other checkout.html and the three pricing.html (step C14 of
+// CONSOLES.md).
+// The server stays the judge: its answer says `essai` (true: the Stripe session
+// starts with the free month; anything else, missing field included: payment
+// the same day); "already had": `essai_refuse: "deja_utilise"` and `message`. The page reads no date
+// from this answer (D13). When what
+// it did differs from what the page announced (an address that already had a
+// free month or Elite, secret removed), the page says so and
+// waits for a second click BEFORE opening Stripe. The return from payment
+// carries `essai=1`, set by the server (like `known=1`), never by the page.
+const ESSAI_SITE_EN_VENTE = false;
+
+// Max's decision D13 (15/11/2026): the page computes no date of the free month
+// and reads none from the server's answer. It gives the length only; the exact
+// date of the first payment is the one on the secure payment page (Stripe) and
+// in the confirmation email.
+const TEXTE_CASE_ESSAI = "I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days elapsed since my first payment: nothing if I am still in my free month. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.";
+// Max's decision D2 (11/15): a session with the free month accepts cards only
+// (create-stripe-checkout, `payment_method_types: ["card"]`). The payment
+// methods line says so as soon as the page offers the free month, or the
+// server gives it (L221-14: payment methods stated from the start of the order).
+const TEXTE_MOYENS_ESSAI = ' With the free month: credit or debit card only (Apple Pay and Google Pay included).';
+function direMoyensEssai() {
+  const el = document.getElementById('moyens-essai');
+  if (el) el.textContent = TEXTE_MOYENS_ESSAI;
+}
+
 function renderPackages() {
   const list = document.getElementById('package-list');
-  const monthlyCard = PRICE_ELITE ? `
+  const monthlyCard = PRICE_ELITE ? (ESSAI_SITE_EN_VENTE ? `
+    <div class="pkg-card" data-price="${PRICE_ELITE}" data-plan="elite" onclick="selectPackage(this)">
+      <div class="pkg-label">Monthly</div>
+      <div class="pkg-name">Linceya Elite</div>
+      <div class="pkg-price">${montant(MONTANT_MENSUEL)}<span class="period">/ month</span></div>
+      <div class="pkg-essai">1 month free, then ${montantTexte(MONTANT_MENSUEL)}/month</div>
+      <div class="pkg-note">€0 today. First payment of ${montantTexte(MONTANT_MENSUEL)} when the free month ends, unless you cancel before. No commitment after that.</div>
+      <div class="pkg-save">2 video analyses during the free month, then 4 a month</div>
+    </div>
+  ` : `
     <div class="pkg-card" data-price="${PRICE_ELITE}" data-plan="elite" onclick="selectPackage(this)">
       <div class="pkg-label">Monthly</div>
       <div class="pkg-name">Linceya Elite</div>
@@ -553,8 +616,17 @@ function renderPackages() {
       <div class="pkg-note">No commitment, cancel anytime.</div>
       <div class="pkg-save">4 AI video analyses per month</div>
     </div>
-  ` : '';
-  const annualCard = PRICE_ELITE_ANNUAL ? `
+  `) : '';
+  const annualCard = PRICE_ELITE_ANNUAL ? (ESSAI_SITE_EN_VENTE ? `
+    <div class="pkg-card" data-price="${PRICE_ELITE_ANNUAL}" data-plan="elite_annual" onclick="selectPackage(this)">
+      <div class="pkg-label">Yearly</div>
+      <div class="pkg-name">Linceya Elite</div>
+      <div class="pkg-price">${montant(MONTANT_ANNUEL)}<span class="period">/ year</span></div>
+      <div class="pkg-essai">1 month free, then ${montantTexte(MONTANT_ANNUEL)}/year</div>
+      <div class="pkg-note">€0 today. First payment of ${montantTexte(MONTANT_ANNUEL)} when the free month ends, for 12 months, unless you cancel before. That is ${montantTexte(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100)}/month. 12-month commitment from that payment; you can stop the renewal at any time.</div>
+      <div class="pkg-save">−${economieAnnuel()}% · 2 video analyses during the free month, then 4 a month</div>
+    </div>
+  ` : `
     <div class="pkg-card" data-price="${PRICE_ELITE_ANNUAL}" data-plan="elite_annual" onclick="selectPackage(this)">
       <div class="pkg-label">Yearly</div>
       <div class="pkg-name">Linceya Elite</div>
@@ -562,7 +634,7 @@ function renderPackages() {
       <div class="pkg-note">That is ${montantTexte(Math.floor(MONTANT_ANNUEL / 12 * 100) / 100)}/month. 12 months paid upfront. 12-month commitment; you can stop the renewal at any time.</div>
       <div class="pkg-save">−${economieAnnuel()}% · 4 AI video analyses per month</div>
     </div>
-  ` : '';
+  `) : '';
   list.innerHTML = monthlyCard + annualCard;
   // Two plans: ?plan=elite_annual selects the yearly one, otherwise the monthly
   // one (behavior before the yearly plan). Only one: it is selected by default.
@@ -578,6 +650,21 @@ function renderPackages() {
     document.getElementById('paywall-renouvellement').textContent =
       "Your subscription renews automatically, every month or every year depending on the plan. Cancel anytime: access stays open until the end of the paid period.";
   }
+  if (ESSAI_SITE_EN_VENTE) {
+    document.getElementById('paywall-sub').textContent = monthlyCard && annualCard
+      ? "First subscription: 1 month free, card required. After that, monthly with no commitment, or yearly paid 12 months upfront."
+      : "First subscription: 1 month free, card required. After that, a paid subscription you can cancel anytime.";
+    document.getElementById('paywall-renouvellement').textContent =
+      "When the free month ends, your subscription becomes paid automatically, then renews "
+      + (monthlyCard && annualCard ? "every month or every year depending on the plan" : "every month")
+      + ". The exact date of your first payment is shown at the next step, on Stripe's payment page, and in the confirmation email. "
+      + "Cancel online before the free month ends: you pay nothing. One free month per person.";
+    document.getElementById('acces-immediat-texte').textContent = TEXTE_CASE_ESSAI;
+    document.getElementById('acces-immediat-aide').textContent =
+      "This box is required to subscribe online: Elite opens as soon as you place your order, free month included.";
+    document.getElementById('side-quota').textContent = '2 video analyses during the free month, then 4 a month';
+    direMoyensEssai();
+  }
   // No offer (ids not filled in yet): nothing to buy.
   document.getElementById('buy-btn').disabled = !cible;
   majBoutonAcces();
@@ -588,6 +675,7 @@ function renderPackages() {
 
 
 function selectPackage(card) {
+  fermerEcart();
   selectedPriceId = card.dataset.price;
   document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
   card.classList.add('selected');
@@ -672,7 +760,7 @@ async function handlePurchase() {
       erreur.code = data.code;
       throw erreur;
     }
-    window.location.href = data.url;
+    allerAuPaiement(data, plan);
   } catch (e) {
     console.error('Purchase error:', e);
     btn.disabled = false;
@@ -689,6 +777,58 @@ async function handlePurchase() {
       : "An error occurred. Please try again.";
     showError(msg);
   }
+}
+
+// What the server did with the session, against what the page announced.
+// Same: Stripe right away. Different: the page says so first.
+function allerAuPaiement(data, plan) {
+  const essai = data.essai === true;
+  if (essai) direMoyensEssai();
+  // Only `essai` counts: no date is read or computed (D13).
+  const commeAnnonce = essai === ESSAI_SITE_EN_VENTE;
+  if (commeAnnonce) {
+    window.location.href = data.url;
+    return;
+  }
+  const annuel = plan === 'elite_annual';
+  const prix = montantTexte(annuel ? MONTANT_ANNUEL : MONTANT_MENSUEL);
+  document.getElementById('essai-ecart-texte').innerHTML = essai
+    ? '<strong>This order starts with 1 free month</strong>, with 2 video analyses. Nothing is charged today. After that, ' + prix
+      + (annuel ? ' a year, for 12 months' : ' a month')
+      + ', charged automatically when the free month ends, unless you cancel before. '
+      + 'The exact date of your first payment is shown at the next step, on Stripe\'s payment page, and in the confirmation email. '
+      + 'One free month per person.'
+    : '<strong>No free month for this order.</strong> ' + causeSansEssai(data)
+      + 'If you continue, you pay ' + prix + ' today' + (annuel ? ', for 12 months' : '')
+      + ', then the subscription renews automatically.';
+  const continuer = document.getElementById('essai-ecart-continuer');
+  continuer.querySelector('span').textContent = essai
+    ? 'Continue to the payment page →'
+    : 'Continue and pay today →';
+  continuer.onclick = function() { window.location.href = data.url; };
+  document.getElementById('buy-btn').hidden = true;
+  document.getElementById('essai-ecart').hidden = false;
+  continuer.focus();
+}
+
+// Why there is no free month, only if the server says so ("already had its
+// free month"): a technical cause is not told to the customer.
+function causeSansEssai(data) {
+  if (!data || data.essai_refuse !== 'deja_utilise' || typeof data.message !== 'string') return '';
+  const echappe = data.message.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  return echappe + ' ';
+}
+
+// "Don't order", another plan or another address: the session already created
+// is not used (Stripe lets it expire), a new click creates another one.
+function fermerEcart() {
+  const ecart = document.getElementById('essai-ecart');
+  if (!ecart || ecart.hidden) return;
+  ecart.hidden = true;
+  const btn = document.getElementById('buy-btn');
+  btn.hidden = false;
+  btn.disabled = false;
+  btn.innerHTML = '<span>Continue →</span>';
 }
 
 function showError(msg) {
@@ -737,9 +877,34 @@ function trackPurchase() {
   // ENTIERE la ou l ancien code remontait au moins un montant faux. On prefere
   // alors une conversion comptee sans montant a une conversion invisible.
   if (!window.linceyaTrack) return;
+  // Free month (`essai=1`, set by the server): nothing is charged. Never a
+  // purchase or an amount: only "trial started", with no value. The first real
+  // payment, a month later, is only counted by the server
+  // (MOIS_GRATUIT_PROPOSITION.md, 2.5 and R13).
+  const essaiRetour = new URLSearchParams(window.location.search).get('essai') === '1';
   if (typeof window.linceyaTrack.plan !== 'function') {
     try {
-      window.linceyaTrack.event('purchase', { currency: 'EUR' });
+      window.linceyaTrack.event(essaiRetour ? 'trial_start' : 'purchase', { currency: 'EUR' });
+    } catch (_) {}
+    return;
+  }
+  if (essaiRetour) {
+    try {
+      const info = window.linceyaTrack.plan(new URLSearchParams(window.location.search).get('plan'));
+      const key = 'linceya_purchase_tracked';
+      let txnId = null;
+      try { txnId = sessionStorage.getItem(key); } catch (_) {}
+      if (txnId) return;
+      txnId = 'web-essai-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+      window.linceyaTrack.event('trial_start', { transaction_id: txnId, currency: 'EUR', plan: info.key });
+      try { sessionStorage.setItem(key, txnId); } catch (_) {}
+      // An analytics.js from before the free month does not know 'trial': it
+      // would turn it into a checkout WITH the price. Nothing in that case.
+      if (window.linceyaTrack.trialConversion === true) {
+        onMarketingConsent(function() {
+          window.linceyaTrack.adConversion('trial', info, txnId);
+        });
+      }
     } catch (_) {}
     return;
   }
@@ -829,10 +994,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tierEl) tierEl.textContent = 'PREMIUM';
     }
 
+    // essai=1: set by the server when the session starts with the free month.
+    // No date here (D13): it is in the confirmation email.
+    const connuRetour = new URLSearchParams(window.location.search).get('known') === '1';
+    if (new URLSearchParams(window.location.search).get('essai') === '1') {
+      const subEl = document.getElementById('success-sub');
+      if (subEl) subEl.innerHTML = '<strong>Your free month has started.</strong> '
+        + 'Its end date is in the confirmation email: your first payment will be taken that day, unless you cancel before. '
+        + (connuRetour
+          ? 'Just sign in to the app with this address — there is nothing else to do.'
+          : "If you already have a Linceya account with this address, just sign in to the app — there is nothing else to do. Otherwise you'll receive a 6-digit activation code: download the app, tap \"I have a Premium code\" on the sign-in screen, then enter it.");
+      const contratEl = document.getElementById('success-contrat');
+      if (contratEl) contratEl.innerHTML = 'We are emailing you the confirmation of your subscription, with your terms of sale. '
+        + 'To pay nothing, cancel before the free month ends: <a href="https://linceya.com/en/cancel-subscription.html">Cancel your contract</a>. '
+        + 'You also have 14 days to withdraw from the contract: <a href="https://linceya.com/en/withdraw.html">Withdraw from the contract here</a>.';
+    } else
     // known=1 : le serveur a confirme qu un compte existe pour cette
     // adresse. Aucun code d activation ne sera envoye — inutile d en
     // faire attendre un.
-    if (new URLSearchParams(window.location.search).get('known') === '1') {
+    if (connuRetour) {
       const subEl = document.getElementById('success-sub');
       if (subEl) subEl.innerHTML = "<strong>Your subscription is active.</strong> Just sign in to the app with this address — there is nothing else to do.";
     }
@@ -845,6 +1025,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // they're typing. 300ms delay = wait for keyboard slide-up animation.
   var emailInput = document.getElementById('checkout-email');
   if (emailInput) {
+    // Another address: the session created for the old one is no longer used.
+    emailInput.addEventListener('input', fermerEcart);
     emailInput.addEventListener('focus', function() {
       setTimeout(function() {
         emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
