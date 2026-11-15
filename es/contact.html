@@ -246,6 +246,10 @@ h1 .accent {
 }
 .form-group select option { background: var(--carbon-high); color: var(--ink); }
 .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.55; }
+/* Ayuda del asunto «Salgo en un vídeo», visible solo cuando está elegido */
+.form-hint { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.form-hint[hidden] { display: none; }
+.form-hint p + p { margin-top: 6px; }
 
 .row { display: flex; gap: 14px; }
 .row .form-group { flex: 1; }
@@ -429,12 +433,17 @@ footer {
             <option value="Eliminación de cuenta">Eliminación de cuenta</option>
             <option value="Sugerencia de mejora">Sugerencia de mejora</option>
             <option value="Asociación / Club">Asociación / Club</option>
+            <option value="Salgo en un vídeo (oposición)">Salgo en un vídeo (oposición)</option>
             <option value="Otro">Otro</option>
           </select>
         </div>
         <div class="form-group">
           <label>Mensaje *</label>
           <textarea id="message" name="message" placeholder="Describe tu solicitud en detalle..." required></textarea>
+          <div class="form-hint" id="aideVideo" hidden>
+            <p>Fecha y hora del partido, club, ciudad y pista, y la ropa que llevabas (colores). Dinos si tienes cuenta en Linceya y si escribes por tu hijo o hija.</p>
+            <p>Sin fotos, por favor: no las necesitamos para encontrar el vídeo.</p>
+          </div>
         </div>
         <!-- Honeypot anti-bot — caché aux humains, rempli par les bots -->
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
@@ -482,6 +491,29 @@ footer {
 // Configuré sur la route linceya.com/api/contact (Proxied + Worker linceya-contact-form).
 var CONTACT_ENDPOINT = '/api/contact';
 
+// Asunto «Salgo en un vídeo»: preseleccionado por el enlace de la política
+// de privacidad (?asunto=video; también ?sujet= y ?subject=, tras una
+// redirección de idioma), con ayuda para el mensaje cuando está elegido.
+(function() {
+  var SUJET_VIDEO = 'Salgo en un vídeo (oposición)';
+  var select = document.getElementById('subject');
+  var message = document.getElementById('message');
+  var aide = document.getElementById('aideVideo');
+  function majAide() {
+    var video = select.value === SUJET_VIDEO;
+    aide.hidden = !video;
+    if (video) message.setAttribute('aria-describedby', 'aideVideo');
+    else message.removeAttribute('aria-describedby');
+  }
+  select.addEventListener('change', majAide);
+  try {
+    var params = new URLSearchParams(location.search);
+    var sujet = params.get('asunto') || params.get('sujet') || params.get('subject');
+    if (sujet === 'video') select.value = SUJET_VIDEO;
+  } catch (e) {}
+  majAide();
+})();
+
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
@@ -517,7 +549,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successCard').style.display = 'block';
   } catch (err) {
-    errBox.textContent = err.message || 'Error de envío, inténtalo de nuevo.';
+    var texteErreur = err.message || 'Error de envío, inténtalo de nuevo.';
+    if (!/[.!?…]$/.test(texteErreur)) texteErreur += '.';
+    errBox.textContent = texteErreur + ' También puedes escribirnos a contact@linceya.com.';
     errBox.style.display = 'block';
     btn.disabled = false;
     btn.innerHTML = originalLabel;

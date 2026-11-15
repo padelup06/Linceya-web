@@ -234,6 +234,8 @@ h1 {
 }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+/* Links to the terms of sale and the policy (subscription bought on linceya.com). */
+.info-list a { color: var(--platinum-light); text-decoration: underline; }
 .badge-del {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--danger); font-weight: 600; font-size: 12px;
@@ -259,6 +261,9 @@ h1 {
 }
 .info-list li:last-child { border-bottom: none; }
 .info-list li strong { color: var(--ink); font-weight: 700; }
+
+/* A badge's dot stays round when the badge wraps ("Deleted by Anthropic"). */
+.badge-del::before, .badge-keep::before { flex-shrink: 0; }
 
 .footer-note {
   margin-top: 32px;
@@ -387,9 +392,15 @@ footer {
         <tr><td>AI analyses</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Videos and replay (our storage servers)</td><td><span class="badge-del">Deleted</span></td><td>Within 8 days</td></tr>
         <tr><td>Elite analysis working copies (Linceya machines)</td><td><span class="badge-del">Deleted</span></td><td>Within 7 days</td></tr>
+        <tr><td>Videos kept to train our models (with your consent)</td><td><span class="badge-del">Deleted</span></td><td>Within 30 days</td></tr>
+        <tr><td>Images and data from these videos analyzed with Claude (Anthropic, our processor)</td><td><span class="badge-del">Deleted by Anthropic</span></td><td>No later than 30 days after they're sent; up to 2 years if its automated safety filters flag what we sent, along with Claude's answer (7 years for the result of that check)</td></tr>
+        <tr><td>Models trained with these videos</td><td><span class="badge-del">Retrained without them</span></td><td>Within 12 months</td></tr>
+        <tr><td>History of your choices about training our models (proof of your consent), without your name or email</td><td><span class="badge-keep">Retained</span></td><td>5 years after your last choice, or 5 years after your account is deleted if your answer is still "Yes"; removed if you never answered "Yes"</td></tr>
         <tr><td>ELO and ranking</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Training plan</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
-        <tr><td>Billing data</td><td><span class="badge-keep">Retained</span></td><td>30 days (legal obligation)</td></tr>
+        <tr><td>Withdrawal and cancellation requests sent by email, and our replies (contact@linceya.com mailbox)</td><td><span class="badge-keep">Retained</span></td><td>5 years after we receive them</td></tr>
+        <tr><td>Invoices and payment data for a subscription bought on linceya.com (at Stripe, our payment provider)</td><td><span class="badge-keep">Retained</span></td><td>10 years (accounting obligation)</td></tr>
+        <tr><td>Messages sent to contact@linceya.com or through the website's forms</td><td><span class="badge-keep">Retained</span></td><td>12 months after our last reply (or after receipt, with no reply)</td></tr>
       </table>
     </div>
 
@@ -404,7 +415,7 @@ footer {
         <li>Deleting your account does not stop a subscription bought on the App Store or Google Play: cancel it first in the store settings (iPhone: Settings → your name → Subscriptions; Android: Play Store → Payments &amp; subscriptions → Subscriptions)</li>
         <li>A subscription paid on linceya.com is canceled by us when the request is processed</li>
         <li>Deleted data cannot be recovered</li>
-        <li>Billing data is kept for 30 days as required by legal obligations</li>
+        <li>If you subscribed on linceya.com, we keep your withdrawal and cancellation requests sent by email, and our replies, for 5 years in our contact@linceya.com mailbox; and invoices and payment data, at Stripe, for 10 years (see our <a href="/en/privacy-policy.html">privacy policy</a>)</li>
         <li>Processing time: <strong>7 business days</strong></li>
       </ul>
     </div>

@@ -234,6 +234,8 @@ h1 {
 }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+/* Enlaces a las condiciones de venta y a la política (suscripción contratada en linceya.com). */
+.info-list a { color: var(--platinum-light); text-decoration: underline; }
 .badge-del {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--danger); font-weight: 600; font-size: 12px;
@@ -259,6 +261,9 @@ h1 {
 }
 .info-list li:last-child { border-bottom: none; }
 .info-list li strong { color: var(--ink); font-weight: 700; }
+
+/* El punto de un badge en varias líneas («Eliminado por Anthropic») sigue redondo. */
+.badge-del::before, .badge-keep::before { flex-shrink: 0; }
 
 .footer-note {
   margin-top: 32px;
@@ -387,9 +392,15 @@ footer {
         <tr><td>Análisis IA</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
         <tr><td>Vídeos y replay (nuestros servidores de almacenamiento)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 8 días</td></tr>
         <tr><td>Copias de trabajo del análisis Elite (máquinas de Linceya)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 7 días</td></tr>
+        <tr><td>Vídeos guardados para entrenar nuestros modelos (con tu consentimiento)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 30 días</td></tr>
+        <tr><td>Imágenes y datos de estos vídeos analizados con Claude (Anthropic, nuestro encargado del tratamiento)</td><td><span class="badge-del">Eliminado por Anthropic</span></td><td>Como máximo 30 días después de su envío; hasta 2 años si sus filtros de seguridad automáticos marcan el envío, junto con la respuesta de Claude (7 años para el resultado de ese control)</td></tr>
+        <tr><td>Modelos entrenados con estos vídeos</td><td><span class="badge-del">Reentrenados sin ellos</span></td><td>En un plazo de 12 meses</td></tr>
+        <tr><td>Historial de tus elecciones sobre el entrenamiento de nuestros modelos (prueba de tu consentimiento), sin tu nombre ni tu correo</td><td><span class="badge-keep">Conservado</span></td><td>5 años después de tu última elección, o 5 años después de la eliminación de la cuenta si tu respuesta sigue siendo «Sí»; se borra si nunca has respondido «Sí»</td></tr>
         <tr><td>ELO y ranking</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
         <tr><td>Plan de entrenamiento</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
-        <tr><td>Datos de facturación</td><td><span class="badge-keep">Conservado</span></td><td>30 días (obligación legal)</td></tr>
+        <tr><td>Solicitudes de desistimiento y de cancelación enviadas por correo, y nuestras respuestas (buzón contact@linceya.com)</td><td><span class="badge-keep">Conservado</span></td><td>5 años después de recibirlas</td></tr>
+        <tr><td>Facturas y datos de pago de una suscripción contratada en linceya.com (en Stripe, nuestro proveedor de pago)</td><td><span class="badge-keep">Conservado</span></td><td>10 años (obligación contable)</td></tr>
+        <tr><td>Mensajes enviados a contact@linceya.com o mediante los formularios del sitio</td><td><span class="badge-keep">Conservado</span></td><td>12 meses después de nuestra última respuesta (o tras su recepción, sin respuesta)</td></tr>
       </table>
     </div>
 
@@ -404,7 +415,7 @@ footer {
         <li>Eliminar tu cuenta no detiene una suscripción contratada en App Store o Google Play: cancélala antes en los ajustes de la tienda (iPhone: Ajustes → tu nombre → Suscripciones; Android: Play Store → Pagos y suscripciones → Suscripciones)</li>
         <li>Una suscripción pagada en linceya.com la cancelamos nosotros al tramitar la solicitud</li>
         <li>Los datos eliminados no se pueden recuperar</li>
-        <li>Los datos de facturación se conservan 30 días por obligaciones legales</li>
+        <li>Si te suscribiste en linceya.com, conservamos tus solicitudes de desistimiento y de cancelación enviadas por correo, y nuestras respuestas, 5 años en nuestro buzón contact@linceya.com; y las facturas y los datos de pago, en Stripe, 10 años (consulta nuestra <a href="/es/privacy-policy.html">política de privacidad</a>)</li>
         <li>Plazo de procesamiento: <strong>7 días hábiles</strong></li>
       </ul>
     </div>

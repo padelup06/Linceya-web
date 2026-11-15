@@ -252,6 +252,37 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
 }
 
+/* SUBSECCIÓN «Mejora de nuestros modelos» */
+.content h3.sous-titre {
+  font-family: var(--font-anton); font-weight: 400; font-size: 16px;
+  color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase;
+  margin: 28px 0 12px; scroll-margin-top: 110px;
+}
+.content ol.points { list-style: none; padding: 0; margin-bottom: 14px; counter-reset: point; }
+.content ol.points > li {
+  counter-increment: point; position: relative;
+  padding: 6px 0 6px 30px;
+  font-size: 15px; color: var(--graphite); line-height: 1.8;
+}
+.content ol.points > li + li { margin-top: 8px; }
+.content ol.points > li::before {
+  content: counter(point) "."; position: absolute; left: 0; top: 6px;
+  font-family: var(--font-mono); font-size: 12px; line-height: 27px; color: var(--gold);
+}
+.content ol.points > li.encadre {
+  background: rgba(201,167,90,0.05);
+  border: 1px solid rgba(227,197,122,0.3);
+  border-radius: 18px;
+  padding: 22px 22px 22px 52px;
+  margin-top: 18px; scroll-margin-top: 110px;
+}
+.content ol.points > li.encadre::before { left: 22px; top: 22px; }
+.content ol.points strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 720px) {
+  .content ol.points > li.encadre { padding: 18px 16px 18px 42px; }
+  .content ol.points > li.encadre::before { left: 16px; top: 18px; }
+}
+
 .footer-note {
   margin-top: 32px; font-family: var(--font-mono); font-size: 11px;
   color: var(--muted); text-align: center; line-height: 2;
@@ -326,7 +357,7 @@ footer {
   <div class="container">
     <div class="eyebrow">Información legal</div>
     <h1>Política de<br>privacidad</h1>
-    <div class="date">Última actualización: 22 de octubre de 2026</div>
+    <div class="date">Última actualización: 15 de noviembre de 2026</div>
 
     <div class="content">
       <p>Linceya ("nosotros", "nuestro") se compromete a proteger tus datos personales. Esta política explica qué datos recopilamos, cómo los usamos y tus derechos.</p>
@@ -340,7 +371,8 @@ footer {
         <li><strong>Cuenta:</strong> dirección de correo, nombre de usuario, foto de perfil</li>
         <li><strong>Perfil deportivo:</strong> nivel de juego, ciudad/región, posición en pista</li>
         <li><strong>Partidos:</strong> puntuaciones, resultados, historial de partidos</li>
-        <li><strong>Vídeos:</strong> vídeos de partido (imagen y sonido) subidos para el análisis IA y el replay del partido (análisis Elite)</li>
+        <li><strong>Vídeos:</strong> vídeos de partido (imagen y sonido) subidos para el análisis IA y el replay del partido (análisis Elite); si lo aceptas, una copia de los momentos de juego, sin el sonido, para entrenar nuestros modelos</li>
+        <li><strong>Tu elección sobre el entrenamiento de nuestros modelos:</strong> tu respuesta, su fecha, el idioma y la versión del texto que viste, el lugar donde respondiste (una pantalla de la app o un mensaje), la fecha en que cerraste la pregunta sin responder y, si se elimina tu cuenta cuando tu respuesta seguía siendo «Sí», la fecha de su eliminación</li>
         <li><strong>Análisis IA:</strong> puntuaciones, métricas, coaching personalizado</li>
         <li><strong>Suscripción:</strong> estado Premium (gestionado por RevenueCat)</li>
         <li><strong>Identificadores técnicos:</strong> token de notificaciones push (Firebase Cloud Messaging), identificador de instalación, identificador publicitario de Android</li>
@@ -359,21 +391,27 @@ footer {
         <li>Gestionar tu suscripción Premium</li>
         <li>Enviarte notificaciones push sobre tus partidos y análisis</li>
         <li>Detectar y corregir errores (diagnóstico Sentry)</li>
+        <li>Entrenar nuestros modelos con tus vídeos de partido, solo si lo has aceptado</li>
         <li>Mejorar la aplicación</li>
       </ul>
 
       <h2 data-num="04">Compartición de datos</h2>
       <p>Tus datos nunca se venden. Pueden compartirse con los siguientes proveedores:</p>
       <ul>
-        <li><strong>Supabase</strong> — almacenamiento y autenticación (servidores UE)</li>
+        <li><strong>Supabase</strong> — almacenamiento y autenticación (servidores en Zúrich, Suiza; la Comisión Europea reconoce que Suiza ofrece un nivel de protección adecuado. El contrato se firma con Supabase Pte. Ltd, en Singapur: un acceso desde otro país, por ejemplo para el soporte técnico, está regulado por las cláusulas contractuales tipo de la Comisión Europea)</li>
         <li><strong>PowerSync</strong> — sincronización de tus datos (partidos, perfil, análisis) entre nuestros servidores y la app de tu teléfono (servidores UE)</li>
         <li><strong>Google Gemini</strong> — análisis IA de los vídeos (análisis clásico), textos de coaching y planes de entrenamiento (servidores US, transferencia regulada por las Cláusulas Contractuales Tipo de la Comisión Europea)</li>
+        <li><strong>Anthropic</strong> — ayuda, con su IA Claude, a analizar los vídeos guardados para entrenar nuestros modelos (etiquetado, revisión de los conjuntos de datos), solo si quien los subió lo ha aceptado (Anthropic Ireland, Limited, en Irlanda, con un tratamiento en Estados Unidos por Anthropic, PBC; transferencia regulada por las cláusulas contractuales tipo de la Comisión Europea, previstas en el acuerdo de tratamiento de datos de Anthropic)</li>
         <li><strong>Firebase (Google)</strong> — notificaciones push y medición de audiencia, atribución de instalaciones, servidores UE/US</li>
         <li><strong>Sentry</strong> — monitorización de errores (servidores UE)</li>
         <li><strong>PostHog</strong> — analítica de producto: recorrido de suscripción y estadísticas de uso (servidores UE)</li>
         <li><strong>RevenueCat</strong> — gestión de las suscripciones contratadas en la App Store y Google Play</li>
         <li><strong>Stripe</strong> — pago de las suscripciones contratadas en linceya.com</li>
+        <li><strong>Cloudflare</strong> — alojamiento del sitio, envío de formularios y recepción de los correos enviados a contact@linceya.com (red mundial; Cloudflare es una empresa estadounidense: transferencia regulada por el Marco de Privacidad de Datos UE-EE. UU. y las cláusulas contractuales tipo de la Comisión Europea)</li>
+        <li><strong>Resend</strong> — envío de correos (formularios, correos de la app y de una suscripción contratada en linceya.com) (envío desde la Unión Europea, en Irlanda; Resend es una empresa estadounidense: transferencia regulada por el Marco de Privacidad de Datos UE-EE. UU. y las cláusulas contractuales tipo de la Comisión Europea)</li>
       </ul>
+      <p>Puedes obtener una copia de las cláusulas contractuales tipo citadas arriba escribiéndonos a <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</p>
+      <p>Tras su recepción por Cloudflare, los correos enviados a <a href="mailto:contact@linceya.com">contact@linceya.com</a> llegan a una bandeja de entrada de Gmail. En el Espacio Económico Europeo y en Suiza, el proveedor de Gmail es Google Ireland Limited (Irlanda). Google puede tratar estos mensajes en sus servidores de todo el mundo, incluso en Estados Unidos por Google LLC, certificada en el Marco de Privacidad de Datos UE-EE. UU.</p>
 
       <p>Únicamente en el <strong>sitio linceya.com</strong> — estas herramientas
       <strong>no están presentes en la aplicación móvil</strong>:</p>
@@ -387,23 +425,42 @@ footer {
       <p>Las cuatro herramientas publicitarias <strong>no se cargan en absoluto</strong> mientras no aceptes la categoría «marketing» en el banner de consentimiento. Puedes cambiar de opinión en cualquier momento mediante el enlace «Cookies» del pie de página. Además, están desactivadas deliberadamente en las páginas de activación de suscripción, cuya dirección contiene información personal.</p>
 
       <h2 data-num="05">Vídeos de partido</h2>
-      <p>Los vídeos subidos se usan exclusivamente para el análisis IA y, en el análisis Elite, para el replay del partido y los vídeos cortos para compartir (cuando la función de compartir esté disponible) descritos a continuación. En el análisis clásico, se envían a la API de Google Gemini y pueden ser conservados temporalmente por Google según sus condiciones de uso. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo se transfiere allí desde nuestro espacio de almacenamiento para el análisis. En ese caso, el vídeo no se envía a Google Gemini, que solo recibe medidas numéricas de tu partido (número y tipos de golpes, distancia, velocidades, tiempo en la red y en el fondo de la pista, duración analizada), sin ninguna imagen, para redactar tus textos de coaching y tu plan de entrenamiento. Con cada análisis Elite, Linceya también conserva una pequeña imagen (192 píxeles de ancho) de cada jugador del partido, cuatro como máximo, recortada del vídeo en el momento en que mejor se le ve: puede mostrar su cara y su equipación. En la app, estas imágenes te permiten reconocerte e indicar quiénes son los demás jugadores. Se guardan con el análisis en nuestra base de datos (Supabase, servidores UE), se conservan mientras el partido exista en tu cuenta y se borran de esta base de datos al eliminar el partido o tu cuenta. Si has vinculado un entrenador a tu cuenta, también ve tus análisis, incluidas estas imágenes. No compartimos tus vídeos con otros usuarios.</p>
+      <p>Los vídeos subidos se usan para el análisis IA y, en el análisis Elite, para el replay del partido y los vídeos cortos para compartir (cuando la función de compartir esté disponible) descritos a continuación. Solo sirven para entrenar nuestros modelos si lo has aceptado (ver <a href="#modelos">«Mejora de nuestros modelos»</a> más abajo). En el análisis clásico, se envían a la API de Google Gemini y pueden ser conservados temporalmente por Google según sus condiciones de uso. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo se transfiere allí desde nuestro espacio de almacenamiento para el análisis. En ese caso, el vídeo no se envía a Google Gemini, que solo recibe medidas numéricas de tu partido (número y tipos de golpes, distancia, velocidades, tiempo en la red y en el fondo de la pista, duración analizada), sin ninguna imagen, para redactar tus textos de coaching y tu plan de entrenamiento. Con cada análisis Elite, Linceya también conserva una pequeña imagen (192 píxeles de ancho) de cada jugador del partido, cuatro como máximo, recortada del vídeo en el momento en que mejor se le ve: puede mostrar su cara y su equipación. En la app, estas imágenes te permiten reconocerte e indicar quiénes son los demás jugadores. Se guardan con el análisis en nuestra base de datos (Supabase, servidores en Suiza), se conservan mientras el partido exista en tu cuenta y se borran de esta base de datos al eliminar el partido o tu cuenta. Si has vinculado un entrenador a tu cuenta, también ve tus análisis, incluidas estas imágenes. No compartimos tus vídeos con otros usuarios.</p>
       <p><strong>El sonido de tus vídeos.</strong> Los vídeos grabados con la app también contienen el sonido registrado por el micrófono del teléfono, que puede captar voces y conversaciones alrededor de la pista; un vídeo elegido de tu galería conserva el sonido que contenga. Este sonido se sube y se conserva con el vídeo y sus copias de trabajo, nunca por separado, y se elimina con ellos. Un partido grabado con la app también se copia, con su sonido, en la galería de tu teléfono. En Android, a partir de la versión 10, la copia se hace sin pedirte permiso. En iPhone, en iPad y en versiones anteriores de Android, solo se hace con tu permiso, que el dispositivo te pide y que puedes cambiar en sus ajustes. Esta copia pasa a ser un vídeo más de tu galería. Solo tú la gestionas, puede guardarse en línea junto con tu galería si así lo has elegido (por ejemplo con iCloud o Google Fotos), y eliminar el partido o tu cuenta no la borra. En el análisis clásico, el vídeo enviado a Google Gemini es una copia reducida, sin el sonido. El análisis Elite no utiliza el sonido, y los vídeos creados a partir de tu partido para el replay (fragmentos de los puntos que se muestran en la app, vídeos para compartir) no lo incluyen. Un vídeo enviado para evaluar tu nivel lo ve y lo escucha un entrenador de Linceya, que valida ese nivel.</p>
       <p><strong>Replay del partido (análisis Elite).</strong> Tras un análisis Elite, Linceya puede conservar un resumen animado de algunos puntos del partido: tus desplazamientos en la pista (trayectoria, distancia, velocidad) y la ubicación de los demás jugadores, reducida a simples posiciones, sin imagen ni identidad. Este resumen se conserva mientras el partido exista en tu cuenta, y se borra tras la eliminación del partido o de tu cuenta. Cuando la función de compartir está disponible, Linceya también crea, a partir del vídeo de tu partido, vídeos verticales cortos de esos puntos, con sus imágenes de vista previa. Se guardan en un espacio privado reservado a tu cuenta: solo tú puedes descargarlos, desde la app. Se eliminan a los 30 días, o antes si se elimina el partido. <strong>Estos vídeos pueden mostrar a los demás jugadores presentes en la pista: pídeles permiso antes de publicarlos.</strong> Linceya nunca publica estos vídeos por ti: no se comparte nada sin que tú lo decidas.</p>
       <p><strong>Fragmentos de los puntos (análisis Elite).</strong> Cuando esta función está disponible, el replay también muestra, en la app, el vídeo de cada uno de sus puntos (tres como máximo), recortado del vídeo de tu partido, sin el sonido. A diferencia del resumen animado, estos fragmentos son imágenes reales del partido. Muestran la pista y, por tanto, también a los demás jugadores y a las personas alrededor de la pista, que pueden ser reconocibles en ellos. Como los vídeos para compartir, se guardan en el espacio privado reservado a tu cuenta. Solo tú puedes verlos, desde la app. Se eliminan de este espacio a los 30 días, o antes si se elimina el partido o tu cuenta. Para reproducirlos, incluso sin conexión, la app descarga una copia en tu teléfono, en su propio espacio y no en tu galería. Cuando abres un replay, la app borra automáticamente las copias que no se han usado en los últimos 7 días. Eliminar el partido o tu cuenta no las borra de inmediato. Se borran con esta limpieza, o junto con la app cuando la eliminas. Linceya nunca publica estos fragmentos, y la app no permite compartirlos. Solo los vídeos para compartir descritos más arriba, que muestran estos mismos puntos, se pueden compartir, y solo si tú lo decides.</p>
+
+      <h3 class="sous-titre" id="modelos">Mejora de nuestros modelos (solo con tu consentimiento)</h3>
+      <ol class="points">
+        <li>Cuando esta función esté disponible, la app te lo preguntará una sola vez: la primera vez que abras un análisis Elite con una versión de la app que ofrezca esta función, y de nuevo si este texto cambia. La pregunta es: «¿Aceptas que Linceya guarde tus próximos vídeos de partido, sin el sonido, para entrenar sus modelos?». Las dos respuestas, «Sí» y «No, gracias», se presentan de la misma forma y ninguna está elegida de antemano. Tu análisis es el mismo en ambos casos. Guardamos tu respuesta con su fecha, el idioma y la versión del texto que viste. Puedes verla y cambiarla en cualquier momento en Perfil &gt; Ayuda a Linceya a mejorar. Al responder «Sí», confirmas que tienes 16 años o más.</li>
+        <li>Si has respondido «Sí», Linceya guarda, de cada vídeo subido después de tu respuesta y procesado por el análisis Elite: los momentos de juego del vídeo (sin los tiempos muertos), sin el sonido; las posiciones de la bola y de los jugadores, con los puntos del cuerpo, calculadas durante el análisis; los golpes detectados; y si el análisis salió bien o no. Nunca guardamos el sonido, la información de ubicación grabada en el archivo de vídeo ni las descripciones de la ropa de los jugadores. Un vídeo subido antes de tu «Sí», o mientras tu respuesta era «No», nunca se guarda, aunque digas «Sí» después. Un vídeo subido desde una versión de la app que aún no ofrece esta función se guarda de la misma forma si tu respuesta ya era «Sí» antes de que llegara a nuestros servidores; esa versión no muestra el aviso de la pantalla de subida ni «Este vídeo no». Un vídeo solo se guarda si has indicado en la app cuál de los jugadores eres. En la pantalla de subida, «Este vídeo no» rechaza un vídeo: no se guarda, y tu respuesta sigue siendo «Sí» para los siguientes. Tócalo para un partido en el que no juegas o con un jugador menor de 16 años. Si sueles grabar partidos en los que no juegas, responde mejor «No». Nunca se guarda un vídeo de un partido creado desde un partido público de Linceya.</li>
+        <li>Finalidad: enseñar a nuestros modelos a detectar mejor la bola, a los jugadores y los golpes. Estos vídeos nunca sirven para reconocer a una persona, ni para saber quién es, ni para identificarla de un partido a otro. Tampoco sirven para aprender a seguir o distinguir a un jugador por su aspecto o su ropa. No se usan para los modelos incluidos en la app de tu móvil.</li>
+        <li>La copia se guarda en un espacio de almacenamiento privado de Linceya, en Supabase, en servidores de Suiza (Zúrich). Ningún usuario tiene acceso. Para anotar los vídeos y entrenar los modelos, el responsable de Linceya descarga copias en un ordenador de Linceya. Los ve y los anota: indica, a mano o con sus herramientas, dónde están la bola y los jugadores y qué golpes se juegan. Para este trabajo, puede contar con la ayuda de Claude, la IA de Anthropic: Claude puede ver imágenes extraídas de estos vídeos, y los datos calculados con ellas, para ayudar a etiquetarlos y a revisar los conjuntos de datos. Anthropic actúa entonces como encargado del tratamiento de Linceya (Estados Unidos, ver la sección 04), según sus condiciones comerciales, que incluyen su acuerdo de tratamiento de datos. No usa estas imágenes ni estos datos para entrenar sus modelos. Los borra de sus servidores como máximo 30 días después de su envío. Una excepción: si sus filtros de seguridad automáticos marcan un envío, Anthropic puede guardarlo hasta 2 años, junto con la respuesta de Claude, y el resultado de ese control hasta 7 años, para hacer cumplir sus normas de uso. Estos vídeos nunca se publican, ni se venden, ni se alquilan, ni se usan para publicidad, ni se muestran a otros usuarios. Nunca se ceden ni se transmiten a otra empresa para su propio uso (Supabase los almacena y Anthropic ayuda a analizarlos, solo por cuenta nuestra, salvo la excepción de seguridad indicada arriba), ni a ningún otro servicio de IA externo, Google Gemini incluido. Antes de que intervenga cualquier otra persona o empresa (anotador, proveedor de cálculo), actualizaremos esta política.</li>
+        <li>Durante los 7 días siguientes a la copia, no se usa: puedes cambiar de opinión. Entra en un conjunto de datos cuando imágenes o posiciones extraídas de ella sirven para entrenar o evaluar un modelo. Si no entra en ningún conjunto de datos, se borra 6 meses después del partido. Si entra, se borra como máximo 2 años después del partido. Las copias, imágenes y anotaciones extraídas de ella se borran en los 30 días siguientes, salvo la excepción de Anthropic del punto 4.</li>
+        <li>Puedes responder «No» en cualquier momento, con un toque, en Perfil &gt; Ayuda a Linceya a mejorar. También puedes escribirnos (<a href="/es/contact.html">formulario de contacto</a> o <a href="mailto:contact@linceya.com">contact@linceya.com</a>). A partir de entonces no se guarda ningún vídeo, y los ya guardados se borran en un plazo de 30 días, junto con todo lo extraído de ellos, salvo la excepción de Anthropic del punto 4. Los modelos que ya aprendieron con ellos se vuelven a entrenar sin ellos en un plazo de 12 meses; mientras tanto, no se usan en ningún entrenamiento nuevo. Tu «No» no afecta a lo hecho antes. Si se elimina el partido o tu cuenta, estos vídeos y todo lo extraído de ellos también se borran en un plazo de 30 días, con la misma excepción, y nuestros modelos se vuelven a entrenar sin ellos en un plazo de 12 meses.</li>
+        <li>Un vídeo de partido también muestra a los demás jugadores y, a veces, a personas alrededor de la pista. Para ellas, Linceya se basa en su interés legítimo en mejorar sus modelos (RGPD, artículo 6, apartado 1, letra f), con estas garantías: sin sonido, solo los momentos de juego, nunca publicado, acceso reservado al responsable de Linceya y a Claude, la IA de Anthropic, que lo ayuda como encargado del tratamiento (salvo la excepción de Anthropic del punto 4), conservación limitada y ningún reconocimiento de personas.</li>
+        <li class="encadre" id="sales-en-un-video"><strong>¿Sales en un vídeo y no quieres que se guarde?</strong> Estos vídeos nos los envía, desde la app, un jugador de tu partido. Puedes oponerte a que se guarden, tengas o no cuenta en Linceya, sin tener que dar ningún motivo. Un padre o una madre puede hacer la solicitud por su hijo o hija. Usa el <a href="/es/contact.html?asunto=video">formulario de contacto</a> (asunto «Salgo en un vídeo») o escribe a <a href="mailto:contact@linceya.com">contact@linceya.com</a>. Indica la fecha y la hora del partido, el club, la ciudad y la pista, y la ropa que llevabas. Buscamos el vídeo. Si lo encontramos, lo borramos en un plazo de 30 días junto con todo lo extraído de él (salvo la excepción de Anthropic del punto 4), y nuestros modelos se vuelven a entrenar sin él en un plazo de 12 meses. Si no lo encontramos, te lo decimos. Tu oposición vale para el vídeo encontrado. Si juegas a menudo con la misma persona, dínoslo: dejaremos de guardar, durante 2 años, los vídeos enviados desde su cuenta. También puedes preguntarnos si se guarda un vídeo en el que sales, pedir que se borre y presentar una reclamación ante la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>) o la autoridad de protección de datos de tu país. Para esta búsqueda no creamos ningún archivo de caras ni usamos reconocimiento facial.</li>
+      </ol>
 
       <h2 data-num="06">Base legal del tratamiento</h2>
       <p>De conformidad con el RGPD (Artículo 6), tratamos tus datos sobre las siguientes bases:</p>
       <ul>
         <li><strong>Ejecución del contrato</strong> — para prestar el servicio Linceya (análisis IA, ELO, ranking, gestión de suscripción)</li>
-        <li><strong>Consentimiento</strong> — para la geolocalización y notificaciones push (puedes retirar tu consentimiento en cualquier momento en los ajustes de la app)</li>
-        <li><strong>Interés legítimo</strong> — para mejorar la aplicación y prevenir el fraude</li>
-        <li><strong>Obligación legal</strong> — para conservar los datos de facturación</li>
+        <li><strong>Consentimiento</strong> — para la geolocalización, las notificaciones push y, si lo aceptas, la conservación de tus vídeos de partido para entrenar nuestros modelos (puedes retirar tu consentimiento en cualquier momento en la app)</li>
+        <li><strong>Interés legítimo</strong> — para mejorar la aplicación (sin los vídeos) y prevenir el fraude, y, para las demás personas visibles en un vídeo guardado con el consentimiento de quien lo subió, para mejorar nuestros modelos (ver <a href="#modelos">«Mejora de nuestros modelos»</a>)</li>
+        <li><strong>Obligación legal</strong> — para conservar los datos de facturación y la prueba de tu elección sobre el entrenamiento de nuestros modelos (RGPD, artículo 7)</li>
       </ul>
 
       <h2 data-num="07">Conservación de los datos</h2>
-      <p>Tus datos se conservan mientras tu cuenta esté activa. En caso de eliminación de la cuenta, todos tus datos personales se borran en un plazo de 8 días, salvo los datos de facturación que se conservan 30 días por obligaciones legales.</p>
+      <p>Tus datos se conservan mientras tu cuenta esté activa. En caso de eliminación de la cuenta, todos tus datos personales se borran en un plazo de 8 días, con cuatro excepciones: los datos de una suscripción contratada en linceya.com, que se conservan por nuestras obligaciones legales y como prueba del contrato (ver más abajo); los vídeos guardados para entrenar nuestros modelos, y todo lo extraído de ellos, que se borran en un plazo de 30 días (salvo la excepción de Anthropic, ver más abajo); el historial de tus elecciones sobre este uso (respuesta, fecha, idioma, versión del texto, lugar donde respondiste, fecha en que cerraste la pregunta sin responder y, si se elimina tu cuenta cuando tu respuesta seguía siendo «Sí», fecha de su eliminación), que se guarda 5 años después de tu última elección como prueba de tu consentimiento, con el identificador técnico de tu cuenta pero sin tu nombre ni tu correo; y los mensajes que nos has enviado por correo electrónico o mediante los formularios del sitio, que se guardan 12 meses después de nuestra última respuesta o, si no los respondemos, después de su recepción, salvo las solicitudes y los correos relacionados con una suscripción contratada en linceya.com, que se guardan 5 años (ver más abajo). Mientras tu cuenta exista y tu respuesta sea «Sí», este historial nunca se borra. Si se elimina tu cuenta, este historial se guarda 5 años después de la eliminación si tu respuesta seguía siendo «Sí», y se borra si nunca has respondido «Sí».</p>
+      <p>Los mensajes enviados a <a href="mailto:contact@linceya.com">contact@linceya.com</a> o mediante los formularios del sitio se guardan 12 meses después de nuestra última respuesta o, si no los respondemos, después de su recepción, y luego se borran, tengas o no cuenta. Excepción: las solicitudes y los correos relacionados con una suscripción contratada en linceya.com (desistimiento, cancelación y nuestras respuestas) se guardan 5 años, ver más abajo.</p>
+      <p><strong>Suscripción contratada en linceya.com.</strong> Estos datos se conservan por nuestras obligaciones legales y como prueba del contrato, tanto si eliminas tu cuenta como si no:</p>
+      <ul>
+        <li>las solicitudes de desistimiento y de cancelación que nos envías por correo, y nuestras respuestas, se conservan 5 años en nuestro buzón contact@linceya.com;</li>
+        <li>las facturas y los datos de pago (el nombre, el correo y la dirección de facturación indicados al pagar, los importes, el medio de pago) están en Stripe, nuestro proveedor de pago: los conservamos 10 años, como exige la ley para los documentos contables. Eliminar tu cuenta de Linceya no los borra.</li>
+      </ul>
       <p><strong>Archivos de trabajo del análisis Elite.</strong> En las máquinas de Linceya que calculan el análisis Elite, los archivos de trabajo, en particular las posiciones de los jugadores calculadas durante el análisis, se conservan para que puedas, si hace falta, indicar cuál de los jugadores eres tú («¿Cuál eres tú?») o quién es quién entre dos jugadores con equipaciones idénticas. Estos archivos, junto con las copias de trabajo de tu vídeo, se eliminan como máximo 30 días después de su último uso (por ejemplo, un análisis o una corrección), aunque el análisis no se haya completado, y antes si se elimina el partido.</p>
+      <p><strong>Copias guardadas para entrenar nuestros modelos.</strong> Solo se guarda una copia si has aceptado ayudar a entrenar nuestros modelos: 6 meses después del partido si no entra en ningún conjunto de datos, y como máximo 2 años si entra (ver <a href="#modelos">«Mejora de nuestros modelos»</a>). Anthropic borra las imágenes y los datos enviados a Claude, su IA, para analizarlos como máximo 30 días después de su envío. Excepción: un envío marcado por sus filtros de seguridad automáticos puede guardarse hasta 2 años, junto con la respuesta de Claude, y el resultado de ese control hasta 7 años, para hacer cumplir sus normas de uso.</p>
 
       <h2 data-num="08">Tus derechos</h2>
       <ul>
@@ -431,6 +488,7 @@ footer {
               <option value="Corrección de mis datos">Corrección de mis datos</option>
               <option value="Eliminación de mi cuenta">Eliminación de mi cuenta</option>
               <option value="Exportación de mis datos">Exportación de mis datos</option>
+              <option value="Salgo en un vídeo">Salgo en un vídeo</option>
               <option value="Otra solicitud">Otra solicitud</option>
             </select>
           </div>
@@ -441,7 +499,7 @@ footer {
           <button type="submit" class="btn-submit">Enviar mi solicitud</button>
         </form>
         <div class="success-msg" id="successMsg">
-          ✓ Tu solicitud ha sido enviada. Te responderemos en 7 días hábiles.
+          Se abrirá tu app de correo con tu solicitud. Envíala para que nos llegue. Si no, escribe a <a href="mailto:contact@linceya.com">contact@linceya.com</a>.
         </div>
       </div>
 
@@ -450,6 +508,7 @@ footer {
 
       <h2 data-num="10">Menores</h2>
       <p>Linceya no está destinado a menores de 13 años. No recopilamos conscientemente datos de menores de 13 años.</p>
+      <p>Para ayudar a entrenar nuestros modelos, hay que tener 16 años o más. Para un partido con un jugador menor de 16 años, toca «Este vídeo no» en la pantalla de subida: ese vídeo nunca se guarda. También puedes responder «No» en Perfil &gt; Ayuda a Linceya a mejorar antes de subir el vídeo: un vídeo subido mientras tu respuesta es «No» nunca se guarda, aunque vuelvas a decir «Sí» después, y tus vídeos ya guardados se borran. Si tu app no tiene este enlace: escríbenos (sección 08) y borraremos el vídeo. Si vemos, al mirar un vídeo, que un jugador tiene claramente menos de 16 años o que quien lo subió no juega, lo borramos.</p>
 
       <h2 data-num="11">Contacto</h2>
       <p>Para cualquier pregunta sobre esta política, usa el formulario de contacto de arriba o visita <a href="/es/delete-account.html">nuestra página de eliminación de cuenta</a>.</p>
