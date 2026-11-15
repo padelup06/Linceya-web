@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Paiement Elite</title>
-<meta name="description" content="Passez à Linceya Elite : 6 analyses vidéo IA par mois, programme personnalisé, ELO certifié. 44,99€/mois, résiliable à tout moment.">
+<meta name="description" content="Passez à Linceya Elite : 6 analyses vidéo IA par mois, programme personnalisé, ELO certifié. 24,99€/mois, résiliable à tout moment.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/png" href="favicon.png">
@@ -491,13 +491,13 @@ const STRIPE_LOCALE = 'fr';
 // dans handlePurchase, qui vaut désormais toujours « elite ».
 const PRICE_MONTHLY = 'price_1TUlkGJuVIEBTqQ2szOQJ5Vx';
 const PRICE_ANNUAL  = 'price_1TUllIJuVIEBTqQ2osIqKAZM';
-// Élite — coller ici l'identifiant du prix Stripe (44,99 €/mois).
+// Élite — coller ici l'identifiant du prix Stripe (24,99 €/mois).
 // Tant que cette chaîne est vide, l'offre Élite n'est pas rendue : on
 // n'affiche jamais un plan qu'on ne saurait pas encaisser. Le même
 // identifiant doit être connu du serveur :
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 // C'est lui qui fait écrire subscription_tier='elite' au webhook.
-const PRICE_ELITE   = 'price_1TxWlMJuVIEBTqQ27MkpkDSB';
+const PRICE_ELITE   = 'price_1Uc9uHJuVIEBTqQ22itOzoWK';
 const EDGE_URL      = 'https://tykruntstzrskowdvubk.supabase.co/functions/v1/create-stripe-checkout';
 const SUCCESS_URL   = 'https://linceya.com/checkout.html?success=1';
 const CANCEL_URL    = 'https://linceya.com/pricing.html';
@@ -510,7 +510,7 @@ function renderPackages() {
     <div class="pkg-card" data-price="${PRICE_ELITE}" onclick="selectPackage(this)">
       <div class="pkg-label">Mensuel</div>
       <div class="pkg-name">Linceya Élite</div>
-      <div class="pkg-price">44,99 €<span class="period">/ mois</span></div>
+      <div class="pkg-price">24,99 €<span class="period">/ mois</span></div>
       <div class="pkg-save">6 analyses vidéo IA par mois</div>
     </div>
   ` : '';

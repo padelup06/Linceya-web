@@ -352,15 +352,15 @@
 
   // ── Catalogue des paliers vendus ─────────────────────────────────
   // Source de vérité unique des montants remontés aux régies. Ce sont les
-  // prix du paiement WEB (Stripe sur linceya.com) : sur les stores mobiles
-  // l'Élite est à 49,99 €, ce tarif-là n'a rien à faire ici.
+  // prix du paiement WEB (Stripe sur linceya.com) : les prix des stores
+  // mobiles (App Store, Google Play) n'ont rien à faire ici.
   // Les trois checkout.html (fr/en/es) lisent cette table via
   // linceyaTrack.plan() — sinon le prix serait recopié dans quatre fichiers
   // et c'est exactement comme ça qu'un 9,99 € en dur avait survécu partout.
   var PLAN_CATALOG = {
     monthly: { value: 9.99,  label: 'Linceya Premium', ltv: 119.88 },
     annual:  { value: 99.99, label: 'Linceya Premium', ltv: 99.99  },
-    elite:   { value: 44.99, label: 'Linceya Élite',   ltv: 539.88 }
+    elite:   { value: 24.99, label: 'Linceya Élite',   ltv: 299.88 }
   };
 
   // Palier inconnu (lien ancien, paramètre tronqué, visiteur qui bricole
@@ -412,7 +412,7 @@
     },
     checkoutClick: function(plan) {
       // Le ternaire précédent ne connaissait que 'annual' : tout le reste,
-      // Élite compris, était valorisé 9,99 € au lieu de 44,99 €. La table
+      // Élite compris, était valorisé 9,99 € au lieu de son prix. La table
       // évite que l'ajout d'un palier repasse en silence au tarif mensuel.
       // TOUT vient de la table, pas seulement le montant. Concatener
       // l argument brut dans l identifiant produit — comme le faisait ce code

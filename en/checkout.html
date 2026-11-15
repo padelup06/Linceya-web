@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Elite Checkout</title>
-<meta name="description" content="Go Linceya Elite: 6 AI video analyses per month, personalized plan, certified ELO. €44.99/month, cancel anytime.">
+<meta name="description" content="Go Linceya Elite: 6 AI video analyses per month, personalized plan, certified ELO. €24.99/month, cancel anytime.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -466,13 +466,13 @@ const STRIPE_LOCALE = 'en';
 // dans handlePurchase, qui vaut désormais toujours « elite ».
 const PRICE_MONTHLY = 'price_1TUlkGJuVIEBTqQ2szOQJ5Vx';
 const PRICE_ANNUAL  = 'price_1TUllIJuVIEBTqQ2osIqKAZM';
-// Elite — paste the Stripe price id here (€44.99/month).
+// Elite — paste the Stripe price id here (€24.99/month).
 // While this string is empty, the Elite offer is not rendered: we never
 // display a plan we wouldn't be able to charge. The same id must be known
 // to the server:
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 // That's what makes the webhook write subscription_tier='elite'.
-const PRICE_ELITE   = 'price_1TxWlMJuVIEBTqQ27MkpkDSB';
+const PRICE_ELITE   = 'price_1Uc9uHJuVIEBTqQ22itOzoWK';
 const EDGE_URL      = 'https://tykruntstzrskowdvubk.supabase.co/functions/v1/create-stripe-checkout';
 const SUCCESS_URL   = 'https://linceya.com/en/checkout.html?success=1';
 const CANCEL_URL    = 'https://linceya.com/en/pricing.html';
@@ -485,7 +485,7 @@ function renderPackages() {
     <div class="pkg-card" data-price="${PRICE_ELITE}" onclick="selectPackage(this)">
       <div class="pkg-label">Monthly</div>
       <div class="pkg-name">Linceya Elite</div>
-      <div class="pkg-price">44.99 €<span class="period">/ month</span></div>
+      <div class="pkg-price">24.99 €<span class="period">/ month</span></div>
       <div class="pkg-save">6 AI video analyses per month</div>
     </div>
   ` : '';
