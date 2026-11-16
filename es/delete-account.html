@@ -262,6 +262,9 @@ h1 {
 .info-list li:last-child { border-bottom: none; }
 .info-list li strong { color: var(--ink); font-weight: 700; }
 
+/* El punto de un badge en varias líneas («Eliminado por Anthropic») sigue redondo. */
+.badge-del::before, .badge-keep::before { flex-shrink: 0; }
+
 .footer-note {
   margin-top: 32px;
   font-family: var(--font-mono); font-size: 11px;
@@ -389,6 +392,10 @@ footer {
         <tr><td>Análisis IA</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
         <tr><td>Vídeos y replay (nuestros servidores de almacenamiento)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 8 días</td></tr>
         <tr><td>Copias de trabajo del análisis Elite (máquinas de Linceya)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 7 días</td></tr>
+        <tr><td>Vídeos guardados para entrenar nuestros modelos (con tu consentimiento)</td><td><span class="badge-del">Eliminado</span></td><td>En un plazo de 30 días</td></tr>
+        <tr><td>Imágenes y datos de estos vídeos analizados con Claude (Anthropic, nuestro encargado del tratamiento)</td><td><span class="badge-del">Eliminado por Anthropic</span></td><td>Como máximo 30 días después de su envío; hasta 2 años si sus filtros de seguridad automáticos marcan el envío, junto con la respuesta de Claude (7 años para el resultado de ese control)</td></tr>
+        <tr><td>Modelos entrenados con estos vídeos</td><td><span class="badge-del">Reentrenados sin ellos</span></td><td>En un plazo de 12 meses</td></tr>
+        <tr><td>Historial de tus elecciones sobre el entrenamiento de nuestros modelos (prueba de tu consentimiento), sin tu nombre ni tu correo</td><td><span class="badge-keep">Conservado</span></td><td>5 años después de tu última elección, o 5 años después de la eliminación de la cuenta si tu respuesta sigue siendo «Sí»; se borra si nunca has respondido «Sí»</td></tr>
         <tr><td>ELO y ranking</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
         <tr><td>Plan de entrenamiento</td><td><span class="badge-del">Eliminado</span></td><td>Inmediato</td></tr>
         <tr><td>Suscripción contratada en linceya.com (parte no utilizada reembolsada en proporción)</td><td><span class="badge-del">Terminada</span></td><td>Al tramitar la solicitud</td></tr>
@@ -396,6 +403,7 @@ footer {
         <tr><td>Solicitudes de desistimiento y de cancelación, sin tu nombre, tu dirección ni tu mensaje</td><td><span class="badge-keep">Conservado</span></td><td>5 años después de recibirlas</td></tr>
         <tr><td>Copias de los correos sobre tus solicitudes y sobre el fin de tu suscripción (buzón contact@linceya.com)</td><td><span class="badge-keep">Conservado</span></td><td>5 años</td></tr>
         <tr><td>Facturas y datos de pago de una suscripción contratada en linceya.com (en Stripe, nuestro proveedor de pago)</td><td><span class="badge-keep">Conservado</span></td><td>10 años (obligación contable)</td></tr>
+        <tr><td>Mensajes enviados a contact@linceya.com o mediante los formularios del sitio</td><td><span class="badge-keep">Conservado</span></td><td>12 meses después de nuestra última respuesta (o tras su recepción, sin respuesta)</td></tr>
       </table>
     </div>
 

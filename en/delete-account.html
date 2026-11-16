@@ -262,6 +262,9 @@ h1 {
 .info-list li:last-child { border-bottom: none; }
 .info-list li strong { color: var(--ink); font-weight: 700; }
 
+/* A badge's dot stays round when the badge wraps ("Deleted by Anthropic"). */
+.badge-del::before, .badge-keep::before { flex-shrink: 0; }
+
 .footer-note {
   margin-top: 32px;
   font-family: var(--font-mono); font-size: 11px;
@@ -389,6 +392,10 @@ footer {
         <tr><td>AI analyses</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Videos and replay (our storage servers)</td><td><span class="badge-del">Deleted</span></td><td>Within 8 days</td></tr>
         <tr><td>Elite analysis working copies (Linceya machines)</td><td><span class="badge-del">Deleted</span></td><td>Within 7 days</td></tr>
+        <tr><td>Videos kept to train our models (with your consent)</td><td><span class="badge-del">Deleted</span></td><td>Within 30 days</td></tr>
+        <tr><td>Images and data from these videos analyzed with Claude (Anthropic, our processor)</td><td><span class="badge-del">Deleted by Anthropic</span></td><td>No later than 30 days after they're sent; up to 2 years if its automated safety filters flag what we sent, along with Claude's answer (7 years for the result of that check)</td></tr>
+        <tr><td>Models trained with these videos</td><td><span class="badge-del">Retrained without them</span></td><td>Within 12 months</td></tr>
+        <tr><td>History of your choices about training our models (proof of your consent), without your name or email</td><td><span class="badge-keep">Retained</span></td><td>5 years after your last choice, or 5 years after your account is deleted if your answer is still "Yes"; removed if you never answered "Yes"</td></tr>
         <tr><td>ELO and ranking</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Training plan</td><td><span class="badge-del">Deleted</span></td><td>Immediate</td></tr>
         <tr><td>Subscription bought on linceya.com (unused part refunded in proportion)</td><td><span class="badge-del">Ended</span></td><td>When the request is processed</td></tr>
@@ -396,6 +403,7 @@ footer {
         <tr><td>Withdrawal and cancellation requests, without your name, your address or your message</td><td><span class="badge-keep">Retained</span></td><td>5 years after we receive them</td></tr>
         <tr><td>Copies of the emails about your requests and the end of your subscription (contact@linceya.com mailbox)</td><td><span class="badge-keep">Retained</span></td><td>5 years</td></tr>
         <tr><td>Invoices and payment data for a subscription bought on linceya.com (at Stripe, our payment provider)</td><td><span class="badge-keep">Retained</span></td><td>10 years (accounting obligation)</td></tr>
+        <tr><td>Messages sent to contact@linceya.com or through the website's forms</td><td><span class="badge-keep">Retained</span></td><td>12 months after our last reply (or after receipt, with no reply)</td></tr>
       </table>
     </div>
 

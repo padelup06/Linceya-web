@@ -10,7 +10,7 @@
  *
  * Custom events exposés :
  *   window.linceyaTrack.appDownloadClick(store)   // 'apple' | 'google'
- *   window.linceyaTrack.checkoutClick(plan)       // 'elite' | 'elite_annual' (anciens : 'monthly' | 'annual')
+ *   window.linceyaTrack.checkoutClick(plan)       // 'elite' | 'elite_annual'
  *   window.linceyaTrack.contactSubmit()
  *   window.linceyaTrack.plan(plan)                // descripteur du palier
  *   window.linceyaTrack.adConversion(kind, info, txnId)  // 'checkout' | 'purchase' | 'trial'
@@ -390,19 +390,17 @@
   // Les trois checkout.html (fr/en/es) lisent cette table via
   // linceyaTrack.plan() — sinon le prix serait recopié dans quatre fichiers
   // et c'est exactement comme ça qu'un 9,99 € en dur avait survécu partout.
-  // monthly et annual : l'ancien Premium (retiré de la vente le 30/10/2026),
-  // gardés pour une URL de succès ancienne. L'annuel Élite a sa propre clé,
-  // elite_annual, jamais « annual » : sinon la page de succès dirait PREMIUM
-  // et l'achat serait compté à 99,99 €.
+  // L'annuel Élite a sa propre clé, elite_annual. Les clés de l'ancien Premium
+  // (monthly, annual : retiré de la vente le 30/10/2026) sont sorties de la
+  // table le 15/11/2026 : une URL de succès qui les porte encore retombe sur
+  // le mensuel Élite, comme un palier inconnu.
   var PLAN_CATALOG = {
-    monthly:      { value: 9.99,  label: 'Linceya Premium', ltv: 119.88 },
-    annual:       { value: 99.99, label: 'Linceya Premium', ltv: 99.99  },
     elite:        { value: 24.99, label: 'Linceya Élite',   ltv: 299.88 },
     elite_annual: { value: 199,   label: 'Linceya Élite',   ltv: 199    }
   };
 
   // Palier inconnu (lien ancien, paramètre tronqué, visiteur qui bricole
-  // l'URL) → on retombe sur le mensuel, le moins cher : mieux vaut
+  // l'URL) → on retombe sur le mensuel Élite, le moins cher : mieux vaut
   // sous-estimer une conversion que gonfler le CA remonté aux régies.
   // contentId garde le préfixe historique 'linceya_premium_' pour que le
   // begin_checkout et le purchase d'un même achat portent le même
@@ -412,7 +410,7 @@
     // et ?plan=toString ferait remonter une méthode héritée d'Object — donc
     // un montant undefined envoyé aux régies.
     var known = Object.prototype.hasOwnProperty.call(PLAN_CATALOG, plan);
-    var key = known ? plan : 'monthly';
+    var key = known ? plan : 'elite';
     var d = PLAN_CATALOG[key];
     return {
       key: key,
@@ -465,7 +463,7 @@
       // funnel qui ne se recolle jamais.
       var info = planInfo(plan);
       gtag('event', 'begin_checkout', {
-        'plan': info.key,         // 'elite', 'elite_annual' (ou ancien 'monthly' / 'annual'), normalise
+        'plan': info.key,         // 'elite' ou 'elite_annual', normalise
         'currency': 'EUR',
         'value': info.value
       });

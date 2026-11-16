@@ -161,7 +161,7 @@
       "name": "¿Se almacenan mis vídeos?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tus vídeos se usan exclusivamente para el análisis IA y, en el análisis Elite, para el replay de tu partido y los vídeos cortos que puedes decidir compartir (cuando la función de compartir esté disponible). En el análisis clásico, se envían a nuestro proveedor de análisis, Google Gemini. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo no se envía a Gemini (ver la política de privacidad). Tus vídeos nunca se venden ni se comparten con otros usuarios, y puedes eliminar tus datos en cualquier momento desde la app o a través de nuestra página de eliminación de cuenta."
+        "text": "Tus vídeos se usan para el análisis IA y, en el análisis Elite, para el replay de tu partido y los vídeos cortos que puedes decidir compartir (cuando la función de compartir esté disponible). Solo sirven para entrenar nuestros modelos si lo has aceptado en la app. En ese caso, Claude, la IA de Anthropic, puede ayudar a etiquetarlos. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo no se envía a Gemini (ver la política de privacidad). Tus vídeos nunca se venden ni se comparten con otros usuarios, y puedes eliminar tus datos en cualquier momento desde la app o a través de nuestra página de eliminación de cuenta."
       }
     },
     {
@@ -818,10 +818,6 @@ section { padding: 64px 48px; position: relative; }
   margin-bottom: 18px;
   font-size: 22px;
 }
-.feature-card.premium .feature-badge {
-  background: linear-gradient(135deg, rgba(180,138,74,0.18), rgba(180,138,74,0.06));
-  border-color: rgba(180,138,74,0.35);
-}
 .feature-num {
   position: absolute; top: 18px; right: 20px;
   font-family: var(--font-mono); font-size: 10px;
@@ -867,11 +863,6 @@ section { padding: 64px 48px; position: relative; }
   position: relative;
 }
 .mini-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.mini-card.premium {
-  border-color: rgba(227,197,122,0.55);
-  background: linear-gradient(180deg, #1D1911 0%, var(--carbon) 100%);
-  box-shadow: 0 0 44px rgba(201,167,90,0.14), inset 0 1px 0 rgba(255,255,255,0.08);
-}
 .mini-card.elite {
   border-color: rgba(227,197,122,0.35);
   background: linear-gradient(180deg, var(--ink-surface) 0%, #0A1428 100%);
@@ -937,7 +928,6 @@ section { padding: 64px 48px; position: relative; }
   background: var(--gold); flex-shrink: 0;
   box-shadow: 0 0 8px rgba(201,167,90,0.5);
 }
-.mini-card.premium .mini-feat .dot { background: var(--platinum); }
 .mini-feat.off .dot { background: var(--stroke-strong); }
 .mini-feat.off { color: var(--muted-light); text-decoration: line-through; opacity: 0.7; }
 .pricing-cta { margin-top: 44px; }
@@ -2252,7 +2242,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q" data-faq><span>¿Se almacenan mis vídeos?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Tus vídeos se usan exclusivamente para el análisis IA y, en el análisis Elite, para el replay de tu partido y los vídeos cortos que puedes decidir compartir (cuando la función de compartir esté disponible). En el análisis clásico, se envían a nuestro proveedor de análisis, Google Gemini. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo no se envía a Gemini (ver la política de privacidad). Tus vídeos nunca se venden ni se comparten con otros usuarios, y puedes eliminar tus datos en cualquier momento desde la app o a través de nuestra página de eliminación de cuenta.</div>
+      <div class="faq-a">Tus vídeos se usan para el análisis IA y, en el análisis Elite, para el replay de tu partido y los vídeos cortos que puedes decidir compartir (cuando la función de compartir esté disponible). Solo sirven para entrenar nuestros modelos si lo has aceptado en la app. En ese caso, Claude, la IA de Anthropic, puede ayudar a etiquetarlos. El análisis Elite se calcula en máquinas gestionadas por Linceya: el vídeo no se envía a Gemini (ver la política de privacidad). Tus vídeos nunca se venden ni se comparten con otros usuarios, y puedes eliminar tus datos en cualquier momento desde la app o a través de nuestra página de eliminación de cuenta.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q" data-faq><span>¿Disponible en iPhone?</span><span class="faq-icon">+</span></button>

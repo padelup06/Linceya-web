@@ -246,6 +246,10 @@ h1 .accent {
 }
 .form-group select option { background: var(--carbon-high); color: var(--ink); }
 .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.55; }
+/* Help for the "I'm in a video" subject, shown only when it is chosen */
+.form-hint { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.form-hint[hidden] { display: none; }
+.form-hint p + p { margin-top: 6px; }
 
 .row { display: flex; gap: 14px; }
 .row .form-group { flex: 1; }
@@ -425,16 +429,21 @@ footer {
             <option value="" disabled selected>Choose a subject...</option>
             <option value="Bug / Technical issue">Bug / Technical issue</option>
             <option value="Question about AI analysis">Question about AI analysis</option>
-            <option value="Premium subscription">Subscription</option>
+            <option value="Subscription">Subscription</option>
             <option value="Account deletion">Account deletion</option>
             <option value="Improvement suggestion">Improvement suggestion</option>
             <option value="Partnership / Club">Partnership / Club</option>
+            <option value="I'm in a video (opt out)">I'm in a video (opt out)</option>
             <option value="Other">Other</option>
           </select>
         </div>
         <div class="form-group">
           <label>Message *</label>
           <textarea id="message" name="message" placeholder="Describe your request in detail..." required></textarea>
+          <div class="form-hint" id="aideVideo" hidden>
+            <p>Date and time of the match, club, city and court, and what you were wearing (colors). Let us know if you have a Linceya account, and if you're writing for your child.</p>
+            <p>No photos, please. We don't need one to find the video.</p>
+          </div>
         </div>
         <!-- Honeypot anti-bot — caché aux humains, rempli par les bots -->
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
@@ -486,6 +495,29 @@ footer {
 // Configuré sur la route linceya.com/api/contact (Proxied + Worker linceya-contact-form).
 var CONTACT_ENDPOINT = '/api/contact';
 
+// "I'm in a video" subject: preselected by the privacy policy link
+// (?subject=video; ?sujet= and ?asunto= too, after a language redirect),
+// with help for the message field when it is chosen.
+(function() {
+  var SUJET_VIDEO = "I'm in a video (opt out)";
+  var select = document.getElementById('subject');
+  var message = document.getElementById('message');
+  var aide = document.getElementById('aideVideo');
+  function majAide() {
+    var video = select.value === SUJET_VIDEO;
+    aide.hidden = !video;
+    if (video) message.setAttribute('aria-describedby', 'aideVideo');
+    else message.removeAttribute('aria-describedby');
+  }
+  select.addEventListener('change', majAide);
+  try {
+    var params = new URLSearchParams(location.search);
+    var sujet = params.get('subject') || params.get('sujet') || params.get('asunto');
+    if (sujet === 'video') select.value = SUJET_VIDEO;
+  } catch (e) {}
+  majAide();
+})();
+
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
@@ -521,7 +553,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successCard').style.display = 'block';
   } catch (err) {
-    errBox.textContent = err.message || 'Send failed, please try again.';
+    var texteErreur = err.message || 'Send failed, please try again.';
+    if (!/[.!?…]$/.test(texteErreur)) texteErreur += '.';
+    errBox.textContent = texteErreur + ' You can also write to us at contact@linceya.com.';
     errBox.style.display = 'block';
     btn.disabled = false;
     btn.innerHTML = originalLabel;

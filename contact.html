@@ -50,10 +50,11 @@
     var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
     if (lng.indexOf('en') === 0) {
       localStorage.setItem('lng_seen', '1');
-      location.replace('/en/contact.html');
+      // Le sujet présélectionné (?sujet=video, lien de la politique) suit la redirection.
+      location.replace('/en/contact.html' + location.search);
     } else if (lng.indexOf('es') === 0) {
       localStorage.setItem('lng_seen', '1');
-      location.replace('/es/contact.html');
+      location.replace('/es/contact.html' + location.search);
     } else {
       localStorage.setItem('lng_seen', '1');
     }
@@ -271,6 +272,10 @@ h1 .accent {
 }
 .form-group select option { background: var(--carbon-high); color: var(--ink); }
 .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.55; }
+/* Aide du sujet « Je suis sur une vidéo », affichée seulement quand il est choisi */
+.form-hint { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.form-hint[hidden] { display: none; }
+.form-hint p + p { margin-top: 6px; }
 
 .row { display: flex; gap: 14px; }
 .row .form-group { flex: 1; }
@@ -450,16 +455,21 @@ footer {
             <option value="" disabled selected>Choisir un sujet...</option>
             <option value="Bug / Problème technique">Bug / Problème technique</option>
             <option value="Question sur l'analyse IA">Question sur l'analyse IA</option>
-            <option value="Abonnement Premium">Abonnement</option>
+            <option value="Abonnement">Abonnement</option>
             <option value="Suppression de compte">Suppression de compte</option>
             <option value="Suggestion d'amélioration">Suggestion d'amélioration</option>
             <option value="Partenariat / Club">Partenariat / Club</option>
+            <option value="Je suis sur une vidéo (refus)">Je suis sur une vidéo (refus)</option>
             <option value="Autre">Autre</option>
           </select>
         </div>
         <div class="form-group">
           <label>Message *</label>
           <textarea id="message" name="message" placeholder="Décrivez votre demande en détail..." required></textarea>
+          <div class="form-hint" id="aideVideo" hidden>
+            <p>Date et heure du match, club, ville et terrain, et votre tenue (couleurs). Dites-nous si vous avez un compte Linceya, et si vous écrivez pour votre enfant.</p>
+            <p>Pas de photo, s'il vous plaît&nbsp;: nous n'en avons pas besoin pour retrouver la vidéo.</p>
+          </div>
         </div>
         <!-- Honeypot anti-bot — caché aux humains, rempli par les bots -->
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
@@ -511,6 +521,29 @@ footer {
 // Configuré sur la route linceya.com/api/contact (Proxied + Worker linceya-contact-form).
 var CONTACT_ENDPOINT = '/api/contact';
 
+// Sujet « Je suis sur une vidéo » : présélectionné par le lien de la politique
+// de confidentialité (?sujet=video ; ?subject= et ?asunto= aussi, après un
+// changement de langue), et aide du champ message quand il est choisi.
+(function() {
+  var SUJET_VIDEO = 'Je suis sur une vidéo (refus)';
+  var select = document.getElementById('subject');
+  var message = document.getElementById('message');
+  var aide = document.getElementById('aideVideo');
+  function majAide() {
+    var video = select.value === SUJET_VIDEO;
+    aide.hidden = !video;
+    if (video) message.setAttribute('aria-describedby', 'aideVideo');
+    else message.removeAttribute('aria-describedby');
+  }
+  select.addEventListener('change', majAide);
+  try {
+    var params = new URLSearchParams(location.search);
+    var sujet = params.get('sujet') || params.get('subject') || params.get('asunto');
+    if (sujet === 'video') select.value = SUJET_VIDEO;
+  } catch (e) {}
+  majAide();
+})();
+
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
@@ -546,7 +579,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successCard').style.display = 'block';
   } catch (err) {
-    errBox.textContent = err.message || 'Erreur d\'envoi, veuillez réessayer.';
+    var texteErreur = err.message || 'Erreur d\'envoi, veuillez réessayer.';
+    if (!/[.!?…]$/.test(texteErreur)) texteErreur += '.';
+    errBox.textContent = texteErreur + ' Vous pouvez aussi nous écrire à contact@linceya.com.';
     errBox.style.display = 'block';
     btn.disabled = false;
     btn.innerHTML = originalLabel;

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
   <!--
-    Page d'activation Premium — pont entre le mail Stripe et l'app mobile.
+    Page d'activation (abonnement Elite acheté sur le site) — pont entre le mail Stripe et l'app mobile.
 
     URL attendue : https://linceya.com/activate?email=X&code=Y
                    (où X = email du paiement Stripe, Y = code à 6 chiffres)
@@ -23,7 +23,7 @@
        page de fallback n'est jamais montrée.
     2. Si l'app n'est pas installée (ou si on est sur desktop), la page reste
        affichée avec le code en gros + des liens vers l'App Store / Play Store.
-       L'user installe l'app, l'ouvre, va sur "J'ai un code Premium" et tape
+       L'user installe l'app, l'ouvre, va sur "J'ai un code d'activation" et tape
        le code manuellement.
 
     Pourquoi cette page existe : Gmail Android (et de plus en plus de clients
@@ -263,7 +263,7 @@
 
     <p class="help">
       <strong>L'app ne s'ouvre pas ?</strong><br/>
-      Télécharge Linceya, ouvre l'app, tape sur <em>« J'ai un code Premium »</em> et saisis le code ci-dessus.
+      Télécharge Linceya, ouvre l'app, tape sur <em>« J'ai un code d'activation »</em> et saisis le code ci-dessus.
     </p>
 
     <!--

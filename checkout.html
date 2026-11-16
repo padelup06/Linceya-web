@@ -297,6 +297,8 @@ nav::before {
 }
 .paywall-terms a { color: var(--platinum-light); text-decoration: none; font-weight: 500; }
 .paywall-terms a:hover { text-decoration: underline; }
+.paywall-mediateur a { color: var(--platinum-light); text-decoration: none; font-weight: 500; }
+.paywall-mediateur a:hover { text-decoration: underline; }
 
 /* LOADING */
 .loading { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
@@ -500,13 +502,13 @@ footer {
           Les <a href="https://linceya.com/terms-of-sale.html" target="_blank" rel="noopener noreferrer">conditions générales de vente</a> s'appliquent&nbsp;: vous les accepterez sur la page de paiement. Vous pourrez renoncer au contrat pendant 14 jours&nbsp;: <a href="https://linceya.com/withdraw.html" target="_blank" rel="noopener noreferrer">Renoncer au contrat ici</a>.
           <span id="paywall-renouvellement">Votre abonnement se renouvelle automatiquement chaque mois. Résiliable à tout moment.</span>
         </div>
-        <div class="paywall-moyens paywall-mediateur">Médiateur de la consommation&nbsp;: <span class="a-remplir">[NOM ET SITE DU MEDIATEUR, A FOURNIR PAR MAX (F1)]</span>.</div>
+        <div class="paywall-moyens paywall-mediateur">Médiateur de la consommation&nbsp;: Linceya n'en a pas encore désigné. Réclamations&nbsp;: <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</div>
       </div>
 
       <div id="success" style="display:none;" class="success-msg">
         <div class="success-icon">✓</div>
         <div class="success-title">BIENVENUE DANS<br>LINCEYA <span class="accent" id="success-tier">ÉLITE</span></div>
-        <div class="success-sub" id="success-sub"><strong>Votre abonnement est actif.</strong> Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code Premium » sur l'écran de connexion, puis saisissez-le.</div>
+        <div class="success-sub" id="success-sub"><strong>Votre abonnement est actif.</strong> Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code d'activation » sur l'écran de connexion, puis saisissez-le.</div>
         <div class="success-sub success-contrat" id="success-contrat">Nous vous envoyons par e-mail la confirmation de votre abonnement, avec vos conditions de vente. Vous avez 14 jours pour renoncer au contrat&nbsp;: <a href="https://linceya.com/withdraw.html">Renoncer au contrat ici</a>.</div>
       </div>
     </div>
@@ -559,12 +561,12 @@ const STRIPE_LOCALE = 'fr';
 // de vente n'est pas en ligne (décision de Max du 14/11/2026) ; le jour où il
 // est rempli, mettre aussi l'offre annuelle dans le JSON-LD des pages de prix
 // et `site_an` dans le bloc faits-machine du drip.
-// À REMPLIR le jour J : les deux nouveaux prix Stripe n'existent pas encore.
+// Mensuel : le prix en ligne depuis le 15/11/2026 (A10). Annuel : à remplir en C8 ter.
 // Le serveur doit connaître les mêmes identifiants :
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 //   supabase secrets set STRIPE_PRICE_ELITE_ANNUEL=price_yyy
 // Ce sont eux qui font écrire subscription_tier='elite' au webhook.
-const PRICE_ELITE        = '';
+const PRICE_ELITE        = 'price_1Uc9uHJuVIEBTqQ22itOzoWK';
 const PRICE_ELITE_ANNUAL = '';
 // Montants affichés sur les cartes : ceux des deux prix Stripe ci-dessus.
 // L'équivalent par mois et l'économie de l'annuel en sont tirés, jamais
@@ -948,7 +950,7 @@ function trackPurchase() {
     // plan serait commune à tous les acheteurs du même palier — GA4 les
     // fusionnerait alors en un seul achat et effacerait du chiffre d'affaires.
     // Cle UNIQUE, volontairement pas indexee sur le palier : une URL de
-    // succes rejouee sans ?plan= retombe sur « monthly » et aurait donc sa
+    // succes rejouee sans ?plan= retombe sur le mensuel et aurait donc sa
     // propre cle, ce qui laissait recompter un achat annuel a 9,99 €. On ne
     // peut acheter qu une fois par session de toute facon.
     const key = 'linceya_purchase_tracked';
@@ -1010,15 +1012,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
 
-  // Seule l'Élite est vendue depuis le 30/10/2026 : le titre dit Élite. Un
-  // paiement Premium commencé juste avant (lien Stripe encore ouvert) revient
-  // avec ?plan=monthly ou annual et garde son nom.
-    const planRetour = new URLSearchParams(window.location.search).get('plan');
-    if (planRetour === 'monthly' || planRetour === 'annual') {
-      const tierEl = document.getElementById('success-tier');
-      if (tierEl) tierEl.textContent = 'PREMIUM';
-    }
-
     // essai=1 : posé par le serveur quand la session commence par le mois
     // gratuit. Aucune date ici (D13) : elle est dans l'e-mail de confirmation.
     const connuRetour = new URLSearchParams(window.location.search).get('known') === '1';
@@ -1028,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', () => {
         + "Sa date de fin est dans l'e-mail de confirmation : votre premier paiement aura lieu ce jour-là, sauf résiliation avant. "
         + (connuRetour
           ? "Connectez-vous simplement à l'app avec cette adresse : il n'y a rien d'autre à faire."
-          : "Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code Premium » sur l'écran de connexion, puis saisissez-le.");
+          : "Si vous avez déjà un compte Linceya avec cette adresse, connectez-vous simplement dans l'app : il n'y a rien d'autre à faire. Sinon, vous allez recevoir un code d'activation à 6 chiffres — téléchargez l'app, touchez « J'ai un code d'activation » sur l'écran de connexion, puis saisissez-le.");
       const contratEl = document.getElementById('success-contrat');
       if (contratEl) contratEl.innerHTML = "Nous vous envoyons par e-mail la confirmation de votre abonnement, avec vos conditions de vente. "
         + "Pour ne rien payer, résiliez avant la fin du mois gratuit : <a href=\"https://linceya.com/cancel-subscription.html\">Résilier votre contrat</a>. "

@@ -287,6 +287,9 @@ h1 {
 .info-list li:last-child { border-bottom: none; }
 .info-list li strong { color: var(--ink); font-weight: 700; }
 
+/* La puce d'un badge sur plusieurs lignes (« Supprimé par Anthropic ») reste ronde. */
+.badge-del::before, .badge-keep::before { flex-shrink: 0; }
+
 .footer-note {
   margin-top: 32px;
   font-family: var(--font-mono); font-size: 11px;
@@ -414,6 +417,10 @@ footer {
         <tr><td>Analyses IA</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
         <tr><td>Vidéos et replay (nos serveurs de stockage)</td><td><span class="badge-del">Supprimé</span></td><td>Sous 8 jours</td></tr>
         <tr><td>Copies de travail de l'analyse Elite (machines de Linceya)</td><td><span class="badge-del">Supprimé</span></td><td>Sous 7 jours</td></tr>
+        <tr><td>Vidéos gardées pour entraîner nos modèles (avec votre accord)</td><td><span class="badge-del">Supprimé</span></td><td>Sous 30 jours</td></tr>
+        <tr><td>Images et données de ces vidéos analysées avec Claude (Anthropic, notre sous-traitant)</td><td><span class="badge-del">Supprimé par Anthropic</span></td><td>Au plus tard 30 jours après leur envoi&nbsp;; jusqu'à 2 ans si ses filtres de sécurité automatiques signalent l'envoi, avec la réponse de Claude (7 ans pour le résultat de ce contrôle)</td></tr>
+        <tr><td>Modèles entraînés avec ces vidéos</td><td><span class="badge-del">Réentraînés sans elles</span></td><td>Sous 12 mois</td></tr>
+        <tr><td>Historique de vos choix sur l'entraînement de nos modèles (preuve de votre accord), sans votre nom ni votre e-mail</td><td><span class="badge-keep">Conservé</span></td><td>5 ans après votre dernier choix, ou 5 ans après la suppression du compte si votre réponse est encore «&nbsp;Oui&nbsp;»&nbsp;; effacé si vous n'avez jamais répondu «&nbsp;Oui&nbsp;»</td></tr>
         <tr><td>ELO et classement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
         <tr><td>Plan d'entraînement</td><td><span class="badge-del">Supprimé</span></td><td>Immédiat</td></tr>
         <tr><td>Abonnement pris sur linceya.com (part non utilisée remboursée au prorata)</td><td><span class="badge-del">Arrêté</span></td><td>Au traitement de la demande</td></tr>
@@ -421,6 +428,7 @@ footer {
         <tr><td>Demandes de rétractation et de résiliation, sans votre nom, votre adresse ni votre message</td><td><span class="badge-keep">Conservé</span></td><td>5 ans après leur réception</td></tr>
         <tr><td>Copies des e-mails sur vos demandes et sur la fin de votre abonnement (boîte contact@linceya.com)</td><td><span class="badge-keep">Conservé</span></td><td>5 ans</td></tr>
         <tr><td>Factures et données de paiement d'un abonnement pris sur linceya.com (chez Stripe, notre prestataire de paiement)</td><td><span class="badge-keep">Conservé</span></td><td>10 ans (obligation comptable)</td></tr>
+        <tr><td>Messages envoyés à contact@linceya.com ou par les formulaires du site</td><td><span class="badge-keep">Conservé</span></td><td>12 mois après notre dernière réponse (ou après réception, sans réponse)</td></tr>
       </table>
     </div>
 

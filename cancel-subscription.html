@@ -279,13 +279,6 @@ dl.recap dd.vide { color: var(--muted); font-style: italic; }
   font-size: 13px; color: var(--muted); line-height: 1.75; text-align: center;
 }
 
-/* Repère à remplir avant la mise en ligne : aucun ne doit rester (grep "a-remplir"). */
-.a-remplir {
-  color: #FFB4C2; background: rgba(224,58,90,0.12);
-  border: 1px dashed rgba(224,58,90,0.55); border-radius: 4px;
-  padding: 0 4px;
-}
-
 /* MAIN FOOTER */
 footer {
   background: #08080A; color: rgba(255,255,255,0.55);
@@ -400,7 +393,7 @@ footer {
         <div class="form-group" id="groupe-motif" hidden>
           <label class="champ" for="motif">Précisez le motif</label>
           <textarea id="motif" name="motif" maxlength="1000" aria-describedby="motif-aide"></textarea>
-          <div class="aide" id="motif-aide">Écrivez le motif sans lien ni adresse e-mail. Si vous avez un justificatif, envoyez-le à <a href="mailto:contact@linceya.com">contact@linceya.com</a> ou par courrier à <span class="a-remplir">[ADRESSE POSTALE A FOURNIR PAR MAX]</span>.</div>
+          <div class="aide" id="motif-aide">Écrivez le motif sans lien ni adresse e-mail. Si vous avez un justificatif, envoyez-le à <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</div>
           <div class="champ-erreur" id="motif-refus" hidden></div>
         </div>
         <button type="submit" class="btn-submit"><span>Vérifier ma demande</span></button>
