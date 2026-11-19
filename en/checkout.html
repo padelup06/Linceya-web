@@ -381,29 +381,57 @@ footer {
 .success-sub a { color: var(--platinum-light); text-decoration: none; font-weight: 500; }
 .success-sub a:hover { text-decoration: underline; }
 .success-contrat { margin-top: 14px; }
-/* Repère à remplir avant la mise en ligne : aucun ne doit rester (grep "a-remplir"). */
-.a-remplir {
-  color: #FFB4C2; background: rgba(224,58,90,0.12);
-  border: 1px dashed rgba(224,58,90,0.55); border-radius: 4px;
-  padding: 0 4px;
-}
 
 /* Free month (ESSAI_SITE_EN_VENTE and the server's answer, script at the bottom). */
 .pkg-essai { margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--gold-light); line-height: 1.45; }
-.essai-ecart[hidden], .buy-btn[hidden] { display: none; }
-.essai-ecart {
-  margin-top: 22px; padding: 16px; border-radius: 12px;
+
+/* Order summary (plan B of C9, Max's decision of 19/11/2026): between the form and
+   Stripe, for every order. Flowing text (no fixed height): enlarged browser text wraps,
+   the label moves above its value. */
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.recap-titre { outline: none; }
+.recapitulatif { scroll-margin-top: 96px; }
+.acces-immediat .cgv-erreur { color: #FF9DB0; }
+.recap-lignes { list-style: none; margin: 0 0 18px; padding: 0; border-top: 1px solid var(--stroke); }
+.recap-ligne {
+  display: flex; flex-wrap: wrap; gap: 2px 14px; padding: 10px 0;
+  border-bottom: 1px solid var(--stroke); font-size: 13px; line-height: 1.55;
+}
+.recap-libelle {
+  flex: 0 0 10em; padding-top: 2px; color: var(--gold);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.recap-valeur { flex: 1 1 14em; min-width: 0; color: var(--graphite); overflow-wrap: anywhere; }
+.recap-annonce {
+  margin: 0 0 16px; padding: 14px; border-radius: 12px;
   border: 1px solid rgba(227,197,122,0.55); background: rgba(201,167,90,0.08);
-  font-size: 13px; line-height: 1.6; color: var(--graphite);
+  font-size: 13px; line-height: 1.6; color: var(--pearl);
 }
-.essai-ecart strong { color: var(--pearl); }
-.essai-ecart .buy-btn { margin-top: 14px; }
-.essai-ecart-retour {
-  display: block; width: 100%; margin-top: 10px; padding: 10px;
-  background: none; border: 1px solid var(--stroke); border-radius: 12px;
-  color: var(--muted); font-family: var(--font-body); font-size: 13px; cursor: pointer;
+.recap-alerte {
+  margin: 0 0 16px; padding: 14px; border-radius: 10px;
+  background: rgba(224,58,90,0.1); border: 1px solid rgba(224,58,90,0.35);
+  font-size: 13px; line-height: 1.5; color: #FF9DB0; outline: none;
 }
-.essai-ecart-retour:hover { color: var(--platinum-light); border-color: var(--platinum); }
+.acces-case a, .recap-retractation a { color: var(--platinum-light); font-weight: 500; text-decoration: underline; }
+.recap-retractation { margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+.recap-avant { margin-top: 18px; font-size: 12.5px; color: var(--graphite); line-height: 1.6; }
+.recap-avant + .buy-btn { margin-top: 14px; }
+.recap-sous-bouton { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
+.lien-modifier {
+  display: block; margin: 14px auto 0; padding: 8px 6px;
+  background: none; border: none; cursor: pointer;
+  color: var(--platinum-light); font-family: var(--font-body); font-size: 13px; text-decoration: underline;
+}
+.lien-modifier:disabled { opacity: 0.5; cursor: not-allowed; }
+.buy-btn:focus-visible, .lien-modifier:focus-visible, .acces-case a:focus-visible,
+.recap-retractation a:focus-visible, .paywall-terms a:focus-visible {
+  outline: 2px solid var(--gold-light); outline-offset: 3px;
+}
+.acces-case input:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   .buy-btn::before { animation: none; }
@@ -429,7 +457,7 @@ footer {
       <div class="checkout-subtitle" id="side-sub">AI video analysis: your shots estimated, your movement measured.</div>
       <div class="checkout-features" id="side-features">
         <div class="checkout-feat"><span class="check">✓</span><span id="side-quota">4 AI video analyses per month</span></div>
-        <div class="checkout-feat"><span class="check">✓</span>Automatic shot &amp; movement detection</div>
+        <div class="checkout-feat"><span class="check">✓</span>Estimated shots &amp; movement detection</div>
         <div class="checkout-feat"><span class="check">✓</span>Distance covered &amp; movement speeds</div>
         <div class="checkout-feat"><span class="check">✓</span>Court coverage heatmap</div>
         <div class="checkout-feat"><span class="check">✓</span>Personalized training plan</div>
@@ -449,6 +477,7 @@ footer {
       </div>
 
       <div id="packages" style="display:none;">
+       <div id="commande-formulaire">
         <div class="paywall-eyebrow">› Subscription</div>
         <div class="paywall-title">Choose<br>your plan</div>
         <div class="paywall-sub" id="paywall-sub">Cancel anytime. No commitment.</div>
@@ -466,18 +495,39 @@ footer {
             </label>
             <div class="hint" id="acces-immediat-aide">This box is required to subscribe online: Elite opens as soon as you pay.</div>
           </div>
-          <button class="buy-btn" id="buy-btn" disabled aria-disabled="true" onclick="handlePurchase()"><span>Continue →</span></button>
-          <div class="essai-ecart" id="essai-ecart" role="alert" hidden>
-            <p id="essai-ecart-texte"></p>
-            <button class="buy-btn" id="essai-ecart-continuer" type="button"><span>Continue to payment →</span></button>
-            <button class="essai-ecart-retour" id="essai-ecart-retour" type="button" onclick="fermerEcart()">Don't order</button>
-          </div>
-        <div class="paywall-moyens">Payment methods: credit or debit card <span class="a-remplir">[ET LES AUTRES MOYENS ACTIVÉS DANS STRIPE, A CONFIRMER PAR MAX : and the other methods enabled in Stripe]</span>.<span id="moyens-essai"></span></div>
+          <button class="buy-btn" id="buy-btn" type="button" disabled aria-disabled="true" onclick="handlePurchase()"><span>Review my order →</span></button>
+        <div class="paywall-moyens">Payment methods: credit or debit card (Apple&nbsp;Pay, Google&nbsp;Pay and Link included), Klarna and Amazon&nbsp;Pay.<span id="moyens-essai"></span></div>
         <div class="paywall-terms">
-          Our <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a> apply: you will accept them on the payment page. You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.
+          Our <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a> apply: you will accept them on your order summary, at the next step. You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.
           <span id="paywall-renouvellement">Your subscription renews automatically every month. Cancel anytime.</span>
         </div>
         <div class="paywall-moyens paywall-mediateur">Consumer mediator: Linceya has not yet appointed one. Complaints: <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</div>
+       </div>
+
+       <!-- Order summary (plan B of C9): filled by the script with the lines written by the
+            server; only "Order with obligation to pay" creates the Stripe session. -->
+       <section class="recapitulatif" id="recapitulatif" aria-labelledby="recap-titre" hidden>
+        <div class="paywall-eyebrow">› Summary</div>
+        <h2 class="paywall-title recap-titre" id="recap-titre" tabindex="-1">Your order summary</h2>
+        <p class="paywall-sub">Check your order. Nothing has been ordered yet.</p>
+        <div class="recap-alerte" id="recap-alerte" role="alert" tabindex="-1" hidden></div>
+        <p class="recap-annonce" id="recap-annonce" hidden></p>
+        <ul class="recap-lignes" id="recap-lignes"></ul>
+        <div class="acces-immediat" id="cgv-bloc">
+          <label class="acces-case" for="cgv-acceptees">
+            <input type="checkbox" id="cgv-acceptees" name="cgv_acceptees" aria-describedby="cgv-version cgv-erreur">
+            <span id="cgv-texte">I accept the Linceya Elite <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a>.</span>
+          </label>
+          <div class="hint" id="cgv-version" hidden></div>
+          <div class="hint cgv-erreur" id="cgv-erreur" role="alert" hidden></div>
+        </div>
+        <p class="recap-retractation">You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.</p>
+        <p class="recap-avant" id="recap-avant-commande"></p>
+        <button class="buy-btn" id="commande-btn" type="button" aria-disabled="true" aria-describedby="recap-avant-commande" onclick="commander()"><span>Order with obligation to pay</span></button>
+        <p class="recap-sous-bouton">You will then go to Stripe's secure page, which only records the payment. This summary is valid for 20 minutes.</p>
+        <button class="lien-modifier" id="modifier-btn" type="button" onclick="modifierCommande()">Edit my order</button>
+       </section>
+       <div class="sr-only" id="etat-commande" role="status" aria-live="polite"></div>
       </div>
 
       <div id="success" style="display:none;" class="success-msg">
@@ -574,20 +624,18 @@ function economieAnnuel() {
 // clause) and then the trial secret of create-stripe-checkout, in one push
 // with the two other checkout.html and the three pricing.html (step C14 of
 // CONSOLES.md).
-// The server stays the judge: its answer says `essai` (true: the Stripe session
-// starts with the free month; anything else, missing field included: payment
-// the same day); "already had": `essai_refuse: "deja_utilise"` and `message`. The page reads no date
-// from this answer (D13). When what
-// it did differs from what the page announced (an address that already had a
-// free month or Elite, secret removed), the page says so and
-// waits for a second click BEFORE opening Stripe. The return from payment
+// The server stays the judge: the order summary (below) shows what it decided,
+// free month or payment the same day, "already had" included
+// (`essai_refuse: "deja_utilise"` and `message`), before anything goes to Stripe.
+// This switch now only drives what the form announces. The return from payment
 // carries `essai=1`, set by the server (like `known=1`), never by the page.
 const ESSAI_SITE_EN_VENTE = false;
 
-// Max's decision D13 (15/11/2026): the page computes no date of the free month
-// and reads none from the server's answer. It gives the length only; the exact
-// date of the first payment is the one on the secure payment page (Stripe) and
-// in the confirmation email.
+// Max's decision D13 (15/11/2026), lifted for the summary alone by the decision of
+// 19/11: the page computes no date of the free month. The form gives the length
+// only; the end date of the free month only appears in the summary lines, written
+// by the server (the one it passes to Stripe), then on Stripe's page and in the
+// confirmation email.
 const TEXTE_CASE_ESSAI = "I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days elapsed since my first payment: nothing if I am still in my free month. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.";
 // Max's decision D2 (11/15): a session with the free month accepts cards only
 // (create-stripe-checkout, `payment_method_types: ["card"]`). The payment
@@ -659,7 +707,7 @@ function renderPackages() {
     document.getElementById('paywall-renouvellement').textContent =
       "When the free month ends, your subscription becomes paid automatically, then renews "
       + (monthlyCard && annualCard ? "every month or every year depending on the plan" : "every month")
-      + ". The exact date of your first payment is shown at the next step, on Stripe's payment page, and in the confirmation email. "
+      + ". The exact date of your first payment is shown at the next step, on your order summary, then on Stripe's page and in the confirmation email. "
       + "Cancel online before the free month ends: you pay nothing. One free month per person.";
     document.getElementById('acces-immediat-texte').textContent = TEXTE_CASE_ESSAI;
     document.getElementById('acces-immediat-aide').textContent =
@@ -677,7 +725,6 @@ function renderPackages() {
 
 
 function selectPackage(card) {
-  fermerEcart();
   selectedPriceId = card.dataset.price;
   document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
   card.classList.add('selected');
@@ -694,7 +741,7 @@ function caseAccesCochee() {
   return !!(caseAcces && caseAcces.checked);
 }
 
-// "Continue" grayed out while the box is not checked (aria-disabled: it stays clickable to say
+// "Review my order" grayed out while the box is not checked (aria-disabled: it stays clickable to say
 // why). `disabled` stays reserved for "no offer" and for the request in flight.
 function majBoutonAcces() {
   const btn = document.getElementById('buy-btn');
@@ -715,13 +762,91 @@ function demanderCaseAcces(message) {
   if (caseAcces) caseAcces.focus();
 }
 
+// ── Order summary (plan B of C9, Max's decision of 19/11/2026) ──────────────────
+// Every order on the site, with or without the free month, goes through our summary:
+//   1. "Review my order" asks the server for the summary (`etape: "recapitulatif"`):
+//      no Stripe session is created;
+//   2. the page shows the lines WRITTEN by the server (plan, price including all taxes,
+//      period, commitment, payment methods, free month and its end date when it
+//      applies), inserted as they are (textContent): it computes no date; then the
+//      terms of sale box, never checked in advance;
+//   3. only "Order with obligation to pay" sends the summary token
+//      (`etape: "commande"`): the server then creates the Stripe session and the page
+//      opens it. Stripe's page only handles the payment.
+// Token expired, changed, already used or not valid: the page asks for a new summary
+// right away, shows it with the server's message and waits for a new click (never
+// Stripe without that click).
+const TEXTE_EMAIL_INVALIDE = 'Please enter a valid email.';
+const TEXTE_ERREUR = 'An error occurred. Please try again.';
+const TEXTE_VERIFIER = 'Review my order →';
+const TEXTE_PREPARATION = 'Preparing your summary…';
+const TEXTE_COMMANDER = 'Order with obligation to pay';
+const TEXTE_REDIRECTION = 'Redirecting to checkout…';
+const TEXTE_CGV_REQUISES = 'To order, check the box accepting the terms of sale.';
+const LIBELLE_ADRESSE = 'Email address';
+const LIBELLE_ACCES = 'Immediate access';
+const TEXTE_ACCES_DEMANDE = 'Requested, with the box checked at the previous step:';
+// Token refused at the order: a new summary, shown before any new click.
+const REFUS_A_RENOUVELER = ['recapitulatif_expire', 'recapitulatif_change', 'recapitulatif_utilise', 'recapitulatif_invalide'];
+
+// The summary on screen: { jeton, prix, plan, email, acces } (acces: the exact text of
+// the immediate access box the person checked).
+let recapEnCours = null;
+// True when showing the summary added "#recapitulatif" to the history: the browser's
+// Back button then does "Edit my order".
+let recapDansHistorique = false;
+
+function planDuPrix(prix) {
+  return PRICE_ELITE_ANNUAL && prix === PRICE_ELITE_ANNUAL ? 'elite_annual' : 'elite';
+}
+
+function annoncer(texte) {
+  const etat = document.getElementById('etat-commande');
+  if (etat) etat.textContent = texte;
+}
+
+function caseCgvCochee() {
+  const caseCgv = document.getElementById('cgv-acceptees');
+  return !!(caseCgv && caseCgv.checked);
+}
+
+// "Order" grayed out while the terms box is not checked (aria-disabled: it stays
+// clickable to say why).
+function majBoutonCommande() {
+  const btn = document.getElementById('commande-btn');
+  const bloc = document.getElementById('cgv-bloc');
+  const cochee = caseCgvCochee();
+  btn.setAttribute('aria-disabled', cochee ? 'false' : 'true');
+  bloc.classList.toggle('coche', cochee);
+  if (cochee) bloc.classList.remove('en-erreur');
+}
+
+function montrerAlerteRecap(message) {
+  const alerte = document.getElementById('recap-alerte');
+  alerte.textContent = message || '';
+  alerte.hidden = !message;
+}
+
+// The message under the terms box (read by a screen reader: role="alert").
+function montrerErreurCgv(message) {
+  const erreur = document.getElementById('cgv-erreur');
+  erreur.textContent = message || '';
+  erreur.hidden = !message;
+}
+
+function demanderCaseCgv(message) {
+  montrerErreurCgv(message);
+  document.getElementById('cgv-bloc').classList.add('en-erreur');
+  document.getElementById('cgv-acceptees').focus();
+}
+
 async function handlePurchase() {
-  if (!selectedPriceId) return;
+  if (!selectedPriceId || document.getElementById('buy-btn').disabled) return;
   const emailInput = document.getElementById('checkout-email');
   const email = (emailInput.value || '').trim();
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!emailValid) {
-    showError('Please enter a valid email.');
+    showError(TEXTE_EMAIL_INVALIDE);
     emailInput.focus();
     return;
   }
@@ -729,108 +854,262 @@ async function handlePurchase() {
     demanderCaseAcces(TEXTE_CASE_REQUISE);
     return;
   }
+  hideError();
+  const texteCase = document.getElementById('acces-immediat-texte').textContent;
+  await demanderRecapitulatif({ prix: selectedPriceId, email: email, acces: texteCase }, '');
+}
+
+// A readable summary: lines and a token. An answer without them (older function,
+// gateway) never opens Stripe: the page says so and goes nowhere.
+function recapitulatifLisible(data) {
+  return !!(data && data.recapitulatif && typeof data.recapitulatif === 'object'
+    && Array.isArray(data.recapitulatif.lignes)
+    && typeof data.jeton === 'string' && data.jeton.length > 0);
+}
+
+// Asks the server for the summary (no Stripe session), then shows it.
+// [alerte]: the server's message to show above it (renewed summary).
+async function demanderRecapitulatif(demande, alerte) {
   const btn = document.getElementById('buy-btn');
   btn.disabled = true;
-  btn.innerHTML = '<span>Redirecting to checkout…</span>';
-  hideError();
-
-  // GA4 conversion : on tracke le begin_checkout avant la redirection Stripe.
-  // elite_annual, never « annual » (the former Premium yearly plan).
-  const plan = PRICE_ELITE_ANNUAL && selectedPriceId === PRICE_ELITE_ANNUAL ? 'elite_annual' : 'elite';
-
-  try {
-    if (window.linceyaTrack) window.linceyaTrack.checkoutClick(plan);
-  } catch (_) {}
-
+  btn.innerHTML = '<span>' + TEXTE_PREPARATION + '</span>';
+  annoncer(TEXTE_PREPARATION);
+  let data = {};
+  let ok = false;
   try {
     const res = await fetch(EDGE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        price_id: selectedPriceId,
+        etape: 'recapitulatif',
+        price_id: demande.prix,
         locale: STRIPE_LOCALE,
-        customer_email: email,
-        acces_immediat: caseAccesCochee(),
-        success_url: SUCCESS_URL + '&plan=' + plan,
+        customer_email: demande.email,
+        acces_immediat: true,
+      }),
+    });
+    // An answer that is not JSON (gateway) falls back to the generic message.
+    data = await res.json().catch(() => ({}));
+    ok = res.ok;
+  } catch (e) {
+    console.error('Recapitulatif error:', e);
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<span>' + TEXTE_VERIFIER + '</span>';
+  annoncer('');
+  if (ok && recapitulatifLisible(data)) {
+    afficherRecapitulatif(data, demande, alerte);
+    return;
+  }
+  // Refusal or failure: back to the form, with the server's message if it gives one.
+  afficherFormulaire(true);
+  const message = data && typeof data.error === 'string' && data.error ? data.error : TEXTE_ERREUR;
+  if (data && data.code === 'acces_immediat_requis') {
+    demanderCaseAcces(message);
+    return;
+  }
+  showError(message);
+  if (data && data.code === 'email_invalide') document.getElementById('checkout-email').focus();
+}
+
+function ajouterLigne(liste, libelle, valeur) {
+  const ligne = document.createElement('li');
+  ligne.className = 'recap-ligne';
+  if (libelle) {
+    const l = document.createElement('span');
+    l.className = 'recap-libelle';
+    l.textContent = libelle;
+    ligne.appendChild(l);
+  }
+  const v = document.createElement('span');
+  v.className = 'recap-valeur';
+  v.textContent = valeur;
+  ligne.appendChild(v);
+  liste.appendChild(ligne);
+}
+
+// A text from the server, non-breaking spaces included, compared with a label of the page.
+function memeTexte(a, b) {
+  const net = (s) => String(s).replace(/[  ]/g, ' ').trim();
+  return net(a) === net(b);
+}
+
+function afficherRecapitulatif(data, demande, alerte) {
+  const r = data.recapitulatif;
+  recapEnCours = { jeton: data.jeton, prix: demande.prix, plan: planDuPrix(demande.prix), email: demande.email, acces: demande.acces };
+  if (r.essai === true) direMoyensEssai();
+
+  // The server's lines, as they are; the email address (which the server does not send
+  // back) and the immediate access box (the exact text of the checked box) are written by
+  // the page, in place of the server's line that announces them, otherwise at the end.
+  const liste = document.getElementById('recap-lignes');
+  while (liste.firstChild) liste.removeChild(liste.firstChild);
+  let adresseMise = false;
+  let accesMis = false;
+  for (const ligne of r.lignes) {
+    if (!ligne || typeof ligne !== 'object') continue;
+    const cle = typeof ligne.cle === 'string' ? ligne.cle : '';
+    const libelle = typeof ligne.libelle === 'string' ? ligne.libelle : '';
+    const valeur = typeof ligne.valeur === 'string' ? ligne.valeur : '';
+    if (cle === 'adresse' || memeTexte(libelle, LIBELLE_ADRESSE)) {
+      if (!adresseMise) ajouterLigne(liste, libelle || LIBELLE_ADRESSE, demande.email);
+      adresseMise = true;
+      continue;
+    }
+    if (cle === 'acces' || memeTexte(libelle, LIBELLE_ACCES)) {
+      if (!accesMis) ajouterLigne(liste, libelle || LIBELLE_ACCES, (valeur.trim() || TEXTE_ACCES_DEMANDE) + ' ' + demande.acces);
+      accesMis = true;
+      continue;
+    }
+    if (!libelle && !valeur) continue;
+    ajouterLigne(liste, libelle, valeur);
+  }
+  if (!adresseMise) ajouterLigne(liste, LIBELLE_ADRESSE, demande.email);
+  if (!accesMis) ajouterLigne(liste, LIBELLE_ACCES, TEXTE_ACCES_DEMANDE + ' ' + demande.acces);
+
+  // "Already had": the server's message, if it is not already in the lines.
+  const source = r.essai_refuse !== undefined ? r : data;
+  const dejaEu = source.essai_refuse === 'deja_utilise' && typeof source.message === 'string' ? source.message : '';
+  const dejaDansLignes = dejaEu && r.lignes.some((l) => l && (memeTexte(l.valeur || '', dejaEu) || memeTexte(l.libelle || '', dejaEu)));
+  const annonce = document.getElementById('recap-annonce');
+  annonce.textContent = dejaDansLignes ? '' : dejaEu;
+  annonce.hidden = !annonce.textContent;
+
+  const version = document.getElementById('cgv-version');
+  version.textContent = typeof r.cgv_version_ecrite === 'string' ? r.cgv_version_ecrite : '';
+  version.hidden = !version.textContent;
+  document.getElementById('recap-avant-commande').textContent = typeof r.avant_commande === 'string' ? r.avant_commande : '';
+
+  // A new summary, a new agreement: the terms box starts unchecked again.
+  const caseCgv = document.getElementById('cgv-acceptees');
+  caseCgv.checked = false;
+  document.getElementById('cgv-bloc').classList.remove('en-erreur');
+  const btn = document.getElementById('commande-btn');
+  btn.disabled = false;
+  btn.innerHTML = '<span>' + TEXTE_COMMANDER + '</span>';
+  document.getElementById('modifier-btn').disabled = false;
+  majBoutonCommande();
+  montrerErreurCgv('');
+  montrerAlerteRecap(alerte);
+
+  document.getElementById('commande-formulaire').hidden = true;
+  const section = document.getElementById('recapitulatif');
+  section.hidden = false;
+  if (!recapDansHistorique) {
+    try {
+      window.history.pushState({ recapitulatif: true }, '', '#recapitulatif');
+      recapDansHistorique = true;
+    } catch (_) {}
+  }
+  annoncer('');
+  try { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (_) {}
+  if (alerte) document.getElementById('recap-alerte').focus();
+  else document.getElementById('recap-titre').focus();
+}
+
+// The only way to Stripe: the token of the summary on screen, after the click.
+async function commander() {
+  const btn = document.getElementById('commande-btn');
+  if (!recapEnCours || btn.disabled) return;
+  if (!caseCgvCochee()) {
+    demanderCaseCgv(TEXTE_CGV_REQUISES);
+    return;
+  }
+  const recap = recapEnCours;
+  btn.disabled = true;
+  btn.innerHTML = '<span>' + TEXTE_REDIRECTION + '</span>';
+  document.getElementById('modifier-btn').disabled = true;
+  montrerErreurCgv('');
+  montrerAlerteRecap('');
+  annoncer(TEXTE_REDIRECTION);
+
+  // GA4 conversion: track begin_checkout before the Stripe redirect.
+  // elite_annual, never "annual" (the former annual Premium).
+  try {
+    if (window.linceyaTrack) window.linceyaTrack.checkoutClick(recap.plan);
+  } catch (_) {}
+
+  let data = {};
+  let ok = false;
+  try {
+    const res = await fetch(EDGE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        etape: 'commande',
+        jeton: recap.jeton,
+        price_id: recap.prix,
+        locale: STRIPE_LOCALE,
+        customer_email: recap.email,
+        acces_immediat: true,
+        cgv_acceptees: true,
+        success_url: SUCCESS_URL + '&plan=' + recap.plan,
         cancel_url: CANCEL_URL,
       }),
     });
-    // A response that is not JSON (gateway) falls back to the generic message.
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || !data.url) {
-      const erreur = new Error(data.error || 'Stripe error');
-      erreur.code = data.code;
-      throw erreur;
-    }
-    allerAuPaiement(data, plan);
+    data = await res.json().catch(() => ({}));
+    ok = res.ok;
   } catch (e) {
     console.error('Purchase error:', e);
-    btn.disabled = false;
-    btn.innerHTML = '<span>Continue →</span>';
-    // The server did not receive the immediate access request: ask for the box again.
-    if (e && e.code === 'acces_immediat_requis') {
-      demanderCaseAcces(e.message && e.message !== 'Stripe error' ? e.message : TEXTE_ACCES_REQUIS);
-      return;
-    }
-    // Display backend message if any (e.g. "already premium"), otherwise
-    // fall back to the generic localised message.
-    const msg = (e && e.message && e.message !== 'Stripe error')
-      ? e.message
-      : "An error occurred. Please try again.";
-    showError(msg);
   }
-}
-
-// What the server did with the session, against what the page announced.
-// Same: Stripe right away. Different: the page says so first.
-function allerAuPaiement(data, plan) {
-  const essai = data.essai === true;
-  if (essai) direMoyensEssai();
-  // Only `essai` counts: no date is read or computed (D13).
-  const commeAnnonce = essai === ESSAI_SITE_EN_VENTE;
-  if (commeAnnonce) {
+  // Browser Back during the request: this summary is no longer on screen.
+  if (recapEnCours !== recap) return;
+  if (ok && data && typeof data.url === 'string' && /^https:\/\//.test(data.url)) {
     window.location.href = data.url;
     return;
   }
-  const annuel = plan === 'elite_annual';
-  const prix = montantTexte(annuel ? MONTANT_ANNUEL : MONTANT_MENSUEL);
-  document.getElementById('essai-ecart-texte').innerHTML = essai
-    ? '<strong>This order starts with 1 free month</strong>, with 2 video analyses. Nothing is charged today. After that, ' + prix
-      + (annuel ? ' a year, for 12 months' : ' a month')
-      + ', charged automatically when the free month ends, unless you cancel before. '
-      + 'The exact date of your first payment is shown at the next step, on Stripe\'s payment page, and in the confirmation email. '
-      + 'One free month per person.'
-    : '<strong>No free month for this order.</strong> ' + causeSansEssai(data)
-      + 'If you continue, you pay ' + prix + ' today' + (annuel ? ', for 12 months' : '')
-      + ', then the subscription renews automatically.';
-  const continuer = document.getElementById('essai-ecart-continuer');
-  continuer.querySelector('span').textContent = essai
-    ? 'Continue to the payment page →'
-    : 'Continue and pay today →';
-  continuer.onclick = function() { window.location.href = data.url; };
-  document.getElementById('buy-btn').hidden = true;
-  document.getElementById('essai-ecart').hidden = false;
-  continuer.focus();
-}
-
-// Why there is no free month, only if the server says so ("already had its
-// free month"): a technical cause is not told to the customer.
-function causeSansEssai(data) {
-  if (!data || data.essai_refuse !== 'deja_utilise' || typeof data.message !== 'string') return '';
-  const echappe = data.message.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  return echappe + ' ';
-}
-
-// "Don't order", another plan or another address: the session already created
-// is not used (Stripe lets it expire), a new click creates another one.
-function fermerEcart() {
-  const ecart = document.getElementById('essai-ecart');
-  if (!ecart || ecart.hidden) return;
-  ecart.hidden = true;
-  const btn = document.getElementById('buy-btn');
-  btn.hidden = false;
+  // Display the backend's message if any (e.g. "already subscribed"), otherwise the
+  // generic message.
+  const message = data && typeof data.error === 'string' && data.error ? data.error : TEXTE_ERREUR;
+  if (data && REFUS_A_RENOUVELER.indexOf(data.code) >= 0) {
+    recapEnCours = null;
+    await demanderRecapitulatif({ prix: recap.prix, email: recap.email, acces: recap.acces }, message);
+    return;
+  }
   btn.disabled = false;
-  btn.innerHTML = '<span>Continue →</span>';
+  btn.innerHTML = '<span>' + TEXTE_COMMANDER + '</span>';
+  document.getElementById('modifier-btn').disabled = false;
+  annoncer('');
+  if (data && data.code === 'cgv_requises') {
+    demanderCaseCgv(message);
+    return;
+  }
+  if (data && data.code === 'acces_immediat_requis') {
+    afficherFormulaire(true);
+    demanderCaseAcces(message);
+    return;
+  }
+  montrerAlerteRecap(message);
+  document.getElementById('recap-alerte').focus();
+}
+
+// Back to the form, as it was: the summary on screen is no longer used.
+// [direct]: return decided by the page (refusal, failure), not by the Back button.
+function afficherFormulaire(direct) {
+  recapEnCours = null;
+  document.getElementById('recapitulatif').hidden = true;
+  document.getElementById('commande-formulaire').hidden = false;
+  const btn = document.getElementById('buy-btn');
+  btn.disabled = !selectedPriceId;
+  btn.innerHTML = '<span>' + TEXTE_VERIFIER + '</span>';
+  majBoutonAcces();
+  if (direct && recapDansHistorique) {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch (_) {}
+    recapDansHistorique = false;
+  }
+}
+
+// "Edit my order": like the browser's Back button.
+function modifierCommande() {
+  if (document.getElementById('modifier-btn').disabled) return;
+  if (recapDansHistorique) {
+    try {
+      window.history.back();
+      return;
+    } catch (_) {}
+  }
+  afficherFormulaire(true);
+  document.getElementById('buy-btn').focus();
 }
 
 function showError(msg) {
@@ -978,6 +1257,35 @@ document.addEventListener('DOMContentLoaded', () => {
       if (caseAcces.checked) hideError();
     });
   }
+  const caseCgv = document.getElementById('cgv-acceptees');
+  if (caseCgv) {
+    caseCgv.addEventListener('change', () => {
+      majBoutonCommande();
+      if (caseCgv.checked) montrerErreurCgv('');
+    });
+  }
+  // A summary does not survive a reload: the page starts again from the form.
+  if (window.location.hash === '#recapitulatif') {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch (_) {}
+  }
+  // Browser Back button on the summary: "Edit my order".
+  window.addEventListener('popstate', () => {
+    recapDansHistorique = false;
+    if (!document.getElementById('recapitulatif').hidden) {
+      afficherFormulaire(false);
+      document.getElementById('buy-btn').focus();
+    }
+  });
+  // Back from Stripe with the Back button (page kept in memory): the button can be
+  // used again (the token was used: a new click gives a new summary).
+  window.addEventListener('pageshow', (e) => {
+    if (!e || !e.persisted || !recapEnCours) return;
+    const btn = document.getElementById('commande-btn');
+    btn.disabled = false;
+    btn.innerHTML = '<span>' + TEXTE_COMMANDER + '</span>';
+    document.getElementById('modifier-btn').disabled = false;
+    annoncer('');
+  });
   renderPackages();
   // Si l'URL contient ?success=1, afficher le block de succès et masquer
   // le bloc pricing qui n'a plus d'utilité post-paiement (sinon il reste
@@ -1018,8 +1326,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // they're typing. 300ms delay = wait for keyboard slide-up animation.
   var emailInput = document.getElementById('checkout-email');
   if (emailInput) {
-    // Another address: the session created for the old one is no longer used.
-    emailInput.addEventListener('input', fermerEcart);
     emailInput.addEventListener('focus', function() {
       setTimeout(function() {
         emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });

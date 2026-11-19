@@ -62,7 +62,7 @@
       "name": "Elite Mensual",
       "price": "24.99",
       "priceCurrency": "EUR",
-      "description": "4 análisis de vídeo IA al mes por visión por computador: mapa de calor de cobertura de la pista, detección automática de golpes y desplazamientos, distancia recorrida y velocidades de desplazamiento, plan de entrenamiento personalizado y ELO Certificado. Facturado mensualmente.",
+      "description": "4 análisis de vídeo IA al mes por visión por computador: mapa de calor de cobertura de la pista, detección automática de los golpes (número estimado) y de los desplazamientos, distancia recorrida y velocidades de desplazamiento, plan de entrenamiento personalizado y ELO Certificado. Facturado mensualmente.",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
         "price": "24.99",
@@ -94,7 +94,7 @@
       "name": "¿Qué es el plan Elite?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Elite es el análisis de vídeo de Linceya: 4 análisis al mes, por visión por computador. Nuestra IA sigue tu partido fotograma a fotograma: mapa de calor de cobertura, detección automática de golpes y desplazamientos, distancia recorrida, velocidades de desplazamiento (media y máxima), tiempo en la red y en el fondo. También recibes, cuando el partido permite un balance, tus puntos fuertes, tus áreas de mejora y tu error crítico, además de un plan de entrenamiento personalizado. Está disponible por 24,99€/mes aquí, o por 29,99€/mes o 249,99€/año desde la app, con 4 análisis al mes en todos los casos."
+        "text": "Elite es el análisis de vídeo de Linceya: 4 análisis al mes, por visión por computador. Nuestra IA sigue tu partido fotograma a fotograma: mapa de calor de cobertura, detección automática de los golpes (número estimado) y de los desplazamientos, distancia recorrida, velocidades de desplazamiento (media y máxima), tiempo en la red y en el fondo. También recibes, cuando el partido permite un balance, tus puntos fuertes, tus áreas de mejora y tu error crítico, además de un plan de entrenamiento personalizado. Está disponible por 24,99€/mes aquí, o por 29,99€/mes o 249,99€/año desde la app, con 4 análisis al mes en todos los casos."
       }
     },
     {
@@ -1042,7 +1042,7 @@ footer {
     </div>
     <div class="plan-features">
       <div class="plan-feature" id="elite-quota"><span class="icon star">★</span> 4 análisis vídeo IA / mes (visión por computador)</div>
-      <div class="plan-feature"><span class="icon star">★</span> Detección automática de golpes y desplazamientos</div>
+      <div class="plan-feature"><span class="icon star">★</span> Golpes estimados y detección de desplazamientos</div>
       <div class="plan-feature"><span class="icon star">★</span> Distancia recorrida y velocidades de desplazamiento</div>
       <div class="plan-feature"><span class="icon star">★</span> Heatmaps y estadísticas en profundidad</div>
       <div class="plan-feature"><span class="icon star">★</span> Tiempo en la red y en el fondo</div>
@@ -1070,7 +1070,7 @@ footer {
     </thead>
     <tbody>
       <tr><td>Análisis vídeo IA (visión por computador)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">4 / mes</span></td></tr>
-      <tr><td>Detección automática de golpes y desplazamientos</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Golpes estimados y detección de desplazamientos</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Mapa de calor de cobertura</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distancia recorrida y velocidades de desplazamiento</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Tiempo en la red / en el fondo</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
@@ -1097,7 +1097,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Qué es el plan Elite?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Elite es el análisis de vídeo de Linceya: 4 análisis al mes, por visión por computador. Nuestra IA sigue tu partido fotograma a fotograma: mapa de calor de cobertura, detección automática de golpes y desplazamientos, distancia recorrida, velocidades de desplazamiento (media y máxima), tiempo en la red y en el fondo. También recibes, cuando el partido permite un balance, tus puntos fuertes, tus áreas de mejora y tu error crítico, además de un plan de entrenamiento personalizado. Está disponible por 24,99€/mes aquí, o por 29,99€/mes o 249,99€/año desde la app, con 4 análisis al mes en todos los casos.</div>
+      <div class="faq-a">Elite es el análisis de vídeo de Linceya: 4 análisis al mes, por visión por computador. Nuestra IA sigue tu partido fotograma a fotograma: mapa de calor de cobertura, detección automática de los golpes (número estimado) y de los desplazamientos, distancia recorrida, velocidades de desplazamiento (media y máxima), tiempo en la red y en el fondo. También recibes, cuando el partido permite un balance, tus puntos fuertes, tus áreas de mejora y tu error crítico, además de un plan de entrenamiento personalizado. Está disponible por 24,99€/mes aquí, o por 29,99€/mes o 249,99€/año desde la app, con 4 análisis al mes en todos los casos.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>¿Hay periodo de prueba?</span><span class="faq-icon">+</span></button>
@@ -1267,7 +1267,7 @@ function majEssai() {
     'Para una primera suscripción. 1 mes gratis, con 2 análisis de vídeo, luego 4 al mes. '
     + 'Se pide tarjeta al registrarte. Al terminar el mes gratis, la suscripción pasa a ser de pago automáticamente'
     + (annuel ? ': los 12 meses pagados y el compromiso de 12 meses empiezan ese día. ' : '. ')
-    + 'La fecha exacta del primer pago aparece en la página de pago de Stripe y en el correo de confirmación. '
+    + 'La fecha exacta del primer pago aparece en el resumen de tu pedido, en la página de Stripe y en el correo de confirmación. '
     + 'Cancela en línea antes de que termine el mes gratis, desde <a href="/es/cancel-subscription.html">Cancelar tu contrato</a>: no pagas nada. '
     + 'Un solo mes gratis por persona.';
 }

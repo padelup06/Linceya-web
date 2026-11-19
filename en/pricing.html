@@ -62,7 +62,7 @@
       "name": "Elite Monthly",
       "price": "24.99",
       "priceCurrency": "EUR",
-      "description": "4 AI video analyses per month powered by computer vision: court coverage heatmap, automatic shot and movement detection, distance covered and movement speeds, personalized training plan and Certified ELO. Billed monthly.",
+      "description": "4 AI video analyses per month powered by computer vision: court coverage heatmap, automatic detection of shots (estimated count) and movements, distance covered and movement speeds, personalized training plan and Certified ELO. Billed monthly.",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
         "price": "24.99",
@@ -94,7 +94,7 @@
       "name": "What is the Elite plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way."
+        "text": "Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic detection of shots (estimated count) and movements, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way."
       }
     },
     {
@@ -1042,7 +1042,7 @@ footer {
     </div>
     <div class="plan-features">
       <div class="plan-feature" id="elite-quota"><span class="icon star">★</span> 4 AI video analyses / month (computer vision)</div>
-      <div class="plan-feature"><span class="icon star">★</span> Automatic shot &amp; movement detection</div>
+      <div class="plan-feature"><span class="icon star">★</span> Estimated shots &amp; movement detection</div>
       <div class="plan-feature"><span class="icon star">★</span> Distance covered &amp; movement speeds</div>
       <div class="plan-feature"><span class="icon star">★</span> In-depth heatmaps &amp; stats</div>
       <div class="plan-feature"><span class="icon star">★</span> Time at the net &amp; at the back</div>
@@ -1070,7 +1070,7 @@ footer {
     </thead>
     <tbody>
       <tr><td>AI video analysis (computer vision)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">4 / month</span></td></tr>
-      <tr><td>Auto shot &amp; movement detection</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Estimated shots &amp; movement detection</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Court coverage heatmap</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distance covered &amp; movement speeds</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Time at the net / at the back</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
@@ -1097,7 +1097,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>What is the Elite plan?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic shot and movement detection, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way.</div>
+      <div class="faq-a">Elite is Linceya's video analysis: 4 analyses per month, powered by computer vision. Our AI follows your match frame by frame: court coverage heatmap, automatic detection of shots (estimated count) and movements, distance covered, movement speeds (average and max), time at the net and at the back. You also get, when the match allows a review, your strengths, improvement areas and critical error, plus a personalized training plan. It's available at €24.99/month here, or €29.99/month or €249.99/year from the app, with 4 analyses a month either way.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Is there a free trial?</span><span class="faq-icon">+</span></button>
@@ -1266,7 +1266,7 @@ function majEssai() {
     'For a first subscription. 1 month free, with 2 video analyses, then 4 a month. '
     + 'Card required at sign-up. When the free month ends, the subscription becomes paid automatically'
     + (annuel ? ': the 12 paid months and the 12-month commitment start that day. ' : '. ')
-    + 'The exact date of your first payment is shown on Stripe\'s payment page and in the confirmation email. '
+    + 'The exact date of your first payment is shown on your order summary, on Stripe\'s page and in the confirmation email. '
     + 'Cancel online before the free month ends, from <a href="/en/cancel-subscription.html">Cancel your contract</a>: you pay nothing. '
     + 'One free month per person.';
 }

@@ -62,7 +62,7 @@
       "name": "Elite Mensuel",
       "price": "24.99",
       "priceCurrency": "EUR",
-      "description": "4 analyses vidéo IA par mois par vision par ordinateur : heatmap de couverture du terrain, détection automatique des coups et des déplacements, distance parcourue et vitesses de déplacement, programme d'entraînement personnalisé et ELO certifié. Facturé mensuellement.",
+      "description": "4 analyses vidéo IA par mois par vision par ordinateur : heatmap de couverture du terrain, détection automatique des coups (nombre estimé) et des déplacements, distance parcourue et vitesses de déplacement, programme d'entraînement personnalisé et ELO certifié. Facturé mensuellement.",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
         "price": "24.99",
@@ -94,7 +94,7 @@
       "name": "C'est quoi le palier Elite ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Elite, c'est l'analyse vidéo de Linceya : 4 analyses par mois, par vision par ordinateur. Notre IA suit votre match image par image : heatmap de couverture du terrain, détection automatique des coups et des déplacements, distance parcourue, vitesses de déplacement (moyenne et max), temps au filet et au fond. Vous recevez aussi, quand le match permet un bilan, vos points forts, vos axes de progression et votre erreur critique, ainsi qu'un programme d'entraînement personnalisé. Il est disponible à 24,99€/mois ici, ou à 29,99€/mois ou 249,99€/an depuis l'app, avec 4 analyses par mois dans tous les cas."
+        "text": "Elite, c'est l'analyse vidéo de Linceya : 4 analyses par mois, par vision par ordinateur. Notre IA suit votre match image par image : heatmap de couverture du terrain, détection automatique des coups (nombre estimé) et des déplacements, distance parcourue, vitesses de déplacement (moyenne et max), temps au filet et au fond. Vous recevez aussi, quand le match permet un bilan, vos points forts, vos axes de progression et votre erreur critique, ainsi qu'un programme d'entraînement personnalisé. Il est disponible à 24,99€/mois ici, ou à 29,99€/mois ou 249,99€/an depuis l'app, avec 4 analyses par mois dans tous les cas."
       }
     },
     {
@@ -1067,7 +1067,7 @@ footer {
     </div>
     <div class="plan-features">
       <div class="plan-feature" id="elite-quota"><span class="icon star">★</span> 4 analyses vidéo IA / mois (vision par ordinateur)</div>
-      <div class="plan-feature"><span class="icon star">★</span> Détection auto des coups &amp; déplacements</div>
+      <div class="plan-feature"><span class="icon star">★</span> Coups estimés &amp; déplacements détectés</div>
       <div class="plan-feature"><span class="icon star">★</span> Distance parcourue &amp; vitesses de déplacement</div>
       <div class="plan-feature"><span class="icon star">★</span> Heatmaps &amp; statistiques approfondies</div>
       <div class="plan-feature"><span class="icon star">★</span> Temps au filet &amp; au fond</div>
@@ -1095,7 +1095,7 @@ footer {
     </thead>
     <tbody>
       <tr><td>Analyse vidéo IA (vision par ordinateur)</td><td><span class="table-x">✕</span></td><td><span class="table-val green">4 / mois</span></td></tr>
-      <tr><td>Détection auto coups &amp; déplacements</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
+      <tr><td>Coups estimés &amp; déplacements détectés</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Heatmap de couverture du terrain</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Distance parcourue &amp; vitesses de déplacement</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
       <tr><td>Temps au filet / au fond</td><td><span class="table-x">✕</span></td><td><span class="table-check">✓</span></td></tr>
@@ -1122,7 +1122,7 @@ footer {
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>C'est quoi le palier Elite ?</span><span class="faq-icon">+</span></button>
-      <div class="faq-a">Elite, c'est l'analyse vidéo de Linceya : 4 analyses par mois, par vision par ordinateur. Notre IA suit votre match image par image : heatmap de couverture du terrain, détection automatique des coups et des déplacements, distance parcourue, vitesses de déplacement (moyenne et max), temps au filet et au fond. Vous recevez aussi, quand le match permet un bilan, vos points forts, vos axes de progression et votre erreur critique, ainsi qu'un programme d'entraînement personnalisé. Il est disponible à 24,99€/mois ici, ou à 29,99€/mois ou 249,99€/an depuis l'app, avec 4 analyses par mois dans tous les cas.</div>
+      <div class="faq-a">Elite, c'est l'analyse vidéo de Linceya : 4 analyses par mois, par vision par ordinateur. Notre IA suit votre match image par image : heatmap de couverture du terrain, détection automatique des coups (nombre estimé) et des déplacements, distance parcourue, vitesses de déplacement (moyenne et max), temps au filet et au fond. Vous recevez aussi, quand le match permet un bilan, vos points forts, vos axes de progression et votre erreur critique, ainsi qu'un programme d'entraînement personnalisé. Il est disponible à 24,99€/mois ici, ou à 29,99€/mois ou 249,99€/an depuis l'app, avec 4 analyses par mois dans tous les cas.</div>
     </div>
     <div class="faq-item reveal">
       <button class="faq-q"><span>Y a-t-il une période d'essai ?</span><span class="faq-icon">+</span></button>
@@ -1292,7 +1292,7 @@ function majEssai() {
     "Pour un premier abonnement. 1 mois gratuit, avec 2 analyses vidéo, puis 4 par mois. "
     + "Carte bancaire demandée à l'inscription. À la fin du mois gratuit, l'abonnement devient payant automatiquement"
     + (annuel ? " : les 12 mois payés et l'engagement de 12 mois commencent ce jour-là. " : '. ')
-    + "La date exacte du premier paiement s'affiche sur la page de paiement de Stripe et dans l'e-mail de confirmation. "
+    + "La date exacte du premier paiement s'affiche sur le récapitulatif de votre commande, sur la page de Stripe et dans l'e-mail de confirmation. "
     + "Annulez en ligne avant la fin du mois gratuit, depuis <a href=\"/cancel-subscription.html\">Résilier votre contrat</a> : vous ne payez rien. "
     + "Un seul mois gratuit par personne.";
 }

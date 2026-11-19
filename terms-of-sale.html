@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta name="robots" content="noindex,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6760952174">
+<script src="/app-banner.js" defer></script>
+<title>Linceya — Conditions générales de vente</title>
+<meta name="description" content="Conditions générales de vente de l'abonnement Linceya Elite souscrit sur linceya.com : prix, mois gratuit, quota, paiement, renouvellement, résiliation et rétractation.">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Linceya" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://linceya.com/terms-of-sale.html">
+<link rel="alternate" hreflang="fr" href="https://linceya.com/terms-of-sale.html">
+<link rel="alternate" hreflang="en" href="https://linceya.com/en/terms-of-sale.html">
+<link rel="alternate" hreflang="es" href="https://linceya.com/es/terms-of-sale.html">
+<link rel="alternate" hreflang="x-default" href="https://linceya.com/terms-of-sale.html">
+<!-- Détection langue navigateur (premier visit only) -->
+<script>
+(function() {
+  try {
+    // Skip pour les bots : Googlebot a navigator.language='en' par défaut
+    // et déclencherait location.replace('/en/...'). Search Console flag alors
+    // la page comme "Page avec redirection". On laisse les hreflang tags du
+    // <head> guider les bots vers les bonnes versions.
+    var ua = (navigator.userAgent || '').toLowerCase();
+    if (/bot|crawler|spider|googlebot|bingbot|yandex|slurp|duckduckbot|baiduspider|facebookexternalhit|twitterbot|linkedinbot/i.test(ua)) return;
+    var seen = localStorage.getItem('lng_seen');
+    if (seen) return;
+    var lng = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+    if (lng.indexOf('en') === 0) {
+      localStorage.setItem('lng_seen', '1');
+      location.replace('/en/terms-of-sale.html');
+    } else if (lng.indexOf('es') === 0) {
+      localStorage.setItem('lng_seen', '1');
+      location.replace('/es/terms-of-sale.html');
+    } else {
+      localStorage.setItem('lng_seen', '1');
+    }
+  } catch (e) {}
+})();
+</script>
+<style>
+/* Linceya v6 "NOIR & OR" — conditions générales de vente (sobriété légale, même gabarit que la politique de confidentialité) */
+:root {
+  --cream: #0B0B0D;
+  --ivory: #16161B;
+  --pearl: #FFFFFF;
+  --carbon: #15151A;
+  --carbon-high: #1C1D24;
+  --ink: #F2F3F7;
+  --navy: #1A2B4D;
+  --signal: #1E47F0;
+  --signal-dark: #1436B8;
+  --platinum: #B48A4A;
+  --platinum-light: #D4B87A;
+  --platinum-soft: #D4B07A;
+  --gold: #C9A75A;
+  --gold-light: #F6E5AE;
+  --on-gold: #1E1503;
+  --graphite: #C9CEDA;
+  --stroke: #26272E;
+  --stroke-soft: rgba(255,255,255,0.08);
+  --muted: #8B93A5;
+  --font-display: 'Anton', 'Archivo Black', 'Archivo', sans-serif;
+  --font-anton: 'Anton', sans-serif;
+  --font-body: 'Archivo', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(ellipse 700px 400px at 80% 10%, rgba(201,167,90,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 10% 95%, rgba(30,71,240,0.04) 0%, transparent 60%);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(11,11,13,0.92); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--stroke);
+}
+nav::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--platinum-light) 28%, var(--platinum) 72%, transparent);
+  opacity: 0.9; pointer-events: none;
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 34px; width: auto; filter: none; }
+.nav-back { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
+.nav-back:hover { color: var(--platinum-light); }
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-lang {
+  display: flex; align-items: center; gap: 1px;
+  padding: 3px; border-radius: 100px;
+  border: 1px solid var(--stroke); background: rgba(255,255,255,0.05);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+}
+.nav-lang a, .nav-lang span {
+  padding: 4px 9px; border-radius: 100px; line-height: 1;
+  text-decoration: none; color: var(--muted); transition: color 0.2s, background 0.2s;
+}
+.nav-lang a:hover { color: var(--platinum-light); }
+.nav-lang .lang-on { color: var(--on-gold); background: var(--platinum-light); font-weight: 700; }
+
+/* MAIN */
+.wrapper {
+  flex: 1; display: flex; justify-content: center;
+  padding: 140px 24px 80px;
+  position: relative; z-index: 2;
+}
+.container { max-width: 760px; width: 100%; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); display: inline-block; }
+h1 {
+  font-family: var(--font-anton); font-weight: 400; font-size: 48px;
+  line-height: 1.08; letter-spacing: 0.02em;
+  color: var(--pearl); text-transform: uppercase; margin-bottom: 14px;
+}
+.date {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--muted); margin-bottom: 40px; letter-spacing: 0.04em;
+}
+
+.content {
+  background: linear-gradient(170deg, var(--carbon-high), var(--carbon)); border: 1px solid var(--stroke);
+  border-radius: 24px; padding: 44px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.content p {
+  font-size: 15px; color: var(--graphite);
+  line-height: 1.8; margin-bottom: 14px;
+}
+.content strong { color: var(--ink); font-weight: 700; }
+/* Adresses longues (linceya.com/.../cancel-subscription.html) : coupées plutôt que rognées à 360 px. */
+.content p, .content li { overflow-wrap: break-word; }
+h2 {
+  font-family: var(--font-anton); font-weight: 400; font-size: 18px;
+  color: var(--ink); letter-spacing: 0.04em;
+  margin: 32px 0 14px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+  scroll-margin-top: 110px;
+}
+h2::before {
+  content: attr(data-num);
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--gold); background: rgba(201,167,90,0.1);
+  border: 1px solid rgba(227,197,122,0.35);
+  padding: 3px 8px; border-radius: 6px;
+  letter-spacing: 0.08em;
+}
+h2:first-of-type { margin-top: 0; }
+.content h3 {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
+  margin: 22px 0 10px;
+}
+
+ul {
+  list-style: none; padding: 0; margin-bottom: 14px;
+}
+ul li {
+  padding: 8px 0 8px 22px;
+  font-size: 14px; color: var(--graphite);
+  line-height: 1.7; position: relative;
+}
+ul li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 10px; height: 2px; background: var(--gold);
+}
+ul li strong { color: var(--ink); font-weight: 700; }
+ol.etapes { margin: 0 0 14px 22px; padding: 0; }
+ol.etapes li { padding: 6px 0 6px 4px; font-size: 14px; color: var(--graphite); line-height: 1.7; }
+ol.etapes li::marker { color: var(--gold); font-family: var(--font-mono); font-size: 12px; }
+
+a { color: var(--platinum-light); text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+
+/* Repère à remplir avant la mise en ligne : aucun ne doit rester (grep "a-remplir"). */
+.a-remplir {
+  color: #FFB4C2; background: rgba(224,58,90,0.12);
+  border: 1px dashed rgba(224,58,90,0.55); border-radius: 4px;
+  padding: 0 4px;
+}
+.content p.projet {
+  display: block; padding: 12px 14px; margin-bottom: 28px;
+  font-family: var(--font-mono); font-size: 12px; line-height: 1.7;
+  color: #FFB4C2;
+}
+/* Encadrés : textes que la loi demande de mettre en évidence ou de reproduire. */
+.encadre {
+  border: 1.5px solid rgba(227,197,122,0.55);
+  background: rgba(201,167,90,0.06);
+  border-radius: 16px; padding: 24px 26px; margin: 14px 0 20px;
+}
+.encadre p, .encadre li { font-size: 14px; line-height: 1.75; }
+.encadre p:last-child { margin-bottom: 0; }
+.encadre ul { margin-bottom: 14px; }
+.loi {
+  border-left: 2px solid var(--gold);
+  padding: 2px 0 2px 18px; margin: 12px 0 22px;
+}
+.loi h3 { margin-top: 0; }
+.loi p { font-size: 14px; line-height: 1.75; }
+.formulaire {
+  border: 1px dashed rgba(227,197,122,0.45);
+  border-radius: 14px; padding: 22px 24px; margin: 14px 0 6px;
+  font-size: 14px; line-height: 1.9; color: var(--graphite);
+}
+.formulaire p { font-size: 14px; margin-bottom: 8px; }
+.formulaire .titre-formulaire { font-family: var(--font-mono); color: var(--ink); letter-spacing: 0.08em; }
+/* Pages EN et ES : texte original français des passages traduits. */
+details { margin: 2px 0 24px; }
+details > summary {
+  cursor: pointer; font-family: var(--font-mono); font-size: 12px;
+  color: var(--platinum-light); letter-spacing: 0.06em; margin-bottom: 12px;
+}
+
+.footer-note {
+  margin-top: 32px; font-family: var(--font-mono); font-size: 11px;
+  color: var(--muted); text-align: center; line-height: 2;
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--stroke-soft); padding-top: 24px;
+}
+
+/* MAIN FOOTER */
+footer {
+  background: #08080A; color: rgba(255,255,255,0.55);
+  padding: 40px 24px 26px; display: flex; flex-direction: column;
+  align-items: center; gap: 22px;
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(201,167,90,0.22);
+}
+.footer-copy {
+  font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  width: 100%; max-width: 720px;
+}
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--platinum-light); }
+.footer-socials { display: flex; gap: 12px; align-items: center; justify-content: center; }
+.footer-socials a {
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50%;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.footer-socials a:hover {
+  color: var(--platinum-light);
+  border-color: rgba(180,138,74,0.4);
+  background: rgba(180,138,74,0.06);
+}
+.footer-socials svg { width: 15px; height: 15px; }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .wrapper { padding: 110px 16px 60px; }
+  h1 { font-size: 36px; }
+  .content { padding: 28px 22px; }
+  h2 { font-size: 16px; flex-wrap: wrap; }
+  .encadre, .formulaire { padding: 18px 16px; }
+  .loi { padding-left: 14px; }
+  footer { padding: 32px 20px 22px; gap: 18px; }
+  .footer-links { gap: 14px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://linceya.com" class="nav-logo">
+    <img src="https://linceya.com/logo.png?v=2" alt="Linceya">
+  </a>
+  <div class="nav-right">
+    <div class="nav-lang" role="group" aria-label="Choisir la langue">
+      <span class="lang-on" aria-current="true">FR</span>
+      <a href="/en/terms-of-sale.html" hreflang="en">EN</a>
+      <a href="/es/terms-of-sale.html" hreflang="es">ES</a>
+    </div>
+    <a href="index.html" class="nav-back">← Accueil</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="eyebrow">Informations légales</div>
+    <h1>Conditions<br>générales de vente</h1>
+    <div class="date">Version du <span class="a-remplir">[DATE DE MISE EN LIGNE]</span></div>
+
+    <div class="content">
+      <p>Ces conditions s'appliquent à l'abonnement <strong>Linceya Elite</strong> acheté sur le site <strong>linceya.com</strong>. Elles s'adressent aux consommateurs, c'est-à-dire aux personnes qui achètent pour leur usage personnel.</p>
+      <p>Un abonnement acheté dans l'application, sur l'App Store ou sur Google Play, est vendu et géré par Apple ou par Google, selon leurs propres conditions&nbsp;: le paiement, le renouvellement, la résiliation et le remboursement se font auprès d'eux.</p>
+      <p>Pour souscrire, vous devez être majeur, ou avoir l'accord d'un parent.</p>
+
+      <h2 data-num="01" id="vendeur">Le vendeur</h2>
+      <p><strong>Linceya</strong><br>
+      E-mail&nbsp;: <a href="mailto:contact@linceya.com">contact@linceya.com</a><br>
+      Formulaire de contact&nbsp;: <a href="/contact.html">linceya.com/contact.html</a></p>
+      <p>Les informations sur l'éditeur et l'hébergeur du site sont dans nos <a href="/legal-notice.html">mentions légales</a>.</p>
+
+      <h2 data-num="02" id="elite">L'abonnement Elite</h2>
+      <p>L'abonnement Elite donne accès, dans l'application Linceya, à&nbsp;:</p>
+      <ul>
+        <li>l'analyse vidéo de vos matchs par IA&nbsp;: heatmap de couverture du terrain, détection automatique des coups (nombre estimé) et des déplacements, distance parcourue, vitesses de déplacement, temps au filet et au fond du terrain&nbsp;;</li>
+        <li>le programme d'entraînement personnalisé&nbsp;;</li>
+        <li>l'ELO certifié, le classement complet et l'historique de progression&nbsp;;</li>
+        <li>l'invitation d'un coach, qui voit alors vos analyses.</li>
+      </ul>
+      <p>Le détail à jour est sur la page <a href="/pricing.html">Abonnements</a>.</p>
+      <p>Il vous faut l'application Linceya, sur iPhone ou sur Android&nbsp;: les versions compatibles sont indiquées sur l'App Store et sur Google Play. L'abonnement est attaché à l'adresse e-mail que vous donnez sur la page de paiement. Si vous n'avez pas encore de compte Linceya avec cette adresse, vous recevez par e-mail un code d'activation à 6 chiffres pour activer votre abonnement dans l'application.</p>
+
+      <h2 data-num="03" id="quota">4 analyses par mois, 2 pendant le mois gratuit</h2>
+      <ul>
+        <li>Pendant le mois gratuit (<a href="#mois-gratuit">partie 04</a>), vous pouvez lancer <strong>2 analyses vidéo en tout</strong>. Elles se comptent depuis le début du mois gratuit, même s'il s'étend sur deux mois calendaires.</li>
+        <li>À partir de votre premier paiement, vous pouvez lancer <strong>4 analyses vidéo par mois calendaire</strong>, avec la formule mensuelle comme avec la formule annuelle.</li>
+        <li>Les 4 analyses commencent quand votre premier paiement est reçu, pas à une date. Tant qu'il n'est pas reçu (il peut arriver un peu après la fin du mois gratuit), vous n'avez pas les 4 analyses&nbsp;: vous gardez celles du mois gratuit. S'il est refusé, l'accès Elite est suspendu (<a href="#souscription">partie 05</a>), sauf si vous avez aussi un abonnement Elite en cours sur l'App Store ou Google Play. Les analyses du mois gratuit ne comptent pas dans les 4 du mois de votre premier paiement.</li>
+        <li>Le compteur repart à zéro le 1er de chaque mois à 0&nbsp;h, heure UTC (1&nbsp;h du matin à Paris en hiver, 2&nbsp;h en été).</li>
+        <li>Les analyses que vous n'utilisez pas ne passent pas au mois suivant.</li>
+        <li>La formule annuelle donne 4 analyses chaque mois. Ce ne sont pas 48 analyses à utiliser quand vous voulez dans l'année.</li>
+        <li>Chaque match envoyé pour une analyse compte dans les 4, ou dans les 2 du mois gratuit, même si l'analyse n'aboutit pas ou si le match est supprimé ensuite. Seule exception&nbsp;: une analyse annulée (ou son match supprimé) avant le début de son traitement ne compte pas. La réservation d'une machine pour cette analyse fait partie de son traitement. Vos droits au titre de la garantie légale de conformité (<a href="#garantie">partie 10</a>) restent entiers.</li>
+      </ul>
+
+      <h2 data-num="04" id="prix">Prix</h2>
+      <ul>
+        <li><strong>Formule mensuelle&nbsp;: 24,99&nbsp;€ par mois.</strong></li>
+        <li><strong>Formule annuelle&nbsp;: 199&nbsp;€ par an</strong>, payés en une fois pour 12 mois.</li>
+      </ul>
+      <p>Les prix sont en euros, toutes taxes comprises&nbsp;: c'est le montant que vous payez.</p>
+      <p>Le prix qui s'applique est celui affiché sur la page de paiement au moment où vous souscrivez. Un code promo, s'il y en a un, s'applique comme cette page l'indique.</p>
+      <p>Le prix de votre abonnement ne change pas pendant une période déjà payée. S'il devait changer pour une période suivante, nous vous préviendrions par e-mail au moins 30 jours avant. Vous pourriez alors résilier avant que le nouveau prix s'applique.</p>
+      <p>Les prix de l'abonnement acheté dans l'application sont fixés sur l'App Store et sur Google Play. Ils peuvent être différents.</p>
+      <h3 id="mois-gratuit">Le mois gratuit</h3>
+      <ul>
+        <li>Un premier abonnement Elite pris sur linceya.com commence par <strong>1 mois gratuit</strong>, avec la formule mensuelle comme avec la formule annuelle, quand le récapitulatif de votre commande sur linceya.com l'annonce.</li>
+        <li>Le mois gratuit finit le même jour du mois suivant que votre commande (le bouton «&nbsp;Commander avec obligation de paiement&nbsp;»), à la même heure, heure de Paris. Si ce jour n'existe pas, il va jusqu'au dernier jour de ce mois. Exemple&nbsp;: commande le 20 novembre, mois gratuit jusqu'au 20 décembre. La date de fin est celle que donnent le récapitulatif de votre commande, la page de paiement de Stripe et l'e-mail de confirmation. La page de Stripe affiche ce mois en nombre de jours&nbsp;: la date de fin est la même.</li>
+        <li>Pendant le mois gratuit, vous avez l'Elite, avec <strong>2 analyses vidéo en tout</strong> (<a href="#quota">partie 03</a>). Rien n'est prélevé.</li>
+        <li>Votre carte bancaire est demandée à la souscription. À la fin du mois gratuit, l'abonnement devient payant automatiquement, sauf si vous l'avez résilié avant&nbsp;: 24,99&nbsp;€ pour la formule mensuelle, ou 199&nbsp;€ pour la formule annuelle, prélevés avec ce moyen de paiement. C'est votre premier paiement. Ensuite, l'abonnement se renouvelle comme le dit la <a href="#duree">partie 06</a>.</li>
+        <li>Avec la formule annuelle, les 12 mois payés et l'engagement de 12 mois commencent à votre premier paiement, à la fin du mois gratuit. La première année compte donc 13 mois, dont 1 gratuit.</li>
+        <li>Pour ne rien payer, résiliez avant la fin du mois gratuit (<a href="#resilier">partie 06</a>). Vous gardez l'Elite jusqu'à la fin du mois gratuit, puis votre compte Linceya passe au palier gratuit, sauf si vous avez aussi un abonnement Elite en cours sur l'App Store ou Google Play, sans aucun prélèvement.</li>
+        <li>Sept jours avant la fin du mois gratuit, si vous n'avez pas résilié, nous vous envoyons un e-mail de rappel. Il vous donne la date et le montant du premier paiement, et le lien pour résilier en ligne.</li>
+        <li>Un seul mois gratuit par personne. Il n'est pas proposé si votre adresse e-mail, une autre adresse de la même boîte mail ou votre compte Linceya a déjà eu un mois gratuit ou un abonnement Elite, ou a un abonnement Linceya en cours. Le récapitulatif de votre commande vous le dit alors, avant que vous commandiez&nbsp;: vous payez dès la souscription.</li>
+        <li>Si la carte bancaire donnée pour un mois gratuit a déjà servi à un autre mois gratuit, si cette boîte mail a déjà un contrat plus ancien sur linceya.com, ou si le moyen de paiement enregistré pour ce mois gratuit n'est pas une carte bancaire que nous pouvons vérifier, l'abonnement qui commençait par ce mois gratuit est annulé tout de suite, sans aucun prélèvement, et nous vous le disons par e-mail. Si un paiement a déjà été pris, nous vous le remboursons et vous l'écrivons. Un abonnement payé dès la souscription n'est jamais annulé pour ces raisons. Si rien n'a été payé, un mois gratuit annulé parce que son moyen de paiement n'était pas une carte bancaire que nous pouvions vérifier ne compte pas&nbsp;: ni comme un mois gratuit déjà eu, ni comme un contrat plus ancien. Vous pouvez alors le demander de nouveau, avec une carte bancaire.</li>
+      </ul>
+
+      <h2 data-num="05" id="souscription">Souscription et paiement</h2>
+      <h3>Les étapes</h3>
+      <ol class="etapes">
+        <li>Vous choisissez la formule, mensuelle ou annuelle, sur la page de paiement de linceya.com. La page rappelle le prix, la durée et, pour la formule annuelle, l'engagement de 12 mois. Quand le mois gratuit est proposé (<a href="#mois-gratuit">partie 04</a>), elle donne aussi sa durée et le montant du premier paiement.</li>
+        <li>Vous entrez l'adresse e-mail de votre compte Linceya.</li>
+        <li>Vous cochez la case qui demande que votre abonnement commence tout de suite (<a href="#acces-immediat">partie 08</a>). Elle n'est pas cochée d'avance. Sans elle, vous ne pouvez pas souscrire en ligne&nbsp;: l'Elite s'ouvre dès votre commande, mois gratuit compris.</li>
+        <li>Avec «&nbsp;Vérifier ma commande&nbsp;», vous voyez le récapitulatif de votre commande&nbsp;: formule, prix toutes taxes comprises, durée, renouvellement automatique et engagement, moyens de paiement, votre adresse e-mail et votre demande d'accès immédiat. Si le mois gratuit s'applique, il donne sa date de fin, ses 2 analyses et le prix qui suit&nbsp;; sinon, il vous dit que vous payez dès la souscription. «&nbsp;Modifier ma commande&nbsp;» vous ramène à l'étape 1 pour corriger. Le récapitulatif est valable 20 minutes&nbsp;; passé ce délai, ou si un élément change (prix, conditions, droit au mois gratuit), la page vous montre un nouveau récapitulatif avant que vous commandiez.</li>
+        <li>Sur ce récapitulatif, vous acceptez ces conditions en cochant la case «&nbsp;J'accepte les conditions générales de vente de Linceya Elite.&nbsp;» Elle n'est pas cochée d'avance&nbsp;; son lien ouvre cette page.</li>
+        <li>Vous validez votre commande avec le bouton «&nbsp;Commander avec obligation de paiement&nbsp;». Juste au-dessus, une phrase vous rappelle que vous passez une commande avec obligation de paiement et, avec le mois gratuit, la date de fin du mois gratuit et le prix qui suit. C'est ce bouton qui valide la commande.</li>
+        <li>Vous passez ensuite sur la page de paiement sécurisée de Stripe, qui ne fait que le paiement&nbsp;: vous y donnez votre moyen de paiement (avec le mois gratuit, votre carte bancaire&nbsp;: rien n'est prélevé ce jour-là) et vous le validez avec le bouton de Stripe («&nbsp;Payer et s'abonner&nbsp;», ou «&nbsp;Démarrer l'essai&nbsp;» avec le mois gratuit). Ce bouton enregistre le paiement de la commande que vous avez déjà passée&nbsp;; il ne passe pas une seconde commande. Si vous quittez cette page sans payer, rien n'est prélevé et la commande n'a pas de suite.</li>
+        <li>Le contrat est conclu quand votre paiement est accepté. Avec le mois gratuit, il est conclu quand votre carte est enregistrée&nbsp;: le mois gratuit commence à ce moment.</li>
+      </ol>
+      <p>Ces conditions sont proposées en français, en anglais et en espagnol. Vous pouvez enregistrer ou imprimer cette page.</p>
+      <h3>Le paiement</h3>
+      <p>Le paiement passe par Stripe, notre prestataire de paiement. Moyens de paiement acceptés&nbsp;: carte bancaire (Apple&nbsp;Pay, Google&nbsp;Pay et Link compris), Klarna et Amazon&nbsp;Pay. Avec le mois gratuit&nbsp;: carte bancaire seulement (Apple&nbsp;Pay et Google&nbsp;Pay compris). Ils sont aussi indiqués sur la page de paiement de linceya.com et sur le récapitulatif de votre commande. Linceya ne voit pas et ne garde pas vos numéros de carte.</p>
+      <p>Vous payez à la souscription, ou à la fin du mois gratuit si vous en avez un, puis automatiquement à chaque renouvellement, avec le même moyen de paiement. Vous recevez un reçu par e-mail à chaque paiement.</p>
+      <p>Si un paiement échoue, Stripe fait de nouvelles tentatives et l'accès Elite est suspendu en attendant, sauf si vous avez aussi un abonnement Elite en cours sur l'App Store ou Google Play. Si le paiement n'aboutit pas, l'abonnement prend fin. C'est vrai aussi pour le premier paiement, à la fin du mois gratuit.</p>
+      <h3 id="confirmation">La confirmation</h3>
+      <p>Après votre commande, nous vous envoyons un e-mail de confirmation de votre contrat, à l'adresse de votre abonnement. Il contient&nbsp;:</p>
+      <ul>
+        <li>le récapitulatif de votre abonnement&nbsp;: formule, prix payé, date et heure de la souscription, prochain renouvellement et engagement. Avec le mois gratuit&nbsp;: sa date de fin, ses 2 analyses, et la date et le montant du premier paiement&nbsp;;</li>
+        <li>la date et l'heure de votre demande d'accès immédiat (<a href="#acces-immediat">partie 08</a>)&nbsp;;</li>
+        <li>la date limite pour vous rétracter, et les liens «&nbsp;Renoncer au contrat ici&nbsp;» et «&nbsp;Résilier votre contrat&nbsp;»&nbsp;;</li>
+        <li>le texte entier de ces conditions, dans la version que vous avez acceptée, avec la date de cette version et l'heure de votre acceptation&nbsp;;</li>
+        <li>le modèle de formulaire de rétractation.</li>
+      </ul>
+      <p>Gardez cet e-mail&nbsp;: il contient vos conditions de vente. Si vous ne le recevez pas, regardez dans vos courriers indésirables, puis écrivez-nous à <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</p>
+      <p>Nous gardons la version des conditions que vous avez acceptée, avec la date et l'heure de votre acceptation et de votre demande d'accès immédiat. Nous conservons votre contrat pendant 10 ans après sa fin, avec la formule mensuelle comme avec la formule annuelle, et nous vous y donnons accès sur simple demande à <a href="mailto:contact@linceya.com">contact@linceya.com</a>. Pour un contrat de 120&nbsp;€ ou plus, comme la formule annuelle, c'est une obligation (article L213-1 du Code de la consommation).</p>
+
+      <h2 data-num="06" id="duree">Durée, renouvellement et résiliation</h2>
+      <h3>Formule mensuelle</h3>
+      <ul>
+        <li>Elle n'a pas de durée minimale. Elle se renouvelle chaque mois, à la date de votre premier paiement (le jour de votre souscription, ou la fin du mois gratuit), jusqu'à ce que vous la résiliiez.</li>
+        <li>Vous pouvez la résilier à tout moment. Elle s'arrête à la fin du mois déjà payé&nbsp;: vous gardez l'Elite jusque-là. Pendant le mois gratuit, elle s'arrête à la fin du mois gratuit, sans aucun paiement.</li>
+        <li>Le mois commencé n'est pas remboursé, sauf rétractation (<a href="#retractation">partie 08</a>) ou suppression de votre compte (<a href="#suppression-compte">plus bas</a>).</li>
+      </ul>
+      <h3>Formule annuelle</h3>
+      <ul>
+        <li>Elle dure 12 mois, payés d'avance. C'est un engagement de 12 mois&nbsp;: une résiliation prend effet à la fin de la période payée, pas avant. Seule exception&nbsp;: la suppression de votre compte, qui met fin à l'abonnement tout de suite, avec le remboursement de la part non utilisée (<a href="#suppression-compte">plus bas</a>).</li>
+        <li>Avec le mois gratuit, ces 12 mois et l'engagement commencent à votre premier paiement, à la fin du mois gratuit. Une résiliation pendant le mois gratuit prend effet à sa fin&nbsp;: rien n'est payé, et il n'y a pas d'engagement.</li>
+        <li>À la fin de chaque période de 12 mois, elle est reconduite tacitement pour 12 mois, au prix prévu en <a href="#prix">partie 04</a>, sauf si vous l'avez résiliée avant.</li>
+        <li>Pour refuser le renouvellement, résiliez au plus tard la veille de la date de renouvellement. C'est la date limite. Vous gardez l'Elite jusqu'à la fin de la période payée.</li>
+        <li>Avant chaque renouvellement, nous vous envoyons un e-mail dédié à ce seul rappel, au plus tôt 3 mois et au plus tard 1 mois avant la date limite. En pratique, nous l'envoyons entre 60 et 32 jours avant la date limite. Il vous rappelle que vous pouvez refuser le renouvellement, gratuitement, et donne la date limite dans un encadré. Il vous donne aussi les liens pour résilier.</li>
+        <li>Si ce rappel ne vous a pas été envoyé, vous pouvez mettre fin à l'abonnement gratuitement, à tout moment après le renouvellement. Nous vous remboursons alors, sous 30 jours, ce que vous avez payé pour la période qui reste, déduction faite de la période déjà écoulée (article L215-1, reproduit en <a href="#textes">partie 14</a>).</li>
+      </ul>
+      <h3 id="resilier">Comment résilier</h3>
+      <p><strong>En ligne et gratuitement, avec «&nbsp;Résilier votre contrat&nbsp;»</strong>, sur la page <a href="/cancel-subscription.html">linceya.com/cancel-subscription.html</a>. Elle est accessible depuis la page <a href="/pricing.html">Abonnements</a>, la page de paiement et le pied de page du site. Vous n'avez pas besoin de compte.</p>
+      <ol class="etapes">
+        <li>Vous indiquez votre nom et prénom, l'adresse e-mail de votre abonnement (elle reçoit la confirmation), une référence si vous en avez une (le numéro d'une facture ou d'un reçu), et la date de fin souhaitée.</li>
+        <li>Vous vérifiez votre demande sur un récapitulatif. Rien n'est encore envoyé&nbsp;: vous pouvez la modifier.</li>
+        <li>Vous l'envoyez avec le bouton «&nbsp;Notifier la résiliation&nbsp;». La page affiche aussitôt la date, l'heure et la référence de votre demande.</li>
+      </ol>
+      <p>Vous pouvez aussi résilier&nbsp;:</p>
+      <ul>
+        <li>depuis «&nbsp;Gérer mon abonnement&nbsp;», sur la page <a href="/pricing.html">Abonnements</a>&nbsp;: vous vous connectez au portail de paiement de Stripe avec l'adresse e-mail de votre abonnement. Vous y trouvez aussi vos factures et vous pouvez y changer de carte&nbsp;;</li>
+        <li>par e-mail, à <a href="mailto:contact@linceya.com">contact@linceya.com</a>&nbsp;;</li>
+        <li>en supprimant votre compte Linceya&nbsp;: un abonnement pris sur linceya.com prend alors fin tout de suite, et nous vous remboursons la part de la période payée qui n'a pas servi (<a href="#suppression-compte">plus bas</a>).</li>
+      </ul>
+      <p>Quelle que soit la façon de résilier, nous vous confirmons par e-mail la réception de votre résiliation, la date à laquelle votre abonnement prend fin et ce que cela change.</p>
+      <p>Sauf si vous supprimez votre compte, vous gardez l'Elite jusqu'à la fin de la période payée, ou du mois gratuit, et aucun nouveau prélèvement n'a lieu. Ensuite, votre compte Linceya reste ouvert, au palier gratuit, sauf si vous avez aussi un abonnement Elite en cours sur l'App Store ou Google Play. Jusqu'à la date de fin, vous pouvez reprendre votre abonnement depuis «&nbsp;Gérer mon abonnement&nbsp;».</p>
+      <p>Si la loi ou ces conditions vous permettent de mettre fin à l'abonnement plus tôt, par exemple après un changement de l'Elite (<a href="#evolution">partie 07</a>) ou si le rappel de renouvellement ne vous a pas été envoyé (plus haut), choisissez «&nbsp;Plus tôt&nbsp;» dans le formulaire et précisez le motif. Vous pouvez envoyer un justificatif à <a href="mailto:contact@linceya.com">contact@linceya.com</a>. Nous examinons votre demande et vous répondons par e-mail sous 7 jours.</p>
+      <p>Un abonnement pris dans l'application se résilie dans les réglages de l'App Store ou de Google Play.</p>
+      <h3 id="suppression-compte">Si vous supprimez votre compte</h3>
+      <p>Vous pouvez demander à tout moment la suppression de votre compte Linceya, sur la page <a href="/delete-account.html">Suppression de compte</a>. Nous traitons la demande sous 7 jours ouvrés. Si vous avez un abonnement pris sur linceya.com, il prend fin tout de suite, le jour où nous supprimons votre compte, avec la formule mensuelle comme avec la formule annuelle. Aucun nouveau prélèvement n'a lieu, et l'abonnement ne peut plus être repris.</p>
+      <p>Nous vous remboursons la part de la période payée qui n'a pas servi, au prorata&nbsp;:</p>
+      <ul>
+        <li>La base est le montant payé pour la période en cours, code promo compris.</li>
+        <li>Nous comptons les jours entiers écoulés entre le début de cette période et la fin de l'abonnement. Un jour commencé ne compte pas.</li>
+        <li>Part gardée = montant payé × jours écoulés ÷ nombre de jours de la période. Elle est arrondie au centime inférieur&nbsp;: l'arrondi est toujours en votre faveur.</li>
+        <li>Nous vous remboursons le reste, avec le même moyen de paiement et sans frais, quand nous mettons fin à l'abonnement. Selon votre banque, le remboursement apparaît sous 5 à 10 jours.</li>
+        <li>Exemple, formule annuelle, sur 365 jours&nbsp;: compte supprimé après 100 jours, 54,52&nbsp;€ gardés, 144,48&nbsp;€ remboursés.</li>
+        <li>Exemple, formule mensuelle, sur un mois de 30 jours&nbsp;: compte supprimé après 10 jours, 8,33&nbsp;€ gardés, 16,66&nbsp;€ remboursés.</li>
+      </ul>
+      <p>Pendant le mois gratuit, rien n'a été payé&nbsp;: l'abonnement prend fin sans aucun paiement, et il n'y a rien à rembourser.</p>
+      <p>Nous vous confirmons par e-mail la fin de votre abonnement et son remboursement. Si vous êtes encore dans le délai de rétractation, vous pouvez aussi vous rétracter (<a href="#retractation">partie 08</a>).</p>
+      <p>La suppression de votre compte n'arrête pas un abonnement pris dans l'application&nbsp;: résiliez-le d'abord dans les réglages de l'App Store ou de Google Play.</p>
+
+      <h2 data-num="07" id="evolution">Évolution de l'Elite</h2>
+      <p>Nous pouvons faire évoluer l'Elite, par exemple pour l'améliorer, pour l'adapter à une évolution technique ou pour des raisons de sécurité. Ces changements sont sans frais pour vous.</p>
+      <p>Si un changement réduit de façon notable ce que l'Elite vous apporte, nous vous prévenons par e-mail avant qu'il s'applique. Vous pouvez alors résilier sans frais dans les 30 jours qui suivent ce message, ou qui suivent le changement s'il vient après. Nous vous remboursons la part de la période payée qui reste.</p>
+
+      <h2 data-num="08" id="retractation">Droit de rétractation</h2>
+      <p>Vous avez <strong>14 jours</strong> pour vous rétracter, sans donner de motif et sans frais. Le délai court à partir du lendemain du jour où vous souscrivez (articles L221-18 et L221-19 du Code de la consommation). S'il finit un samedi, un dimanche ou un jour férié, il va jusqu'au premier jour ouvrable qui suit. L'e-mail de confirmation vous donne la date limite.</p>
+      <p>Avec le mois gratuit, ce délai court aussi à partir de la souscription. Il finit avant le premier paiement&nbsp;: si vous vous rétractez pendant ce délai, vous ne payez rien. Le premier paiement, à la fin du mois gratuit, n'ouvre pas de nouveau délai de rétractation. Après lui, vous pouvez toujours résilier (<a href="#duree">partie 06</a>).</p>
+      <h3 id="renoncer">Comment vous rétracter</h3>
+      <p>Dites-le-nous avant la fin du délai, par une déclaration claire&nbsp;:</p>
+      <ul>
+        <li><strong>en ligne, avec la fonction «&nbsp;Renoncer au contrat ici&nbsp;»</strong>, sur la page <a href="/withdraw.html">linceya.com/withdraw.html</a>. Elle est accessible depuis la page <a href="/pricing.html">Abonnements</a>, la page de paiement, le pied de page du site et l'e-mail de confirmation. Elle est gratuite et reste ouverte pendant tout le délai. Vous n'avez pas besoin de compte&nbsp;;</li>
+        <li>par e-mail, à <a href="mailto:contact@linceya.com">contact@linceya.com</a>&nbsp;;</li>
+        <li>ou avec le modèle de formulaire donné en <a href="#formulaire">annexe</a>. Il n'est pas obligatoire.</li>
+      </ul>
+      <p>Il suffit que votre message parte avant la fin du délai.</p>
+      <p>Vous pouvez également exercer votre droit de rétractation en ligne sur <a href="/withdraw.html">linceya.com/withdraw.html</a>. Si vous utilisez cette fonctionnalité en ligne, nous vous enverrons, dans les meilleurs délais, un accusé de réception de la rétractation sur un support durable (par exemple, par courriel), y compris son contenu ainsi que la date et l'heure de sa soumission.</p>
+      <h3>«&nbsp;Renoncer au contrat ici&nbsp;», pas à pas</h3>
+      <ol class="etapes">
+        <li>Vous indiquez votre nom et prénom, l'adresse e-mail de votre abonnement (elle reçoit l'accusé de réception) et votre formule. Vous pouvez ajouter la date de votre souscription et un message. La page affiche votre déclaration&nbsp;: «&nbsp;Je me rétracte de mon contrat d'abonnement Linceya Elite souscrit sur linceya.com.&nbsp;»</li>
+        <li>Vous vérifiez votre demande sur un récapitulatif. Rien n'est encore envoyé&nbsp;: vous pouvez la modifier.</li>
+        <li>Vous l'envoyez avec le bouton «&nbsp;Confirmer la rétractation&nbsp;». La page affiche aussitôt la date, l'heure et la référence de votre demande.</li>
+        <li>Nous vous envoyons sans délai, par e-mail, à l'adresse de votre abonnement, un accusé de réception. Il reprend le contenu de votre déclaration, avec la date et l'heure de son envoi.</li>
+      </ol>
+      <h3 id="acces-immediat">Accès tout de suite</h3>
+      <p>Sur la page de paiement de linceya.com, avant de payer, vous cochez une case. Elle n'est pas cochée d'avance. Voici son texte&nbsp;:</p>
+      <div class="encadre">
+        <p>«&nbsp;Je demande que mon abonnement commence tout de suite, avant la fin du délai de rétractation de 14 jours. Si je me rétracte pendant ce délai, je paierai la part de l'abonnement qui correspond aux jours écoulés. Je reconnais que je perdrai mon droit de rétractation une fois l'abonnement entièrement exécuté.&nbsp;»</p>
+      </div>
+      <p>Quand la page de paiement annonce le mois gratuit, le texte de la case est celui-ci&nbsp;:</p>
+      <div class="encadre">
+        <p>«&nbsp;Je demande que mon abonnement commence tout de suite, avant la fin du délai de rétractation de 14 jours. Si je me rétracte pendant ce délai, je paierai la part de l'abonnement qui correspond aux jours écoulés depuis mon premier paiement&nbsp;: rien si je suis encore dans mon mois gratuit. Je reconnais que je perdrai mon droit de rétractation une fois l'abonnement entièrement exécuté.&nbsp;»</p>
+      </div>
+      <p>Cette case est nécessaire pour souscrire en ligne&nbsp;: l'Elite s'ouvre dès votre commande, mois gratuit compris. Nous enregistrons la date et l'heure de votre demande, et nous vous les confirmons dans l'e-mail de confirmation (<a href="#confirmation">partie 05</a>).</p>
+      <p>Cocher cette case ne vous fait pas perdre votre droit de rétractation&nbsp;: vous gardez vos 14 jours. Un abonnement d'un mois ou d'un an n'est jamais entièrement exécuté avant la fin de ce délai.</p>
+      <h3>Remboursement</h3>
+      <p>Nous vous remboursons au plus tard 14 jours après avoir reçu votre rétractation, avec le même moyen de paiement, sans frais (article L221-24 du Code de la consommation).</p>
+      <p>Si vous avez demandé de commencer la prestation de services pendant le délai de rétractation, vous devrez nous payer un montant proportionnel à ce qui vous a été fourni jusqu'au moment où vous nous avez informé de votre rétractation du présent contrat, par rapport à l'ensemble des prestations prévues par le contrat.</p>
+      <p>Comme l'abonnement a commencé à votre demande, nous gardons donc la part qui correspond aux jours écoulés (article L221-25 du Code de la consommation). Voici comment nous la calculons&nbsp;:</p>
+      <ul>
+        <li>La base est le montant que vous avez payé, code promo compris.</li>
+        <li>Nous comptons les jours entiers écoulés entre votre souscription et l'envoi de votre rétractation. Un jour commencé ne compte pas.</li>
+        <li>Part gardée = montant payé × jours écoulés ÷ nombre de jours de la période payée. Elle est arrondie au centime inférieur&nbsp;: l'arrondi est toujours en votre faveur.</li>
+        <li>Nous vous remboursons le reste.</li>
+        <li>Exemple, formule mensuelle, sur un mois de 30 jours&nbsp;: rétractation après 10 jours, 8,33&nbsp;€ gardés, 16,66&nbsp;€ remboursés.</li>
+        <li>Exemple, formule annuelle, sur 365 jours&nbsp;: rétractation après 10 jours, 5,45&nbsp;€ gardés, 193,55&nbsp;€ remboursés.</li>
+        <li>Pendant le mois gratuit, vous n'avez rien payé&nbsp;: rien n'est gardé ni remboursé, et l'abonnement prend fin sans aucun paiement.</li>
+      </ul>
+      <p>Si nous n'avons pas recueilli votre demande d'accès immédiat, rien ne vous est retenu&nbsp;: vous êtes remboursé en entier.</p>
+      <h3>Après votre rétractation</h3>
+      <ul>
+        <li>L'accusé de réception contient un lien «&nbsp;Ce n'est pas vous&nbsp;?&nbsp;». Pendant 24 heures, il permet au titulaire de l'adresse e-mail d'annuler une demande qu'il n'a pas faite. Il protège votre abonnement contre une demande envoyée par quelqu'un d'autre avec votre adresse.</li>
+        <li>Passé ces 24 heures, nous traitons votre rétractation&nbsp;: nous vous remboursons et nous mettons fin à votre abonnement. Le remboursement est toujours fait dans les 14 jours qui suivent la réception de votre rétractation.</li>
+        <li>Votre accès Elite du site prend fin quand nous traitons la demande. Votre compte Linceya reste ouvert, au palier gratuit, sauf si vous avez aussi un abonnement Elite en cours sur l'App Store ou Google Play.</li>
+        <li>Un second e-mail vous donne le montant payé, la part gardée et le montant remboursé. Selon votre banque, le remboursement apparaît sous 5 à 10 jours.</li>
+        <li>Si nous ne retrouvons pas votre abonnement avec les informations données, nous examinons votre demande et nous vous écrivons. Une demande reçue après la fin du délai est aussi enregistrée et examinée.</li>
+        <li>Un abonnement pris dans l'application (App Store ou Google Play) se gère chez Apple ou chez Google&nbsp;: cette fonction ne le concerne pas.</li>
+      </ul>
+
+      <h2 data-num="09" id="remboursement">Remboursement</h2>
+      <p>En dehors de la rétractation (<a href="#retractation">partie 08</a>), de la garantie légale (<a href="#garantie">partie 10</a>), d'un changement qui réduit l'Elite (<a href="#evolution">partie 07</a>), du cas de l'article L215-1 (<a href="#duree">partie 06</a>) et de la suppression de votre compte (<a href="#suppression-compte">partie 06</a>), une période commencée n'est pas remboursée, ni en entier ni au prorata.</p>
+      <p>Après une résiliation, vous gardez l'Elite jusqu'à la fin de la période payée, ou du mois gratuit. Si vous supprimez votre compte, l'abonnement prend fin tout de suite et nous vous remboursons au prorata la part de la période payée qui n'a pas servi (<a href="#suppression-compte">partie 06</a>).</p>
+
+      <h2 data-num="10" id="garantie">Garantie légale de conformité</h2>
+      <p>Nous répondons des défauts de conformité de l'Elite pendant toute la durée de votre abonnement. Si l'Elite ne fonctionne pas comme prévu, écrivez-nous&nbsp;: nous la remettons en conformité sans frais.</p>
+      <div class="encadre">
+        <p>Le consommateur a droit à la mise en œuvre de la garantie légale de conformité en cas d'apparition d'un défaut de conformité durant un délai d'un mois pour la formule mensuelle et de douze mois pour la formule annuelle, pour chaque période d'abonnement, à compter de la fourniture du contenu numérique ou du service numérique. Durant ce délai, le consommateur n'est tenu d'établir que l'existence du défaut de conformité et non la date d'apparition de celui-ci.</p>
+        <p>La garantie légale de conformité emporte obligation de fournir toutes les mises à jour nécessaires au maintien de la conformité du contenu numérique ou du service numérique durant chaque période d'abonnement.</p>
+        <p>La garantie légale de conformité donne au consommateur droit à la mise en conformité du contenu numérique ou du service numérique sans retard injustifié suivant sa demande, sans frais et sans inconvénient majeur pour lui.</p>
+        <p>Le consommateur peut obtenir une réduction du prix en conservant le contenu numérique ou le service numérique, ou il peut mettre fin au contrat en se faisant rembourser intégralement contre renoncement au contenu numérique ou au service numérique, si&nbsp;:</p>
+        <p>1° Le professionnel refuse de mettre le contenu numérique ou le service numérique en conformité&nbsp;;</p>
+        <p>2° La mise en conformité du contenu numérique ou du service numérique est retardée de manière injustifiée&nbsp;;</p>
+        <p>3° La mise en conformité du contenu numérique ou du service numérique ne peut intervenir sans frais imposés au consommateur&nbsp;;</p>
+        <p>4° La mise en conformité du contenu numérique ou du service numérique occasionne un inconvénient majeur pour le consommateur&nbsp;;</p>
+        <p>5° La non-conformité du contenu numérique ou du service numérique persiste en dépit de la tentative de mise en conformité du professionnel restée infructueuse.</p>
+        <p>Le consommateur a également droit à une réduction du prix ou à la résolution du contrat lorsque le défaut de conformité est si grave qu'il justifie que la réduction du prix ou la résolution du contrat soit immédiate. Le consommateur n'est alors pas tenu de demander la mise en conformité du contenu numérique ou du service numérique au préalable.</p>
+        <p>Dans les cas où le défaut de conformité est mineur, le consommateur n'a droit à l'annulation du contrat que si le contrat ne prévoit pas le paiement d'un prix.</p>
+        <p>Toute période d'indisponibilité du contenu numérique ou du service numérique en vue de sa remise en conformité suspend la garantie qui restait à courir jusqu'à la fourniture du contenu numérique ou du service numérique de nouveau conforme.</p>
+        <p>Ces droits résultent de l'application des articles L. 224-25-1 à L. 224-25-31 du code de la consommation.</p>
+        <p>Le professionnel qui fait obstacle de mauvaise foi à la mise en œuvre de la garantie légale de conformité encourt une amende civile d'un montant maximal de 300 000 euros, qui peut être porté jusqu'à 10 % du chiffre d'affaires moyen annuel (article L. 242-18-1 du code de la consommation).</p>
+        <p>Le consommateur bénéficie également de la garantie légale des vices cachés en application des articles 1641 à 1649 du code civil, pendant une durée de deux ans à compter de la découverte du défaut. Cette garantie donne droit à une réduction de prix si le contenu numérique ou le service numérique est conservé, ou à un remboursement intégral contre renonciation au contenu numérique ou au service numérique.</p>
+      </div>
+
+      <h2 data-num="11" id="donnees">Données personnelles</h2>
+      <p>Nous traitons vos données comme l'explique notre <a href="/privacy-policy.html">politique de confidentialité</a>. Les données de paiement sont traitées par Stripe. Les informations que vous donnez dans les formulaires «&nbsp;Renoncer au contrat ici&nbsp;» et «&nbsp;Résilier votre contrat&nbsp;» servent seulement à traiter votre demande et à vous répondre.</p>
+      <p>Durées de conservation&nbsp;:</p>
+      <ul>
+        <li>votre contrat (formule, prix, dates, version des conditions acceptée, demande d'accès immédiat) est gardé 10 ans après sa fin, avec la formule mensuelle comme avec la formule annuelle. Nous n'y gardons pas votre adresse e-mail, seulement son empreinte, un code tiré de l'adresse qui permet de retrouver votre contrat sans la garder en clair&nbsp;;</li>
+        <li>pour ne donner le mois gratuit qu'une fois par personne, votre contrat garde aussi un code tiré d'une forme réduite de votre adresse e-mail (sans ce qui suit un «&nbsp;+&nbsp;», par exemple). Si votre abonnement commence par un mois gratuit, il garde en plus les dates de ce mois gratuit et un code tiré de votre carte bancaire, jamais son numéro. Ces codes et ces dates sont effacés avec le contrat, 10 ans après sa fin. Les dates de votre mois gratuit sont aussi gardées avec votre compte Linceya, tant que ce compte existe, sauf celles d'un mois gratuit annulé parce que son moyen de paiement n'était pas une carte vérifiable (<a href="#mois-gratuit">partie 04</a>)&nbsp;: elles sont retirées du compte, le contrat les garde&nbsp;;</li>
+        <li>si vous souscrivez sans compte Linceya, le code d'activation que vous recevez par e-mail (<a href="#elite">partie 02</a>) est gardé avec votre adresse e-mail. Si votre abonnement commence par un mois gratuit, les dates de ce mois gratuit sont gardées avec ce code jusqu'à leur recopie dans votre compte Linceya, puis effacées du code. Si elles ne sont pas recopiées, elles sont effacées avec le code, ou avant. Chaque code d'activation est effacé 3 ans après son utilisation, ou 3 ans après sa date d'expiration s'il n'a pas servi&nbsp;; un code qui n'a pas servi peut l'être plus tôt&nbsp;;</li>
+        <li>vos demandes de rétractation et de résiliation sont gardées 5 ans après leur réception, sans votre nom, votre adresse ni votre message&nbsp;;</li>
+        <li>les e-mails que nous vous envoyons au sujet de votre abonnement partent par notre prestataire d'envoi d'e-mails, Resend. Les accusés de réception, les e-mails de remboursement, les confirmations de résiliation ou de fin d'abonnement et l'annulation d'une rétractation arrivent aussi, en copie, dans notre boîte <a href="mailto:contact@linceya.com">contact@linceya.com</a>. Ces copies, qui reprennent le contenu de vos demandes, sont gardées 5 ans.</li>
+      </ul>
+
+      <h2 data-num="12" id="mediation">Réclamations et médiation</h2>
+      <p>Pour toute réclamation, écrivez-nous d'abord à <a href="mailto:contact@linceya.com">contact@linceya.com</a> ou par le <a href="/contact.html">formulaire de contact</a>.</p>
+      <p>Linceya n'a pas encore désigné de médiateur de la consommation. Si le désaccord persiste, vous pouvez nous écrire de nouveau à <a href="mailto:contact@linceya.com">contact@linceya.com</a>. Vous pouvez aussi saisir le tribunal compétent (<a href="#droit">partie 13</a>).</p>
+
+      <h2 data-num="13" id="droit">Droit applicable et litiges</h2>
+      <p>Ces conditions sont soumises au droit français. Si vous habitez dans un autre pays de l'Union européenne, vous gardez la protection des règles impératives de votre pays.</p>
+      <p>En cas de litige, vous pouvez saisir le tribunal compétent selon les règles habituelles, ou celui du lieu où vous habitiez au moment de la souscription (article R631-3 du Code de la consommation).</p>
+
+      <h2 data-num="14" id="textes">Textes de loi sur la reconduction</h2>
+      <p>Comme le demande l'article L215-4 du Code de la consommation, voici le texte intégral de ses articles L215-1 à L215-3 et L241-3.</p>
+      <div class="loi">
+        <h3>Article L215-1</h3>
+        <p>Pour les contrats de prestations de services conclus pour une durée déterminée avec une clause de reconduction tacite, le professionnel prestataire de services informe le consommateur par écrit, par lettre nominative ou courrier électronique dédiés, au plus tôt trois mois et au plus tard un mois avant le terme de la période autorisant le rejet de la reconduction, de la possibilité de ne pas reconduire le contrat qu'il a conclu avec une clause de reconduction tacite. Cette information, délivrée dans des termes clairs et compréhensibles, mentionne, dans un encadré apparent, la date limite de non-reconduction.</p>
+        <p>Lorsque cette information ne lui a pas été adressée conformément aux dispositions du premier alinéa, le consommateur peut mettre gratuitement un terme au contrat, à tout moment à compter de la date de reconduction.</p>
+        <p>Les avances effectuées après la dernière date de reconduction ou, s'agissant des contrats à durée indéterminée, après la date de transformation du contrat initial à durée déterminée, sont dans ce cas remboursées dans un délai de trente jours à compter de la date de résiliation, déduction faite des sommes correspondant, jusqu'à celle-ci, à l'exécution du contrat.</p>
+        <p>Les dispositions du présent article s'appliquent sans préjudice de celles qui soumettent légalement certains contrats à des règles particulières en ce qui concerne l'information du consommateur.</p>
+        <p>Par exception au premier alinéa du présent article, pour les contrats de fourniture de service de télévision au sens de l'article 2 de la loi n° 86-1067 du 30 septembre 1986 relative à la liberté de communication et pour les contrats de fourniture de services de médias audiovisuels à la demande, le consommateur peut mettre gratuitement un terme au contrat, à tout moment à compter de la première reconduction, dès lors qu'il change de domicile ou que son foyer fiscal évolue.</p>
+      </div>
+      <div class="loi">
+        <h3>Article L215-1-1</h3>
+        <p>Lorsqu'un contrat a été conclu par voie électronique ou a été conclu par un autre moyen et que le professionnel, au jour de la résiliation par le consommateur, offre au consommateur la possibilité de conclure des contrats par voie électronique, la résiliation est rendue possible selon cette modalité.</p>
+        <p>A cet effet, le professionnel met à la disposition du consommateur une fonctionnalité gratuite permettant d'accomplir, par voie électronique, la notification et les démarches nécessaires à la résiliation du contrat. Lorsque le consommateur notifie la résiliation du contrat, le professionnel lui confirme la réception de la notification et l'informe, sur un support durable et dans des délais raisonnables, de la date à laquelle le contrat prend fin et des effets de la résiliation.</p>
+        <p>Un décret fixe notamment les modalités techniques de nature à garantir une identification du consommateur et un accès facile, direct et permanent à la fonctionnalité mentionnée au deuxième alinéa, telles que ses modalités de présentation et d'utilisation. Il détermine les informations devant être fournies par le consommateur.</p>
+      </div>
+      <div class="loi">
+        <h3>Article L215-2</h3>
+        <p>Les dispositions du présent chapitre, à l'exception de l'article L. 215-1-1, ne sont pas applicables aux exploitants des services d'eau potable et d'assainissement.</p>
+      </div>
+      <div class="loi">
+        <h3>Article L215-3</h3>
+        <p>Les dispositions du présent chapitre sont également applicables aux contrats conclus entre des professionnels et des non-professionnels.</p>
+      </div>
+      <div class="loi">
+        <h3>Article L241-3</h3>
+        <p>Lorsque le professionnel n'a pas procédé au remboursement dans les conditions prévues à l'article L. 215-1, les sommes dues sont productives d'intérêts au taux légal.</p>
+      </div>
+
+      <h2 data-num="A" id="formulaire">Annexe&nbsp;: modèle de formulaire de rétractation</h2>
+      <p>Vous pouvez utiliser ce modèle, sans obligation&nbsp;: un simple message clair suffit (<a href="#retractation">partie 08</a>).</p>
+      <div class="formulaire">
+        <p class="titre-formulaire">MODÈLE DE FORMULAIRE DE RÉTRACTATION</p>
+        <p>(Veuillez compléter et renvoyer le présent formulaire uniquement si vous souhaitez vous rétracter du contrat.)</p>
+        <p>A l'attention de Linceya, contact@linceya.com&nbsp;:</p>
+        <p>Je/nous (*) vous notifie/notifions (*) par la présente ma/notre (*) rétractation du contrat portant sur la vente du bien (*)/pour la prestation de services (*) ci-dessous&nbsp;:</p>
+        <p>Commandé le (*)/reçu le (*)&nbsp;:</p>
+        <p>Nom du (des) consommateur(s)&nbsp;:</p>
+        <p>Adresse du (des) consommateur(s)&nbsp;:</p>
+        <p>Signature du (des) consommateur(s) (uniquement en cas de notification du présent formulaire sur papier)&nbsp;:</p>
+        <p>Date&nbsp;:</p>
+        <p>(*) Rayez la mention inutile.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/linceya.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@linceya.app" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+    </a>
+    <a href="https://x.com/linceyapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.snapchat.com/add/Linceyapp" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 2.001c1.466.024 4.298.404 5.667 3.515.464 1.054.348 2.85.255 4.292l-.004.066c-.014.219-.027.43-.036.625.007.005.026.013.063.016.198-.012.418-.075.65-.181.073-.038.247-.117.448-.117.119 0 .238.026.347.075.323.119.523.354.527.622.005.357-.302.667-.913.92-.06.025-.137.05-.219.078-.291.094-.731.236-.85.515-.061.144-.039.328.066.55l.006.013c.044.103.991 2.292 3.193 2.654.099.016.171.103.165.203a.55.55 0 0 1-.044.179c-.139.323-.7.518-1.713.595-.046.005-.064.054-.105.21-.018.062-.038.131-.062.205l-.014.046c-.046.156-.099.317-.245.317-.013 0-.027 0-.041-.003a.745.745 0 0 1-.17-.038 4.05 4.05 0 0 0-1.121-.155 4.94 4.94 0 0 0-.792.064c-.502.087-.939.388-1.442.737-.731.508-1.561 1.082-2.853 1.082-.058 0-.115-.003-.171-.005a3.27 3.27 0 0 1-.143.005c-1.293 0-2.122-.574-2.853-1.082-.502-.349-.939-.65-1.441-.737a4.91 4.91 0 0 0-.792-.064c-.566 0-.992.131-1.121.155a.95.95 0 0 1-.17.038c-.158 0-.205-.144-.245-.317l-.013-.046a3.4 3.4 0 0 1-.063-.205c-.041-.156-.06-.205-.105-.21-1.012-.077-1.574-.272-1.713-.595a.55.55 0 0 1-.044-.179c-.005-.099.066-.187.165-.203 2.202-.362 3.149-2.551 3.193-2.654l.006-.013c.105-.219.127-.405.066-.55-.119-.279-.559-.421-.85-.515a3.5 3.5 0 0 1-.219-.078c-.612-.255-.918-.563-.913-.92.005-.268.205-.503.527-.622a1.07 1.07 0 0 1 .347-.075c.201 0 .375.079.448.117.232.106.452.169.65.181.04-.003.057-.011.063-.016a17.24 17.24 0 0 0-.036-.625l-.004-.066c-.094-1.443-.21-3.236.255-4.292 1.369-3.111 4.201-3.491 5.667-3.515h.061Z"/></svg>
+    </a>
+  </div>
+  <div class="footer-links">
+    <a href="/contact.html">Contact</a>
+    <a href="/pricing.html">Abonnements</a>
+    <a href="/index.html">Accueil</a>
+    <a href="/terms-of-sale.html">Conditions de vente</a>
+    <a href="/legal-notice.html">Mentions légales</a>
+    <a href="/cancel-subscription.html">Résilier votre contrat</a>
+    <a href="/withdraw.html">Renoncer au contrat ici</a>
+    <a href="#" data-cookies-settings>Cookies</a>
+  </div>
+  <div class="footer-lang" style="display:flex;gap:18px;justify-content:center;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:8px;"><span style="color:var(--platinum-light);">FR</span> <a href="/en/terms-of-sale.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">EN</a> <a href="/es/terms-of-sale.html" style="color:rgba(255,255,255,0.55);text-decoration:none;">ES</a></div>
+  <div class="footer-copy">© 2026 LINCEYA — TOUS DROITS RÉSERVÉS</div>
+</footer>
+
+<script src="/cookies.js" defer></script>
+<script src="/analytics.js" defer></script>
+</body>
+</html>
