@@ -338,13 +338,13 @@ footer {
         <li><strong>Annual plan: €199 per year</strong>, paid in a single payment for 12 months.</li>
       </ul>
       <p>Prices are in euros and include all taxes: this is the amount you pay.</p>
-      <p>The price that applies is the one shown on the payment page when you subscribe. A promo code, if there is one, applies as shown on that page.</p>
+      <p>The price that applies is the one on your order summary, when you order (<a href="#subscribing">section 05</a>). Stripe's payment page does not change it: no promo code can be entered there.</p>
       <p>The price of your subscription does not change during a period you have already paid for. If it were to change for a later period, we would tell you by email at least 30 days before. You could then cancel before the new price applies.</p>
       <p>Prices for the subscription bought in the app are set on the App Store and on Google Play. They may be different.</p>
       <h3 id="free-month">The free month</h3>
       <ul>
         <li>A first Elite subscription taken out on linceya.com starts with <strong>1 free month</strong>, with the monthly plan as with the annual plan, when your order summary on linceya.com says so.</li>
-        <li>The free month ends on the same day of the next month as your order (the “Order with obligation to pay” button), at the same time, Paris time. If that day does not exist, it runs until the last day of that month. Example: you order on November 20, the free month runs until December 20. The end date is the one given by your order summary, Stripe's payment page and the confirmation email. Stripe's page shows this month as a number of days: the end date is the same.</li>
+        <li>The free month ends on the same day of the next month as your order (the “Order with obligation to pay” button), at the same time, Paris time. If that day does not exist, it runs until the last day of that month. Example: you order on November 20, the free month runs until December 20. The end date, in Paris time, is the one given by your order summary and the confirmation email. Stripe's payment page shows this month as a number of days, and may show its date in your device's time.</li>
         <li>During the free month, you have Elite, with <strong>2 video analyses in total</strong> (<a href="#quota">section 03</a>). Nothing is charged.</li>
         <li>Your card is required when you subscribe. At the end of the free month, the subscription becomes paid automatically, unless you have canceled it before: €24.99 for the monthly plan, or €199 for the annual plan, charged to that payment method. This is your first payment. After that, the subscription renews as set out in <a href="#term">section 06</a>.</li>
         <li>With the annual plan, the 12 paid months and the 12-month commitment start at your first payment, at the end of the free month. The first year therefore has 13 months, 1 of them free.</li>
@@ -359,12 +359,12 @@ footer {
       <ol class="etapes">
         <li>You choose the plan, monthly or annual, on the linceya.com payment page. The page reminds you of the price, the term and, for the annual plan, the 12-month commitment. When the free month is offered (<a href="#free-month">section 04</a>), it also gives its length and the amount of the first payment.</li>
         <li>You enter the email address of your Linceya account.</li>
-        <li>You check the box asking for your subscription to start right away (<a href="#immediate-access">section 08</a>). It is not checked in advance. Without it, you cannot subscribe online: Elite opens as soon as you place your order, free month included.</li>
+        <li>You check the box asking for your subscription to start right away (<a href="#immediate-access">section 08</a>). It is not checked in advance. Without it, you cannot subscribe online: Elite opens as soon as your payment is accepted or, with the free month, as soon as your card is saved.</li>
         <li>With “Review my order”, you see your order summary: plan, price including all taxes, term, automatic renewal and commitment, payment methods, your email address and your request for immediate access. If the free month applies, it gives its end date, its 2 analyses and the price that follows; otherwise, it tells you that you pay when you subscribe. “Edit my order” takes you back to step 1 to correct it. The summary is valid for 20 minutes; after that, or if something changes (price, terms, right to the free month), the page shows you a new summary before you order.</li>
         <li>On this summary, you accept these terms by checking the box “I accept the Linceya Elite terms of sale.” It is not checked in advance; its link opens this page.</li>
         <li>You confirm your order with the “Order with obligation to pay” button. Just above it, a sentence reminds you that you are placing an order with an obligation to pay and, with the free month, gives the end date of the free month and the price that follows. This button is the one that confirms the order.</li>
-        <li>You then go to Stripe's secure payment page, which only handles the payment: there, you give your payment method (with the free month, your card: nothing is charged that day) and confirm it with Stripe's button (“Pay and subscribe”, or <span class="a-remplir">[BOUTON DE STRIPE AVEC LE MOIS GRATUIT EN ANGLAIS, A CONSTATER]</span> with the free month). That button records the payment for the order you have already placed; it does not place a second order. If you leave that page without paying, nothing is charged and the order goes no further.</li>
-        <li>The contract is concluded when your payment is accepted. With the free month, it is concluded when your card is saved: the free month starts at that moment.</li>
+        <li>You then go to Stripe's secure payment page, which only handles the payment: there, you give your payment method (with the free month, your card: nothing is charged that day) and save it with Stripe's button (for example “Pay and subscribe”, or <span class="a-remplir">[BOUTON DE STRIPE AVEC LE MOIS GRATUIT EN ANGLAIS, A CONSTATER]</span> with the free month), or with the button of the method you chose (Apple Pay, Klarna…). That button carries out the payment for the order you have already placed (with the free month, it only saves your card, without charging anything); it does not place a second order. If you leave that page without paying, the order is canceled at no cost (step 8).</li>
+        <li>The contract is concluded when you click “Order with obligation to pay”. It is performed when your payment is accepted (with the free month, when your card is saved): Elite then opens. If you leave Stripe's page without paying, or if no payment is accepted there, the order is canceled at no cost and you owe us nothing.</li>
       </ol>
       <p>You can save or print this page.</p>
       <h3>Payment</h3>
@@ -372,7 +372,7 @@ footer {
       <p>You pay when you subscribe, or at the end of the free month if you have one, then automatically at each renewal, with the same payment method. You receive a receipt by email for each payment.</p>
       <p>If a payment fails, Stripe tries again and Elite access is suspended in the meantime, unless you also have an active Elite subscription on the App Store or Google Play. If the payment does not go through, the subscription ends. This also applies to the first payment, at the end of the free month.</p>
       <h3 id="confirmation">Confirmation</h3>
-      <p>After your order, we send you an email confirming your contract, to the address of your subscription. It contains:</p>
+      <p>When your payment is accepted (with the free month, when your card is saved), we send you an email confirming your contract, to the address of your subscription. It contains:</p>
       <ul>
         <li>the summary of your subscription: plan, price paid, date and time of subscription, next renewal and commitment. With the free month: its end date, its 2 analyses, and the date and amount of the first payment;</li>
         <li>the date and time of your request for immediate access (<a href="#immediate-access">section 08</a>);</li>
@@ -436,7 +436,7 @@ footer {
       <p>If a change noticeably reduces what Elite gives you, we tell you by email before it applies. You can then cancel free of charge within 30 days of that message, or of the change if it comes later. We refund the part of the paid period that remains.</p>
 
       <h2 data-num="08" id="withdrawal">Right of withdrawal</h2>
-      <p>You have <strong>14 days</strong> to withdraw, without giving a reason and at no cost. The period starts on the day after the day you subscribe (Articles L221-18 and L221-19 of the French Consumer Code). If it ends on a Saturday, a Sunday or a public holiday, it runs until the next business day. The confirmation email gives you the deadline.</p>
+      <p>You have <strong>14 days</strong> to withdraw, without giving a reason and at no cost. The period starts on the day after the day the contract is concluded (<a href="#subscribing">section 05</a>; Articles L221-18 and L221-19 of the French Consumer Code). If it ends on a Saturday, a Sunday or a public holiday, it runs until the next business day. The confirmation email gives you the deadline.</p>
       <p>With the free month, this period also starts from the day you subscribe. It ends before the first payment: if you withdraw during this period, you pay nothing. The first payment, at the end of the free month, does not open a new withdrawal period. After it, you can still cancel (<a href="#term">section 06</a>).</p>
       <h3 id="withdraw-here">How to withdraw</h3>
       <p>Tell us before the period ends, with a clear statement:</p>
@@ -467,7 +467,7 @@ footer {
       <div class="encadre">
         <p>“I ask for my subscription to start right away, before the end of the 14-day withdrawal period. If I withdraw during this period, I will pay for the part of the subscription that matches the days elapsed since my first payment: nothing if I am still in my free month. I acknowledge that I will lose my right of withdrawal once the subscription has been fully performed.”</p>
       </div>
-      <p>This box is required to subscribe online: Elite opens as soon as you place your order, free month included. We record the date and time of your request, and we confirm them in the confirmation email (<a href="#confirmation">section 05</a>).</p>
+      <p>This box is required to subscribe online: Elite opens as soon as your payment is accepted or, with the free month, as soon as your card is saved. We record the date and time of your request, and we confirm them in the confirmation email (<a href="#confirmation">section 05</a>).</p>
       <p>Checking this box does not make you lose your right of withdrawal: you keep your 14 days. A one-month or one-year subscription is never fully performed before the end of this period.</p>
       <h3>Refund</h3>
       <p>We refund you no later than 14 days after receiving your withdrawal, with the same payment method, at no cost (Article L221-24 of the French Consumer Code).</p>

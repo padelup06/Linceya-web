@@ -550,7 +550,7 @@ footer {
         <p class="recap-retractation">Vous pourrez renoncer au contrat pendant 14 jours&nbsp;: <a href="https://linceya.com/withdraw.html" target="_blank" rel="noopener noreferrer">Renoncer au contrat ici</a>.</p>
         <p class="recap-avant" id="recap-avant-commande"></p>
         <button class="buy-btn" id="commande-btn" type="button" aria-disabled="true" aria-describedby="recap-avant-commande" onclick="commander()"><span>Commander avec obligation de paiement</span></button>
-        <p class="recap-sous-bouton">Vous passerez ensuite sur la page sécurisée de Stripe, qui enregistre seulement le paiement. Ce récapitulatif est valable 20 minutes.</p>
+        <p class="recap-sous-bouton">Vous passerez ensuite sur la page sécurisée de Stripe, qui ne s'occupe que du paiement (avec le mois gratuit, elle enregistre seulement votre carte). Ce récapitulatif est valable 20 minutes.</p>
         <button class="lien-modifier" id="modifier-btn" type="button" onclick="modifierCommande()">Modifier ma commande</button>
        </section>
        <div class="sr-only" id="etat-commande" role="status" aria-live="polite"></div>
@@ -666,6 +666,18 @@ const TEXTE_CASE_ESSAI = "Je demande que mon abonnement commence tout de suite, 
 // ligne des moyens de paiement le dit dès que la page annonce le mois gratuit,
 // ou que le serveur le donne (L221-14 : moyens dits dès le début de la commande).
 const TEXTE_MOYENS_ESSAI = " Avec le mois gratuit : carte bancaire seulement (Apple Pay et Google Pay compris).";
+// L'aide de la case d'accès immédiat avec le mois gratuit (revue du 19/11 : l'Elite s'ouvre quand la
+// carte est enregistrée, pas au clic sur notre bouton).
+const TEXTE_AIDE_ESSAI = "Cette case est nécessaire pour souscrire en ligne : avec le mois gratuit, l'Elite s'ouvre dès que votre carte est enregistrée.";
+// Revue du 19/11 : la case d'accès immédiat dans sa variante du mois gratuit (texte et aide), décochée.
+function montrerCaseEssai() {
+  document.getElementById('acces-immediat-texte').textContent = TEXTE_CASE_ESSAI;
+  document.getElementById('acces-immediat-aide').textContent = TEXTE_AIDE_ESSAI;
+  const caseAcces = document.getElementById('acces-immediat');
+  if (caseAcces) caseAcces.checked = false;
+  direMoyensEssai();
+  majBoutonAcces();
+}
 function direMoyensEssai() {
   const el = document.getElementById('moyens-essai');
   if (el) el.textContent = TEXTE_MOYENS_ESSAI;
@@ -734,8 +746,7 @@ function renderPackages() {
       + ". La date exacte du premier paiement s'affiche à l'étape suivante, sur le récapitulatif de votre commande, puis sur la page de Stripe et dans l'e-mail de confirmation. "
       + "Résiliez en ligne avant la fin du mois gratuit : vous ne payez rien. Un seul mois gratuit par personne.";
     document.getElementById('acces-immediat-texte').textContent = TEXTE_CASE_ESSAI;
-    document.getElementById('acces-immediat-aide').textContent =
-      "Cette case est nécessaire pour souscrire en ligne : l'Elite s'ouvre dès votre commande, mois gratuit compris.";
+    document.getElementById('acces-immediat-aide').textContent = TEXTE_AIDE_ESSAI;
     document.getElementById('side-quota').textContent = '2 analyses vidéo pendant le mois gratuit, puis 4 par mois';
     direMoyensEssai();
   }
@@ -812,6 +823,10 @@ const LIBELLE_ACCES = 'Accès tout de suite';
 const TEXTE_ACCES_DEMANDE = "Demandé, avec la case cochée à l'étape précédente :";
 // Refus du jeton à la commande : un nouveau récapitulatif, montré avant tout nouveau clic.
 const REFUS_A_RENOUVELER = ['recapitulatif_expire', 'recapitulatif_change', 'recapitulatif_utilise', 'recapitulatif_invalide'];
+// Revue du 19/11 : la case cochée n'était pas la variante du mois gratuit que le serveur accorde.
+const TEXTE_CASE_ESSAI_A_COCHER = "Le mois gratuit s'applique à votre commande : lisez la case de demande d'accès immédiat, qui a changé, puis cochez-la de nouveau.";
+// Revue du 19/11 : panne à la commande (le jeton a peut-être servi) : un nouveau récapitulatif.
+const TEXTE_ERREUR_RECAP = "Une erreur est survenue. Voici un nouveau récapitulatif : vérifiez-le, puis commandez de nouveau.";
 
 // Le récapitulatif affiché : { jeton, prix, plan, email, acces } (acces : le texte exact
 // de la case d'accès immédiat que la personne a cochée).
@@ -960,6 +975,16 @@ function memeTexte(a, b) {
 
 function afficherRecapitulatif(data, demande, alerte) {
   const r = data.recapitulatif;
+  // Revue du 19/11 : le serveur accorde le mois gratuit, mais la case cochée était la variante sans
+  // lui (interrupteur de la page éteint, fenêtre de C14) : son texte ne disait pas « rien si je suis
+  // encore dans mon mois gratuit ». La page montre la variante du mois gratuit, la décoche et la
+  // redemande (une nouvelle demande expresse), avant tout récapitulatif.
+  if (r.essai === true && demande.acces !== TEXTE_CASE_ESSAI) {
+    afficherFormulaire(true);
+    montrerCaseEssai();
+    demanderCaseAcces(TEXTE_CASE_ESSAI_A_COCHER);
+    return;
+  }
   recapEnCours = { jeton: data.jeton, prix: demande.prix, plan: planDuPrix(demande.prix), email: demande.email, acces: demande.acces };
   if (r.essai === true) direMoyensEssai();
 
@@ -1088,6 +1113,14 @@ async function commander() {
   if (data && REFUS_A_RENOUVELER.indexOf(data.code) >= 0) {
     recapEnCours = null;
     await demanderRecapitulatif({ prix: recap.prix, email: recap.email, acces: recap.acces }, message);
+    return;
+  }
+  // Revue du 19/11 : panne, réponse illisible ou sans adresse de Stripe (aucun code du serveur) : le
+  // jeton a peut-être déjà servi. Un nouveau récapitulatif est demandé tout de suite, montré avec un
+  // message, et un nouveau clic attendu (jamais un clic de plus sur un jeton déjà servi).
+  if (!data || typeof data.code !== 'string' || !data.code) {
+    recapEnCours = null;
+    await demanderRecapitulatif({ prix: recap.prix, email: recap.email, acces: recap.acces }, TEXTE_ERREUR_RECAP);
     return;
   }
   btn.disabled = false;
