@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Pago Elite</title>
-<meta name="description" content="Pasa a Linceya Elite: 4 análisis vídeo IA al mes, plan personalizado, ELO certificado. 24,99€/mes, cancelable en cualquier momento.">
+<meta name="description" content="Pasa a Linceya Elite: 4 análisis vídeo IA al mes, plan personalizado, ELO certificado. 24,99€/mes sin compromiso, o 199€/año.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -480,7 +480,7 @@ footer {
        <div id="commande-formulaire">
         <div class="paywall-eyebrow">› Suscripción</div>
         <div class="paywall-title">Elige<br>tu plan</div>
-        <div class="paywall-sub" id="paywall-sub">Cancelable en cualquier momento. Sin compromiso.</div>
+        <div class="paywall-sub" id="paywall-sub">Mensual sin compromiso, o anual pagado 12 meses por adelantado.</div>
         <div class="error-msg" id="error"></div>
         <div id="package-list"></div>
         <div class="email-input-wrap">
@@ -499,7 +499,7 @@ footer {
         <div class="paywall-moyens">Medios de pago: tarjeta bancaria (Apple&nbsp;Pay, Google&nbsp;Pay y Link incluidos), Klarna y Amazon&nbsp;Pay.<span id="moyens-essai"></span></div>
         <div class="paywall-terms">
           Se aplican las <a href="https://linceya.com/es/terms-of-sale.html" target="_blank" rel="noopener noreferrer">condiciones generales de venta</a>: las aceptarás en el resumen de tu pedido, en el paso siguiente. Podrás desistir del contrato durante 14 días: <a href="https://linceya.com/es/withdraw.html" target="_blank" rel="noopener noreferrer">Desistir del contrato aquí</a>.
-          <span id="paywall-renouvellement">Tu suscripción se renueva automáticamente cada mes. Cancelable en cualquier momento.</span>
+          <span id="paywall-renouvellement">Tu suscripción se renueva automáticamente, cada mes o cada año según el plan. Cancelable en cualquier momento: el acceso sigue abierto hasta el final del periodo pagado.</span>
         </div>
         <div class="paywall-moyens paywall-mediateur">Mediador de consumo: Linceya aún no ha designado ninguno. Reclamaciones: <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</div>
        </div>
@@ -582,17 +582,21 @@ const STRIPE_LOCALE = 'es';
 //   PRICE_ELITE        : mensual, 24,99 €/mes.
 //   PRICE_ELITE_ANNUAL : anual, 199 €/año.
 // Una cadena vacía = tarjeta no renderizada: nunca mostramos una oferta que
-// no sabríamos cobrar. El anual se queda vacío mientras la página de
-// condiciones de venta no esté en línea (decisión de Max del 14/11/2026); el
-// día que se rellene, añadir también la oferta anual al JSON-LD de las
-// páginas de precios y `site_an` al bloque faits-machine del drip.
-// Mensual: el precio en línea desde el 15/11/2026 (A10). Anual: a rellenar en C8 ter. El
+// no sabríamos cobrar. El anual está a la venta desde E6 (C8 ter hecho,
+// condiciones de venta en línea). Retirarlo es cambiar a la vez:
+// ANNUEL_SITE_EN_VENTE de los tres pricing.html; en las páginas de precios, la
+// oferta anual del JSON-LD, las FAQ (texto y JSON-LD) y la meta description; la
+// meta description de esta página; en la portada, la oferta anual del JSON-LD,
+// las FAQ (texto y JSON-LD) y la tarjeta Elite; el paso 01 de los tres
+// coach.html; los artículos del blog que citan 199 €; y `site_an` del bloque
+// faits-machine del drip. Para no olvidar ninguno, buscar «199» en la web.
+// Mensual: el precio en línea desde el 15/11/2026 (A10). Anual: a la venta con E6. El
 // servidor debe conocer los mismos identificadores:
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 //   supabase secrets set STRIPE_PRICE_ELITE_ANNUEL=price_yyy
 // Son los que hacen que el webhook escriba subscription_tier='elite'.
 const PRICE_ELITE        = 'price_1Uc9uHJuVIEBTqQ22itOzoWK';
-const PRICE_ELITE_ANNUAL = '';
+const PRICE_ELITE_ANNUAL = 'price_1Uc9usJuVIEBTqQ2PceVRy8j';
 // Importes de las tarjetas: los de los dos precios Stripe de arriba. El
 // equivalente al mes y el ahorro del anual se calculan a partir de ellos,
 // nunca se escriben a mano.
@@ -627,7 +631,7 @@ function economieAnnuel() {
 // Stripe. Este interruptor solo sirve ya para lo que anuncia el formulario. La
 // vuelta del pago lleva `essai=1`, puesto por el servidor (como `known=1`), nunca
 // por la página.
-const ESSAI_SITE_EN_VENTE = false;
+const ESSAI_SITE_EN_VENTE = true;
 
 // Decisión D13 de Max (15/11/2026), levantada solo para el resumen por la decisión
 // del 19/11: la página no calcula ninguna fecha del mes gratis. El formulario dice

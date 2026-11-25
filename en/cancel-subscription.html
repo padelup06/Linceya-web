@@ -358,9 +358,10 @@ footer {
     <h1>Cancel your contract</h1>
 
     <div class="intro">
-      <p class="lead">Cancel here your Elite subscription bought on linceya.com. It is free. You keep Elite until the end of the period you have paid for, and no further payment is taken.</p>
+      <p class="lead">Cancel here your Elite subscription bought on linceya.com. It is free. You keep Elite until the end of the period you have paid for, or of the free month, and no further payment is taken. If you cancel during your free month, you pay nothing.</p>
+      <p class="lead">Annual plan: during the free month there is no commitment yet; from your first payment, it is a 12-month commitment. Your cancellation takes effect at the end of the 12 months paid for; to refuse the next renewal, cancel no later than the day before its date.</p>
       <p class="lead">Subscription bought in the app: cancel it in the App Store or Google Play settings.</p>
-      <p class="lead">Still within the withdrawal period? You can also withdraw from the contract and get a refund, minus the share of the days already elapsed: <a href="/en/withdraw.html">Withdraw from the contract here</a>.</p>
+      <p class="lead">Still within the withdrawal period? You can also withdraw from the contract: <a href="/en/withdraw.html">Withdraw from the contract here</a>. Your site Elite access then ends when we process your request. You get a refund of what you paid, minus the share of the days already elapsed if you requested immediate access; during the free month, you have paid nothing: there is nothing to refund.</p>
     </div>
 
     <section class="card" id="etape-formulaire" aria-label="Cancel your contract">
@@ -386,7 +387,7 @@ footer {
         <fieldset class="form-group">
           <legend>Preferred end date</legend>
           <div class="choix">
-            <label class="choix-item"><input type="radio" name="fin" value="fin_de_periode" checked><span>At the end of the paid period</span></label>
+            <label class="choix-item"><input type="radio" name="fin" value="fin_de_periode" checked><span>At the end of the paid period, or of the free month</span></label>
             <label class="choix-item"><input type="radio" name="fin" value="anticipee"><span>Earlier, for a reason provided by law or by our terms of sale</span></label>
           </div>
         </fieldset>
@@ -468,7 +469,7 @@ footer {
   var LANGUE = 'en';
   var T = {
     "fins": {
-      "fin_de_periode": "At the end of the paid period",
+      "fin_de_periode": "At the end of the paid period, or of the free month",
       "anticipee": "Earlier, for a reason provided by law or by our terms of sale"
     },
     "nonIndiquee": "not given",

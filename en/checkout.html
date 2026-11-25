@@ -6,7 +6,7 @@
 <meta name="apple-itunes-app" content="app-id=6760952174">
 <script src="/app-banner.js" defer></script>
 <title>Linceya — Elite Checkout</title>
-<meta name="description" content="Go Linceya Elite: 4 AI video analyses per month, personalized plan, certified ELO. €24.99/month, cancel anytime.">
+<meta name="description" content="Go Linceya Elite: 4 AI video analyses per month, personalized plan, certified ELO. €24.99/month with no commitment, or €199/year.">
 <meta name="robots" content="noindex">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -480,7 +480,7 @@ footer {
        <div id="commande-formulaire">
         <div class="paywall-eyebrow">› Subscription</div>
         <div class="paywall-title">Choose<br>your plan</div>
-        <div class="paywall-sub" id="paywall-sub">Cancel anytime. No commitment.</div>
+        <div class="paywall-sub" id="paywall-sub">Monthly with no commitment, or yearly paid 12 months upfront.</div>
         <div class="error-msg" id="error"></div>
         <div id="package-list"></div>
         <div class="email-input-wrap">
@@ -499,7 +499,7 @@ footer {
         <div class="paywall-moyens">Payment methods: credit or debit card (Apple&nbsp;Pay, Google&nbsp;Pay and Link included), Klarna and Amazon&nbsp;Pay.<span id="moyens-essai"></span></div>
         <div class="paywall-terms">
           Our <a href="https://linceya.com/en/terms-of-sale.html" target="_blank" rel="noopener noreferrer">terms of sale</a> apply: you will accept them on your order summary, at the next step. You can withdraw from the contract within 14 days: <a href="https://linceya.com/en/withdraw.html" target="_blank" rel="noopener noreferrer">Withdraw from the contract here</a>.
-          <span id="paywall-renouvellement">Your subscription renews automatically every month. Cancel anytime.</span>
+          <span id="paywall-renouvellement">Your subscription renews automatically, every month or every year depending on the plan. Cancel anytime: access stays open until the end of the paid period.</span>
         </div>
         <div class="paywall-moyens paywall-mediateur">Consumer mediator: Linceya has not yet appointed one. Complaints: <a href="mailto:contact@linceya.com">contact@linceya.com</a>.</div>
        </div>
@@ -582,17 +582,21 @@ const STRIPE_LOCALE = 'en';
 //   PRICE_ELITE        : monthly, €24.99/month.
 //   PRICE_ELITE_ANNUAL : yearly, €199/year.
 // An empty string = card not rendered: we never display an offer we
-// wouldn't be able to charge. The yearly one stays empty until the terms of
-// sale page is online (Max's decision of 14/11/2026); the day it is filled
-// in, also add the yearly offer to the JSON-LD of the pricing pages and
-// `site_an` to the faits-machine block of the drip.
-// Monthly: the live price since 15/11/2026 (A10). Yearly: to fill in at C8 ter. The
+// wouldn't be able to charge. The yearly one has been on sale since E6 (C8 ter
+// done, terms of sale online). Withdrawing it means changing, together:
+// ANNUEL_SITE_EN_VENTE of the three pricing.html; on the pricing pages, the
+// yearly offer in the JSON-LD, the FAQ (text and JSON-LD) and the meta
+// description; the meta description of this page; on the home page, the yearly
+// offer in the JSON-LD, the FAQ (text and JSON-LD) and the Elite card; step 01
+// of the three coach.html; the blog articles that quote €199; and `site_an` in
+// the faits-machine block of the drip. To miss none, search the site for "199".
+// Monthly: the live price since 15/11/2026 (A10). Yearly: on sale with E6. The
 // server must know the same ids:
 //   supabase secrets set STRIPE_PRICE_ELITE=price_xxx
 //   supabase secrets set STRIPE_PRICE_ELITE_ANNUEL=price_yyy
 // They are what makes the webhook write subscription_tier='elite'.
 const PRICE_ELITE        = 'price_1Uc9uHJuVIEBTqQ22itOzoWK';
-const PRICE_ELITE_ANNUAL = '';
+const PRICE_ELITE_ANNUAL = 'price_1Uc9usJuVIEBTqQ2PceVRy8j';
 // Amounts shown on the cards: those of the two Stripe prices above. The
 // per-month equivalent and the yearly saving are computed from them, never
 // written by hand.
@@ -629,7 +633,7 @@ function economieAnnuel() {
 // (`essai_refuse: "deja_utilise"` and `message`), before anything goes to Stripe.
 // This switch now only drives what the form announces. The return from payment
 // carries `essai=1`, set by the server (like `known=1`), never by the page.
-const ESSAI_SITE_EN_VENTE = false;
+const ESSAI_SITE_EN_VENTE = true;
 
 // Max's decision D13 (15/11/2026), lifted for the summary alone by the decision of
 // 19/11: the page computes no date of the free month. The form gives the length
