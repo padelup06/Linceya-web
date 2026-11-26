@@ -298,6 +298,9 @@ nav::before {
   animation: liquid 6s ease-in-out infinite;
 }
 .success-sub { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 320px; margin: 0 auto; }
+/* Page de succès : la colonne de gauche est masquée, la carte passe à une seule colonne centrée. */
+.checkout-container.checkout-succes { grid-template-columns: 1fr; max-width: 640px; }
+.checkout-succes .success-sub { max-width: 440px; }
 .success-sub strong { color: var(--graphite); }
 
 /* ERROR */
@@ -1331,6 +1334,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('packages').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('checkout-info').style.display = 'none';
+    const cadreSucces = document.getElementById('checkout-info').parentNode;
+    if (cadreSucces && cadreSucces.classList) cadreSucces.classList.add('checkout-succes');
 
     // essai=1: set by the server when the session starts with the free month.
     // No date here (D13): it is in the confirmation email.
